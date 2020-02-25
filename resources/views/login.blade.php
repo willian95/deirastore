@@ -52,7 +52,7 @@
                             }else{
 
                                 if(res.data.user.rol_id == 1){
-                                    window.location.replace("{{ url('/home') }}")
+                                    window.location.replace("{{ url('/') }}")
                                 }else if(res.data.user.rol_id == 3){
                                     window.location.replace("{{ route('admin.dashboard') }}")
                                 }

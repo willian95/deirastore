@@ -17,6 +17,17 @@
 
 Route::get('/', "HomeController@index");
 
+Route::get('/product/{slug}', "HomeController@show");
+
+Route::get('/cart', 'CartController@index')->name('cart');
+Route::post('/cart', 'CartController@store')->name('cart.store');
+Route::post('/cart/update', 'CartController@update')->name('cart.update');
+Route::get('/cart/products', 'CartController@getItems')->name('cart.items');
+Route::post('/cart/delete', 'CartController@delete')->name('cart.delete');
+
+Route::get('/profile', 'ProfileController@index')->name('profile');
+Route::post('/profile', 'ProfileController@update')->name('profile.update');
+
 Route::get('/register', "RegisterController@index");
 Route::post('/register', "RegisterController@register");
 

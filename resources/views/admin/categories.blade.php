@@ -75,7 +75,6 @@
         </div>
     </div>
 
-
     <!-- Create Modal -->
 
 @endsection

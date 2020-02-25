@@ -54,12 +54,19 @@ class ProductController extends Controller
 
         try{
             
+            $slug = str_replace(" ", "-", $request->name);
+
+            if(Product::where('slug', $slug)->count() > 0){
+                $slug = $slug."-".Carbon::now()->timestamp;
+            }
+
             $product = new Product;
             $product->name = $request->name;
             $product->sub_title = $request->subTitle;
             $product->price = $request->price;
             $product->sub_price = $request->subPrice;
             $product->picture = $fileName;
+            $product->slug = $slug;
             $product->description = $request->description;
             $product->category_id = $request->categoryId;
             $product->save();
@@ -92,6 +99,12 @@ class ProductController extends Controller
 
         try{
             
+            $slug = str_replace(" ", "-", $request->name);
+
+            if(Product::where('slug', $slug)->where('id', '<>', $request->productId)->count() > 0){
+                $slug = $slug."-".Carbon::now()->timestamp;
+            }
+
             $product = Product::find($request->productId);
             $product->name = $request->name;
             $product->sub_title = $request->subTitle;
@@ -101,6 +114,7 @@ class ProductController extends Controller
                 $product->picture = $fileName;
             }
             $product->description = $request->description;
+            $product->slug = $slug;
             $product->category_id = $request->categoryId;
             $product->update();
 
