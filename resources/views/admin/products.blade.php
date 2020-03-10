@@ -79,11 +79,23 @@
                         <label for="subTitle">Sub-titulo</label>
                         <input type="text" class="form-control" id="subTitle" v-model="subTitle">
                     </div>
-                    <div class="form-group">
-                        <label for="category">categoría</label>
-                        <select class="form-control" v-model="categoryId">
-                            <option :value="category.id" v-for="category in categories">@{{ category.name }}</option>
-                        </select>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-1">
+                                <label style="visibility:hidden;">c</label>
+                                <button class="btn btn-success" data-toggle="modal" data-target="#createCategory">
+                                    +
+                                </button>
+                            </div>
+                            <div class="col-11">
+                                <div class="form-group">
+                                    <label for="category">categoría</label>
+                                    <select class="form-control" v-model="categoryId">
+                                        <option :value="category.id" v-for="category in categories">@{{ category.name }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="price">precio</label>
@@ -110,6 +122,33 @@
 
     <!-- Create Modal -->
 
+    <!-- add category modal -->
+
+    <div class="modal fade" id="createCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Crear categoría</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="name">nombre</label>
+                        <input type="text" class="form-control" id="categoryName" v-model="categoryName">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" @click="storeCategory()">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- add category modal -->
+
 @endsection
 
 @push('scripts')
@@ -134,7 +173,8 @@
                     categories:[],
                     products:[],
                     pages:0,
-                    query:""
+                    query:"",
+                    categoryName:""
                 }
             },
             methods:{
@@ -219,6 +259,47 @@
                     return error;
 
                 },
+                storeCategory(){
+
+                    if(!this.formCategoryHasError()){
+
+                        axios.post("{{ route('admin.categories.store') }}", {name: this.categoryName})
+                        .then(res => {
+                            
+                            if(res.data.success == true){
+
+                                alert(res.data.msg)
+                                this.categoryName = ""
+                                this.fetch()
+
+                            } else{
+
+                                alert(res.data.msg)
+
+                            }
+
+                        })
+                        .catch(err => {
+                            $.each(err.response.data.errors, function(key, value){
+                                alert(value)
+                            });
+                        })
+
+                    }
+
+                },
+                formCategoryHasError(){
+
+                    let error = false
+
+                    if(this.name == ""){
+                        alert("Campo nombre es requerido")
+                        error = true
+                    }
+
+                    return error;
+
+                },
                 onImageChange(e){
                     this.picture = e.target.files[0];
                     this.imagePreview = URL.createObjectURL(this.picture);
@@ -247,6 +328,7 @@
                     this.description = ""
                     this.productId = ""
                     this.imagePreview = ""
+                    $("#picture").val(null)
                 },
                 edit(product){
 

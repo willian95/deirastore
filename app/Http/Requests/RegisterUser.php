@@ -24,8 +24,8 @@ class RegisterUser extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'unique:users,email',
-            'rut' => 'unique:users,numeric',
+            'email' => 'unique:users|email',
+            'rut' => 'unique:users|integer',
             "name" => 'required',
             "password" => 'required',
             'phoneNumber' => 'required',

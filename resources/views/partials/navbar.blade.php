@@ -13,9 +13,11 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ route('profile') }}">Perfil</a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ route('cart') }}">Cart</a>
-                </li>
+                @if(Auth::user()->rol_id == 1)
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ route('cart') }}">Cart</a>
+                    </li>
+                @endif
                 @if(Auth::user()->rol_id == 3)
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin.products') }}">Productos</a>
