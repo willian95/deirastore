@@ -3,14 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Purchase extends Model
+class Payment extends Model
 {
-    use SoftDeletes;
-
     public function user(){
         return $this->belongsTo(User::class);
     }
 
+    public function productPurchase(){
+        return $this->hasMany(ProductPurchase::class);
+    }
 }

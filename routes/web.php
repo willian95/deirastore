@@ -35,6 +35,15 @@ Route::get('/login', "LoginController@index");
 Route::post('/login', "LoginController@logIn");
 Route::get('/logout', "LoginController@logout");
 
+//Route::post('/checkout', "CheckoutController@checkout")->name('checkout');
+
+Route::get('/checkout', 'CheckoutController@initTransaction')->name('checkout'); 
+Route::post('/checkout/webpay/response', 'CheckoutController@response')->name('checkout.webpay.response');  
+Route::post('/checkout/webpay/finish', 'CheckoutController@finish')->name('checkout.webpay.finish');
+
+Route::get('/purchase', 'PurchaseController@myPurchase')->name('user.purchase');
+Route::post('/purchase/fetch', 'PurchaseController@myPurchaseFetch')->name('user.purchase.fetch');
+
 Route::prefix('admin')->group(function () {
     
     Route::get('/dashboard', function(){
@@ -61,5 +70,8 @@ Route::prefix('admin')->group(function () {
     Route::post('/purchase/store', "PurchaseController@store")->name('admin.purchase.store');
     Route::post('/purchase/fetch', "PurchaseController@fetch")->name('admin.purchase.fetch');
     Route::post('/purchase/delete', "PurchaseController@delete")->name('admin.purchase.delete');
+
+    Route::get('/sale', "SaleController@index")->name('admin.sale');
+    Route::post('/sale/fetch', "SaleController@fetch")->name('admin.sale.fetch');
 
 });

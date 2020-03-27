@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StorePurchase;
 use App\Product;
 use App\Purchase;
+use App\Payment;
 
 class PurchaseController extends Controller
 {
@@ -19,6 +20,31 @@ class PurchaseController extends Controller
     function show($id){
 
         return view('admin.purchases', ['id' => $id]);
+
+    }
+
+    function myPurchase(){
+
+        return view('purchase');
+
+    }
+
+    function myPurchaseFetch(Request $request){
+
+        try{
+
+            $skip = ($request->page-1) * 10;
+
+            $purchases = Payment::where('user_id', \Auth::user()->id)->with('user')->with('productPurchase')->with('productPurchase.product')->skip($skip)->take(10)->get();
+            $purchasesCount = Payment::where('user_id', \Auth::user()->id)->with('user')->with('productPurchase')->with('productPurchase.product')->count();
+
+            return response()->json(["success" => true, "purchases" => $purchases, "purchasesCount" => $purchasesCount]);
+
+        }catch(\Exception $e){
+
+            return response()->json(["success" => false, "msg" => "Error en el servidor", "err" => $e->getMessage()]);
+
+        }
 
     }
 

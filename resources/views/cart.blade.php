@@ -21,6 +21,14 @@
 
             </div>
         </div>
+        <div class="row" v-if="items.length > 0">
+            <div class="col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-12">
+                
+                <!--button class="btn btn-success" @click="payProducts()">checkout</button>-->
+                <a href="{{ route('checkout') }}" class="btn btn-success">checkout</a>
+
+            </div>
+        </div>
     </div>
 
     <!-- Create Modal -->
@@ -167,7 +175,30 @@
                         
                     }
 
+                },
+                payProducts(){
+
+                    axios.post("{{ route('checkout') }}")
+                    .then(res => {
+
+                        if(res.data.success == true){
+                            
+                            this.getItems()
+                            alert(res.data.msg)
+
+                        }else{
+                            alert(res.data.msg)
+                        }
+
+                    })
+                    .cacth(err => {
+                        $.each(err.response.data.errors, function(key, value){
+                            alert(value)
+                        });
+                    })
+
                 }
+
 
             },
             mounted(){

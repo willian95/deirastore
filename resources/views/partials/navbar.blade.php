@@ -11,6 +11,9 @@
                     <a class="nav-link" href="#">{{ Auth::user()->name }}</a>
                 </li>
                 <li class="nav-item active">
+                    <a class="nav-link" href="{{ route('user.purchase') }}">Mis compras</a>
+                </li>
+                <li class="nav-item active">
                     <a class="nav-link" href="{{ route('profile') }}">Perfil</a>
                 </li>
                 @if(Auth::user()->rol_id == 1)
@@ -27,6 +30,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin.purchase') }}">Compras</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.sale') }}">Ventas</a>
                     </li>
                 @endif
                 <li class="nav-item active">
