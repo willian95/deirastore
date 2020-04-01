@@ -12,7 +12,14 @@
                 <h1>{{ $product->name }}</h1>
 
                 @if(Auth::check() && Auth::user()->id)
-                    <button class="btn btn-success" data-toggle="modal" data-target="#addToCart">Añadir al carrito</button>
+                    <label for="amount">Cantidad</label>
+                    <input type="number" class="form-control" id="amount" v-model="amount" max="{{ $product->amount }}" min="1" readonly>
+                    <button class="btn btn-success" @click="add()"> sumar</button>
+                    <button class="btn btn-danger" @click="substract()"> restar</button>
+
+                    <button class="btn btn-info" @click="store()">añadir al carrito</button>
+                @else
+                    <h3>Debe loguearse para comenzar</h3>
                 @endif
             </div>
         </div>
@@ -92,23 +99,17 @@
                     })
 
                 },
-                isNumber: function(evt) {
+                add(){
 
-                    evt = (evt) ? evt : window.event;
-                    var charCode = (evt.which) ? evt.which : evt.keyCode;
+                    if(this.amount + 1 <= this.maxAmount){
+                        this.amount++;
+                    }
 
-                    if ((charCode > 31 && (charCode < 48 || charCode > 57))) {
-                        evt.preventDefault();
+                },
+                substract(){
 
-                    } else {
-
-                        if(this.amount > this.maxAmount){
-                            this.amount = this.maxAmount
-                            evt.preventDefault()
-                        }else{
-                            return true;
-                        }   
-                        
+                    if(this.amount - 1 > 0){
+                        this.amount--
                     }
 
                 }

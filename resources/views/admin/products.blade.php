@@ -83,7 +83,7 @@
                         <div class="row">
                             <div class="col-1">
                                 <label style="visibility:hidden;">c</label>
-                                <button class="btn btn-success" data-toggle="modal" data-target="#createCategory">
+                                <button class="btn btn-success" @click="openCategoryForm()">
                                     +
                                 </button>
                             </div>
@@ -96,6 +96,21 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row" v-if="showCategoryForm == true">
+                            <div class="col-12">
+                                <h3 class="text-center">Nueva categoría</h3>
+                                <div class="form-group">
+                                    <label for="name">nombre</label>
+                                    <input type="text" class="form-control" id="categoryName" v-model="categoryName">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button type="button" class="btn btn-secondary" @click="closeCategoryForm()">Close</button>
+                                <button type="button" class="btn btn-primary" @click="storeCategory()">Save changes</button>
+                            </div>
+                        </div>
+
                     </div>
                     <div class="form-group">
                         <label for="price">precio</label>
@@ -174,7 +189,8 @@
                     products:[],
                     pages:0,
                     query:"",
-                    categoryName:""
+                    categoryName:"",
+                    showCategoryForm:false
                 }
             },
             methods:{
@@ -292,7 +308,7 @@
 
                     let error = false
 
-                    if(this.name == ""){
+                    if(this.categoryName == ""){
                         alert("Campo nombre es requerido")
                         error = true
                     }
@@ -435,6 +451,12 @@
 
                     }
 
+                },
+                openCategoryForm(){
+                    this.showCategoryForm = true
+                },
+                closeCategoryForm(){
+                    this.showCategoryForm = false
                 },
                 isNumber: function(evt) {
                     evt = (evt) ? evt : window.event;

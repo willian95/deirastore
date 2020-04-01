@@ -10,13 +10,13 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="#">{{ Auth::user()->name }}</a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ route('user.purchase') }}">Mis compras</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ route('profile') }}">Perfil</a>
-                </li>
                 @if(Auth::user()->rol_id == 1)
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ route('user.purchase') }}">Mis compras</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ route('profile') }}">Perfil</a>
+                    </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="{{ route('cart') }}">Cart</a>
                     </li>
