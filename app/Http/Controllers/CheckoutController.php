@@ -23,7 +23,7 @@ class CheckoutController extends Controller
 
 		foreach($carts as $cart){
 
-			$total += $cart->product->price;
+			$total += $cart->product->price * $cart->amount;
 
 		}
 

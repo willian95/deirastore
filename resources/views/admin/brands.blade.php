@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-    
+
     @include('partials.admin.navbar')
 
     <div class="container">
@@ -12,7 +12,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="name">Buscar</label>
-                            <input type="text" class="form-control" id="name" v-model="query" @keyup="search()">
+                            <input type="text" class="form-control" v-model="query" @keyup="search()">
                         </div>
                     </div>
                 </div>
@@ -20,18 +20,18 @@
                 <div class="card">
                     <div class="card-body">
                         <p class="text-center">
-                            <button class="btn btn-success" data-toggle="modal" data-target="#createCategory" @click="changeTitle()">añadir</button>
+                            <button class="btn btn-success" data-toggle="modal" data-target="#createBrand" @click="changeTitle()">añadir</button>
                         </p>
                     </div>
                 </div>
 
-                <div class="card" v-for="category in categories">
+                <div class="card" v-for="brand in brands">
                     <div class="card-body">
                         <p class="text-center">
-                        @{{ category.name }}
+                        @{{ brand.name }}
                         </p>
-                        <button class="btn btn-success" @click="edit(category)" data-toggle="modal" data-target="#createCategory">editar</button>
-                        <button class="btn btn-danger" @click="erase(category.id)">eliminar</button>
+                        <button class="btn btn-success" @click="edit(brand)" data-toggle="modal" data-target="#createBrand">editar</button>
+                        <button class="btn btn-danger" @click="erase(brand.id)">eliminar</button>
                     </div>
                 </div>
 
@@ -52,7 +52,7 @@
 
     <!-- Create Modal -->
 
-    <div class="modal fade" id="createCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="createBrand" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -88,19 +88,19 @@
 
 @push('scripts')
 
-    <script>
+<script>
         
         const app = new Vue({
             el: '#dev-app',
             data(){
                 return{
-                    modalTitle:"Crear categoría",
+                    modalTitle:"Crear tienda",
                     isEdit:false,
                     name:'',
-                    categoryId:'',
-                    categories:[],
                     picture:"",
                     imagePreview:"",
+                    brandId:'',
+                    brands:[],
                     pages:0,
                     query:""
                 }
@@ -119,7 +119,7 @@
                             formData.append("name", this.name)
                             formData.append("image", this.picture)
 
-                            axios.post("{{ route('admin.categories.store') }}", formData)
+                            axios.post("{{ route('admin.brands.store') }}", formData)
                             .then(res => {
                                 
                                 if(res.data.success == true){
@@ -157,6 +157,11 @@
                         error = true
                     }
 
+                    if($("#image").val() == null){
+                        alert("Imagen es requerida")
+                        error = true
+                    }
+
                     return error;
 
                 },
@@ -179,34 +184,37 @@
                     reader.readAsDataURL(file);
                 },
                 changeTitle(){
-                    this.modalTitle = "Crear categoría"
+                    this.modalTitle = "Crear tienda"
                     this.isEdit = false
                     this.name = ""
+                    this.imagePreview = ""
+                    $("#image").val(null)
                 },
-                edit(category){
+                edit(brand){
                     
-                    this.name = category.name
-                    this.modalTitle = "Editar Categoría"
-                    this.categoryId = category.id
+                    this.name = brand.name
+                    this.modalTitle = "Editar tienda"
+                    this.brandId = brand.id
                     this.isEdit = true
-                    this.imagePreview = "{{ url('/') }}"+"/images/categories/"+category.image
+                    this.imagePreview = "{{ url('/') }}"+"/images/brands/"+brand.image
 
                 },
                 update(){
 
                     let formData = new FormData()
-                    formData.append("id", this.categoryId)
                     formData.append("name", this.name)
                     formData.append("image", this.picture)
+                    formData.append("brandId", this.brandId)
 
-                    axios.post("{{ route('admin.categories.update') }}", formData)
+                    axios.post("{{ route('admin.brands.update') }}", formData)
                     .then(res => {
                         
                         if(res.data.success == true){
                             alert(res.data.msg)
-                            this.name=""
+                            this.name = ""
                             this.imagePreview = ""
                             $("#image").val(null)
+                            this.fetch()
                             this.fetch()
                         }else{
                             alert(res.data.msg)
@@ -222,11 +230,17 @@
                 },
                 fetch(page = 1){
 
-                    axios.post("{{ route('admin.categories.fetch') }}", {page: page})
+                    axios.post("{{ route('admin.brands.fetch') }}", {page: page})
                     .then(res => {
-                        
-                        this.pages = Math.ceil(res.data.categoriesCount / 10)
-                        this.categories = res.data.categories
+
+                        if(res.data.success == true){
+                            this.pages = Math.ceil(res.data.brandsCount / 10)
+                            this.brands = res.data.brands
+                        }else{
+
+                            alert(res.data.msg)
+
+                        }
 
                     })
                     .catch(err => {
@@ -238,9 +252,9 @@
 
                     if(this.query.length > 0){
                         this.pages = 0;
-                        axios.post("{{ route('admin.categories.search') }}", {search: this.query})
+                        axios.post("{{ route('admin.brands.search') }}", {search: this.query})
                         .then(res => {
-                            this.categories = res.data.categories
+                            this.brands = res.data.brands
                         })
                         .catch(err => {
                             console.log(err.response.data)
@@ -255,7 +269,7 @@
 
                     if(confirm('¿Estás seguro?')){
 
-                        axios.post("{{ route('admin.categories.delete') }}", {id: id})
+                        axios.post("{{ route('admin.brands.delete') }}", {id: id})
                         .then(res => {
                             if(res.data.success == true){
                                 alert(res.data.msg)

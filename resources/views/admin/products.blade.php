@@ -2,7 +2,7 @@
 
 @section('content')
 
-    @include('partials.navbar')
+    @include('partials.admin.navbar')
 
     <div class="container">
         <div class="row">
@@ -79,6 +79,50 @@
                         <label for="subTitle">Sub-titulo</label>
                         <input type="text" class="form-control" id="subTitle" v-model="subTitle">
                     </div>
+                    <div class="form-group">
+                        <label for="sku">SKU</label>
+                        <input type="text" class="form-control" id="sku" v-model="sku">
+                    </div>
+                    <div class="form-group">
+                        <label for="vpn">VPN</label>
+                        <input type="text" class="form-control" id="vpn" v-model="vpn">
+                    </div>
+                    <div class="form-group">
+                        <label for="min_description">Descripción minima</label>
+                        <input type="text" class="form-control" id="min_description" v-model="min_description">
+                    </div>
+                    <div class="form-group">
+                        <label for="product_type">Tipo de producto</label>
+                        <input type="text" class="form-control" id="product_type" v-model="product_type">
+                    </div>
+                    <div class="form-group">
+                        <label for="product_material">Tipo de material</label>
+                        <input type="text" class="form-control" id="product_material" v-model="product_material">
+                    </div>
+                    <div class="form-group">
+                        <label for="dimenssions">Dimensiones</label>
+                        <input type="text" class="form-control" id="dimenssions" v-model="dimenssions">
+                    </div>
+                    <div class="form-group">
+                        <label for="weight">Peso</label>
+                        <input type="text" class="form-control" id="weight" v-model="weight">
+                    </div>
+                    <div class="form-group">
+                        <label for="features">Características</label>
+                        <input type="text" class="form-control" id="features" v-model="features">
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Localización</label>
+                        <input type="text" class="form-control" id="location" v-model="location">
+                    </div>
+                    <div class="form-group">
+                        <label for="warranty">Garantía</label>
+                        <input type="text" class="form-control" id="warranty" v-model="warranty">
+                    </div>
+                    <div class="form-group">
+                        <label for="color">Color</label>
+                        <input type="text" class="form-control" id="color" v-model="color">
+                    </div>
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-1">
@@ -103,11 +147,52 @@
                                 <div class="form-group">
                                     <label for="name">nombre</label>
                                     <input type="text" class="form-control" id="categoryName" v-model="categoryName">
+                                    <label for="name">Imagen</label>
+                                    <input type="file" class="form-control"  id="categoryImage" @change="onImageCategoryChange" accept="image/*">
+                                    <div class="form-group">
+                                        <img :src="imageCategoryPreview" class="full-image" style="margin-top: 10px; width: 40%">
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <button type="button" class="btn btn-secondary" @click="closeCategoryForm()">Close</button>
                                 <button type="button" class="btn btn-primary" @click="storeCategory()">Save changes</button>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-1">
+                                <label style="visibility:hidden;">c</label>
+                                <button class="btn btn-success" @click="openBrandForm()">
+                                    +
+                                </button>
+                            </div>
+                            <div class="col-11">
+                                <div class="form-group">
+                                    <label for="brand">Tienda</label>
+                                    <select class="form-control" v-model="brandId">
+                                        <option :value="brand.id" v-for="brand in brands">@{{ brand.name }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" v-if="showBrandForm == true">
+                            <div class="col-12">
+                                <h3 class="text-center">Nueva tienda</h3>
+                                <div class="form-group">
+                                    <label for="name">nombre</label>
+                                    <input type="text" class="form-control" id="brandName" v-model="brandName">
+                                    <label for="name">Imagen</label>
+                                    <input type="file" class="form-control"  id="brandImage" @change="onImageBrandChange" accept="image/*">
+                                    <div class="form-group">
+                                        <img :src="imageBrandPreview" class="full-image" style="margin-top: 10px; width: 40%">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button type="button" class="btn btn-secondary" @click="closeBrandForm()">Close</button>
+                                <button type="button" class="btn btn-primary" @click="storeBrand()">Save changes</button>
                             </div>
                         </div>
 
@@ -185,16 +270,70 @@
                     description:"",
                     categoryId:"",
                     productId:'',
+                    brandId:"",
                     categories:[],
                     products:[],
                     pages:0,
                     query:"",
                     categoryName:"",
-                    showCategoryForm:false
+                    categoryImage:"",
+                    imageCategoryPreview:"",
+                    showCategoryForm:false,
+                    brandName:"",
+                    brandImage:"",
+                    imageBrandPreview:"",
+                    showBrandForm:false,
+                    brands:[],
+                    sku:"",
+                    vpn:"",
+                    min_description:"",
+                    product_type:"",
+                    product_material:"",
+                    dimenssions:"",
+                    weight:"",
+                    features:"",
+                    location:"",
+                    warranty:"",
+                    color:""
                 }
             },
             methods:{
-                
+                onImageCategoryChange(e){
+                    this.categoryImage = e.target.files[0];
+
+                    this.imageCategoryPreview = URL.createObjectURL(this.categoryImage);
+                    let files = e.target.files || e.dataTransfer.files;
+                    if (!files.length)
+                        return;
+                    //this.view_image = false
+                    this.createCategoryImage(files[0]);
+                },
+                createCategoryImage(file) {
+                    let reader = new FileReader();
+                    let vm = this;
+                    reader.onload = (e) => {
+                        vm.categoryImage = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                },
+                onImageBrandChange(e){
+                    this.brandImage = e.target.files[0];
+
+                    this.imageBrandPreview = URL.createObjectURL(this.brandImage);
+                    let files = e.target.files || e.dataTransfer.files;
+                    if (!files.length)
+                        return;
+                    //this.view_image = false
+                    this.createBrandImage(files[0]);
+                },
+                createBrandImage(file) {
+                    let reader = new FileReader();
+                    let vm = this;
+                    reader.onload = (e) => {
+                        vm.BrandImage = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                },
                 store(){
 
                     if(!this.formHasError()){
@@ -211,6 +350,18 @@
                             formData.append("subTitle", this.subTitle)
                             formData.append("description", this.description)
                             formData.append("categoryId", this.categoryId)
+                            formData.append("brandId", this.brandId)
+                            formData.append("sku", this.sku)
+                            formData.append("vpn", this.vpn)
+                            formData.append("min_description", this.min_description)
+                            formData.append("product_type", this.product_type)
+                            formData.append("product_material", this.product_material)
+                            formData.append("dimenssions", this.dimenssions)
+                            formData.append("weight", this.weight)
+                            formData.append("features", this.features)
+                            formData.append("location", this.location)
+                            formData.append("warranty", this.warranty)
+                            formData.append("color", this.color)
 
                             axios.post("{{ route('admin.products.store') }}", formData, {
                                 headers: {
@@ -229,6 +380,17 @@
                                     this.description = ""
                                     this.categoryId = ""
                                     this.imagePreview = ""
+                                    this.sku=""
+                                    this.vpn=""
+                                    this.min_description=""
+                                    this.product_type=""
+                                    this.product_material=""
+                                    this.dimenssions=""
+                                    this.weight=""
+                                    this.features=""
+                                    this.location=""
+                                    this.warranty=""
+                                    this.color =""
                                     this.fetch()
                                 }else{
                                     alert(res.data.msg)
@@ -279,13 +441,20 @@
 
                     if(!this.formCategoryHasError()){
 
-                        axios.post("{{ route('admin.categories.store') }}", {name: this.categoryName})
+                        let formData = new FormData()
+                        formData.append("name", this.categoryName)
+                        formData.append("image", this.categoryImage)
+
+                        axios.post("{{ route('admin.categories.store') }}", formData)
                         .then(res => {
                             
                             if(res.data.success == true){
 
                                 alert(res.data.msg)
                                 this.categoryName = ""
+                                this.cateogoryImage = ""
+                                this.imageCategoryPreview = ""
+                                $("#categoryImage").val(null)
                                 this.fetch()
 
                             } else{
@@ -316,6 +485,59 @@
                     return error;
 
                 },
+                storeBrand(){
+
+                    if(!this.formBrandHasError()){
+
+                        let formData = new FormData()
+                        formData.append("name", this.brandName)
+                        formData.append("image", this.brandImage)
+
+                        axios.post("{{ route('admin.brands.store') }}", formData)
+                        .then(res => {
+                            
+                            if(res.data.success == true){
+
+                                alert(res.data.msg)
+                                this.brandName = ""
+                                this.brandImage = ""
+                                this.imageBrandPreview = ""
+                                $("#brandImage").val(null)
+                                this.fetch()
+
+                            } else{
+
+                                alert(res.data.msg)
+
+                            }
+
+                        })
+                        .catch(err => {
+                            $.each(err.response.data.errors, function(key, value){
+                                alert(value)
+                            });
+                        })
+
+                    }
+
+                    },
+                    formBrandHasError(){
+
+                        let error = false
+
+                        if(this.brandName == ""){
+                            alert("Campo nombre es requerido")
+                            error = true
+                        }
+
+                        if(this.brandImage == ""){
+                            alert("Campo nombre es requerido")
+                            error = true
+                        }
+
+                        return error;
+
+                    },
                 onImageChange(e){
                     this.picture = e.target.files[0];
                     this.imagePreview = URL.createObjectURL(this.picture);
@@ -343,7 +565,19 @@
                     this.subTitle = ""
                     this.description = ""
                     this.productId = ""
+                    this.brandId = ""
                     this.imagePreview = ""
+                    this.sku=""
+                    this.vpn=""
+                    this.min_description=""
+                    this.product_type=""
+                    this.product_material=""
+                    this.dimenssions=""
+                    this.weight=""
+                    this.features=""
+                    this.location=""
+                    this.warranty=""
+                    this.color=""
                     $("#picture").val(null)
                 },
                 edit(product){
@@ -359,7 +593,19 @@
                     this.description = product.description
                     this.productId = product.id 
                     this.categoryId = product.category_id
+                    this.brandId = product.brand_id
                     this.imagePreview = "{{ url('/') }}"+"/images/products/"+product.picture
+                    this.sku=product.sku
+                    this.vpn=product.vpn
+                    this.min_description=product.min_description
+                    this.product_type=product.product_type
+                    this.product_material=product.product_material
+                    this.dimenssions=product.dimenssions
+                    this.weight=product.weight
+                    this.features=product.features
+                    this.location=product.location
+                    this.warranty=product.warranty
+                    this.color = product.color
 
                 },
                 update(){
@@ -372,7 +618,20 @@
                     formData.append("subTitle", this.subTitle)
                     formData.append("description", this.description)
                     formData.append("categoryId", this.categoryId)
+                    formData.append("brandId", this.brandId)
                     formData.append("productId", this.productId)
+                    formData.append("brandId", this.brandId)
+                    formData.append("sku", this.sku)
+                    formData.append("vpn", this.vpn)
+                    formData.append("min_description", this.min_description)
+                    formData.append("product_type", this.product_type)
+                    formData.append("product_material", this.product_material)
+                    formData.append("dimenssions", this.dimenssions)
+                    formData.append("weight", this.weight)
+                    formData.append("features", this.features)
+                    formData.append("location", this.location)
+                    formData.append("warranty", this.warranty)
+                    formData.append("color", this.color)
 
                     axios.post("{{ route('admin.products.update') }}", formData,  {
                         headers: {
@@ -390,7 +649,19 @@
                             this.subTitle = ""
                             this.description = ""
                             this.categoryId = ""
+                            this.brandId = ""
                             this.imagePreview = ""
+                            this.sku=""
+                            this.vpn=""
+                            this.min_description=""
+                            this.product_type=""
+                            this.product_material=""
+                            this.dimenssions=""
+                            this.weight=""
+                            this.features=""
+                            this.location=""
+                            this.warranty=""
+                            this.color=""
                             this.fetch()
                         }else{
                             alert(res.data.msg)
@@ -412,6 +683,7 @@
                         this.products = res.data.products
                         this.pages = Math.ceil(res.data.productsCount / 10)
                         this.categories = res.data.categories
+                        this.brands = res.data.brands
 
                     })
                     .catch(err => {
@@ -419,6 +691,7 @@
                     })
 
                 },
+                
                 search(){
 
                     if(this.query.length > 0){
@@ -457,6 +730,12 @@
                 },
                 closeCategoryForm(){
                     this.showCategoryForm = false
+                },
+                openBrandForm(){
+                    this.showBrandForm = true
+                },
+                closeBrandForm(){
+                    this.showBrandForm = false
                 },
                 isNumber: function(evt) {
                     evt = (evt) ? evt : window.event;

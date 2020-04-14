@@ -29,7 +29,8 @@ class StoreProduct extends FormRequest
             "subPrice" => "required|numeric",
             "categoryId" => "required",
             "description" => "required",
-            "picture" => "required"
+            "picture" => "required",
+            "brandId" => "required|integer"
         ];
     }
 }

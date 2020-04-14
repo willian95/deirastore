@@ -2,7 +2,7 @@
 
 @section('content')
 
-    @include('partials.navbar')
+    @include('partials.admin.navbar')
 
     <div class="container">
         <div class="row">

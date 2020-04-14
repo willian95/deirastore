@@ -21,4 +21,8 @@ class Product extends Model
         return $this->hasMany(ProductPurchase::class);
     }
 
+    function brand(){
+        return $this->belongsTo('App\Brand');
+    }
+
 }

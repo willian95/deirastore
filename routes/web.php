@@ -18,6 +18,7 @@
 Route::get('/', "HomeController@index");
 
 Route::get('/product/{slug}', "HomeController@show");
+Route::get('/search', "HomeController@search");
 
 Route::get('/cart', 'CartController@index')->name('cart');
 Route::post('/cart', 'CartController@store')->name('cart.store');
@@ -35,6 +36,11 @@ Route::get('/login', "LoginController@index");
 Route::post('/login', "LoginController@logIn");
 Route::get('/logout', "LoginController@logout");
 
+Route::get('/password/recovery', "RecoveryPasswordController@index");
+Route::post('/password/recovery/send', "RecoveryPasswordController@send");
+Route::get('/password/recovery/restore/{recovery_hash}', "RecoveryPasswordController@restore");
+Route::post('/password/recovery/update', "RecoveryPasswordController@update");
+
 //Route::post('/checkout', "CheckoutController@checkout")->name('checkout');
 
 Route::get('/checkout', 'CheckoutController@initTransaction')->name('checkout'); 
@@ -49,6 +55,13 @@ Route::prefix('admin')->group(function () {
     Route::get('/dashboard', function(){
         return view('admin.dashboard');
     })->name('admin.dashboard');
+
+    Route::get('/brands', "BrandController@index")->name('admin.brands');
+    Route::post('/brands/store', "BrandController@store")->name('admin.brands.store');
+    Route::post('/brands/fetch', "BrandController@fetch")->name('admin.brands.fetch');
+    Route::post('/brands/update', "BrandController@update")->name('admin.brands.update');
+    Route::post('/brands/delete', "BrandController@delete")->name('admin.brands.delete');
+    Route::post('/brands/seach', "BrandController@search")->name('admin.brands.search');
 
     Route::get('/categories', "CategoriesController@index")->name('admin.categories');
     Route::post('/categories/fetch', "CategoriesController@fetch")->name('admin.categories.fetch');

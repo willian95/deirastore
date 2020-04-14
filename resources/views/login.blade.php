@@ -18,6 +18,11 @@
                         <div class="form-group">
                             <button class="btn btn-primary" @click="logIn()">Log In</button>
                         </div>
+
+                        <div class="form-group">
+                            <a href="{{ url('/password/recovery') }}">Recuperar contraseña</a>
+                        </div>
+
                     </div>
                 </div>
             </div>

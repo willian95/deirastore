@@ -9,6 +9,7 @@ use Intervention\Image\Facades\Image;
 use App\Product;
 use App\Category;
 use Carbon\Carbon;
+use App\Brand;
 
 class ProductController extends Controller
 {
@@ -24,14 +25,15 @@ class ProductController extends Controller
             $skip = ($request->page-1) * 10;
 
             $categories = Category::all();
+            $brands = Brand::all();
             $products = Product::skip($skip)->take(10)->get();
             $productsCount = Product::count();
 
-            return response()->json(["success" => true, "products" => $products, "productsCount" => $productsCount, "categories" => $categories]);
+            return response()->json(["success" => true, "products" => $products, "productsCount" => $productsCount, "categories" => $categories, "brands" => $brands]);
 
         }catch(\Exception $e){
 
-            return response()->json(["success" => false, "msg" => "Error en el servidor"]);
+            return response()->json(["success" => false, "msg" => "Error en el servidor", "err" => $e->getMessage(), "ln" => $e->getLine()]);
 
         }
 
@@ -69,6 +71,18 @@ class ProductController extends Controller
             $product->slug = $slug;
             $product->description = $request->description;
             $product->category_id = $request->categoryId;
+            $product->brand_id = $request->brandId;
+            $product->sku = $request->sku;
+            $product->vpn = $request->vpn;
+            $product->min_description = $request->min_description;
+            $product->product_type = $request->product_type;
+            $product->product_material = $request->product_material;
+            $product->dimenssions = $request->dimenssions;
+            $product->weight = $request->weight;
+            $product->features = $request->features;
+            $product->location = $request->location;
+            $product->warranty = $request->warranty;
+            $product->color = $request->color;
             $product->save();
 
             return response()->json(["success" => true, "msg" => "Producto registrado"]);
@@ -116,6 +130,18 @@ class ProductController extends Controller
             $product->description = $request->description;
             $product->slug = $slug;
             $product->category_id = $request->categoryId;
+            $product->brand_id = $request->brandId;
+            $product->sku = $request->sku;
+            $product->vpn = $request->vpn;
+            $product->min_description = $request->min_description;
+            $product->product_type = $request->product_type;
+            $product->product_material = $request->product_material;
+            $product->dimenssions = $request->dimenssions;
+            $product->weight = $request->weight;
+            $product->features = $request->features;
+            $product->location = $request->location;
+            $product->warranty = $request->warranty;
+            $product->color = $request->color;
             $product->update();
 
             return response()->json(["success" => true, "msg" => "Producto actualizado"]);
@@ -156,7 +182,7 @@ class ProductController extends Controller
 
         try{
 
-            $product = Product::with('category')->where('id', $id)->first();            
+            $product = Product::with('category', 'brand')->where('id', $id)->first();            
             return response()->json(["success" => true, "product" => $product]);
 
         }catch(\Exception $e){

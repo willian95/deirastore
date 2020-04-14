@@ -1,51 +1,71 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Deira's Store</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-  
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            @if(Auth::check() && Auth::user()->id)
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">{{ Auth::user()->name }}</a>
-                </li>
-                @if(Auth::user()->rol_id == 1)
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('user.purchase') }}">Mis compras</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('profile') }}">Perfil</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('cart') }}">Cart</a>
-                    </li>
-                @endif
-                @if(Auth::user()->rol_id == 3)
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.products') }}">Productos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.categories') }}">Categorías</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.purchase') }}">Compras</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.sale') }}">Ventas</a>
-                    </li>
-                @endif
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ url('/logout') }}">Cerrar sesión</a>
-                </li>
-            @else
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/register') }}">Register</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/login') }}">Login</a>
-                </li>
-            @endif
-        </ul>
+<header>
+    <div class="container">
+        <div class="main-menu__top">
+            <div class="main-menu__top-item">
+                <img class="logo" src="{{ asset('assets/img/logo-cap.png') }}" alt="">
+            </div>
+            <div class="main-menu__top-item search">
+                <form class="form-inline form-general" action="{{ url('/search') }}" method="GET">
+                    <input class="form-control " type="search" placeholder='  Buscar productos,  marcas y más'
+                        aria-label="Search" name="search">
+                    <button class="btn btn-form" type="submit"><img src="{{ asset('assets/img/lupa.svg') }}" alt=""></button>
+                </form>
+            </div>
+            <div class="main-menu__top-item">
+                <ul>
+                    @if(Auth::check() && Auth::user()->id)
+                        <li><a href="#">{{ Auth::user()->name }}</a></li>
+                    @else
+                        <li><a href="{{ url('/login') }}"><img src="{{ asset('assets/img/persona2.svg') }}" alt=""></a></li>
+                    @endif
+                    <li><a href=""><img src="{{ asset('assets/img/telefono.svg') }}" alt=""></a></li>
+                    @if(Auth::check() && Auth::user()->id)
+                        <li><a href="{{ url('/cart') }}"><img src="{{ asset('assets/img/carro2.svg') }}" alt=""></a></li>
+                    @endif
+
+                </ul>
+            </div>
+        </div>
     </div>
-</nav>
+
+
+    <nav class="navbar navbar-expand-md fixed-top navbar-fixed-js">
+        <div class="container">
+            <div class="main-brand">
+                <button class="navbar-toggler p-2 border-0 hamburger hamburger--elastic" data-toggle="offcanvas" type="button">
+                    <span class="hamburger-box">
+                        <span class="hamburger-inner"></span>
+                    </span>
+                </button>
+            </div>
+            <div class="navbar-collapse offcanvas-collapse">
+                <ul class="navbar-nav m-auto">
+
+
+                    <li class="nav-item dropdown mega-menu">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                            aria-haspopup="true" aria-expanded="false">Categorías</a>
+                        <div class="dropdown-menu" style="opacity: 1;">
+                            dfdff
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Marcas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="detalle.html">Ofertas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Impresión</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Computación</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Software</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>

@@ -15,8 +15,15 @@ class CartController extends Controller
 
     function getItems(){
 
-        $carts = Cart::with("product")->where('user_id', \Auth::user()->id)->get();
-        return response()->json(["products" => $carts]);
+        $carts = Cart::with("product", "product.brand")->where('user_id', \Auth::user()->id)->get();
+        $total = 0;
+        foreach($carts as $cart){
+
+            $total += $cart->amount * $cart->product->price;
+
+        }
+
+        return response()->json(["products" => $carts, "total" => $total]);
 
     }
     

@@ -4,59 +4,206 @@
 
     @include('partials.navbar')
 
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-12">
-                
-                <div class="card" v-for="item in items">
-                    <div class="card-body">
+    <div class="container pagina bg">
+        <div class="carrito">
+            <div class="iconos-buy">
+                <div class="icono-p">
+                    <div class="icono-buy__item">
+                        <img src="assets/img/deira-48.png" alt="">
+                    </div>
+                    <div class="icono-buy__item">
+                        <img src="assets/img/deira-49.png" alt="">
+                    </div>
+                    <div class="icono-buy__item">
+                        <img src="assets/img/deira-50.png" alt="">
+                    </div>
+                    <div class="icono-buy__item">
+                        <img src="assets/img/deira-51.png" alt="">
+                    </div>
+                    <div class="icono-buy__item">
+                        <img src="assets/img/deira-52.png" alt="">
+                    </div>
+                </div>
+            </div>
 
-                        @{{ item.product.name }} - @{{ item.amount }}
+            <div class="row">
+                <div class="col-sm-12 ">
+                    <div class="div-carrito">
+                        <!-- <div class="iconos-carrito">
+                                        <div class="icono-carrito"></div>
+                                        <div class="icono-carrito"></div>
+                                        <div class="icono-carrito"></div>
+                                        <div class="icono-carrito"></div>
+                                        <div class="icono-carrito"></div>
+                                    </div> -->
+                        <div class="title__general">
+                            <p><strong>Carrito </strong>de compras</p>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <td>Producto</td>
+                                            <td>Marca</td>
+                                            <td>Nombre</td>
+                                            <td>Precio</td>
+                                            <td>Cantidad</td>
+                                            <td>Total</td>
+                                            <td></td>
 
-                        <button class="btn btn-success" data-toggle="modal" data-target="#editCart" @click="edit(item.id, item.amount, item.product.amount)">editar</button>
-                        <button class="btn btn-danger" @click="erase(item.id)">eliminar</button>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="item in items">
+                                            <td><img class="lista-pedido" :src="'{{ url('/') }}'+'/images/products/'+item.product.picture" alt=""></td>
+                                            <td><img class="lista-pedido" :src="'{{ url('/') }}'+'/images/brands/'+item.product.brand.image" alt=""></td>
+                                            <td>
+                                                <span>@{{ item.product.name }} </span>
+                                                <p>@{{ item.product.sub_title }}</p>
+                                            </td>
+                                            <td>$ @{{ item.product.price }}</td>
+                                            <td>@{{ item.amount }}</td>
+                                            <td>$ @{{ item.product.price * item.amount }}</td>
+                                            <td><button class="btn btn-danger" @click="erase(item.id)">X</button></td>
+                                        </tr>
+
+
+
+                                    </tbody>
+                                </table>
+                                <div class="carrito-informacion">
+                                    <div class="carrito_item">
+                                        <img src="assets/img/estadocompra.svg" alt="">
+                                        <div>
+                                            <p>ESTADO DE COMPRA </p>
+                                            <span>Seguimiento online</span>
+                                        </div>
+                                    </div>
+                                    <div class="carrito_item">
+                                        <img src="assets/img/deira-47.png" alt="">
+                                    </div>
+                                    <div class="carrito_item">
+                                        <img src="assets/img/auricular.svg" alt="">
+                                        <div>
+                                            <p>CONTÁCTANOS </p>
+                                            <span>+56 22 674 8000</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="pedido">
+                                    <h3>Tu pedido</h3>
+                                    <h5>Total de tu compra</h5>
+                                    <h2>$ @{{ total }}</h2>
+                                    <p>Todos los valores incluyen iva</p>
+                                    <button @click="checkout()" class="finalizar-compra">checkout</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ofertas -->
+            <section>
+                <div class="title__general">
+
+                    <p><strong>Te puede</strong> Interesar</p>
+                </div>
+
+                <div class="container">
+                    <div class="main-slider__content">
+                        <div class="main-slider__item">
+                            <div class="content-slider">
+                                <img src="assets/img/deira-04.png" alt="">
+                            </div>
+                            <div class="main-slider__text title-blue ">
+                                <span>Pisonee Poner Lite 525W</span>
+                                <p class="title">Proyector</p>
+                                <span class="price">$ 935.990</span>
+                                <p class="price-old">Normal <span>$999.999</span></p>
+                            </div>
+                        </div>
+                        <div class="main-slider__item">
+                            <div class="content-slider">
+                                <img src="assets/img/deira-05.png" alt="">
+                            </div>
+                            <div class="main-slider__text title-blue ">
+                                <span>Pisonee Poner Lite 525W</span>
+                                <p class="title">Proyector</p>
+                                <span class="price">$ 935.990</span>
+                                <p class="price-old">Normal <span>$999.999</span></p>
+                            </div>
+                        </div>
+                        <div class="main-slider__item">
+                            <div class="content-slider">
+                                <img src="assets/img/deira-06.png" alt="">
+                            </div>
+                            <div class="main-slider__text title-blue ">
+                                <span>Pisonee Poner Lite 525W</span>
+                                <p class="title">Proyector</p>
+                                <span class="price">$ 935.990</span>
+                                <p class="price-old">Normal <span>$999.999</span></p>
+                            </div>
+                        </div>
+                        <div class="main-slider__item">
+                            <div class="content-slider ">
+                                <img src="assets/img/deira-07.png" alt="">
+                            </div>
+                            <div class="main-slider__text title-blue ">
+                                <span>Pisonee Poner Lite 525W</span>
+                                <p class="title">Proyector</p>
+                                <span class="price">$ 935.990</span>
+                                <p class="price-old">Normal <span>$999.999</span></p>
+                            </div>
+                        </div>
+                        <div class="main-slider__item">
+                            <div class="content-slider">
+                                <img src="assets/img/deira-08.png" alt="">
+                            </div>
+                            <div class="main-slider__text title-blue ">
+                                <span>Pisonee Poner Lite 525W</span>
+                                <p class="title">Proyector</p>
+                                <span class="price">$ 935.990</span>
+                                <p class="price-old">Normal <span>$999.999</span></p>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="main-slider__item">
+                            <div class="content-slider ">
+                                <img src="assets/img/deira-09.png" alt="">
+                            </div>
+                            <div class="main-slider__text">
+                                <span>Pisonee Poner Lite 525W</span>
+                                <p class="title">Proyector</p>
+                                <span class="price">$ 935.990</span>
+                                <p class="price-old">Normal <span>$999.999</span></p>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
+            </section>
 
-            </div>
-        </div>
-        <div class="row" v-if="items.length > 0">
-            <div class="col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-12">
-                
-                <!--button class="btn btn-success" @click="payProducts()">checkout</button>-->
-                <a href="{{ route('checkout') }}" class="btn btn-success">checkout</a>
 
-            </div>
+
+
         </div>
+
     </div>
 
-    <!-- Create Modal -->
-
-    <div class="modal fade" id="editCart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">@{{ modalTitle }}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="amount">Cantidad</label>
-                        <input type="number" class="form-control" id="amount" v-model="amount" :max="maxAmount" min="1" @keyup="isNumber()">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" @click="update()">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Create Modal -->
+    @include('partials.footer')
 
 @endsection
 
@@ -72,7 +219,8 @@
                     items:[],
                     amount:0,
                     maxAmount:0,
-                    itemId:0
+                    itemId:0,
+                    total:0
                 }
             },
             methods:{
@@ -83,6 +231,7 @@
                     .then(res => {
                         
                         this.items = res.data.products
+                        this.total = res.data.total
 
                     })
                     .catch(err => {
@@ -197,6 +346,9 @@
                         });
                     })
 
+                },
+                checkout(){
+                    window.location.href="{{ route('checkout') }}"
                 }
 
 

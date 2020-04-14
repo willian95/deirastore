@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCategories;
 use App\Http\Requests\UpdateCategories;
+use Intervention\Image\Facades\Image;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use App\Category;
 
 class CategoriesController extends Controller
@@ -17,9 +19,22 @@ class CategoriesController extends Controller
     function store(StoreCategories $request){
 
         try{
+
+            $imageData = $request->get('image');
+            $fileName = Carbon::now()->timestamp . '_' . uniqid() . '.' . explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
+            Image::make($request->get('image'))->save(public_path('images/categories/').$fileName);
+
+        }catch(\Exception $e){
+
+            return response()->json(["success" => false, "msg" => "Hubo un error al cargar la imagen"]);
+
+        }
+
+        try{
             
             $category = new Category;
             $category->name = $request->name;
+            $category->image = $fileName;
             $category->save();
 
             return response()->json(["success" => true, "msg" => "Categoría registrada"]);
@@ -34,17 +49,33 @@ class CategoriesController extends Controller
 
     function update(UpdateCategories $request){
 
+        if($request->get('image') != null){
+            try{
+
+                $imageData = $request->get('image');
+                $fileName = Carbon::now()->timestamp . '_' . uniqid() . '.' . explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
+                Image::make($request->get('image'))->save(public_path('images/categories/').$fileName);
+
+            }catch(\Exception $e){
+
+                return response()->json(["success" => false, "msg" => "Hubo un error al cargar la imagen"]);
+
+            }
+        }
         try{
             
             $category = Category::find($request->id);
             $category->name = $request->name;
+            if($request->get('image') != null){
+                $category->image = $fileName;
+            }
             $category->update();
 
             return response()->json(["success" => true, "msg" => "Categoría actualizada"]);
 
         }catch(\Exception $e){
 
-            return resonse()->json(["success" => false, "msg" => "Error en el servidor"]);
+            return response()->json(["success" => false, "msg" => "Error en el servidor"]);
 
         }
 
