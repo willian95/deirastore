@@ -23,7 +23,7 @@
                         <div class="div-informacion-detalles">
                             <h2><strong>{{ $product->name }}</strong></h2>
                             <h3 style="">$ {{ $product->price }} <small style="">IVA incluido.</small></h3>
-                            <h5>{{ $product->subtitle }}</h5>
+                            <h5>{{ $product->sub_title }}</h5>
                             <ul>
                                 <li><strong>SKU:</strong> {{ $product->sku }}</li>
                                 <li><strong>VPN:</strong> {{ $product->vpn }}</li>
