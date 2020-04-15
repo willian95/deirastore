@@ -120,17 +120,19 @@
             <div class="container">
                 <div class="main-slider__content">
                     @foreach(App\Product::with('category')->get() as $product)
-                        <div class="main-slider__item">
-                            <div class="content-slider">
-                                <img src="{{ asset('/images/products/'.$product->picture) }}" alt="">
+                        <a href="{{ url('/product/'.$product->slug) }}">
+                            <div class="main-slider__item">
+                                <div class="content-slider">
+                                    <img src="{{ asset('/images/products/'.$product->picture) }}" alt="">
+                                </div>
+                                <div class="main-slider__text">
+                                    <span>{{ $product->name }}</span>
+                                    <p class="title">{{ $product->category->name }}</p>
+                                    <span class="price">$ {{ $product->sub_price }}</span>
+                                    <p class="price-old">Normal <span>${{ $product->price }}</span></p>
+                                </div>
                             </div>
-                            <div class="main-slider__text">
-                                <span>{{ $product->name }}</span>
-                                <p class="title">{{ $product->category->name }}</p>
-                                <span class="price">$ {{ $product->sub_price }}</span>
-                                <p class="price-old">Normal <span>${{ $product->price }}</span></p>
-                            </div>
-                        </div>
+                        </a>
                     @endforeach
                 </div>
             </div>
