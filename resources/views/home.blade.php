@@ -67,7 +67,7 @@
                             <div class="main-categorias-txt">
                                 <a href=""> 
                                     <img src="{{ asset('/images/categories/'.$category->image) }}" alt="">
-                                    <span>Cable</span>
+                                    <span>{{ $categoru}}</span>
                                 </a>
                             </div>
                         </div>
