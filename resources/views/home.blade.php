@@ -119,82 +119,24 @@
 
             <div class="container">
                 <div class="main-slider__content">
-                    <div class="main-slider__item">
-                        <div class="content-slider">
-                            <img src="assets/img/deira-09.png" alt="">
+                    @foreach(App\Product::with('category')->get() as $product)
+                        <div class="main-slider__item">
+                            <div class="content-slider">
+                                <img src="{{ asset('/images/products/'.$product->picture) }}" alt="">
+                            </div>
+                            <div class="main-slider__text">
+                                <span>{{ $product->name }}</span>
+                                <p class="title">{{ $product->category->name }}</p>
+                                <span class="price">$ {{ $product->sub_price }}</span>
+                                <p class="price-old">Normal <span>${{ $product->price }}</span></p>
+                            </div>
                         </div>
-                        <div class="main-slider__text">
-                            <span>Pisonee Poner Lite 525W</span>
-                            <p class="title">Proyector</p>
-                            <span class="price">$ 935.990</span>
-                            <p class="price-old">Normal <span>$999.999</span></p>
-                        </div>
-                    </div>
-                    <div class="main-slider__item">
-                        <div class="content-slider">
-                            <img src="assets/img/deira-10.png" alt="">
-                        </div>
-                        <div class="main-slider__text">
-                            <span>Pisonee Poner Lite 525W</span>
-                            <p class="title">Proyector</p>
-                            <span class="price">$ 935.990</span>
-                            <p class="price-old">Normal <span>$999.999</span></p>
-                        </div>
-                    </div>
-                    <div class="main-slider__item">
-                        <div class="content-slider">
-                            <img src="assets/img/deira-11.png" alt="">
-                        </div>
-                        <div class="main-slider__text">
-                            <span>Pisonee Poner Lite 525W</span>
-                            <p class="title">Proyector</p>
-                            <span class="price">$ 935.990</span>
-                            <p class="price-old">Normal <span>$999.999</span></p>
-                        </div>
-                    </div>
-                    <div class="main-slider__item">
-                        <div class="content-slider">
-                            <img src="assets/img/deira-12.png" alt="">
-                        </div>
-                        <div class="main-slider__text">
-                            <span>Pisonee Poner Lite 525W</span>
-                            <p class="title">Proyector</p>
-                            <span class="price">$ 935.990</span>
-                            <p class="price-old">Normal <span>$999.999</span></p>
-                        </div>
-                    </div>
-                    <div class="main-slider__item">
-                        <div class="content-slider">
-                            <img src="assets/img/deira-13.png" alt="">
-                        </div>
-                        <div class="main-slider__text">
-                            <span>Pisonee Poner Lite 525W</span>
-                            <p class="title">Proyector</p>
-                            <span class="price">$ 935.990</span>
-                            <p class="price-old">Normal <span>$999.999</span></p>
-                        </div>
-                    </div>
-
-
-
-
-                    <div class="main-slider__item">
-                        <div class="content-slider">
-                            <img src="assets/img/deira-15.png" alt="">
-                        </div>
-                        <div class="main-slider__text">
-                            <span>Pisonee Poner Lite 525W</span>
-                            <p class="title">Proyector</p>
-                            <span class="price">$ 935.990</span>
-                            <p class="price-old">Normal <span>$999.999</span></p>
-                        </div>
-                    </div>
-
+                    @endforeach
                 </div>
             </div>
         </section>
         <!-- ofertas -->
-        <section>
+        <!--<section>
             <div class="title__general">
                 <p><strong>Ofertas</strong> Imperdibles </p>
             </div>
@@ -274,7 +216,7 @@
 
                 </div>
             </div>
-        </section>
+        </section>-->
     </div>
 
     <footer>
