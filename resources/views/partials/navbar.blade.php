@@ -17,6 +17,7 @@
                         <li><a href="#">{{ Auth::user()->name }}</a></li>
                     @else
                         <li><a href="{{ url('/login') }}"><img src="{{ asset('assets/img/persona2.svg') }}" alt=""></a></li>
+                        <li><a href="{{ url('/register') }}"><img src="{{ asset('assets/img/persona2.svg') }}" alt=""></a></li>
                     @endif
                     <li><a href=""><img src="{{ asset('assets/img/telefono.svg') }}" alt=""></a></li>
                     @if(Auth::check() && Auth::user()->id)
