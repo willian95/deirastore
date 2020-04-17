@@ -32,6 +32,13 @@
 
         <script>
             new WOW().init();
+
+
+$(document).ready(function() {
+	$(".megamenu").on("click", function(e) {
+		e.stopPropagation();
+	});
+});
         </script>
         
         @stack('scripts')

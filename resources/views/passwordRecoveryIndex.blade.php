@@ -3,19 +3,23 @@
 @section('content')
 
     @include('partials.navbar')
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 offset-lg-3 col-md-6 offset-md-3 col-12">
+    <div class="container bg card-form">
+    <div class="row center-form">
+            <div class="col-lg-4  col-md-6  col-12">
                 <div class="card">
                     <div class="card-body">
+                    <div class="title__general title__general--font">
+                        <p><strong>Recuperar</strong> contraseña</p>
+                    </div>
                         <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" v-model="email">
+                            <!-- <label for="email">Email</label> -->
+                            <input placeholder="Correo electrónico"  type="email" class="form-control" id="email" aria-describedby="emailHelp" v-model="email">
                         </div>
                     
-                        <div class="form-group">
-                            <button class="btn btn-primary" @click="recovery()">recuperar</button>
+                        <div class="form-group text-center">
+                            <button class="btn btn-primary btn-general btn-general--form" @click="recovery()">Recuperar</button>
                         </div>
+
 
                     </div>
                 </div>

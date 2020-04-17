@@ -6,22 +6,29 @@
             </div>
             <div class="main-menu__top-item search">
                 <form class="form-inline form-general" action="{{ url('/search') }}" method="GET">
-                    <input class="form-control " type="search" placeholder='  Buscar productos,  marcas y más'
-                        aria-label="Search" name="search">
+                    <input class="form-control " type="search" placeholder='  Buscar productos,  marcas y más' aria-label="Search" name="search">
                     <button class="btn btn-form" type="submit"><img src="{{ asset('assets/img/lupa.svg') }}" alt=""></button>
                 </form>
             </div>
             <div class="main-menu__top-item">
                 <ul>
                     @if(Auth::check() && Auth::user()->id)
-                        <li><a href="#">{{ Auth::user()->name }}</a></li>
+                    <li><a href="#">{{ Auth::user()->name }}</a></li>
                     @else
-                        <li><a href="{{ url('/login') }}"><img src="{{ asset('assets/img/persona2.svg') }}" alt=""></a></li>
-                        <li><a href="{{ url('/register') }}"><img src="{{ asset('assets/img/persona2.svg') }}" alt=""></a></li>
+                    <li class="nav-item dropdown arrow">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="{{ asset('assets/img/persona2.svg') }}" alt="">
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="drow-none" href="{{ url('/login') }}">Iniciar sesion</a>
+                            <a class="drow-none" href="{{ url('/register') }}">Registrarme</a>
+                        </div>
+                    </li>
+
                     @endif
                     <li><a href=""><img src="{{ asset('assets/img/telefono.svg') }}" alt=""></a></li>
                     @if(Auth::check() && Auth::user()->id)
-                        <li><a href="{{ url('/cart') }}"><img src="{{ asset('assets/img/carro2.svg') }}" alt=""></a></li>
+                    <li><a href="{{ url('/cart') }}"><img src="{{ asset('assets/img/carro2.svg') }}" alt=""></a></li>
                     @endif
 
                 </ul>
@@ -44,12 +51,23 @@
 
 
                     <li class="nav-item dropdown mega-menu">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                            aria-haspopup="true" aria-expanded="false">Categorías</a>
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Categorías</a>
                         <div class="dropdown-menu" style="opacity: 1;">
-                            dfdff
+                            <div class="grid-menu">
+                                <div class="grid-menu__item">
+                                    <ul>
+                                        <li>Cables</li>
+                                        <li>Cámara y Escáners</li>
+                                        <li>Componentes de sistema</li>
+                                        <li>Comunicaciones</li>
+                                        <li>Dispositivos Audio / Video</li>
+                                        <li>Dispositivo de Almacenamiento</li>
+                                        <li>Dispositivos de Entrada</li>
+                                    </ul>
+                                </div>
+
+                            </div>
                         </div>
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Marcas</a>
                     </li>
