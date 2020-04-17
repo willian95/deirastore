@@ -88,3 +88,5 @@ Route::prefix('admin')->group(function () {
     Route::post('/sale/fetch', "SaleController@fetch")->name('admin.sale.fetch');
 
 });
+
+Route::get('/nexsys', "NexsysController@index");
