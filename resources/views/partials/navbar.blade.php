@@ -12,20 +12,22 @@
             </div>
             <div class="main-menu__top-item">
                 <ul>
-                    @if(Auth::check() && Auth::user()->id)
-                    <li><a href="#">{{ Auth::user()->name }}</a></li>
-                    @else
+                    
                     <li class="nav-item dropdown arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img src="{{ asset('assets/img/persona2.svg') }}" alt="">
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="drow-none" href="{{ url('/login') }}">Iniciar sesion</a>
-                            <a class="drow-none" href="{{ url('/register') }}">Registrarme</a>
+                            @if(Auth::check() && Auth::user()->id)
+                                <a href="#" class="drow-none">{{ Auth::user()->name }}</a>
+                                <a href="{{ url('/logout') }}" class="drow-none">Cerrar sesión</a>
+                            @else
+                                <a class="drow-none" href="{{ url('/login') }}">Iniciar sesion</a>
+                                <a class="drow-none" href="{{ url('/register') }}">Registrarme</a>
+                            @endif
                         </div>
                     </li>
 
-                    @endif
                     <li><a href=""><img src="{{ asset('assets/img/telefono.svg') }}" alt=""></a></li>
                     @if(Auth::check() && Auth::user()->id)
                     <li><a href="{{ url('/cart') }}"><img src="{{ asset('assets/img/carro2.svg') }}" alt=""></a></li>

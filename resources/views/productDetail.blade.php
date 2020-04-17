@@ -33,11 +33,24 @@
                             @if(Auth::check())
                                 @if($product->amount > 0)
 
-                                    <label for="amount">Cantidad</label>
-                                    <input type="number" class="form-control" id="amount" v-model="amount" max="{{ $product->amount }}" min="1" readonly>
-                                    <button class="btn btn-success" @click="add()"> sumar</button>
-                                    <button class="btn btn-danger" @click="substract()"> restar</button>
-                                    <button class="btn btn-info" @click="store()">añadir al carrito</button>
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <button class="btn btn-danger" @click="substract()" style="margin-top: 28px"> restar</button>
+                                            </div>
+                                            <div class="col-4">
+                                                <label for="amount">Cantidad</label>
+                                                <input type="number" class="form-control" id="amount" v-model="amount" max="{{ $product->amount }}" min="1" readonly>
+                                                
+                                            </div>
+                                            <div class="col-4">
+                                                <button class="btn btn-success" @click="add()" style="margin-top: 28px"> sumar</button>
+                                            </div>
+                                            <div class="col-12">
+                                                <button class="btn btn-info" @click="store()">añadir al carrito</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 @else
 
                                     <p>Producto sin stock</p>
