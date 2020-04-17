@@ -4,22 +4,22 @@
 
     @include('partials.navbar')
 
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 offset-lg-3 col-md-6 offset-md-3 col-12">
+    <div class="container bg card-form">
+    <div class="row center-form">
+            <div class="col-lg-4  col-md-6  col-12">
                 <div class="card">
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="">Clave</label>
-                            <input type="password" class="form-control" v-model="password">
+                            <!-- <label for="">Clave</label> -->
+                            <input placeholder="Contraseña" type="password" class="form-control" v-model="password">
                         </div>
                         <div class="form-group">
-                            <label for="">Repetir clave</label>
-                            <input type="password" class="form-control" v-model="password_confirmation">
+                            <!-- <label for="">Repetir clave</label> -->
+                            <input placeholder="Repetir clave" type="password" class="form-control" v-model="password_confirmation">
                         </div>
                     
-                        <div class="form-group">
-                            <button class="btn btn-primary" @click="update()">Cambiar</button>
+                        <div class="form-group text-center">
+                            <button class="btn btn-primary btn-general btn-general--form" @click="update()">Cambiar</button>
                         </div>
 
                     </div>
