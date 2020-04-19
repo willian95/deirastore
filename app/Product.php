@@ -9,6 +9,37 @@ class Product extends Model
 {
     use SoftDeletes;
 
+    protected $fillable=[
+        "name",
+        "price",	
+        "sub_price",
+        "picture",
+        "sub_title",
+        "description",
+        "category_id",
+        "created_at",
+        "updated_at",
+        "deleted_at",
+        "amount",
+        "slug",
+        "sku",
+        "vpn",
+        "min_description",
+        "product_type",
+        "product_material",
+        "dimenssions",
+        "weight",
+        "features",
+        "location",
+        "warranty",
+        "color",
+        "brand_id",
+        "currency",
+        "is_external",
+        "tax_excluded",
+        "external_price"
+    ];
+
     public function category(){
         return $this->belongsTo(Category::class);
     }

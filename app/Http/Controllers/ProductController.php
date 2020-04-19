@@ -83,6 +83,7 @@ class ProductController extends Controller
             $product->location = $request->location;
             $product->warranty = $request->warranty;
             $product->color = $request->color;
+            $product->is_external = false;
             $product->save();
 
             return response()->json(["success" => true, "msg" => "Producto registrado"]);

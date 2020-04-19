@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBrandsTable extends Migration
+class AddSlugToBrands extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateBrandsTable extends Migration
      */
     public function up()
     {
-        Schema::create('brands', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string("name");
-            $table->string('image')->nullable();
-            $table->timestamps();
+        Schema::table('brands', function (Blueprint $table) {
+            $table->string('slug')->nullable();
         });
     }
 
@@ -28,6 +25,8 @@ class CreateBrandsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('brands');
+        Schema::table('brands', function (Blueprint $table) {
+            //
+        });
     }
 }

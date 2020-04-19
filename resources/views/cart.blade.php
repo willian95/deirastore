@@ -64,7 +64,7 @@
                                             </td>
                                             <td>$ @{{ item.product.price }}</td>
                                             <td>@{{ item.amount }}</td>
-                                            <td>$ @{{ item.product.price * item.amount }}</td>
+                                            <td>$ @{{ item.price }}</td>
                                             <td><button class="btn btn-danger" @click="erase(item.id)">X</button></td>
                                         </tr>
 

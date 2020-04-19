@@ -22,7 +22,14 @@
 
                         <div class="div-informacion-detalles">
                             <h2><strong>{{ $product->name }}</strong></h2>
-                            <h3 style="">$ {{ $product->price }} <small style="">IVA incluido.</small></h3>
+                            <h3 style="">$  @if($product->external_price > 0)
+                                                {{ round($product->external_price * App\DolarPrice::first()->price, 2) }} 
+                                            @else
+                                                {{ $product->price }}
+                                            @endif
+                            
+                            @if($product->tax_excluded == false)<small style="">IVA incluido.</small> @else <small style="">Excento de IVA.</small> @endif</h3>
+                            
                             <h5>{{ $product->sub_title }}</h5>
                             <ul>
                                 <li><strong>SKU:</strong> {{ $product->sku }}</li>
@@ -63,16 +70,22 @@
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <img class="imagen-detalles" src="{{ asset('/images/products/'.$product->picture) }}" alt="">
+                        @if($product->is_external == false)
+                            <img class="imagen-detalles" src="{{ asset('/images/products/'.$product->picture) }}" alt="">
+                        @else
+                            <img class="imagen-detalles" src="{{ $product->picture }}" alt="">
+                        @endif
                         <div class="logo-detalle">
-                            <img src="{{ asset('/images/brands/'.$product->brand->image) }}" alt="">
+                            @if($product->brand->image != null)
+                                <img src="{{ asset('/images/brands/'.$product->brand->image) }}" alt="">
+                            @endif
                         </div>
-                        <div class="imagen-detalles-sub">
+                        <!--<div class="imagen-detalles-sub">
                             <img src="{{ asset('assets/img/deira-70.png') }}" alt="">
                             <img src="{{ asset('assets/img/deira-71.png') }}" alt="">
                             <img src="{{ asset('assets/img/deira-72.png') }}" alt="">
 
-                        </div>
+                        </div>-->
                     </div>
 
                 </div>
@@ -161,38 +174,54 @@
                                                 <td>{{ $product->min_description }}
                                                 </td>
                                             </tr>
+                                            @if($product->product_type)
                                             <tr>
                                                 <td>Tipo de producto</td>
                                                 <td>{{ $product->product_type }}</td>
                                             </tr>
+                                            @endif
+                                            @if($product->color)
                                             <tr>
                                                 <td>Color</td>
                                                 <td>{{ $product->color }}</td>
                                             </tr>
+                                            @endif
+                                            @if($product->product_material)
                                             <tr>
                                                 <td>Material del producto</td>
                                                 <td>{{ $product->product_material }}</td>
                                             </tr>
+                                            @endif
+                                            @if($product->dimenssions)
                                             <tr>
                                                 <td>Dimensiones</td>
                                                 <td>{{ $product->dimenssions }}</td>
                                             </tr>
+                                            @endif
+                                            @if($product->weight)
                                             <tr>
                                                 <td>Peso </td>
                                                 <td>{{ $product->weight }}</td>
                                             </tr>
+                                            @endif
+                                            @if($product->features)
                                             <tr>
                                                 <td>Características </td>
                                                 <td>{{ $product->features }}</td>
                                             </tr>
+                                            @endif
+                                            @if($product->location)
                                             <tr>
                                                 <td>Localización </td>
                                                 <td>{{ $product->location }}</td>
                                             </tr>
+                                            @endif
+                                            @if($product->warranty)
                                             <tr>
                                                 <td>Garantía del fabricante </td>
                                                 <td>{{ $product->warranty }}</td>
                                             </tr>
+                                            @endif
                                         </tbody>
                                     </table>
                                 </div>

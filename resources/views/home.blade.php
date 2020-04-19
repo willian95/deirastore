@@ -63,14 +63,16 @@
             <div class="container">
                 <div class="main-categorias__content">
                     @foreach($categories as $category)
-                        <div class="main-categorias__item">
-                            <div class="main-categorias-txt">
-                                <a href=""> 
-                                    <img src="{{ asset('/images/categories/'.$category->image) }}" alt="">
-                                    <span>{{ $category->name}}</span>
-                                </a>
+                        @if($category->image != null)
+                            <div class="main-categorias__item">
+                                <div class="main-categorias-txt">
+                                    <a href="{{ url('/category/'.$category->slug) }}"> 
+                                        <img src="{{ asset('/images/categories/'.$category->image) }}" alt="">
+                                        <span>{{ $category->name}}</span>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
+                        @endif
                     @endforeach
                 </div>
             </div>
@@ -85,26 +87,30 @@
             <div class="container">
                 <div class="main-shop__grid">
                     @foreach($brands as $brand)
-                        <div class="main-shop__item">
-                            <img src="{{ asset('/images/brands/'.$brand->image) }}" alt="">
-                            <p>{{ $brand->name }}</p>
-                            <div class="main-shop__card">
-                                @foreach(App\Product::where('brand_id', $brand->id)->orderBy('id', 'desc')->limit(3)->get() as $product)
-                                    <div class="main-shop__card-item">
-                                        <a href="{{ url('/product/'.$product->slug) }}"> <img style="width: 100%;" src="{{ asset('/images/products/'.$product->picture) }}" alt=""></a>
-                                    </div>
-                                <!--<div class="main-shop__card-item">
-                                    <a href=""> <img src="assets/img/deira-12.png" alt=""></a>
+                        @if($brand->image != null)
+                            <div class="main-shop__item">
+                                
+                                <img src="{{ asset('/images/brands/'.$brand->image) }}" alt="">
+                                
+                                <p>{{ $brand->name }}</p>
+                                <div class="main-shop__card">
+                                    @foreach(App\Product::where('brand_id', $brand->id)->orderBy('id', 'desc')->limit(3)->get() as $product)
+                                        <div class="main-shop__card-item">
+                                            <a href="{{ url('/product/'.$product->slug) }}"> 
+                                                @if($product->is_external == true)
+                                                    <img style="width: 100%;" src="{{ asset('/images/products/'.$product->picture) }}" alt="">
+                                                @else
+                                                    <img style="width: 100%;" src="{{ $product->picture }}" alt="">
+                                                @endif
+                                            </a>
+                                        </div>
+
+                                    @endforeach
+
                                 </div>
-                                <div class="main-shop__card-item">
-                                    <a href=""> <img src="assets/img/deira-12.png" alt=""></a>
-                                </div>-->
-
-                                @endforeach
-
+                                <a href="{{ url('/brand/'.$brand->slug) }}">Ver tienda</a>
                             </div>
-                            <a href="">Ver tienda</a>
-                        </div>
+                        @endif
 
                     @endforeach
 
@@ -119,17 +125,30 @@
 
             <div class="container">
                 <div class="main-slider__content">
-                    @foreach(App\Product::with('category')->get() as $product)
+                    @foreach(App\Product::with('category')->inRandomOrder()->take(20)->get() as $product)
                         <a href="{{ url('/product/'.$product->slug) }}">
                             <div class="main-slider__item">
                                 <div class="content-slider">
-                                    <img src="{{ asset('/images/products/'.$product->picture) }}" alt="">
+
+                                    @if($product->is_external == false)
+                                        <img src="{{ asset('/images/products/'.$product->picture) }}" alt="" style="width: 100%">
+                                    @else
+                                        <img src="{{ $product->picture }}" alt="" style="width: 100%">
+                                    @endif
                                 </div>
                                 <div class="main-slider__text">
                                     <span>{{ $product->name }}</span>
-                                    <p class="title">{{ $product->category->name }}</p>
-                                    <span class="price">$ {{ $product->sub_price }}</span>
-                                    <p class="price-old">Normal <span>${{ $product->price }}</span></p>
+
+                                    @if($product->category)
+                                        <p class="title">{{ $product->category->name }}</p>
+                                    @endif
+                                    @if($product->external_price > 0)
+                                        <span class="price">$ {{ round($product->external_price * App\DolarPrice::first()->price, 2) }}</span>
+                                    @else
+                                     <span class="price">$ {{ $product->price }}</span>
+                                    @endif
+                                    
+                                    <!--<p class="price-old">Normal <span>$</span></p>-->
                                 </div>
                             </div>
                         </a>

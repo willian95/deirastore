@@ -8,6 +8,7 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Category;
+use App\Product;
 
 class CategoriesController extends Controller
 {
@@ -31,10 +32,17 @@ class CategoriesController extends Controller
         }
 
         try{
+
+            $slug = str_replace(" ", "-", $request->name);
+
+            if(Product::where('slug', $slug)->count() > 0){
+                $slug = $slug."-".Carbon::now()->timestamp;
+            }
             
             $category = new Category;
             $category->name = $request->name;
             $category->image = $fileName;
+            $category->slug = $slug;
             $category->save();
 
             return response()->json(["success" => true, "msg" => "Categoría registrada"]);
@@ -63,12 +71,19 @@ class CategoriesController extends Controller
             }
         }
         try{
+
+            $slug = str_replace(" ", "-", $request->name);
+
+            if(Product::where('slug', $slug)->where('id', '<>', $request->productId)->count() > 0){
+                $slug = $slug."-".Carbon::now()->timestamp;
+            }
             
             $category = Category::find($request->id);
             $category->name = $request->name;
             if($request->get('image') != null){
                 $category->image = $fileName;
             }
+            $category->slug = $request->slug;
             $category->update();
 
             return response()->json(["success" => true, "msg" => "Categoría actualizada"]);
@@ -123,6 +138,32 @@ class CategoriesController extends Controller
         }
 
 
+
+    }
+
+    function slug($slug){
+
+        return view('categorySlug', ["slug" => $slug]);
+
+    }
+
+    function products(Request $request){
+
+        try{
+
+            $skip = ($request->page-1) * 20;
+            $category = Category::where('slug', $request->slug)->first();
+
+            $products = Product::where('category_id', $category->id)->with('category')->skip($skip)->take(20)->get();
+            $productsCount = Product::where('category_id', $category->id)->with('category')->count();
+
+            return response()->json(["success" => true, "products" => $products, "productsCount" => $productsCount]);
+
+        }catch(\Exception $e){
+
+            return response()->json(["success" => false, "msg" => "Error en el servidor", "err" => $e->getMessage(), "ln" => $e->getLine()]);
+
+        }
 
     }
 

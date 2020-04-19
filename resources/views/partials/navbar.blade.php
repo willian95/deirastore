@@ -2,7 +2,9 @@
     <div class="container">
         <div class="main-menu__top">
             <div class="main-menu__top-item">
-                <img class="logo" src="{{ asset('assets/img/logo-cap.png') }}" alt="">
+                <a href="{{ url('/') }}">
+                    <img class="logo" src="{{ asset('assets/img/logo-cap.png') }}" alt="">
+                </a>
             </div>
             <div class="main-menu__top-item search">
                 <form class="form-inline form-general" action="{{ url('/search') }}" method="GET">
@@ -28,9 +30,9 @@
                         </div>
                     </li>
 
-                    <li><a href=""><img src="{{ asset('assets/img/telefono.svg') }}" alt=""></a></li>
+                    <!--<li><a href=""><img src="{{ asset('assets/img/telefono.svg') }}" alt=""></a></li>-->
                     @if(Auth::check() && Auth::user()->id)
-                    <li><a href="{{ url('/cart') }}"><img src="{{ asset('assets/img/carro2.svg') }}" alt=""></a></li>
+                        <li><a href="{{ url('/cart') }}"><img src="{{ asset('assets/img/carro2.svg') }}" alt=""></a></li>
                     @endif
 
                 </ul>
@@ -53,38 +55,36 @@
 
 
                     <li class="nav-item dropdown mega-menu">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Categorías</a>
-                        <div class="dropdown-menu" style="opacity: 1;">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" id="menu-categories">Categorías</a>
+                        <div class="dropdown-menu" style="opacity: 1;" id="menu-categories-dropdown">
                             <div class="grid-menu">
                                 <div class="grid-menu__item">
                                     <ul>
-                                        <li>Cables</li>
-                                        <li>Cámara y Escáners</li>
-                                        <li>Componentes de sistema</li>
-                                        <li>Comunicaciones</li>
-                                        <li>Dispositivos Audio / Video</li>
-                                        <li>Dispositivo de Almacenamiento</li>
-                                        <li>Dispositivos de Entrada</li>
+                                        @foreach(App\Category::all() as $category)
+                                            <li>
+                                                <a href="{{ url('/category/'.$category->slug) }}">{{ $category->name }}</a>
+                                            </li>
+                                        @endforeach
                                     </ul>
                                 </div>
 
                             </div>
                         </div>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Marcas</a>
+                        <a class="nav-link" href="{{ route('brands.all') }}">Marcas</a>
                     </li>
-                    <li class="nav-item">
+                    <!--<li class="nav-item">
                         <a class="nav-link" href="detalle.html">Ofertas</a>
+                    </li>-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/category/impresoras') }}">Impresión</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Impresión</a>
+                        <a class="nav-link" href="{{ url('/category/Computadores-y-servidores') }}">Computación</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Computación</a>
-                    </li>
-                    <li class="nav-item">
+                    <!--<li class="nav-item">
                         <a class="nav-link" href="#">Software</a>
-                    </li>
+                    </li>-->
                 </ul>
             </div>
         </div>

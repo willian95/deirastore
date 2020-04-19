@@ -19,13 +19,7 @@ class CheckoutController extends Controller
 	{
 		
 		$carts = Cart::with('product')->where('user_id', \Auth::user()->id)->get();
-		$total = 0;
-
-		foreach($carts as $cart){
-
-			$total += $cart->product->price * $cart->amount;
-
-		}
+		$total = Cart::where('user_id', \Auth::user()->id)->sum('price');
 
 		$order = Carbon::now()->timestamp.uniqid();
 		session(['order' =>$order]);

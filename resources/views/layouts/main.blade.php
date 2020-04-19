@@ -34,11 +34,21 @@
             new WOW().init();
 
 
-$(document).ready(function() {
-	$(".megamenu").on("click", function(e) {
-		e.stopPropagation();
-	});
-});
+            $(document).ready(function() {
+                $(".megamenu").on("click", function(e) {
+                    e.stopPropagation();
+                });
+
+                $("#menu-categories").on("click", function(){
+                    if($("#menu-categories-dropdown").hasClass('show')){
+                        $("#menu-categories-dropdown").removeClass('show')
+                    }else{
+                        $("#menu-categories-dropdown").addClass('show')
+                    }
+                })
+
+            });
+            
         </script>
         
         @stack('scripts')

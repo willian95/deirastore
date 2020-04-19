@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreCart;
 use App\Product;
 use App\Cart;
+use App\DolarPrice;
 
 class CartController extends Controller
 {
@@ -16,12 +17,7 @@ class CartController extends Controller
     function getItems(){
 
         $carts = Cart::with("product", "product.brand")->where('user_id', \Auth::user()->id)->get();
-        $total = 0;
-        foreach($carts as $cart){
-
-            $total += $cart->amount * $cart->product->price;
-
-        }
+        $total = Cart::where('user_id', \Auth::user()->id)->sum('price');
 
         return response()->json(["products" => $carts, "total" => $total]);
 
@@ -35,12 +31,18 @@ class CartController extends Controller
                 
                 $product = Cart::where('user_id', \Auth::user()->id)->where('product_id', $request->productId)->first();
                 $amount = $product->amount + $request->amount;
+                $productModel = Product::find($request->product_id);
+                if($productModel->external_price > 0)
+                    $price = $productModel->external_price * DolarPrice::first()->price;
+                else
+                    $price = $productModel->price;
 
                 if(!$this->verifyAmount($request->productId, $amount)){
-                    return response()->json(["success" => false, "msg" => "Cantidad aadida supera a nuestro stock"]);
+                    return response()->json(["success" => false, "msg" => "Cantidad añadida supera a nuestro stock"]);
                 }
 
                 $product->amount = $amount;
+                $product->price = $amount * $price;
                 $product->update();
             
             }else{
@@ -49,6 +51,14 @@ class CartController extends Controller
                 $cart->product_id = $request->productId;
                 $cart->amount = $request->amount;
                 $cart->user_id = \Auth::user()->id;
+
+                $productModel = Product::find($request->productId);
+                if($productModel->external_price > 0)
+                    $price = $productModel->external_price * DolarPrice::first()->price;
+                else
+                    $price = $productModel->price;
+
+                $cart->price = $request->amount * $price;
                 $cart->save();
 
             }
@@ -57,7 +67,7 @@ class CartController extends Controller
 
         }catch(\Exception $e){
 
-            return response()->json(["success" => false, "msg" => "Error en el servidor", "err" => $e->getMessage()]);
+            return response()->json(["success" => false, "msg" => "Error en el servidor", "err" => $e->getMessage(), "ln" => $e->getLine()]);
 
         }
 

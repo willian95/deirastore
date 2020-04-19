@@ -8,6 +8,7 @@ use App\Http\Requests\BrandUpdateRequest;
 use Intervention\Image\Facades\Image;
 use App\Brand;
 use Carbon\Carbon;
+use App\Product;
 
 class BrandController extends Controller
 {
@@ -32,16 +33,23 @@ class BrandController extends Controller
 
         try{
 
+            $slug = str_replace(" ", "-", $request->name);
+
+            if(Product::where('slug', $slug)->count() > 0){
+                $slug = $slug."-".Carbon::now()->timestamp;
+            }
+
             $brand = new Brand;
             $brand->name = $request->name;
             $brand->image = $fileName;
+            $brand->slug = $slug;
             $brand->save();
 
             return response()->json(["success" => true, "msg" => "Tienda creada"]);
 
         }catch(\Exception $e){
 
-            return reponse()->json(["success" => false, "msg" => "Error en el servidor", "err" => $e->getMessage(), "ln" => $e->getLine()]);
+            return response()->json(["success" => false, "msg" => "Error en el servidor", "err" => $e->getMessage(), "ln" => $e->getLine()]);
 
         }
 
@@ -68,11 +76,18 @@ class BrandController extends Controller
 
         try{
 
+            $slug = str_replace(" ", "-", $request->name);
+
+            if(Product::where('slug', $slug)->where('id', '<>', $request->productId)->count() > 0){
+                $slug = $slug."-".Carbon::now()->timestamp;
+            }
+
             $brand = Brand::find($request->brandId);
             $brand->name = $request->name;
             if($request->get('image') != null){
                 $brand->image = $fileName;
             }
+            $brand->slug = $slug;
             $brand->update();
 
             return response()->json(["success" => true, "msg" => "Tienda actualizado"]);
@@ -124,6 +139,38 @@ class BrandController extends Controller
 
         $brands = Brand::where('name', 'like', '%'.$request->search.'%')->get();
         return response()->json(["brands" => $brands]);
+
+    }
+
+    function brands(){
+
+        return view('allBrands');
+
+    }
+
+    function slug($slug){
+
+        return view('brandSlug', ["slug" => $slug]);
+
+    }
+
+    function products(Request $request){
+
+        try{
+
+            $skip = ($request->page-1) * 20;
+            $brand = Brand::where('slug', $request->slug)->first();
+
+            $products = Product::where('brand_id', $brand->id)->with('category')->skip($skip)->take(20)->get();
+            $productsCount = Product::where('brand_id', $brand->id)->with('category')->count();
+
+            return response()->json(["success" => true, "products" => $products, "productsCount" => $productsCount]);
+
+        }catch(\Exception $e){
+
+            return response()->json(["success" => false, "msg" => "Error en el servidor", "err" => $e->getMessage(), "ln" => $e->getLine()]);
+
+        }
 
     }
 

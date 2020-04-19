@@ -41,7 +41,13 @@ Route::post('/password/recovery/send', "RecoveryPasswordController@send");
 Route::get('/password/recovery/restore/{recovery_hash}', "RecoveryPasswordController@restore");
 Route::post('/password/recovery/update', "RecoveryPasswordController@update");
 
-//Route::post('/checkout', "CheckoutController@checkout")->name('checkout');
+Route::get('/brands/all', 'BrandController@brands')->name('brands.all');
+Route::post('/brands/fetch', "BrandController@fetch")->name('brands.fetch');
+Route::get('brand/{slug}', "BrandController@slug")->name('brands.slug');
+Route::post('/brand/products', "BrandController@products")->name('brands.products');
+
+Route::get('/category/{slug}', "CategoriesController@slug");
+Route::post('/category/products', "CategoriesController@products")->name('category.products');
 
 Route::get('/checkout', 'CheckoutController@initTransaction')->name('checkout'); 
 Route::post('/checkout/webpay/response', 'CheckoutController@response')->name('checkout.webpay.response');  
@@ -87,6 +93,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/sale', "SaleController@index")->name('admin.sale');
     Route::post('/sale/fetch', "SaleController@fetch")->name('admin.sale.fetch');
 
+    Route::get('/dolar', "DolarController@index")->name('admin.dolar.index');
+
 });
 
-Route::get('/nexsys', "NexsysController@index");
+Route::get('/nexsys/{mark}', "NexsysController@index");
