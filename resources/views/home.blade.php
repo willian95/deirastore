@@ -97,7 +97,7 @@
                                     @foreach(App\Product::where('brand_id', $brand->id)->orderBy('id', 'desc')->limit(3)->get() as $product)
                                         <div class="main-shop__card-item">
                                             <a href="{{ url('/product/'.$product->slug) }}"> 
-                                                @if($product->is_external == true)
+                                                @if($product->is_external == false)
                                                     <img style="width: 100%;" src="{{ asset('/images/products/'.$product->picture) }}" alt="">
                                                 @else
                                                     <img style="width: 100%;" src="{{ $product->picture }}" alt="">
