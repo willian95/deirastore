@@ -29,7 +29,9 @@ class HomeController extends Controller
     function search(Request $request){
 
 
-        $products = Product::with("category")->where('name', 'like', '%'.$request->search.'%')->orWhere('sub_title', 'like', '%'.$request->search.'%')->orWhere('description', 'like', '%'.$request->search.'%')->get();
+        $products = Product::with("category")->join('brands', 'products.brand_id', '=', 'brands.id')->where('products.name', 'like', '%'.$request->search.'%')->orWhere('products.sub_title', 'like', '%'.$request->search.'%')->orWhere('products.description', 'like', '%'.$request->search.'%')->orWhere("brands.name", 'like', '%'.$request->search.'%')->get();
+
+        dd($products);
 
         $brands = Brand::where("name", "like", '%'.$request->search.'%')->get();
 

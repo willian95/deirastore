@@ -23,7 +23,7 @@
                         <div class="div-informacion-detalles">
                             <h2><strong>{{ $product->name }}</strong></h2>
                             <h3 style="">$  @if($product->external_price > 0)
-                                                {{ round($product->external_price * App\DolarPrice::first()->price, 2) }} 
+                                                {{ intval($product->external_price * App\DolarPrice::first()->price) }} 
                                             @else
                                                 {{ $product->price }}
                                             @endif

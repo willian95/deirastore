@@ -33,7 +33,7 @@ class CartController extends Controller
                 $amount = $product->amount + $request->amount;
                 $productModel = Product::find($request->product_id);
                 if($productModel->external_price > 0)
-                    $price = $productModel->external_price * DolarPrice::first()->price;
+                    $price = intval($productModel->external_price * DolarPrice::first()->price);
                 else
                     $price = $productModel->price;
 
@@ -54,14 +54,14 @@ class CartController extends Controller
 
                 $productModel = Product::find($request->productId);
                 if($productModel->external_price > 0)
-                    $price = $productModel->external_price * DolarPrice::first()->price;
+                    $price = intval($productModel->external_price * DolarPrice::first()->price);
                 else
                     $price = $productModel->price;
 
                 $cart->price = $request->amount * $price;
                 $cart->save();
 
-            }
+            })
 
             return response()->json(["success" => true, "msg" => "Producto añadido al carrito"]);
 

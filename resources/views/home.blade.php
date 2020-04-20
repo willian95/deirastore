@@ -143,7 +143,7 @@
                                         <p class="title">{{ $product->category->name }}</p>
                                     @endif
                                     @if($product->external_price > 0)
-                                        <span class="price">$ {{ round($product->external_price * App\DolarPrice::first()->price, 2) }}</span>
+                                        <span class="price">$ {{ intval($product->external_price * App\DolarPrice::first()->price) }}</span>
                                     @else
                                      <span class="price">$ {{ $product->price }}</span>
                                     @endif
