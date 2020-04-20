@@ -61,7 +61,7 @@ class CartController extends Controller
                 $cart->price = $request->amount * $price;
                 $cart->save();
 
-            })
+            }
 
             return response()->json(["success" => true, "msg" => "Producto añadido al carrito"]);
 
