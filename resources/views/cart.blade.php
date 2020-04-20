@@ -62,7 +62,8 @@
                                                 <span>@{{ item.product.name }} </span>
                                                 <p>@{{ item.product.sub_title }}</p>
                                             </td>
-                                            <td>$ @{{ item.product.price }}</td>
+                                            <td v-if="item.product.external_price > 0">$ @{{ item.product.external_price * this.dolarPrice }}</td>
+                                            <td v-else>$ @{{ item.product.price }}</td>
                                             <td>@{{ item.amount }}</td>
                                             <td>$ @{{ item.price }}</td>
                                             <td><button class="btn btn-danger" @click="erase(item.id)">X</button></td>
@@ -220,7 +221,8 @@
                     amount:0,
                     maxAmount:0,
                     itemId:0,
-                    total:0
+                    total:0,
+                    dolarPrice:'{!! App\DolarPrice::first()->price !!}'
                 }
             },
             methods:{
