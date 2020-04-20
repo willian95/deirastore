@@ -37,7 +37,7 @@ class HomeController extends Controller
         //DB::statement('ALTER TABLE products ADD FULLTEXT fulltext_index (name, description)');
         //$products = Product::where('name', 'like', '%'.$request->search.'%')->get();
 
-        $products = Product::with('category')->join('categories', 'products.category_id', '=', 'categories.id')->join('brands', 'products.brand_id','=', 'brands.id')
+        $products = Product::with('category')->select('products.name', 'products.is_external', "products.external_price", 'categories.name as category_name', "products.slug","products.picture", "products.price", "products.sub_price")->join('categories', 'products.category_id', '=', 'categories.id')->join('brands', 'products.brand_id','=', 'brands.id')
                     ->where(function ($query) use($words) {
                         for ($i = 0; $i < count($words); $i++){
                             $query->orWhere('products.name', $words[$i]);
@@ -65,6 +65,8 @@ class HomeController extends Controller
                     })
                     ->get();
 
+                    
+                
         $brands = Brand::where(function ($query) use($words) {
             for ($i = 0; $i < count($words); $i++){
                 $query->orWhere('brands.name', 'like',  '%' . $words[$i] .'%');

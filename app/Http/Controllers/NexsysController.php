@@ -47,6 +47,7 @@ class NexsysController extends Controller
                         );
 
                         $productSlug = str_replace(" ", "-", $value->short_description);
+                        $productSlug = str_replace("/", "-", $productSlug);
                         
                         $excluded_tax = false;
                         if($value->tax_excluded == "true")
