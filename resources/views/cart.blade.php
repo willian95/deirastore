@@ -56,7 +56,8 @@
                                     </thead>
                                     <tbody>
                                         <tr v-for="item in items">
-                                            <td><img class="lista-pedido" :src="'{{ url('/') }}'+'/images/products/'+item.product.picture" alt=""></td>
+                                            <td v-if="item.product.is_external"><img class="lista-pedido" :src="item.product.picture" alt=""></td>
+                                            <td v-else><img class="lista-pedido" :src="'{{ url('/') }}'+'/images/products/'+item.product.picture" alt=""></td>
                                             <td><img class="lista-pedido" :src="'{{ url('/') }}'+'/images/brands/'+item.product.brand.image" alt=""></td>
                                             <td>
                                                 <span>@{{ item.product.name }} </span>
@@ -231,7 +232,7 @@
 
                     axios.get("{{ route('cart.items') }}")
                     .then(res => {
-                        
+                        console.log("text-items", res)
                         this.items = res.data.products
                         this.total = res.data.total
 
