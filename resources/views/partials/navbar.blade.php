@@ -16,12 +16,18 @@
                 <ul>
                     
                     <li class="nav-item dropdown arrow">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="{{ asset('assets/img/persona2.svg') }}" alt="">
-                        </a>
+                        @if(\Auth::check() && \Auth::user()->id)
+                            <a class="nav-link dropdown-toggle" style="width: 90%; border-radius: 20px; margin-right: 10px; color: #000;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ Auth::user()->name }}
+                            </a>
+                        @else
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="{{ asset('assets/img/persona2.svg') }}" alt="">
+                            </a>    
+                        @endif
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             @if(Auth::check() && Auth::user()->id)
-                                <a href="#" class="drow-none">{{ Auth::user()->name }}</a>
+                                <!--<a href="#" class="drow-none">{{ Auth::user()->name }}</a>-->
                                 <a href="{{ url('/logout') }}" class="drow-none">Cerrar sesión</a>
                             @else
                                 <a class="drow-none" href="{{ url('/login') }}">Iniciar sesion</a>
