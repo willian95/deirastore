@@ -76,12 +76,12 @@
                     <!--<li class="nav-item">
                         <a class="nav-link" href="detalle.html">Ofertas</a>
                     </li>-->
-                    <li class="nav-item">
+                    <!--<li class="nav-item">
                         <a class="nav-link" href="{{ url('/category/impresoras') }}">Impresión</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('/category/Computadores-y-servidores') }}">Computación</a>
-                    </li>
+                    </li>-->
                     <!--<li class="nav-item">
                         <a class="nav-link" href="#">Software</a>
                     </li>-->

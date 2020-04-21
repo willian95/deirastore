@@ -11,6 +11,7 @@ use App\Cart;
 use App\ProductPurchase;
 use App\Payment;
 use App\Product;
+use App\User;
 use DB;
 
 class CheckoutController extends Controller
@@ -52,7 +53,11 @@ class CheckoutController extends Controller
 
 		$this->checkout($response->detailOutput->responseCode);
 		if($response->detailOutput->responseCode == 0){
-			return view('successPayment');
+
+			$payment = Payment::where('order_id', session('order'))->first();
+			$products = ProductPurchase::with('product')->where('payment_id', $payment->id)->get();
+
+			return view('successPayment', ["products" => $products]);
 		}else{
 			return view('failedPayment');
 		}
@@ -84,6 +89,7 @@ class CheckoutController extends Controller
 					$productPurchase->payment_id = $payment->id;
 					$productPurchase->product_id = $cart->product_id;
 					$productPurchase->amount = $cart->amount;
+					$productPurchase->price = $cart->price;
 					$productPurchase->save();
 	
 					$product = Product::find($cart->product_id);
@@ -103,4 +109,29 @@ class CheckoutController extends Controller
 		}
 
 	}
+
+	function sendMessage(){
+
+        try{
+
+			$to_name = \Auth::user()->name;
+			$to_email = \Auth::user()->email;
+			$user = User::find(\Auth::user()->id);
+
+			$data = ["user" => $user];
+			\Mail::send("emails.recoveryMail", $data, function($message) use ($to_name, $to_email) {
+
+				$message->to($to_email, $to_name)->subject("Deira");
+				$message->from("rodriguezwillian95@gmail.com","Deira");
+
+			});
+
+
+        }catch(\Exception $e){
+
+            return response()->json(["success" => false, "msg" => "Error en el servidor", "err" => $e->getMessage(), "ln" => $e->getLine()]);
+
+		}
+	}
+
 }
