@@ -56,7 +56,7 @@ class CheckoutController extends Controller
 
 			$payment = Payment::where('order_id', session('order'))->first();
 			$products = ProductPurchase::with('product')->where('payment_id', $payment->id)->get();
-
+			$this->sendMessage();
 			return view('successPayment', ["products" => $products]);
 		}else{
 			return view('failedPayment');
@@ -119,7 +119,7 @@ class CheckoutController extends Controller
 			$user = User::find(\Auth::user()->id);
 
 			$data = ["user" => $user];
-			\Mail::send("emails.recoveryMail", $data, function($message) use ($to_name, $to_email) {
+			\Mail::send("emails.purchaseMail", $data, function($message) use ($to_name, $to_email) {
 
 				$message->to($to_email, $to_name)->subject("Deira");
 				$message->from("rodriguezwillian95@gmail.com","Deira");
