@@ -26,6 +26,8 @@ class RegisterController extends Controller
             $user->phone_number = $request->phoneNumber;
             $user->save();
 
+            Auth::loginUsingId($usr->id);
+
             $data = ["user" => $user];
 			\Mail::send("emails.purchaseMail", $data, function($message) use ($to_name, $to_email) {
 

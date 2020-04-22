@@ -108,6 +108,8 @@
                             this.passwordRepeat = ""
                             this.terms = ""
 
+                            window.location.href="{{ url('/') }}"
+
                         })
                         .catch(err => {
                             $.each(err.response.data.errors, function(key, value) {
