@@ -29,7 +29,9 @@ class RegisterController extends Controller
             \Auth::loginUsingId($user->id);
 
             $data = ["user" => $user];
-			\Mail::send("emails.purchaseMail", $data, function($message) use ($to_name, $to_email) {
+            $to_name = $user->name;
+			$to_email = $user->email;
+			\Mail::send("emails.registerMail", $data, function($message) use ($to_name, $to_email) {
 
 				$message->to($to_email, $to_name)->subject("Deira");
 				$message->from("rodriguezwillian95@gmail.com","Deira");
