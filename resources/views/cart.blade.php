@@ -63,7 +63,7 @@
                                                 <span>@{{ item.product.name }} </span>
                                                 <p>@{{ item.product.sub_title }}</p>
                                             </td>
-                                            <td v-if="item.product.external_price > 0">$ @{{ parseInt(item.product.external_price * parseFloat(dolarPrice)) }}</td>
+                                            <td v-if="item.product.external_price > 0">$ @{{ parseInt(item.product.external_price * parseFloat(dolarPrice)).toLocaleString('us', {minimumFractionDigits: 0, maximumFractionDigits: 0}) }}</td>
                                             <td v-else>$ @{{ item.product.price }}</td>
                                             <td>@{{ item.amount }}</td>
                                             <td>$ @{{ item.price }}</td>

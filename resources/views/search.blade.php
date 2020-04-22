@@ -29,7 +29,7 @@
                                 <span>{{ $product->name }}</span>
                                 <p class="title">{{ $product->category_name }}</p>
                                 @if($product->external_price > 0)
-                                    <span class="price">$ {{ intval($product->external_price * App\DolarPrice::first()->price) }}</span>
+                                    <span class="price">$ {{ number_format(intval($product->external_price * App\DolarPrice::first()->price), 0, ",", ".") }}</span>
                                 @else
                                     <span class="price">$ {{ $product->price }}</span>
                                 @endif

@@ -26,6 +26,15 @@ class RegisterController extends Controller
             $user->phone_number = $request->phoneNumber;
             $user->save();
 
+            $data = ["user" => $user];
+			\Mail::send("emails.purchaseMail", $data, function($message) use ($to_name, $to_email) {
+
+				$message->to($to_email, $to_name)->subject("Deira");
+				$message->from("rodriguezwillian95@gmail.com","Deira");
+
+			});
+
+
             return response()->json(["success" => true, "msg" => "Has sido registrado"]);
 
         }catch(\Exception $e){

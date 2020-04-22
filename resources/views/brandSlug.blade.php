@@ -16,7 +16,7 @@
                         <div class="main-slider__text">
                             <span>@{{ product.name }}</span>
                             <p class="title">@{{ product.category.name }}</p>
-                            <span class="price" v-if="product.external_price > 0">$ @{{ parseInt(product.external_price * dolarPrice) }}</span>
+                            <span class="price" v-if="product.external_price > 0">$ @{{ parseInt(product.external_price * dolarPrice).toLocaleString('us', {minimumFractionDigits: 0, maximumFractionDigits: 0}) }}</span>
                             <span class="price" v-else>$ @{{ product.price }}</span>
                             <p v-if="product.sub_price > 0" class="price-old">Normal <span>$ @{{ product.sub_price }}</span></p>
                         </div>
@@ -27,7 +27,7 @@
         <div class="row">
             <div class="col-12">
                 <nav aria-label="Page navigation example">
-                    <ul class="pagination">
+                    <ul class="pagination" style="margin-top: 15px;">
                         <li class="page-item" v-for="index in pages">
                             <a class="page-link" href="#"  :key="index" @click="fetch(index)" >@{{ index }}</a>
                         </li>

@@ -16,7 +16,7 @@
                         <div class="main-slider__text">
                             <span>@{{ product.name }}</span>
                             <p class="title">@{{ product.category.name }}</p>
-                            <span class="price" v-if="product.external_price > 0">$ @{{ parseInt(dolarPrice * product.external_price) }}</span>
+                            <span class="price" v-if="product.external_price > 0">$ @{{ parseInt(dolarPrice * product.external_price).toLocaleString('us', {minimumFractionDigits: 0, maximumFractionDigits: 0}) }}</span>
                             <span class="price" v-else>$ @{{ product.price }}</span>
                             <p class="price-old" v-if="product.sub_price > 0">Normal <span>$ @{{ product.sub_price }}</span></p>
                         </div>

@@ -23,9 +23,9 @@
                         <div class="div-informacion-detalles">
                             <h2><strong>{{ $product->name }}</strong></h2>
                             <h3 style="">$  @if($product->external_price > 0)
-                                                {{ intval($product->external_price * App\DolarPrice::first()->price) }} 
+                                                {{ number_format(intval($product->external_price * App\DolarPrice::first()->price), 0, ",", ".") }} 
                                             @else
-                                                {{ $product->price }}
+                                                {{ number_format($product->price, 0, ",", ".") }}
                                             @endif
                             
                             @if($product->tax_excluded == false)<small style="">IVA incluido.</small> @else <small style="">Excento de IVA.</small> @endif</h3>
