@@ -26,10 +26,10 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <nav aria-label="Page navigation example">
+                <nav aria-label="Page navigation example" style="margin-top: 10px;">
                     <ul class="pagination">
-                        <li class="page-item">
-                            <a class="page-link" href="#" v-for="index in pages" :key="index" @click="fetch(index)" >@{{ index }}</a>
+                        <li class="page-item" v-for="index in pages">
+                            <a class="page-link" href="#"  :key="index" @click="fetch(index)" >@{{ index }}</a>
                         </li>
                     </ul>
                 </nav>
@@ -61,7 +61,7 @@
                 .then(res => {
 
                     if(res.data.success == true){
-                        this.pages = Math.ceil(res.data.productsCount / 10)
+                        this.pages = Math.ceil(res.data.productsCount / 20)
                         this.products = res.data.products
                     }else{
 
