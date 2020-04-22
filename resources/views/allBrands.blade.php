@@ -10,8 +10,8 @@
                 <div class="main-slider__item">
                     <a :href="'{{ url('/') }}' + '/brand/' + brand.slug">
                         <div class="content-slider">
-                            <img :src="'{{ url('/') }}' + '/images/brands/'+brand.image" alt="" v-if="brand.image != null">
-                            <img :src="'{{ url('/') }}' + '/images/brands/default.png'" alt="" v-else>
+                            <img :src="'{{ url('/') }}' + '/images/brands/'+brand.image" alt="" v-if="brand.image != null" style="width: 100%">
+                            <img :src="'{{ url('/') }}' + '/images/brands/default.png'" alt="" v-else style="width: 100%">
                         </div>
                         <div class="main-slider__text">
                             <span>@{{ brand.name }}</span>
