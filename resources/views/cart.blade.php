@@ -66,7 +66,7 @@
                                             <td v-if="item.product.external_price > 0">$ @{{ parseInt(item.product.external_price * parseFloat(dolarPrice)).toLocaleString('us', {minimumFractionDigits: 0, maximumFractionDigits: 0}) }}</td>
                                             <td v-else>$ @{{ item.product.price }}</td>
                                             <td>@{{ item.amount }}</td>
-                                            <td>$ @{{ item.price }}</td>
+                                            <td>$ @{{ parseInt(item.price).toLocaleString('us', {minimumFractionDigits: 0, maximumFractionDigits: 0}) }}</td>
                                             <td><button class="btn btn-danger" @click="erase(item.id)">X</button></td>
                                         </tr>
 
@@ -98,7 +98,7 @@
                                 <div class="pedido">
                                     <h3>Tu pedido</h3>
                                     <h5>Total de tu compra</h5>
-                                    <h2>$ @{{ total }}</h2>
+                                    <h2>$ @{{ parseInt(total).toLocaleString('us', {minimumFractionDigits: 0, maximumFractionDigits: 0}) }}</h2>
                                     <p>Todos los valores incluyen iva</p>
                                     <button @click="checkout()" class="finalizar-compra">checkout</button>
 
