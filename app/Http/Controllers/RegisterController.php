@@ -31,7 +31,7 @@ class RegisterController extends Controller
             $data = ["user" => $user];
             $to_name = $user->name;
 			$to_email = $user->email;
-			\Mail::send("emails.registerMail", $data, function($message) use ($to_name, $to_email) {
+			\Mail::send("emails.registerEmail", $data, function($message) use ($to_name, $to_email) {
 
 				$message->to($to_email, $to_name)->subject("Deira");
 				$message->from("rodriguezwillian95@gmail.com","Deira");
