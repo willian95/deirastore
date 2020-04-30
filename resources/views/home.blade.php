@@ -6,53 +6,97 @@
 
     <div class="container bg">
         <!-- banner -->
-        <div class="main-banner">
-            <div class="main-banner__img">
-                <img src="assets/img/deira-30.png" alt="">
-                <div class="main-banner__content">
-                    <div class="title">
-                        <p><strong>Notebook</strong> hp</p>
-                        <p><strong>$578.990</strong> <small> IVA incluido.</small></p>
-                        <p class="mt-3 mb-5">240 G6 i3-6006U Ram 4GB <br> Led 14.0" HD W10 Pro</p>
-                        <a href="detalle.html" class="btn-general">Ver Producto...</a>
-                    </div>
-                    <div class="desc">
-                        <p><strong>30</strong>%<br> DCTO.</p>
-                    </div>
-                </div>
-            </div>
+        <div class="row">
 
+            @foreach(App\Banner::where('size', 'large')->where('location', 'landing')->get() as $banner)
+
+                @php
+                    $float = "";
+                    if($banner->position == "izquierda"){
+                        $float = "left";
+                    }else{
+                        $float = "right";
+                    }
+
+                @endphp
+
+                <div class="col-12">
+                    <!--<div class="main-banner">-->
+                        <div class="main-banner__img">
+                            <img src="{{ asset('/images/banners/'.$banner->image) }}" alt="" style="width: 100%;">
+                            <div class="main-banner__content">
+                                <div class="title" style="text-align: {{ $float }};">
+                                    <h3 style="color: {{ $banner->title_color }}">{{ $banner->title }}</h3>
+                                    <p style="color: {{ $banner->text_color }}">{{ $banner->text }}</p>
+                                    <a href="{{ $banner->link }}" target="_blank" class="btn-general" style="color: {{ $banner->button_color }}; background-color: {{ $banner->button_text_color }};">{{ $banner->button_text }}</a>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    <!--</div>-->
+                </div>
+            @endforeach
 
         </div>
 
-        <!-- banner card-->
-        <div class="main-banner__card">
-            <div class="main-banner__card-img">
-                <img src="assets/img/card1.png" alt="">
-                <div class="title">
-                    <p><strong>PROYECTORES</strong></p>
-                    <span><strong>30%</strong> <br>DCTO.</span>
-                </div>
-            </div>
-            <div class="main-banner__card-img">
-                <img src="assets/img/card2.png" alt="">
-                <div class="title">
-                    <p><strong>IMPRESORAS</strong> HP</p>
-                    <span><strong>20% </strong><br>DCTO. </span>
 
-                    <a href="">Comprar</a>
-                </div>
+        <div class="row">
+        @foreach(App\Banner::where('size', 'medium')->where('location', 'landing')->get() as $banner)
 
-            </div>
-            <div class="main-banner__card-img">
-                <img src="assets/img/card3.png" alt="">
-                <div class="title">
-                    <p><strong>NOTEBOOK HP</strong></p>
-                    <span><strong>20%</strong> <br>DCTO.</span>
+            @php
+                $float = "";
+                if($banner->position == "izquierda"){
+                    $float = "left";
+                }else{
+                    $float = "right";
+                }
+
+            @endphp
+
+            <div class="col-md-6">
+                <div class="main-banner__card-img">
+                    <img src="{{ asset('/images/banners/'.$banner->image) }}" alt="" style="width: 100%;">
+                    <div class="title" style="text-align: {{ $float }};">
+                        <h3 style="color: {{ $banner->title_color }}">{{ $banner->title }}</h3>
+                        <p style="color: {{ $banner->text_color }}">{{ $banner->text }}</p>
+                        @if($banner->link != "" && $banner->button_text != "")
+                        <a href="{{ $banner->link }}" target="_blank" class="btn-general" style="color: {{ $banner->button_color }}; background-color: {{ $banner->button_text_color }};">{{ $banner->button_text }}</a>
+                        @endif
+                    </div>
                 </div>
             </div>
+
+        @endforeach
         </div>
+        
 
+        <div class="row">
+        @foreach(App\Banner::where('size', 'small')->where('location', 'landing')->get() as $banner)
+            
+            @php
+                $float = "";
+                if($banner->position == "izquierda"){
+                    $float = "left";
+                }else{
+                    $float = "right";
+                }
+
+            @endphp
+
+            <div class="col-md-3">
+                <div class="main-banner__card-img">
+                    <img src="{{ asset('/images/banners/'.$banner->image) }}" alt="" style="width: 100%;">
+                    <div class="title" style="text-align: {{ $float }} !important">
+                        <h3 style="color: {{ $banner->title_color }}">{{ $banner->title }}</h3>
+                        <p style="color: {{ $banner->text_color }}">{{ $banner->text }}</p>
+                        <a href="{{ $banner->link }}" target="_blank" class="btn-general" style="color: {{ $banner->button_color }}; background-color: {{ $banner->button_text_color }};">{{ $banner->button_text }}</a>
+                    </div>
+                </div>
+            </div>
+
+        @endforeach
+        </div>
 
         <!-- categorias -->
         <section>
@@ -240,47 +284,6 @@
         </section>-->
     </div>
 
-    <footer>
-        <div class="main-footer__content container">
-            <div class="main-footer__item">
-                <img class="logo-footer" src="assets/img/logo-cap.png" alt="">
-                <p class="description">Empresa de Servicio, Soporte, Soluciones y Venta de
-                    Productos Informáticos, dando respuesta a requerimientos
-                    de integración de harreare y software.</p>
-                <a class="contact" href=tel:+56226748000><img src="assets/img/telefono.svg" alt="">+56 22 674 8000</a>
-
-                <ul>
-                    <li><a href=""><img src="assets/img/deira-74.png" alt=""></a></li>
-                    <li><a href=""><img src="assets/img/deira-76.png" alt=""></a></li>
-                </ul>
-            </div>
-            <div class="main-footer__item">
-                <div class="menu-grid">
-                    <ul>
-                        <p class="title">DEIRA STORE</p>
-                        <li><a href="#">Categorías</a></li>
-                        <li><a href="#">Productos Destacados</a></li>
-                        <li><a href="#">Ofertas Imperdibles</a></li>
-                        <li><a href="#">Impresión</a></li>
-                        <li><a href="#">Software</a></li>
-                    </ul>
-                    <ul>
-                        <p class="title">SERVICIO AL CLIENTE</p>
-                        <li><a href="#">¿Por qué comprar en Deira Store?</a></li>
-                        <li><a href="#">Métodos y costos de envío</a></li>
-                        <li><a href="#">Seguimiento de mi orden</a></li>
-                        <li><a href="#">Cambios y devoluciones</a></li>
-                        <li><a href="#">Términos y condiciones</a></li>
-
-                    </ul>
-                </div>
-            </div>
-            <div class="main-footer__item">
-                <div class="logo-grid">
-                  <img width="300px;" src="assets/img/deira-78.png" alt="">
-                </div>
-            </div>
-        </div>
-    </footer>
+    @include('partials.footer')
 
 @endsection

@@ -54,6 +54,7 @@
 
                                         </tr>
                                     </thead>
+                                    @if(\Auth::check())
                                     <tbody>
                                         <tr v-for="item in items">
                                             <td v-if="item.product.is_external"><img class="lista-pedido" :src="item.product.picture" alt=""></td>
@@ -70,9 +71,27 @@
                                             <td><button class="btn btn-danger" @click="erase(item.id)">X</button></td>
                                         </tr>
 
+                                    </tbody>
+                                    @else
 
+                                    <tbody>
+                                        <tr v-for="(item, index) in guestItem">
+                                            <td v-if="item.is_external"><img class="lista-pedido" :src="item.picture" alt=""></td>
+                                            <td v-else><img class="lista-pedido" :src="'{{ url('/') }}'+'/images/products/'+item.picture" alt=""></td>
+                                            <td><img class="lista-pedido" :src="'{{ url('/') }}'+'/images/brands/'+item.brand_image" alt=""></td>
+                                            <td>
+                                                <span>@{{ item.name }} </span>
+                                                <p>@{{ item.sub_title }}</p>
+                                            </td>
+                                            <td>$ @{{ item.price }}</td>
+                                            <td>@{{ item.amount }}</td>
+                                            <td>$ @{{ parseInt(item.price).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</td>
+                                            <td><button class="btn btn-danger" @click="eraseGuestProduct(index)">X</button></td>
+                                        </tr>
 
                                     </tbody>
+
+                                    @endif
                                 </table>
                                 <div class="carrito-informacion">
                                     <div class="carrito_item">
@@ -98,7 +117,11 @@
                                 <div class="pedido">
                                     <h3>Tu pedido</h3>
                                     <h5>Total de tu compra</h5>
-                                    <h2>$ @{{ parseInt(total).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</h2>
+                                    @if(\Auth::check())
+                                        <h2>$ @{{ parseInt(total).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</h2>
+                                    @else
+                                        <h2>$ @{{ parseInt(totalGuest).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</h2>
+                                    @endif
                                     <p>Todos los valores incluyen iva</p>
                                     <button @click="checkout()" class="finalizar-compra">checkout</button>
 
@@ -123,77 +146,52 @@
 
                 <div class="container">
                     <div class="main-slider__content">
-                        <div class="main-slider__item">
-                            <div class="content-slider">
-                                <img src="assets/img/deira-04.png" alt="">
-                            </div>
-                            <div class="main-slider__text title-blue ">
-                                <span>Pisonee Poner Lite 525W</span>
-                                <p class="title">Proyector</p>
-                                <span class="price">$ 935.990</span>
-                                <p class="price-old">Normal <span>$999.999</span></p>
-                            </div>
-                        </div>
-                        <div class="main-slider__item">
-                            <div class="content-slider">
-                                <img src="assets/img/deira-05.png" alt="">
-                            </div>
-                            <div class="main-slider__text title-blue ">
-                                <span>Pisonee Poner Lite 525W</span>
-                                <p class="title">Proyector</p>
-                                <span class="price">$ 935.990</span>
-                                <p class="price-old">Normal <span>$999.999</span></p>
-                            </div>
-                        </div>
-                        <div class="main-slider__item">
-                            <div class="content-slider">
-                                <img src="assets/img/deira-06.png" alt="">
-                            </div>
-                            <div class="main-slider__text title-blue ">
-                                <span>Pisonee Poner Lite 525W</span>
-                                <p class="title">Proyector</p>
-                                <span class="price">$ 935.990</span>
-                                <p class="price-old">Normal <span>$999.999</span></p>
-                            </div>
-                        </div>
-                        <div class="main-slider__item">
-                            <div class="content-slider ">
-                                <img src="assets/img/deira-07.png" alt="">
-                            </div>
-                            <div class="main-slider__text title-blue ">
-                                <span>Pisonee Poner Lite 525W</span>
-                                <p class="title">Proyector</p>
-                                <span class="price">$ 935.990</span>
-                                <p class="price-old">Normal <span>$999.999</span></p>
-                            </div>
-                        </div>
-                        <div class="main-slider__item">
-                            <div class="content-slider">
-                                <img src="assets/img/deira-08.png" alt="">
-                            </div>
-                            <div class="main-slider__text title-blue ">
-                                <span>Pisonee Poner Lite 525W</span>
-                                <p class="title">Proyector</p>
-                                <span class="price">$ 935.990</span>
-                                <p class="price-old">Normal <span>$999.999</span></p>
-                            </div>
-                        </div>
+                        @php
+                        
+                            $carts = App\Cart::with('product')->get();
+                            $products = [];
+                            foreach($carts as $cart){
+                                array_push($products, $cart->product->brand_id);
+                            }
 
+                            $query = App\Product::with('category');
 
+                        @endphp
 
+                        @if(count($carts) > 0)
+                            @php
+                                $randomProducts = $query->whereIn('brand_id', $products)->inRandomOrder()->take(10)->get();
+                            @endphp
+                        @else
+                            @php
+                                $randomProducts = $query->inRandomOrder()->take(10)->get()
+                            @endphp
+                        @endif
 
-                        <div class="main-slider__item">
-                            <div class="content-slider ">
-                                <img src="assets/img/deira-09.png" alt="">
-                            </div>
-                            <div class="main-slider__text">
-                                <span>Pisonee Poner Lite 525W</span>
-                                <p class="title">Proyector</p>
-                                <span class="price">$ 935.990</span>
-                                <p class="price-old">Normal <span>$999.999</span></p>
-                            </div>
-                        </div>
-
+                        @foreach($randomProducts as $related)
+                            <a href="{{ url('/product/'.$related->slug) }}">
+                                <div class="main-slider__item">
+                                    <div class="content-slider">
+                                        @if($related->is_external == true)
+                                            <img src="{{ $related->picture }}" alt="" style="width: 100%">
+                                        @else
+                                            <img src="{{ asset('images/products/'.$related->picture) }}" alt="">
+                                        @endif
+                                    </div>
+                                    <div class="main-slider__text">
+                                        <span>{{ $related->name }}</span>
+                                        <p class="title">{{ $related->category->name }}</p>
+                                        @if($related->external_price > 0 && $related->price == 0)
+                                            <span class="price">$ {{ number_format($related->external_price * App\DolarPrice::first()->price, 0, ",", ".") }}</span>
+                                        @else
+                                            <span class="price">$ {{ number_format($related->price, 0, ",", ".") }}</span>
+                                        @endif
+                                        <!--<p class="price-old">Normal <span>$999.999</span></p>-->
+                                    </div>
+                                </div>
+                            </a>
+                        @endforeach
+                    
                     </div>
                 </div>
             </section>
@@ -223,7 +221,10 @@
                     maxAmount:0,
                     itemId:0,
                     total:0,
-                    dolarPrice:'{!! App\DolarPrice::first()->price !!}'
+                    dolarPrice:'{!! App\DolarPrice::first()->price !!}',
+                    authCheck:'{!! Auth::check() !!}',
+                    guestItem:[],
+                    totalGuest:0
                 }
             },
             methods:{
@@ -308,6 +309,22 @@
                     }
 
                 },
+                eraseGuestProduct(index){
+
+                    if(confirm("¿Está seguro de eliminar este producto?")){
+                        this.guestItem.splice(index, 1)
+                        let cart = []
+                        this.guestItem.forEach(function(data, index) {
+
+                            cart.push({productId: data.id, amount: data.amount})
+
+                        })
+
+                        window.localStorage.setItem("cart", JSON.stringify(cart))
+                        this.getGuestItems()
+                    }
+
+                },
                 isNumber: function(evt) {
 
                     evt = (evt) ? evt : window.event;
@@ -351,13 +368,37 @@
 
                 },
                 checkout(){
-                    window.location.href="{{ route('checkout') }}"
+                    if(this.authCheck == 1)
+                        window.location.href="{{ route('checkout') }}"
+                    else
+                        window.location.href="{{ url('/guest/checkout/') }}"
+        
+                },
+                getGuestItems(){
+                    let products = JSON.parse(window.localStorage.getItem('cart'))
+                    
+                    if(products != null){
+                        
+                        axios.post("{{ url('/guestCart') }}", {products: products}).then(res => {
+                            this.guestItem = res.data.cart
+                            this.totalGuest = res.data.total
+                        })
+
+                    }
+                    
+
                 }
 
 
             },
             mounted(){
-                this.getItems()
+                if(this.authCheck == 1){
+                    this.getItems()
+                }
+                else{   
+                    this.getGuestItems()
+                }
+                    
             }
 
         })

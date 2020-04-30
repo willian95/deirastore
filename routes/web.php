@@ -45,6 +45,9 @@ Route::get('/brands/all', 'BrandController@brands')->name('brands.all');
 Route::post('/brands/fetch', "BrandController@fetch")->name('brands.fetch');
 Route::get('brand/{slug}', "BrandController@slug")->name('brands.slug');
 Route::post('/brand/products', "BrandController@products")->name('brands.products');
+Route::get('/brands/fetch/all', "BrandController@fetchAll");
+
+Route::get('/categories/all', "CategoriesController@categoriesAll");
 
 Route::get('/category/{slug}', "CategoriesController@slug");
 Route::post('/category/products', "CategoriesController@products")->name('category.products');
@@ -55,6 +58,13 @@ Route::post('/checkout/webpay/finish', 'CheckoutController@finish')->name('check
 
 Route::get('/purchase', 'PurchaseController@myPurchase')->name('user.purchase');
 Route::post('/purchase/fetch', 'PurchaseController@myPurchaseFetch')->name('user.purchase.fetch');
+
+Route::post("/guestCart", "CartController@getGuestCarts");
+
+Route::get("/guest/checkout", "GuestController@guestCheckoutIndex");
+Route::post("/guest/store", "GuestController@store");
+
+Route::get("products/destacados", "ProductController@highlighted");
 
 Route::prefix('admin')->group(function () {
     
@@ -95,6 +105,12 @@ Route::prefix('admin')->group(function () {
 
     Route::get('/dolar', "DolarController@index")->name('admin.dolar.index');
 
+    Route::get('/banner/index', "BannerController@index")->name('admin.banner.index');
+    Route::post('/banner/store', "BannerController@store")->name('admin.banner.store');
+    Route::post('/banner/update', "BannerController@update")->name('admin.banner.update');
+    Route::get('/banner/fetch/{page}', "BannerController@fetchAdmin");
+    Route::post('/banner/delete', "BannerController@delete")->name('admin.banner.delete');
+    
 });
 
 Route::get('/nexsys/{mark}', "NexsysController@index");

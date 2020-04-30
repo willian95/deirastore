@@ -29,6 +29,9 @@
                         <a class="nav-link" href="{{ route('admin.brands') }}">Tiendas</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.banner.index') }}">Banners</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin.categories') }}">Categorías</a>
                     </li>
                     <li class="nav-item">

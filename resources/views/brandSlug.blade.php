@@ -35,8 +35,103 @@
                 </nav>
             </div>
         </div>
+
+        <div class="row">
+
+            @foreach(App\Banner::where('size', 'large')->where('location', $slug)->get() as $banner)
+
+                @php
+                    $float = "";
+                    if($banner->position == "izquierda"){
+                        $float = "left";
+                    }else{
+                        $float = "right";
+                    }
+
+                @endphp
+
+                <div class="col-12">
+                    <!--<div class="main-banner">-->
+                        <div class="main-banner__img">
+                            <img src="{{ asset('/images/banners/'.$banner->image) }}" alt="" style="width: 100%;">
+                            <div class="main-banner__content">
+                                <div class="title" style="text-align: {{ $float }};">
+                                    <h3 style="color: {{ $banner->title_color }}">{{ $banner->title }}</h3>
+                                    <p style="color: {{ $banner->text_color }}">{{ $banner->text }}</p>
+                                    <a href="{{ $banner->link }}" target="_blank" class="btn-general" style="color: {{ $banner->button_color }}; background-color: {{ $banner->button_text_color }};">{{ $banner->button_text }}</a>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    <!--</div>-->
+                </div>
+            @endforeach
+
+        </div>
+
+
+        <div class="row">
+        @foreach(App\Banner::where('size', 'medium')->where('location', $slug)->get() as $banner)
+
+            @php
+                $float = "";
+                if($banner->position == "izquierda"){
+                    $float = "left";
+                }else{
+                    $float = "right";
+                }
+
+            @endphp
+
+            <div class="col-md-6">
+                <div class="main-banner__card-img">
+                    <img src="{{ asset('/images/banners/'.$banner->image) }}" alt="" style="width: 100%;">
+                    <div class="title" style="text-align: {{ $float }};">
+                        <h3 style="color: {{ $banner->title_color }}">{{ $banner->title }}</h3>
+                        <p style="color: {{ $banner->text_color }}">{{ $banner->text }}</p>
+                        @if($banner->link != "" && $banner->button_text != "")
+                            <a href="{{ $banner->link }}" target="_blank" class="btn-general" style="color: {{ $banner->button_color }}; background-color: {{ $banner->button_text_color }};">{{ $banner->button_text }}</a>
+                        @endif
+                    </div>
+                </div>
+            </div>
+
+        @endforeach
+        </div>
+        
+
+        <div class="row">
+        @foreach(App\Banner::where('size', 'small')->where('location', $slug)->get() as $banner)
+            
+            @php
+                $float = "";
+                if($banner->position == "izquierda"){
+                    $float = "left";
+                }else{
+                    $float = "right";
+                }
+
+            @endphp
+
+            <div class="col-md-3">
+                <div class="main-banner__card-img">
+                    <img src="{{ asset('/images/banners/'.$banner->image) }}" alt="" style="width: 100%;">
+                    <div class="title" style="text-align: {{ $float }} !important">
+                        <h3 style="color: {{ $banner->title_color }}">{{ $banner->title }}</h3>
+                        <p style="color: {{ $banner->text_color }}">{{ $banner->text }}</p>
+                        <a href="{{ $banner->link }}" target="_blank" class="btn-general" style="color: {{ $banner->button_color }}; background-color: {{ $banner->button_text_color }};">{{ $banner->button_text }}</a>
+                    </div>
+                </div>
+            </div>
+
+        @endforeach
+        </div>
+
+
     </div>
 
+    @include('partials.footer')
 
 @endsection
 

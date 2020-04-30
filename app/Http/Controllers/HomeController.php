@@ -29,20 +29,85 @@ class HomeController extends Controller
 
     function search(Request $request){
 
-        $words = explode(' ',$request->search);
+        $words = explode(' ',strtolower($request->search)); // coloco cada palabra en un espacio del array
         $wordsToDelete = array('de');
 
-        $words = array_values(array_diff($words,$wordsToDelete));
+        $words = array_values(array_diff($words,$wordsToDelete)); // Elimino todas las coincidencias de las wordsToDelete
+        $synonymousIndexes = [];
+
+        $synonymous =[
+            [
+                "monitor",
+                "monitores",
+                "pantalla",
+                "pantallas",
+                "screen",
+                "screens",
+            ],
+            [
+                "televisores",
+                "televisor",
+                "tele",
+                "tv"
+            ],
+            [
+                "pc",
+                "computador",
+                "computadores",
+                "computadora",
+                "computadoras",
+                "ordenador",
+                "ordenadores"
+            ],
+            [
+                "disco",
+                "discos",
+                "hdd",
+                "hard drive",
+                "drive"
+            ],
+            [
+                "memoria",
+                "memoria usb",
+                "pendrive"
+            ],
+            [
+                "lector",
+                "lectores"
+            ]
+        ];
+
+        $index = 0;
+        for($i = 0; $i < count($words); $i++){ //se recorren las palabras extraidas
+
+            foreach($synonymous as $sy){ // se recorren los sinonimos
+                foreach($sy as $word){
+                    if($word == $words[$i]){ //si la palabra de busqueda se encuentra entre los sinonimos
+                        array_push($synonymousIndexes, $index); // se añade al array de los synoymousIndexes, esto con el fin de tomar todas las coincidencias de los sinonimos
+                    }
+                }
+                $index++;
+            }
+
+        }
+
+        for($i = 0; $i < count($synonymousIndexes); $i++){
+            foreach($synonymous[$synonymousIndexes[$i]] as $word){ //recorremos todas las palabras dentro del indice
+                array_push($words, $word); // añadimos las palabras al arreglo de palabras
+            }
+        }
+
+        $words = array_unique($words); //eliminamos las palabras duplicadas
+        $words = array_values($words); // reordenamos el array
+
         
-        //DB::statement('ALTER TABLE products ADD FULLTEXT fulltext_index (name, description)');
-        //$products = Product::where('name', 'like', '%'.$request->search.'%')->get();
 
         $products = Product::with('category')->select('products.name', 'products.is_external', "products.external_price", 'categories.name as category_name', "products.slug","products.picture", "products.price", "products.sub_price")->join('categories', 'products.category_id', '=', 'categories.id')->join('brands', 'products.brand_id','=', 'brands.id')
                     ->where(function ($query) use($words) {
                         for ($i = 0; $i < count($words); $i++){
                             $query->orWhere('products.name', $words[$i]);
                         }      
-                    })
+                    }) //Busco todas las coincidencias en el campo
                     ->orWhere(function ($query) use($words) {
                         for ($i = 0; $i < count($words); $i++){
                             $query->orWhere('categories.name', 'like',  '%' . $words[$i] .'%');

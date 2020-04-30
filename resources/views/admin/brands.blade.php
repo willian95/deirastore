@@ -215,7 +215,6 @@
                             this.imagePreview = ""
                             $("#image").val(null)
                             this.fetch()
-                            this.fetch()
                         }else{
                             alert(res.data.msg)
                         }
@@ -269,7 +268,7 @@
 
                     if(confirm('¿Estás seguro?')){
 
-                        axios.post("{{ route('admin.brands.delete') }}", {id: id})
+                        axios.post("{{ route('admin.banner.delete') }}", {id: id})
                         .then(res => {
                             if(res.data.success == true){
                                 alert(res.data.msg)

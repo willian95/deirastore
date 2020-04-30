@@ -43,13 +43,14 @@ class CategoriesController extends Controller
             $category->name = $request->name;
             $category->image = $fileName;
             $category->slug = $slug;
+            $category->parent_id = $request->parentId;
             $category->save();
 
             return response()->json(["success" => true, "msg" => "Categoría registrada"]);
 
         }catch(\Exception $e){
 
-            return resonse()->json(["success" => false, "msg" => "Error en el servidor"]);
+            return response()->json(["success" => false, "msg" => "Error en el servidor", "err" => $e->getMessage(), "ln" => $e->getLine()]);
 
         }
 
@@ -83,14 +84,15 @@ class CategoriesController extends Controller
             if($request->get('image') != null){
                 $category->image = $fileName;
             }
-            $category->slug = $request->slug;
+            $category->parent_id = $request->parentId;
+            $category->slug = $slug;
             $category->update();
 
             return response()->json(["success" => true, "msg" => "Categoría actualizada"]);
 
         }catch(\Exception $e){
 
-            return response()->json(["success" => false, "msg" => "Error en el servidor"]);
+            return response()->json(["success" => false, "msg" => "Error en el servidor", "err" => $e->getMessage(), "ln" => $e->getLine()]);
 
         }
 
@@ -102,7 +104,7 @@ class CategoriesController extends Controller
 
             $skip = ($request->page-1) * 10;
 
-            $categories = Category::skip($skip)->take(10)->get();
+            $categories = Category::with("parent")->skip($skip)->take(10)->get();
             $categoriesCount = Category::count();
 
             return response()->json(["success" => true, "categories" => $categories, "categoriesCount" => $categoriesCount]);
@@ -162,6 +164,21 @@ class CategoriesController extends Controller
         }catch(\Exception $e){
 
             return response()->json(["success" => false, "msg" => "Error en el servidor", "err" => $e->getMessage(), "ln" => $e->getLine()]);
+
+        }
+
+    }
+
+    function categoriesAll(){
+
+        try{
+
+            $categories = Category::all();
+            return response()->json(["success" => true, "categories" => $categories]);
+
+        }catch(\Exception $e){
+
+            return response()->json(["success" => false, "msg" => "Error en el servidor"]);
 
         }
 

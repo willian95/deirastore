@@ -133,4 +133,46 @@ class CartController extends Controller
 
     }
 
+    function getGuestCarts(Request $request){
+        
+        $array = [];
+        $cart = [];
+
+        foreach($request->products as $product){
+            array_push($array, $product["productId"]);
+        }
+
+        $products = Product::with('category', 'brand')->whereIn('id', $array)->get();
+        $loop = 0;
+        $total = 0;
+
+        foreach($products as $product){
+            $price = 0;
+            if($product->external_price > 0 && $product->price == 0){
+                $price = $product->external_price * DolarPrice::first()->price;
+            }else if($product->price > 0){
+                $price = $product->price;
+            }
+
+            $total += $price;
+
+            $cart[] = [
+                "id" => $product->id,
+                "picture" => $product->picture,
+                "name" => $product->name,
+                "brand_image" => $product->brand->image,
+                "sub_title" => $product->sub_title,
+                "price" => intval($price),
+                "amount" => $request->products[$loop]["amount"],
+                "is_external" => $product->is_external
+            ];
+
+            $loop++;
+
+        }
+
+        return response()->json(["cart" => $cart, "total" => $total]);
+
+    }
+
 }

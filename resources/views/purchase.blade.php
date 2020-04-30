@@ -87,6 +87,8 @@
 
     <!-- Details Modal -->
 
+    @include('partials.footer')
+
 @endsection
 
 @push('scripts')

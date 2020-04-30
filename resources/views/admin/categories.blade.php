@@ -25,7 +25,37 @@
                     </div>
                 </div>
 
-                <div class="card" v-for="category in categories">
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <td>#</td>
+                                    <td>Categoría</td>
+                                    <td>Categoría superior</td>
+                                    <td>Acciones</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(category, index) in categories">
+                                    <td>@{{ index + 1 }}</td>
+                                    <td>@{{ category.name }}</td>
+                                    <td>
+                                        <div v-if="category.parent != null">
+                                            @{{ category.parent.name }}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-success" @click="edit(category)" data-toggle="modal" data-target="#createCategory">editar</button>
+                                        <button class="btn btn-danger" @click="erase(category.id)">eliminar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!--<div class="card" v-for="category in categories">
                     <div class="card-body">
                         <p class="text-center">
                         @{{ category.name }}
@@ -33,7 +63,7 @@
                         <button class="btn btn-success" @click="edit(category)" data-toggle="modal" data-target="#createCategory">editar</button>
                         <button class="btn btn-danger" @click="erase(category.id)">eliminar</button>
                     </div>
-                </div>
+                </div>-->
 
             </div>
         </div>
@@ -63,15 +93,23 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="name">nombre</label>
+                        <label for="name">Nombre</label>
                         <input type="text" class="form-control" id="name" v-model="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Categoría Padre</label>
+                        <select class="form-control" v-model="parentId">
+                            <option :value="category.id" v-for="category in allCategories" v-if="category.parent_id == null && category.id != categoryId">
+                                @{{ category.name }}
+                            </option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="picture">Imagen</label>
                         <input type="file" id="image" class="form-control" id="picture" ref="file" @change="onImageChange" accept="image/*">
                     </div>
                     <div class="form-group">
-                        <img id="blah" :src="imagePreview" class="full-image" style="margin-top: 10px; width: 40%">
+                        <img id="blah" :src="imagePreview" class="full-image" style="margin-top: 10px; width: 40%" v-if="imagePreview != null">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -102,6 +140,8 @@
                     picture:"",
                     imagePreview:"",
                     pages:0,
+                    allCategories:[],
+                    parentId:"",
                     query:""
                 }
             },
@@ -118,6 +158,7 @@
                             let formData = new FormData()
                             formData.append("name", this.name)
                             formData.append("image", this.picture)
+                            formData.append("parentId", this.parentId)
 
                             axios.post("{{ route('admin.categories.store') }}", formData)
                             .then(res => {
@@ -127,6 +168,7 @@
                                     alert(res.data.msg)
                                     this.name = ""
                                     this.imagePreview = ""
+                                    this.parentId = ""
                                     $("#image").val(null)
                                     this.fetch()
 
@@ -182,6 +224,7 @@
                     this.modalTitle = "Crear categoría"
                     this.isEdit = false
                     this.name = ""
+                    this.parentId =""
                 },
                 edit(category){
                     
@@ -189,7 +232,9 @@
                     this.modalTitle = "Editar Categoría"
                     this.categoryId = category.id
                     this.isEdit = true
-                    this.imagePreview = "{{ url('/') }}"+"/images/categories/"+category.image
+                    if(category.image != null)
+                        this.imagePreview = "{{ url('/') }}"+"/images/categories/"+category.image
+                    this.parentId = category.parent_id
 
                 },
                 update(){
@@ -198,6 +243,7 @@
                     formData.append("id", this.categoryId)
                     formData.append("name", this.name)
                     formData.append("image", this.picture)
+                    formData.append("parentId", this.parentId)
 
                     axios.post("{{ route('admin.categories.update') }}", formData)
                     .then(res => {
@@ -206,6 +252,7 @@
                             alert(res.data.msg)
                             this.name=""
                             this.imagePreview = ""
+                            this.parentId = ""
                             $("#image").val(null)
                             this.fetch()
                         }else{
@@ -251,6 +298,13 @@
                     }
 
                 },
+                fetchAllCategories(){
+
+                    axios.get("{{ url('/categories/all') }}").then(res => {
+                        this.allCategories = res.data.categories
+                    })
+
+                },
                 erase(id){
 
                     if(confirm('¿Estás seguro?')){
@@ -275,6 +329,7 @@
             },
             mounted(){
                 this.fetch()
+                this.fetchAllCategories()
             }
 
         })

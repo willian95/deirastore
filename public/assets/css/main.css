@@ -328,7 +328,7 @@ header {
 .btn-general {
 	color: #fff;
 	background: #d32b2b;
-	padding: 10px 50px 10px 10px;
+	padding: 10px 10px 10px 10px;
 	border-radius: 50px;
 	font-size: 1rem;
 	outline: transparent;
@@ -354,6 +354,7 @@ header {
 	grid-template-columns: 25% 50% 25%;
 	/* gap: 20px; */
 }
+
 
 .main-banner__card-img img {
 	width: 100%;
@@ -1731,4 +1732,9 @@ img.lista-pedido {
 }
 .form-check-label:hover{
 	color: #d32b2b;
+}
+
+.color-box{
+	height: 20px;
+	width: 20px;
 }

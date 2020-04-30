@@ -37,9 +37,9 @@
                     </li>
 
                     <!--<li><a href=""><img src="{{ asset('assets/img/telefono.svg') }}" alt=""></a></li>-->
-                    @if(Auth::check() && Auth::user()->id)
-                        <li><a href="{{ url('/cart') }}"><img src="{{ asset('assets/img/carro2.svg') }}" alt=""></a></li>
-                    @endif
+                    
+                    <li><a href="{{ url('/cart') }}"><img src="{{ asset('assets/img/carro2.svg') }}" alt=""></a></li>
+                   
 
                 </ul>
             </div>
@@ -76,18 +76,33 @@
 
                             </div>
                         </div>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('brands.all') }}">Marcas</a>
                     </li>
-                    <!--<li class="nav-item">
-                        <a class="nav-link" href="detalle.html">Ofertas</a>
-                    </li>-->
-                    <!--<li class="nav-item">
-                        <a class="nav-link" href="{{ url('/category/impresoras') }}">Impresión</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/products/destacados') }}">Productos Destacados</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/category/Computadores-y-servidores') }}">Computación</a>
-                    </li>-->
+                        <a class="nav-link" href="#">Quienes somos</a>
+                    </li>
+                    <li class="nav-item dropdown mega-menu">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" id="menu-brands">Mejores tiendas</a>
+                        <div class="dropdown-menu" style="opacity: 1;" id="menu-brands-dropdown">
+                            <div class="grid-menu">
+                                <div class="grid-menu__item">
+                                    <ul>
+                                        @foreach(App\Brand::inRandomOrder()->take(10)->get() as $brand)
+                                            <li>
+                                                <a href="{{ url('/brand/'.$brand->slug) }}">{{ $brand->name }}</a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                    </li>
                     <!--<li class="nav-item">
                         <a class="nav-link" href="#">Software</a>
                     </li>-->

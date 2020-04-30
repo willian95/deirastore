@@ -8,7 +8,11 @@
                 <div class="card">
                     <h2>Pago exitoso</h2>
 
-                    <p>Nombre: {{ \Auth::user()->name }}</p>
+                    @if(\Auth::check())
+                        <p>Nombre: {{ \Auth::user()->name }}</p>
+                    @else
+                        <p>Nombre: {{ $name }}</p>
+                    @endif
 
                     <table class="table">
                         <thead>
@@ -39,4 +43,32 @@
             </div>
         </div>
     </div>
+
+    @include('partials.footer')
+
 @endsection
+
+@push('scripts')
+    
+    <script>
+        
+        const app = new Vue({
+            el: '#dev-app',
+            methods:{
+                
+               deleteStorage(){
+                   window.localStorage.removeItem('cart')
+               }
+
+
+            },
+            mounted(){
+               
+                this.deleteStorage()
+            }
+
+        })
+    
+    </script>
+
+@endpush

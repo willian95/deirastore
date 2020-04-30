@@ -47,6 +47,14 @@
                     }
                 })
 
+                $("#menu-brands").on("click", function(){
+                    if($("#menu-brands-dropdown").hasClass('show')){
+                        $("#menu-brands-dropdown").removeClass('show')
+                    }else{
+                        $("#menu-brands-dropdown").addClass('show')
+                    }
+                })
+
             });
             
         </script>

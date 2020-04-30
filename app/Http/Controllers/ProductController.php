@@ -194,4 +194,8 @@ class ProductController extends Controller
 
     }
 
+    function highlighted(){
+        return view('highlightedProducts');
+    }
+
 }

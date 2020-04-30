@@ -174,4 +174,19 @@ class BrandController extends Controller
 
     }
 
+    function fetchAll(){
+
+        try{
+
+            $brands = Brand::all();
+            return response()->json(["success" => true, "brands" => $brands]);
+
+        }catch(\Exception $e){
+
+            return response()->json(["success" => false, "msg" => "Error en el servidor"]);
+
+        }
+
+    }
+
 }

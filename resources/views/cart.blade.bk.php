@@ -57,6 +57,7 @@
     </div>
 
     <!-- Create Modal -->
+    @include('partials.footer')
 
 @endsection
 
