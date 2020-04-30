@@ -4,7 +4,7 @@
 
     @include('partials.navbar')
 
-    <div class="container" style="margin-bottom: 10px;">
+    <div class="container bg">
         <div class="row">
             <div class="col-3" v-for="brand in brands">
                 <div class="main-slider__item">

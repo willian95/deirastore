@@ -4,7 +4,10 @@
 
     @include('partials.navbar')
 
-    <div class="container">
+    <div class="container bg">
+        <div class="title__general title__general-start">
+            <p><strong>{{ $brand->name }}</strong></p>
+        </div>
         <div class="row">
             <div class="col-3" v-for="product in products">
                 <div class="main-slider__item">

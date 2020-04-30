@@ -150,7 +150,9 @@ class BrandController extends Controller
 
     function slug($slug){
 
-        return view('brandSlug', ["slug" => $slug]);
+        $brand = Brand::where('slug', $slug)->first();
+
+        return view('brandSlug', ["slug" => $slug, "brand" => $brand]);
 
     }
 

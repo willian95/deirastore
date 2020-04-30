@@ -37,34 +37,42 @@
                                 <li><strong>STOCK:</strong> {{ $product->amount }}</li>
                             </ul>
 
-                            
-                            @if($product->amount > 0)
 
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-4">
-                                            <button class="btn btn-danger" @click="substract()" style="margin-top: 28px"> restar</button>
+                                @if($product->amount > 0)
+                                    <div class="container">
+                                        <label for="amount" style="margin-left: -10px;">Cantidad</label>   
+                                        <div class="row">
+                                             
+                                          <div class="amout">
+                                              <div class="amount_item">  
+                                                                               
+                                                    <button class="btn btn-danger" @click="substract()" > -</button>                                                                                       
+                                              </div>
+                                                                            
+                                            <div class="amount_item">                                                                                  
+                                                
+                                                  <input type="number" class="form-control" id="amount" v-model="amount" max="{{ $product->amount }}" min="1" readonly>                                                                                         
+                                            </div>                                                                     
+                                            <div class="amount_item">                                                                               
+                                                    <button class="btn btn-success" @click="add()" > +</button>                                      
+                                            </div>
+                                            <div class="amount_item ml-5">   
+                                                                                                                  
+                                                <button class="btn btn-info" @click="store()">añadir al carrito</button>                                     
                                         </div>
-                                        <div class="col-4">
-                                            <label for="amount">Cantidad</label>
-                                            <input type="number" class="form-control" id="amount" v-model="amount" max="{{ $product->amount }}" min="1" readonly>
-                                            
                                         </div>
-                                        <div class="col-4">
-                                            <button class="btn btn-success" @click="add()" style="margin-top: 28px"> sumar</button>
-                                        </div>
-                                        <div class="col-12">
-                                            <button class="btn btn-info" @click="store()">añadir al carrito</button>
+                                         
+                                          <!--  <div class="col-12">
+                                                <button class="btn btn-info" @click="store()">añadir al carrito</button>
+                                            </div>-->
                                         </div>
                                     </div>
-                                </div>
-                            @else
+                                @else
 
-                                <p>Producto sin stock</p>
+                                    <p>Producto sin stock</p>
 
-                            @endif
-                            <!--<a href="" class="comprar-producto-details">COMPRAR</a>-->
-                            
+                                @endif
+                                
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -290,31 +298,77 @@
 
                 <div class="container">
                     <div class="main-slider__content">
+                        <div class="main-slider__item">
+                            <div class="content-slider">
+                                <img src="{{ asset('assets/img/deira-09.png') }}" alt="">
+                            </div>
+                            <div class="main-slider__text">
+                                <span>Pisonee Poner Lite 525W</span>
+                                <p class="title">Proyector</p>
+                                <span class="price">$ 935.990</span>
+                                <p class="price-old">Normal <span>$999.999</span></p>
+                            </div>
+                        </div>
+                        <div class="main-slider__item">
+                            <div class="content-slider">
+                                <img src="{{ asset('assets/img/deira-10.png') }}" alt="">
+                            </div>
+                            <div class="main-slider__text">
+                                <span>Pisonee Poner Lite 525W</span>
+                                <p class="title">Proyector</p>
+                                <span class="price">$ 935.990</span>
+                                <p class="price-old">Normal <span>$999.999</span></p>
+                            </div>
+                        </div>
+                        <div class="main-slider__item">
+                            <div class="content-slider">
+                                <img src="{{ asset('assets/img/deira-11.png') }}" alt="">
+                            </div>
+                            <div class="main-slider__text">
+                                <span>Pisonee Poner Lite 525W</span>
+                                <p class="title">Proyector</p>
+                                <span class="price">$ 935.990</span>
+                                <p class="price-old">Normal <span>$999.999</span></p>
+                            </div>
+                        </div>
+                        <div class="main-slider__item">
+                            <div class="content-slider">
+                                <img src="{{ asset('assets/img/deira-12.png') }}" alt="">
+                            </div>
+                            <div class="main-slider__text">
+                                <span>Pisonee Poner Lite 525W</span>
+                                <p class="title">Proyector</p>
+                                <span class="price">$ 935.990</span>
+                                <p class="price-old">Normal <span>$999.999</span></p>
+                            </div>
+                        </div>
+                        <div class="main-slider__item">
+                            <div class="content-slider">
+                                <img src="{{ asset('assets/img/deira-13.png') }}" alt="">
+                            </div>
+                            <div class="main-slider__text">
+                                <span>Pisonee Poner Lite 525W</span>
+                                <p class="title">Proyector</p>
+                                <span class="price">$ 935.990</span>
+                                <p class="price-old">Normal <span>$999.999</span></p>
+                            </div>
+                        </div>
 
-                        @foreach(App\Product::with('category')->where('brand_id', $product->brand_id)->inRandomOrder()->take(10)->get() as $related)
-                            <a href="{{ url('/product/'.$related->slug) }}">
-                                <div class="main-slider__item">
-                                    <div class="content-slider">
-                                        @if($related->is_external == true)
-                                            <img src="{{ $related->picture }}" alt="" style="width: 100%">
-                                        @else
-                                            <img src="{{ asset('images/products/'.$related->picture) }}" alt="">
-                                        @endif
-                                    </div>
-                                    <div class="main-slider__text">
-                                        <span>{{ $related->name }}</span>
-                                        <p class="title">{{ $related->category->name }}</p>
-                                        @if($related->external_price > 0 && $related->price == 0)
-                                            <span class="price">$ {{ number_format($related->external_price * App\DolarPrice::first()->price, 0, ",", ".") }}</span>
-                                        @else
-                                            <span class="price">$ {{ number_format($related->price, 0, ",", ".") }}</span>
-                                        @endif
-                                        <!--<p class="price-old">Normal <span>$999.999</span></p>-->
-                                    </div>
-                                </div>
-                            </a>
-                        @endforeach
-                        
+
+
+
+                        <div class="main-slider__item">
+                            <div class="content-slider">
+                                <img src="{{ asset('assets/img/deira-15.png') }}" alt="">
+                            </div>
+                            <div class="main-slider__text">
+                                <span>Pisonee Poner Lite 525W</span>
+                                <p class="title">Proyector</p>
+                                <span class="price">$ 935.990</span>
+                                <p class="price-old">Normal <span>$999.999</span></p>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </section>
@@ -337,41 +391,13 @@
                     productId:"{!! $product->id !!}",
                     modalTitle: "Añadir al carrito",
                     amount:1,
-                    maxAmount:"{!! $product->amount !!}",
-                    authCheck:'{!! Auth::check() !!}'
+                    maxAmount:"{!! $product->amount !!}"
                 }
             },
             methods:{
 
                 store(){
 
-                    if(this.authCheck == 1){
-                        
-                        this.serverStorage()
-                    
-                    }else{
-
-                        this.browserStorage()
-
-                    }
-
-                },
-                browserStorage(){
-
-                    let cart = JSON.parse(window.localStorage.getItem("cart"))
-
-                    if(cart == null){
-                        cart = []
-                    }
-                    
-                    cart.push({productId: this.productId, amount: this.amount})
-                    window.localStorage.setItem("cart", JSON.stringify(cart))
-
-                    alert("Producto añadido al carrito")
-                    this.amount = 1;
-
-                },
-                serverStorage(){
                     let formData = new FormData()
                     formData.append("productId", this.productId)
                     formData.append("amount", this.amount)
@@ -398,6 +424,7 @@
                         });
 
                     })
+
                 },
                 add(){
 
