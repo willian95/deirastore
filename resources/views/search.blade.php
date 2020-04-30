@@ -4,11 +4,13 @@
 
     @include('partials.navbar')
 
-    <div class="container">
+    <div class="container bg">
 
         <div class="row">
             <div class="col-12">
-                <h2 class="text-center">Productos</h2>
+                <div class="title__general title__general-start">
+                    <p><strong>Resultado de:</strong> Titulo</p>
+                </div>
             </div>
         </div>
 

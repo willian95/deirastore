@@ -49,7 +49,10 @@ body {
 html {
 	overflow-x: hidden;
 }
+a {
+    color: #333333;
 
+}
 ::-webkit-scrollbar {
 	width: 8px;
 	height: 8px;
@@ -86,12 +89,17 @@ section {
 
 .navbar {
 	background: transparent;
-
+	padding: 0;
 
 }
 
 .top {
 	top: 0rem;
+}
+.main-menu__top-item{
+	display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .top-cero {}
@@ -153,19 +161,21 @@ section {
 /* mega munu buscador */
 header {
 	background-color: #333333;
-	height: 45vh;
+	height: 30vh;
 }
 
 .main-menu__top {
 	display: grid;
 	grid-template-columns: 300px 500px 300px;
-	padding-top: 40px;
+	padding-top: 10px;
 }
 
 .main-menu__top-item ul {
 	display: flex;
 	list-style: none;
 	justify-content: flex-end;
+	margin: 0;
+    padding: 0;
 }
 
 .main-menu__top-item ul li img {
@@ -257,7 +267,7 @@ header {
 	display: flex;
 	justify-content: center;
 	align-items: flex-end;
-	margin: 40px 0px 10px;
+	margin: 0px 0px 10px;
 }
 
 .main-banner {
@@ -359,7 +369,7 @@ header {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
-
+	transition: .6s;
 }
 
 .main-banner__card-img {
@@ -368,6 +378,7 @@ header {
 	width: 100%;
 	position: relative;
 	padding: 10px;
+	transition: .6s;
 }
 
 .main-banner__card-img .title {
@@ -434,6 +445,21 @@ header {
 	color: #000;
 	position: relative;
 	margin-bottom: 30px;
+}
+.title__general-start {
+    text-align: start;
+	font-size: 2.5rem;
+}
+.title__general-start p::after {
+	position: absolute;
+	width: 130px;
+	border-radius: 10px;
+	height: 5px;
+	top: 50px;
+	left: 0;
+	bottom: 0;
+	background: #d32b2b;
+	content: "";
 }
 
 .title__general p::after {
@@ -700,7 +726,7 @@ footer {
 
 .main-footer__item {
 	margin-top: 50px;
-	text-align: center;
+	text-align: start;
 }
 
 .logo-footer {
@@ -710,10 +736,14 @@ footer {
 .description {
 	color: #fff;
 	font-size: .9rem;
-	text-align: center;
-	padding: 0px 30px;
-}
+	text-align: start;
 
+}
+.social  {
+    display: flex;
+	justify-content: start!important;
+    padding: 0;
+}
 .contact img {
 	width: 30px;
 	filter: invert(1);
@@ -923,19 +953,42 @@ button.comprar-producto {
 	position: relative;
 	right: 15px;
 }
+.medios-pago .row{
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.despachos .row{
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 .compra-protegida {
 	display: flex;
+	transition: .5s;
+	cursor: default;
+}
+.compra-protegida .row{
+	display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .compra-protegida img {
 	width: 70%;
 }
+.compra-protegida:hover {
+	box-shadow: 0px 0px 10px #0000004a;
+    background-color: #ffffff;
 
+    color: #17a2b8;
+}
 .compra-protegida h3 {
 	font-size: 18px;
 	font-weight: bold;
-
+	margin: 0;
 }
 
 .compra-protegida {
@@ -953,6 +1006,19 @@ button.comprar-producto {
 	padding: 15px;
 	color: #d32b2b;
 	background-color: #fff;
+	transition: .5s;
+}
+.medios-pago:hover {
+	box-shadow: 0px 0px 10px #0000004a;
+    background-color: #d32b2b;
+
+    color: #fff;
+}
+.despachos:hover {
+	box-shadow: 0px 0px 10px #0000004a;
+    background-color: #fff;
+
+    color: #d32b2b;
 }
 
 .medios-pago img {
@@ -962,7 +1028,7 @@ button.comprar-producto {
 .medios-pago h3 {
 	font-size: 18px;
 	font-weight: bold;
-
+	margin: 0;
 }
 
 .despachos {
@@ -972,6 +1038,7 @@ button.comprar-producto {
 	padding: 15px;
 	color: #fff;
 	background-color: #d32b2b;
+	transition: .5s;
 }
 
 .despachos img {
@@ -981,7 +1048,7 @@ button.comprar-producto {
 .despachos h3 {
 	font-size: 18px;
 	font-weight: bold;
-
+	margin: 0;
 }
 
 .card-header {
@@ -1731,4 +1798,36 @@ img.lista-pedido {
 }
 .form-check-label:hover{
 	color: #d32b2b;
+}
+
+.login-btn{
+	font-size: 1.2rem;
+	
+}
+.login-btn a{
+	color: #ffffff;
+	transition: .5s;
+    background: #d32b2b;
+    padding: 10px;
+    border-radius: 10px;
+}
+.login-btn a:hover {
+    color: #d32b2b;
+	background: #ffffff;
+
+
+}
+.main-banner__card-img:hover {
+
+    transform: translateY(-20px);
+}
+.main-banner__card-img img:hover {
+  
+    box-shadow: 0px 0px 12px black;
+
+}
+.amout{
+	display: grid;
+    grid-template-columns: 32px 50px 32px 100%;
+    align-items: center;
 }

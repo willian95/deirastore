@@ -7,7 +7,7 @@
                 de integración de harreare y software.</p>
             <a class="contact" href=tel:+56226748000><img src="{{ asset('assets/img/telefono.svg') }}" alt="">+56 22 674 8000</a>
 
-            <ul>
+            <ul class="social">
                 <li><a href=""><img src="{{ asset('assets/img/deira-74.png') }}" alt=""></a></li>
                 <li><a href=""><img src="{{ asset('assets/img/deira-76.png') }}" alt=""></a></li>
             </ul>

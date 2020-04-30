@@ -18,7 +18,8 @@
                     <li class="nav-item dropdown arrow">
                         @if(\Auth::check() && \Auth::user()->id)
                             <a class="nav-link dropdown-toggle" style="width: 90%; border-radius: 20px; margin-right: 10px; color: #000;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{ Auth::user()->name }}
+                                <img src="{{ asset('assets/img/persona2.svg') }}" alt="" style="    width: 20px;
+                                margin-right: 10px;">   {{ Auth::user()->name }}
                             </a>
                         @else
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -61,7 +62,7 @@
 
 
                     <li class="nav-item dropdown mega-menu">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" id="menu-categories">Categorías</a>
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false" id="menu-categories">Categorías</a>
                         <div class="dropdown-menu" style="opacity: 1;" id="menu-categories-dropdown">
                             <div class="grid-menu">
                                 <div class="grid-menu__item">

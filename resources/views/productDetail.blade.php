@@ -39,23 +39,32 @@
 
                             @if(Auth::check())
                                 @if($product->amount > 0)
-
                                     <div class="container">
+                                        <label for="amount" style="margin-left: -10px;">Cantidad</label>   
                                         <div class="row">
-                                            <div class="col-4">
-                                                <button class="btn btn-danger" @click="substract()" style="margin-top: 28px"> restar</button>
-                                            </div>
-                                            <div class="col-4">
-                                                <label for="amount">Cantidad</label>
-                                                <input type="number" class="form-control" id="amount" v-model="amount" max="{{ $product->amount }}" min="1" readonly>
+                                             
+                                          <div class="amout">
+                                              <div class="amount_item">  
+                                                                               
+                                                    <button class="btn btn-danger" @click="substract()" > -</button>                                                                                       
+                                              </div>
+                                                                            
+                                            <div class="amount_item">                                                                                  
                                                 
+                                                  <input type="number" class="form-control" id="amount" v-model="amount" max="{{ $product->amount }}" min="1" readonly>                                                                                         
+                                            </div>                                                                     
+                                            <div class="amount_item">                                                                               
+                                                    <button class="btn btn-success" @click="add()" > +</button>                                      
                                             </div>
-                                            <div class="col-4">
-                                                <button class="btn btn-success" @click="add()" style="margin-top: 28px"> sumar</button>
-                                            </div>
-                                            <div class="col-12">
+                                            <div class="amount_item ml-5">   
+                                                                                                                  
+                                                <button class="btn btn-info" @click="store()">añadir al carrito</button>                                     
+                                        </div>
+                                        </div>
+                                         
+                                          <!--  <div class="col-12">
                                                 <button class="btn btn-info" @click="store()">añadir al carrito</button>
-                                            </div>
+                                            </div>-->
                                         </div>
                                     </div>
                                 @else
@@ -65,7 +74,7 @@
                                 @endif
                                 <!--<a href="" class="comprar-producto-details">COMPRAR</a>-->
                             @else
-                                <p><a href="{{ url('/login') }}">Inicia sesión</a> para poder comprar</p>
+                                <p class="login-btn"><a href="{{ url('/login') }}" >Inicia sesión</a> para poder comprar</p>
                             @endif
                         </div>
                     </div>
