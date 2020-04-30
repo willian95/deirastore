@@ -14,7 +14,7 @@
                         <a href="{{ url('/product/'.$product->slug) }}">
                             <div class="content-slider">
                                 @if($product->external == false)
-                                    <img src="{{ $product->picture }}" alt="">
+                                    <img src="{{ $product->picture }}" alt="" style="width: 100%;">
                                 @else
                                     <img src="{{ url('/images/products/'.$product->picture) }}" style="width: 100%;" alt="">
                                 @endif
