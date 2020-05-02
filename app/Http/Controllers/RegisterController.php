@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\RegisterUser;
+use Illuminate\Support\Str;
 use App\User;
+use Carbon\Carbon;
 
 class RegisterController extends Controller
 {
@@ -15,7 +17,9 @@ class RegisterController extends Controller
     function register(RegisterUser $request){
 
         try{
-    
+            
+            $hash = Str::random(40)."-".uniqid();
+
             $user = new User;
             $user->name = $request->name;
             $user->email = $request->email;
@@ -23,17 +27,17 @@ class RegisterController extends Controller
             $user->genre = $request->genre;
             $user->birth_date = $request->birthDate;
             $user->rut = $request->rut;
+            $user->lastname = $request->lastname;
             $user->phone_number = $request->phoneNumber;
+            $user->register_hash = $hash;
             $user->save();
-
-            \Auth::loginUsingId($user->id);
-
-            $data = ["user" => $user];
+            
+            $data = ["user" => $user, "hash" => $hash];
             $to_name = $user->name;
 			$to_email = $user->email;
 			\Mail::send("emails.registerEmail", $data, function($message) use ($to_name, $to_email) {
 
-				$message->to($to_email, $to_name)->subject("Deira");
+				$message->to($to_email, $to_name)->subject("¡Solo falta un paso tu registro!");
 				$message->from("rodriguezwillian95@gmail.com","Deira");
 
 			});
@@ -44,6 +48,27 @@ class RegisterController extends Controller
         }catch(\Exception $e){
 
             return response()->json(["success" => false, "msg" => "Error en el servidor", "error" => $e->getMessage()]);
+
+        }
+
+    }
+
+    function confirmEmail($hash){
+
+        try{
+
+            $user = User::where('register_hash', $hash)->first();
+            $user->register_hash = null;
+            $user->email_verified_at = Carbon::now();
+            $user->update();
+
+            \Auth::loginUsingId($user->id);
+
+            return redirect()->to('/');
+
+        }catch(\Exception $e){
+
+            return response()->json(["success" => false, "msg" => "Error en el servidor", "error" => $e->getMessage(), "ln" => $e->getLine()]);
 
         }
 

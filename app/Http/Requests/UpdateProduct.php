@@ -32,4 +32,20 @@ class UpdateProduct extends FormRequest
             "brandId" => "required|integer" 
         ];
     }
+
+    public function messages(){
+        return[
+
+            "name.required" => "Nombre es requerido",
+            "price.required" => "Precio es requerido",
+            "price.numeric" => "Precio debe ser un número",
+            "subPrice.required" => "Sub-precio es requerido",
+            "subPrice.numeric" => "Sub-precio debe ser un número",
+            "categoryId.required" => "Debe elegir una categoría",
+            "description.required" => "Descripción es requerida",
+            "brandId.required" => "Marca es requerida",
+            "brandId.integer" => "Debe elegir una marca válida"
+
+        ];
+    }
 }

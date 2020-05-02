@@ -28,7 +28,7 @@
                         @endif
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             @if(Auth::check() && Auth::user()->id)
-                                <!--<a href="#" class="drow-none">{{ Auth::user()->name }}</a>-->
+                                <a href="{{ url('/profile') }}" class="drow-none">Mis Datos</a>
                                 <a href="{{ url('/logout') }}" class="drow-none">Cerrar sesión</a>
                             @else
                                 <a class="drow-none" href="{{ url('/login') }}">Iniciar sesion</a>

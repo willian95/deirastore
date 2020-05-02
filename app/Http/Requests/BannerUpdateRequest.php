@@ -28,4 +28,13 @@ class BannerUpdateRequest extends FormRequest
             "location" => "required"
         ];
     }
+
+    public function messages(){
+        return[
+
+            "size.required" => "Tamaño es requerido",
+            "location.required" => "Lugar es requerido",
+
+        ];
+    }
 }

@@ -21,6 +21,10 @@ class LoginController extends Controller
     function logIn(Request $request){
 
         $credentials = $request->only('email', 'password');
+        
+        if(User::where('email', $request->email)->first()->email_verified_at == null){
+            return response()->json(["success" => false, "msg" => "Aún no has verificado tu correo"]);
+        }
 
         if (Auth::attempt($credentials)) {
             
@@ -29,7 +33,7 @@ class LoginController extends Controller
         
         }
 
-        return response()->json(["success" => false, "msg" => "Usuario no encontrado"]);
+        return response()->json(["success" => false, "msg" => "Usuario o contraseña incorrectos"]);
 
     }
 

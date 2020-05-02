@@ -29,4 +29,14 @@ class BannerStoreRequest extends FormRequest
             "location" => "required"
         ];
     }
+
+    public function messages(){
+        return[
+
+            "image.required" => "Imagen es requerida",
+            "size.required" => "Tamaño es requerido",
+            "location.required" => "Lugar es requerido",
+
+        ];
+    }
 }

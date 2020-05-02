@@ -144,7 +144,7 @@ class HomeController extends Controller
             }      
         })->get();
 
-        return view('search', ["products" => $products, "brands" => $brands, "categories" => $categories]);
+        return view('search', ["products" => $products, "brands" => $brands, "categories" => $categories, "search" => $request->search]);
 
     }
 

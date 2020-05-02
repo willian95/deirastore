@@ -28,4 +28,14 @@ class PasswordRestoreRequest extends FormRequest
             "recovery_hash" => "required"
         ];
     }
+
+    public function messages(){
+        return[
+
+            "password.required" => "Contraseña es requerida",
+            "password.confirmed" => "Contraseñas no coinciden",
+            "recovery_hash.required" => "No posee un token de verificación",
+
+        ];
+    }
 }

@@ -28,4 +28,13 @@ class StoreCategories extends FormRequest
             "image" => "required"
         ];
     }
+
+    public function messages(){
+        return[
+
+            "name.required" => "Nombre es requerido",
+            "image.required" => "Imagen es requerida",
+
+        ];
+    }
 }
