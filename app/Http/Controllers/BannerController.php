@@ -30,7 +30,7 @@ class BannerController extends Controller
     
             }catch(\Exception $e){
     
-                return response()->json(["success" => false, "msg" => "Hubo un error al cargar la imagen"]);
+                return response()->json(["success" => false, "msg" => "Hubo un error al cargar la imagen", "err" => $e->getMessage(), "ln" => $e->getLine()]);
     
             }
 
