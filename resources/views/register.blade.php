@@ -260,23 +260,27 @@
                 }
             },
             validateRut(){
-                this.loading = true
-                axios.get("{{ url('/validate/rut/') }}"+"/"+this.rut).then(res => {
-                    this.loading = false
-                    if(res.data.success == true){
+               
+                if(this.rut != ""){
+                    this.loading = true
+                    axios.get("{{ url('/validate/rut/') }}"+"/"+this.rut).then(res => {
+                        this.loading = false
+                        if(res.data.success == true){
 
-                        this.isRutValid = res.data.data
-                        
-                    }else{
-                        this.isRutValid = res.data.data
-                        alert(res.data.msg)
+                            this.isRutValid = res.data.data
+                            
+                        }else{
+                            this.isRutValid = res.data.data
+                            alert(res.data.msg)
 
-                    }
+                        }
 
-                })
-                .catch(err => {
+                    })
+                    .catch(err => {
 
-                })
+                    })
+                }
+                
             }
 
         },
