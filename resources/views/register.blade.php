@@ -8,63 +8,75 @@
             <div class="col-lg-6  col-md-6  col-12">
                 <div class="card">
                     <div class="card-body">
-                    <div class="title__general">
+                        <div class="title__general">
                             <p><strong>Registro</strong> de usuario </p>
                         </div>
-                                      <!-------------------------FORMYLARUO NEW----->
+
                         <div class="form-grid">
                             <!-- input -->
                             <div class="form-grid__item">
-                                <label hidden  for="name" hidden>Nombre Completo</label>
-                                <input  placeholder="Nombre Completo" type="text" class="form-control" id="name" aria-describedby="emailHelp" v-model="name">
+                                <label  for="name">Nombre</label>
+                                <input  placeholder="Nombre" type="text" class="form-control" id="name" aria-describedby="emailHelp" v-model="name">
                             </div>
                             <!-- input -->
-                        
+                            <div class="form-grid__item">
+                                <label  for="name">Apellido</label>
+                                <input  placeholder="Apellido" type="text" class="form-control" aria-describedby="emailHelp" v-model="lastname">
+                            </div>
                             <!-- input -->
                             <div class="form-grid__item">
-                                <label hidden  for="genre">Género</label>
+                                <label  for="genre">Género</label>
                                 <select class="form-control" id="genre" v-model="genre">
-                                    <option value="M" >Género</option>
-                                    <option value="M">Masculino</option>
-                                    <option value="F">Femenino</option>
-                                    <option value="F">Prefiero mantenerlo en privado</option>
+                                    <option>Género</option>
+                                    <option value="masculino">Masculino</option>
+                                    <option value="femenino">Femenino</option>
+                                    <option value="prefiero mantenerlo en privado">Prefiero mantenerlo en privado</option>
                                 </select>
                             </div>
                             <!-- input -->
                             <div class="form-grid__item">
-                                <label hidden  for="birthDate">Fec. Nacimiento</label>
+                                <label  for="birthDate">Fec. Nacimiento</label>
                                 <input  placeholder="Fec. Nacimiento" type="date" class="form-control" id="birthDate" aria-describedby="emailHelp" v-model="birthDate">
                             </div>
                                 <!-- input -->
-                                <div class="form-grid__item">
-                                    <label hidden  for="rut">Rut</label>
-                                    <input  placeholder="Rut" type="text" class="form-control" id="rut" aria-describedby="emailHelp" v-model="rut" @keypress="isNumber($event)">
+                                <div class="form-grid__item inputcontainer">
+                                    <label  for="rut">Rut</label>
+                                    <input placeholder="Rut" type="text" class="form-control" id="rut" aria-describedby="emailHelp" v-model="rut" @keypress="isAlphaNumeric($event)" @blur="validateRut()">
+                                    <div class="icon-container" v-if="loading == true">
+                                        <i class="loader"></i>
+                                    </div>
+                                    <div class="icon-container" v-if="loading == false && isRutValid == true">
+                                        <i class="fa fa-check-square"></i>
+                                    </div>
+                                    <div class="icon-container" v-if="loading == false && isRutValid == false">
+                                        <i class="fa fa-times"></i>
+                                    </div>
                                 </div>
                                     <!-- input -->
                         
                                 <!-- input -->
                                 <div class="form-grid__item">
-                                    <label hidden  for="phoneNumber">Celular</label>
+                                    <label  for="phoneNumber">Celular</label>
                                     <input  placeholder="Celular" type="text" class="form-control" id="phoneNumber" aria-describedby="emailHelp" v-model="phoneNumber" @keypress="isTelephoneNumber($event)">
                                 </div>
                                     <!-- input -->
                             <div class="form-grid__item">
-                                <label hidden  for="email">Email</label>
+                                <label  for="email">Email</label>
                                 <input  placeholder="Email" type="email" class="form-control" id="email" aria-describedby="emailHelp" v-model="email">
                             </div>
                             <div class="form-grid__item">
-                                <label hidden  for="password">Contraseña</label>
+                                <label  for="password">Contraseña</label>
                                 <input  placeholder="Contraseña" type="password" class="form-control" id="password" v-model="password">
                             </div>
 
                             <div class="form-grid__item">
-                                <label hidden  for="passwordRepeat">Repetir Contraseña</label>
+                                <label  for="passwordRepeat">Repetir Contraseña</label>
                                 <input  placeholder="Repetir Contraseña" type="password" class="form-control" id="passwordRepeat" v-model="passwordRepeat">
                             </div>
 
                             <div class="form-grid__item form-check">
                                 <input  type="checkbox" class="form-check-input" id="terms" v-model="terms">
-                                <label  class="form-check-label" for="terms">Acepto terminos y condiciones</label>
+                                <label  class="form-check-label" for="terms"><a href="{{ url('/terms') }}" target="_blank">Acepto terminos y condiciones</a></label>
                             </div>
                             <div class="form-grid__item mt-5 mb-3"> </div>
                             <div class="form-grid__item">
@@ -72,67 +84,7 @@
                                     <button class="btn btn-primary btn-general btn-general--form" @click="register()">Registrar</button>
                                 </div>
                             </div>
-                            <!-------------------------FORMYLARUO NEW----->
-
-<!-------------------------TU FORMULARIO ----->
-                        <div class="form-group">
-                            <label hidden  for="name" hidden>Nombre</label>
-                            <input placeholder="Nombre" type="text" class="form-control" id="name" aria-describedby="emailHelp" v-model="name">
                         </div>
-                        <div class="form-group">
-                            <label hidden  for="name" hidden>Apellido</label>
-                            <input placeholder="Apellido" type="text" class="form-control" aria-describedby="emailHelp" v-model="lastname">
-                        </div>
-                        <div class="form-group">
-                            <label hidden  for="genre">Género</label>
-                            <select class="form-control" id="genre" v-model="genre">
-                                <option >Género</option>
-                                <option value="masculino" selected>Masculino</option>
-                                <option value="femenino">Femenino</option>
-                                <option value="prefiero mantenerlo en privado">Prefiero mantenerlo en privado</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label hidden  for="birthDate">Fec. Nacimiento</label>
-                            <input placeholder="Fec. Nacimiento" type="date" class="form-control" id="birthDate" aria-describedby="emailHelp" v-model="birthDate">
-                        </div>
-                        <div class="form-group inputcontainer">
-                            <label hidden  for="rut">Rut</label>
-                            <input placeholder="Rut" type="text" class="form-control" id="rut" aria-describedby="emailHelp" v-model="rut" @keypress="isAlphaNumeric($event)" @blur="validateRut()">
-                            <div class="icon-container" v-if="loading == true">
-                                <i class="loader"></i>
-                            </div>
-                            <div class="icon-container" v-if="loading == false && isRutValid == true">
-                                <i class="fa fa-check-square"></i>
-                            </div>
-                            <div class="icon-container" v-if="loading == false && isRutValid == false">
-                                <i class="fa fa-times"></i>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label hidden  for="phoneNumber">Celular</label>
-                            <input placeholder="Celular" type="text" class="form-control" id="phoneNumber" aria-describedby="emailHelp" v-model="phoneNumber" @keypress="isTelephoneNumber($event)">
-                        </div>
-                        <div class="form-group">
-                            <label hidden  for="email">Email</label>
-                            <input placeholder="Email" type="email" class="form-control" id="email" aria-describedby="emailHelp" v-model="email">
-                        </div>
-                        <div class="form-group">
-                            <label hidden  for="password">Contraseña</label>
-                            <input placeholder="Contraseña" type="password" class="form-control" id="password" v-model="password">
-                        </div>
-                        <div class="form-group">
-                            <label hidden  for="passwordRepeat">Repetir Contraseña</label>
-                            <input placeholder="Repetir Contraseña" type="password" class="form-control" id="passwordRepeat" v-model="passwordRepeat">
-                        </div>
-                        <div class="form-group form-check">
-                            <input type="checkbox" class="form-check-input" id="terms" v-model="terms">
-                            <label  class="form-check-label" for="terms"><a href="{{ url('/terms') }}" target="_blank">Acepto terminos y condiciones</a></label>
-                        </div>
-                        <div class="form-group text-center">
-                            <button class="btn btn-primary btn-general btn-general--form" @click="register()">Registrar</button>
-                        </div>
-
                     </div>
                 </div>
             </div>
