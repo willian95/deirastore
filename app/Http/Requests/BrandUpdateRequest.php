@@ -27,4 +27,12 @@ class BrandUpdateRequest extends FormRequest
             "name" => "required"
         ];
     }
+
+    public function messages(){
+        return[
+
+            "name.required" => "Nombre es requerido",
+
+        ];
+    }
 }

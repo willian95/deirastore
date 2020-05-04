@@ -13,15 +13,21 @@
                         <h3 class="text-center">Perfil</h3>
 
                         <div class="form-group">
-                            <label for="name">Nombre Completo</label>
+                            <label for="name">Nombre</label>
                             <input type="text" class="form-control" id="name" aria-describedby="emailHelp" v-model="name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name">Apellido</label>
+                            <input type="text" class="form-control" aria-describedby="emailHelp" v-model="lastname">
                         </div>
 
                         <div class="form-group">
                             <label for="genre">Género</label>
                             <select class="form-control" id="genre" v-model="genre">
-                                <option value="M">Masculino</option>
-                                <option value="F">Femenino</option>
+                                <option value="masculino">Masculino</option>
+                                <option value="femenino">Femenino</option>
+                                <option value="prefiero mantenerlo en privado">Prefiero mantenerlo en privado</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -64,6 +70,7 @@
             data(){
                 return{
                     name: "{!! Auth::user()->name !!}",
+                    lastname: '{!! Auth::user()->lastname !!}',
                     genre: "{!! Auth::user()->genre !!}",
                     birthDate: "{!! Auth::user()->birth_date !!}",
                     phoneNumber: "{!! Auth::user()->phone_number !!}",
@@ -80,6 +87,7 @@
 
                         let formData = new FormData()
                         formData.append("name", this.name)
+                        formData.append("lastname", this.lastname)
                         formData.append("genre", this.genre)
                         formData.append("birthDate", this.birthDate)
                         formData.append("phoneNumber", this.phoneNumber)

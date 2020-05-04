@@ -24,12 +24,30 @@ class RegisterUser extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'unique:users|email',
-            'rut' => 'unique:users|integer',
+            'email' => 'required|unique:users|email',
+            'rut' => 'required|unique:users',
+            'lastname' => "required",
             "name" => 'required',
             "password" => 'required',
             'phoneNumber' => 'required',
             'genre' => 'required'
+        ];
+    }
+
+    public function messages(){
+        return[
+
+            "email.required" => "Correo es requerido",
+            "email.email" => "Correo debe ser un correo válido",
+            "email.unique" => "Correo ya está registrado",
+            'lastname.required' => "Apellidos son requeridos",
+            "rut.required" => "RUT es requerido",
+            "rut.unique" => "RUT ya está  registrado",
+            "name.required" => "Nombre es requerido",
+            "password.required" => "Clave es requerida",
+            "phoneNumber.required" => "Teléfono es requerido",
+            "genre.required" => "Género es requerido"
+
         ];
     }
 }

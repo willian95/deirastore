@@ -2,6 +2,7 @@
 
 @section('content')
     @include('partials.navbar')
+
     <div class="container bg card-form">
         <div class="row center-form">
             <div class="col-lg-6  col-md-6  col-12">
@@ -10,6 +11,7 @@
                     <div class="title__general">
                             <p><strong>Registro</strong> de usuario </p>
                         </div>
+                                      <!-------------------------FORMYLARUO NEW----->
                         <div class="form-grid">
                             <!-- input -->
                             <div class="form-grid__item">
@@ -70,8 +72,65 @@
                                     <button class="btn btn-primary btn-general btn-general--form" @click="register()">Registrar</button>
                                 </div>
                             </div>
+                            <!-------------------------FORMYLARUO NEW----->
 
-
+<!-------------------------TU FORMULARIO ----->
+                        <div class="form-group">
+                            <label hidden  for="name" hidden>Nombre</label>
+                            <input placeholder="Nombre" type="text" class="form-control" id="name" aria-describedby="emailHelp" v-model="name">
+                        </div>
+                        <div class="form-group">
+                            <label hidden  for="name" hidden>Apellido</label>
+                            <input placeholder="Apellido" type="text" class="form-control" aria-describedby="emailHelp" v-model="lastname">
+                        </div>
+                        <div class="form-group">
+                            <label hidden  for="genre">Género</label>
+                            <select class="form-control" id="genre" v-model="genre">
+                                <option >Género</option>
+                                <option value="masculino" selected>Masculino</option>
+                                <option value="femenino">Femenino</option>
+                                <option value="prefiero mantenerlo en privado">Prefiero mantenerlo en privado</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label hidden  for="birthDate">Fec. Nacimiento</label>
+                            <input placeholder="Fec. Nacimiento" type="date" class="form-control" id="birthDate" aria-describedby="emailHelp" v-model="birthDate">
+                        </div>
+                        <div class="form-group inputcontainer">
+                            <label hidden  for="rut">Rut</label>
+                            <input placeholder="Rut" type="text" class="form-control" id="rut" aria-describedby="emailHelp" v-model="rut" @keypress="isAlphaNumeric($event)" @blur="validateRut()">
+                            <div class="icon-container" v-if="loading == true">
+                                <i class="loader"></i>
+                            </div>
+                            <div class="icon-container" v-if="loading == false && isRutValid == true">
+                                <i class="fa fa-check-square"></i>
+                            </div>
+                            <div class="icon-container" v-if="loading == false && isRutValid == false">
+                                <i class="fa fa-times"></i>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label hidden  for="phoneNumber">Celular</label>
+                            <input placeholder="Celular" type="text" class="form-control" id="phoneNumber" aria-describedby="emailHelp" v-model="phoneNumber" @keypress="isTelephoneNumber($event)">
+                        </div>
+                        <div class="form-group">
+                            <label hidden  for="email">Email</label>
+                            <input placeholder="Email" type="email" class="form-control" id="email" aria-describedby="emailHelp" v-model="email">
+                        </div>
+                        <div class="form-group">
+                            <label hidden  for="password">Contraseña</label>
+                            <input placeholder="Contraseña" type="password" class="form-control" id="password" v-model="password">
+                        </div>
+                        <div class="form-group">
+                            <label hidden  for="passwordRepeat">Repetir Contraseña</label>
+                            <input placeholder="Repetir Contraseña" type="password" class="form-control" id="passwordRepeat" v-model="passwordRepeat">
+                        </div>
+                        <div class="form-group form-check">
+                            <input type="checkbox" class="form-check-input" id="terms" v-model="terms">
+                            <label  class="form-check-label" for="terms"><a href="{{ url('/terms') }}" target="_blank">Acepto terminos y condiciones</a></label>
+                        </div>
+                        <div class="form-group text-center">
+                            <button class="btn btn-primary btn-general btn-general--form" @click="register()">Registrar</button>
                         </div>
 
                     </div>
@@ -92,14 +151,18 @@
         data() {
             return {
                 name: "",
-                genre: "M",
+                isRutValid:false,
+                lastname:"",
+                genre: "masculino",
                 birthDate: "",
                 rut: "",
                 phoneNumber: "",
                 email: '',
                 password: "",
                 passwordRepeat: "",
-                terms: ""
+                terms: "",
+                loading:false,
+                reg: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/
             }
         },
         methods: {
@@ -115,22 +178,33 @@
                             rut: this.rut,
                             phoneNumber: this.phoneNumber,
                             email: this.email,
-                            password: this.password
+                            password: this.password,
+                            lastname: this.lastname
                         })
                         .then(res => {
-                            alert(res.data.msg)
+                            
 
-                            this.name = ""
-                            this.genre = "M"
-                            this.birthDate = ""
-                            this.rut = ""
-                            this.phoneNumber = ""
-                            this.email = ""
-                            this.password = ""
-                            this.passwordRepeat = ""
-                            this.terms = ""
+                            if(res.data.success == true){
 
-                            window.location.href="{{ url('/') }}"
+                                alert(res.data.msg)
+
+                                this.name = ""
+                                this.genre = "masculino"
+                                this.birthDate = ""
+                                this.rut = ""
+                                this.phoneNumber = ""
+                                this.email = ""
+                                this.password = ""
+                                this.passwordRepeat = ""
+                                this.lastname = ""
+                                this.terms = ""
+
+                                window.location.href="{{ url('/') }}"
+                            }else{
+
+                                alert(res.data.msg)
+
+                            }
 
                         })
                         .catch(err => {
@@ -148,6 +222,11 @@
 
                 if (this.name == "") {
                     alert("Campo nombre es requerido")
+                    error = true
+                }
+
+                if (this.lastname == "") {
+                    alert("Campo apellido es requerido")
                     error = true
                 }
 
@@ -196,6 +275,16 @@
                     error = true
                 }
 
+                if(this.isRutValid == false){
+                    alert("Rut no válido")
+                    error = true
+                }
+
+                if(!this.reg.test(this.email)){
+                    alert("Email no válido")
+                    error = true
+                }
+
                 return error
 
             },
@@ -204,10 +293,25 @@
                 var charCode = (evt.which) ? evt.which : evt.keyCode;
 
                 if ((charCode > 31 && (charCode < 48 || charCode > 57))) {
-                    evt.preventDefault();;
+                    evt.preventDefault();
                 } else {
                     return true;
                 }
+            },
+            isAlphaNumeric(evt){
+
+                evt = (evt) ? evt : window.event;
+
+                var letters = /^[0-9a-zA-Z]+$/;
+                if(evt.key.match(letters))
+                {
+                    return true;
+                }
+                else
+                {
+                    evt.preventDefault();
+                }
+
             },
             isTelephoneNumber: function(evt) {
                 evt = (evt) ? evt : window.event;
@@ -218,6 +322,29 @@
                 } else {
                     return true;
                 }
+            },
+            validateRut(){
+               
+                if(this.rut != ""){
+                    this.loading = true
+                    axios.get("{{ url('/validate/rut/') }}"+"/"+this.rut).then(res => {
+                        this.loading = false
+                        if(res.data.success == true){
+
+                            this.isRutValid = res.data.data
+                            
+                        }else{
+                            this.isRutValid = res.data.data
+                            alert(res.data.msg)
+
+                        }
+
+                    })
+                    .catch(err => {
+
+                    })
+                }
+                
             }
 
         },

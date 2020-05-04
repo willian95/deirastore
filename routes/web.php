@@ -66,6 +66,13 @@ Route::post("/guest/store", "GuestController@store");
 
 Route::get("products/destacados", "ProductController@highlighted");
 
+Route::get('/validate/rut/{rut}', "RutController@validateRut");
+Route::get('/confirm/email/{hash}', "RegisterController@confirmEmail");
+
+Route::get('/terms', function(){
+    return view('terms');
+});
+
 Route::prefix('admin')->group(function () {
     
     Route::get('/dashboard', function(){

@@ -28,4 +28,14 @@ class StorePurchase extends FormRequest
             "amount" => "integer"
         ];
     }
+
+    public function messages(){
+        return [
+
+            "shoppingPrice.numeric" => "Precio debe ser un número",
+            "amount.integer" => "Cantidad debe ser un número entero"
+
+        ];
+    }
+
 }

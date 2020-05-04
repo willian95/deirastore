@@ -28,4 +28,14 @@ class GuestStoreRequest extends FormRequest
             "name" => "required"
         ];
     }
+
+    public function messages(){
+        return[
+
+            "email.required" => "Correo es requerido",
+            "email.email" => "Correo debe ser un correo válido",
+            "name.required" => "Nombre es requerido",
+
+        ];
+    }
 }

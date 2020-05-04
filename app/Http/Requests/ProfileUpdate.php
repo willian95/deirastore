@@ -25,9 +25,23 @@ class ProfileUpdate extends FormRequest
     {
         return [
             "name" => "required",
+            "lastname" => "required",
             "genre" => "required",
             "birthDate" => "required|date",
             "phoneNumber" => "required"
+        ];
+    }
+
+    public function messages(){
+        return[
+
+            "name.required" => "Nombre es requerido",
+            "lastname.required" => "Apellido es requerido",
+            "genre.required" => "Género es requerido",
+            "birthDate.required" => "Fecha de nacimiento es requerida",
+            "birthDate.date" => "Fecha de nacimiento debe ser una fecha",
+            "phoneNumber.required" => "Teléfono es requerido",
+
         ];
     }
 }

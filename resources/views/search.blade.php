@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="title__general title__general-start">
-                    <p><strong>Resultado de:</strong> Titulo</p>
+                    <p><strong>Resultado de:</strong> {{ $search }}</p>
                 </div>
             </div>
         </div>

@@ -77,7 +77,7 @@ class CheckoutController extends Controller
 
 			$payment = Payment::where('order_id', session('order'))->first(); //obtenemos el pago registrado en la funcion checkout
 			$products = ProductPurchase::with('product')->where('payment_id', $payment->id)->get();
-			$this->sendMessage();
+			$this->sendMessage($products);
 			$name = "";
 			if(\Auth::guest()){
 
@@ -194,7 +194,7 @@ class CheckoutController extends Controller
 
 	}
 
-	function sendMessage(){
+	function sendMessage($products){
 
         try{
 
@@ -212,10 +212,10 @@ class CheckoutController extends Controller
 
 			}
 			
-			$data = ["user" => $user];
+			$data = ["user" => $user, "products" => $products];
 			\Mail::send("emails.purchaseMail", $data, function($message) use ($to_name, $to_email) {// se envía el email
 
-				$message->to($to_email, $to_name)->subject("Deira");
+				$message->to($to_email, $to_name)->subject("¡Tu compra se ha realizado con éxito!");
 				$message->from("rodriguezwillian95@gmail.com","Deira");
 
 			});

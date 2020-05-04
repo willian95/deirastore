@@ -28,4 +28,14 @@ class BrandStoreRequest extends FormRequest
             "image" => "required"
         ];
     }
+
+    public function messages(){
+        return[
+
+            "name.required" => "Nombre es requerido",
+            "name.unique" => "Nombre previamente registrado",
+            "image.required" => "Imagen es requerida",
+
+        ];
+    }
 }

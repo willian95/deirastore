@@ -28,4 +28,12 @@ class StoreCart extends FormRequest
             "productId" => "required|integer"
         ];
     }
+
+    public function messages(){
+        return[
+
+            "amount.required" => "Cantidad es requerida",
+            "amount.integer" => "Cantidad debe ser un número entero",
+        ];
+    }
 }

@@ -160,8 +160,9 @@ class CategoriesController extends Controller
 
             $products = Product::where('category_id', $category->id)->with('category')->skip($skip)->take(20)->get();
             $productsCount = Product::where('category_id', $category->id)->with('category')->count();
+            $subCategories = Category::where('parent_id', $category->id)->get();
 
-            return response()->json(["success" => true, "products" => $products, "productsCount" => $productsCount]);
+            return response()->json(["success" => true, "products" => $products, "productsCount" => $productsCount, "subCategories" => $subCategories]);
 
         }catch(\Exception $e){
 

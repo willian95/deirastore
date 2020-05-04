@@ -27,4 +27,13 @@ class RecoveryRequest extends FormRequest
             "email" => "required|email"
         ];
     }
+
+    public function messages(){
+        return[
+
+            "email.required" => "Correo es requerido",
+            "email.email" => "Correo debe ser un correo válido"
+
+        ];
+    }
 }

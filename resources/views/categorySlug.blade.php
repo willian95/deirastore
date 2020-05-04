@@ -9,7 +9,7 @@
             <p><strong>{{ $category->name }}</strong></p>
         </div>
         <div class="row">
-            <div class="col-3" v-for="product in products">
+            <div class="col-12 col-md-6 col-lg-3" v-for="product in products">
                 <div class="main-slider__item">
                     <a :href=" '{{ url('/') }}' + '/product/' + product.slug">
                         <div class="content-slider">
@@ -38,6 +38,31 @@
                 </nav>
             </div>
         </div>
+
+        <div class="row" v-if="subCategories.length > 0">
+            <div class="col-12">
+                <div class="title__general title__general-start">
+                    <p><strong>Sub-categorías</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="margin-bottom: 20px;">
+            <div class="col-12 col-md-6 col-lg-3" v-for="subCategory in subCategories">
+                <div class="main-slider__item">
+                    <a :href=" '{{ url('/') }}' + '/category/' + subCategory.slug">
+                        <div class="content-slider">
+                            <img :src="'{{ url('/') }}' + '/assets/images/categories/' +subCategory.picture" alt="" v-if="subCategory.image != null" style="width: 100%">
+                            <img :src="'{{ url('/') }}' + '/images/categories/default.png'" alt="" v-else style="width: 100%">
+                        </div>
+                        <div class="main-slider__text">
+                            <span>@{{ subCategory.name }}</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     @include('partials.footer')
@@ -54,6 +79,7 @@
             return{
                 slug:'{!! $slug !!}',
                 products:[],
+                subCategories:[],
                 pages:0,
                 dolarPrice: '{!! App\DolarPrice::first()->price !!}'
             }
@@ -68,6 +94,7 @@
                     if(res.data.success == true){
                         this.pages = Math.ceil(res.data.productsCount / 20)
                         this.products = res.data.products
+                        this.subCategories = res.data.subCategories
                     }else{
 
                         alert(res.data.msg)
@@ -79,7 +106,8 @@
                     console.log(err.response.data)
                 })
 
-            },
+            }
+
 
         },
         mounted(){
