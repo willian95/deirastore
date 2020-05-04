@@ -1908,8 +1908,8 @@ img.lista-pedido {
 
 .icon-container {
 	position: absolute;
-	right: 10px;
-	top: calc(50% - 10px);
+    right: 22px;
+    top: calc(50% - -1px);
   }
   .loader {
 	position: relative;
