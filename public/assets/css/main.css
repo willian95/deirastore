@@ -1953,3 +1953,11 @@ img.lista-pedido {
 	animation: around 0.7s ease-in-out 0.1s infinite;
 	background: transparent;
   }
+  .form-check {
+    position: relative;
+    display: block;
+    padding-left: 1.25rem;
+    display: flex!important;
+    align-items: center!important;
+    margin: 0!important;
+}
