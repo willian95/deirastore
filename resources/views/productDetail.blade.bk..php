@@ -14,8 +14,8 @@
                 @if(Auth::check() && Auth::user()->id)
                     <label for="amount">Cantidad</label>
                     <input type="number" class="form-control" id="amount" v-model="amount" max="{{ $product->amount }}" min="1" readonly>
-                    <button class="btn btn-success" @click="add()"> sumar</button>
-                    <button class="btn btn-danger" @click="substract()"> restar</button>
+                    <button class="btn btn-cart" @click="add()"> sumar</button>
+                    <button class="btn btn-cart" @click="substract()"> restar</button>
 
                     <button class="btn btn-info" @click="store()">añadir al carrito</button>
                 @else

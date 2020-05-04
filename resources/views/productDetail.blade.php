@@ -46,15 +46,15 @@
                                           <div class="amout">
                                               <div class="amount_item">  
                                                                                
-                                                    <button class="btn btn-danger" @click="substract()" > -</button>                                                                                       
+                                                    <button class="btn btn-cart" @click="substract()" > -</button>                                                                                       
                                               </div>
                                                                             
                                             <div class="amount_item">                                                                                  
                                                 
-                                                  <input type="number" class="form-control" id="amount" v-model="amount" max="{{ $product->amount }}" min="1" readonly>                                                                                         
+                                                  <input type="number" class="form-control btn-cart" id="amount" v-model="amount" max="{{ $product->amount }}" min="1" readonly>                                                                                         
                                             </div>                                                                     
                                             <div class="amount_item">                                                                               
-                                                    <button class="btn btn-success" @click="add()" > +</button>                                      
+                                                    <button class="btn btn-cart" @click="add()" > +</button>                                      
                                             </div>
                                             <div class="amount_item ml-5">   
                                                                                                                   

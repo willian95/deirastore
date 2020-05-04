@@ -24,11 +24,13 @@
                     </ul>
                     <ul>
                         <p class="title">SERVICIO AL CLIENTE</p>
+                        <li><a href="#">Centro de ayuda</a></li>
                         <li><a href="#">¿Por qué comprar en Deira Store?</a></li>
                         <li><a href="#">Métodos y costos de envío</a></li>
                         <li><a href="#">Seguimiento de mi orden</a></li>
                         <li><a href="#">Cambios y devoluciones</a></li>
                         <li><a href="#">Términos y condiciones</a></li>
+               
 
                     </ul>
                 </div>

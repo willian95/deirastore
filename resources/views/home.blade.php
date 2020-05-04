@@ -132,6 +132,7 @@
                 <div class="main-shop__grid">
                     @foreach($brands as $brand)
                         @if($brand->image != null)
+                        <a href="{{ url('/brand/'.$brand->slug) }}">
                             <div class="main-shop__item">
                                 
                                 <img src="{{ asset('/images/brands/'.$brand->image) }}" alt="">
@@ -140,20 +141,21 @@
                                 <div class="main-shop__card">
                                     @foreach(App\Product::where('brand_id', $brand->id)->orderBy('id', 'desc')->limit(3)->get() as $product)
                                         <div class="main-shop__card-item">
-                                            <a href="{{ url('/product/'.$product->slug) }}"> 
+                                        <!--    <a href="{{ url('/product/'.$product->slug) }}"> -->
+                                            <span> 
                                                 @if($product->is_external == false)
                                                     <img style="width: 100%;" src="{{ asset('/images/products/'.$product->picture) }}" alt="">
                                                 @else
                                                     <img style="width: 100%;" src="{{ $product->picture }}" alt="">
                                                 @endif
-                                            </a>
+                                            </span>
                                         </div>
 
                                     @endforeach
 
                                 </div>
-                                <a href="{{ url('/brand/'.$brand->slug) }}">Ver tienda</a>
-                            </div>
+                              Ver tienda
+                            </div><!---main-shop__item ---></a>
                         @endif
 
                     @endforeach

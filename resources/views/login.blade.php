@@ -22,13 +22,17 @@
                         <div class="form-group pass">
                             <a href="{{ url('/password/recovery') }}">¿Has olvidado tu contraseña?</a>
                         </div>
+                    
 
                         <div class="form-group text-center">
                             <button class="btn btn-primary btn-general btn-general--form" @click="logIn()">Acceder</button>
                         </div>
 
-
-
+<br><br>
+                        <div class="form-group pass text-center" style="font-size: 1rem;
+                        font-weight: 600;">
+                            <a href="{{ url('/register') }}}">¿Aun no se registra?</a>
+                        </div>
                     </div>
                 </div>
             </div>

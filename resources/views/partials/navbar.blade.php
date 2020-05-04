@@ -17,9 +17,12 @@
                     
                     <li class="nav-item dropdown arrow">
                         @if(\Auth::check() && \Auth::user()->id)
-                            <a class="nav-link dropdown-toggle" style="width: 90%; border-radius: 20px; margin-right: 10px; color: #000;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle user_content"  href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img src="{{ asset('assets/img/persona2.svg') }}" alt="" style="    width: 20px;
                                 margin-right: 10px;">   {{ Auth::user()->name }}
+                                <div class="active_user">
+                                    
+                                </div>
                             </a>
                         @else
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
