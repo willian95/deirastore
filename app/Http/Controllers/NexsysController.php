@@ -102,6 +102,7 @@ class NexsysController extends Controller
                                 "min_description" => $value->short_description,
                                 "sub_title" => $value->short_description,
                                 "price" => 0,
+                                "data_source_id" => 1,
                                 "tax_excluded" => $excluded_tax,
                                 "name" => $value->short_description,
                                 "slug" => $productSlug,

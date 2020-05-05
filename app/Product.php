@@ -25,6 +25,7 @@ class Product extends Model
         "sku",
         "vpn",
         "parent_nexsys",
+        "data_source_id",
         "min_description",
         "product_type",
         "product_material",
