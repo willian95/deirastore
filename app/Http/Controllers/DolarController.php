@@ -9,7 +9,6 @@ class DolarController extends Controller
 {
     
     function index(){
-        ini_set('max_execution_time', 0);
 
         $client = new \GuzzleHttp\Client();
         $request = $client->request("GET", 'https://mindicador.cl/api/dolar');
