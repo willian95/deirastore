@@ -1961,3 +1961,7 @@ img.lista-pedido {
     align-items: center!important;
     margin: 0!important;
 }
+
+.dropdown-toggle::after{
+	display: none;
+}

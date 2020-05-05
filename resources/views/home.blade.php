@@ -20,22 +20,19 @@
 
                 @endphp
 
-                <div class="col-12">
-                    <!--<div class="main-banner">-->
-                        <div class="main-banner__img">
-                            <img src="{{ asset('/images/banners/'.$banner->image) }}" alt="" style="width: 100%;">
-                            <div class="main-banner__content">
+          
+                  <div class="main-banner__content">
+                        <div class="main-banner__item">
+                            <div class="main-banner__img">
+                                <img src="{{ asset('/images/banners/'.$banner->image) }}" alt="" style="width: 100%;">
+                            </div>                                      
                                 <div class="title" style="text-align: {{ $float }};">
                                     <h3 style="color: {{ $banner->title_color }}">{{ $banner->title }}</h3>
                                     <p style="color: {{ $banner->text_color }}">{{ $banner->text }}</p>
                                     <a href="{{ $banner->link }}" target="_blank" class="btn-general" style="color: {{ $banner->button_color }}; background-color: {{ $banner->button_text_color }};">{{ $banner->button_text }}</a>
                                 </div>
                             </div>
-                        </div>
-
-
-                    <!--</div>-->
-                </div>
+                        </div>                     
             @endforeach
 
         </div>
