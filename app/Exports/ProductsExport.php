@@ -23,7 +23,7 @@ class ProductsExport implements FromCollection, WithHeadings, WithMapping
     */
     public function collection()
     {
-        return Product::with('brand')->take(10)->get();
+        return Product::with('brand')->get();
     }
 
     public function map($product): array
