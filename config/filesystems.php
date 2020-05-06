@@ -47,7 +47,10 @@ return [
             'driver' => 'local',
             'root' => storage_path('app'),
         ],
-
+        'cnet_upload' => [
+            'driver' => 'local',
+            'root'   => public_path() . '/assets/cnet',
+        ],
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
