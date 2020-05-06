@@ -84,6 +84,41 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('brands.all') }}">Marcas</a>
                     </li>
+
+                    <div class="navbar navbar-expand-md  navbar-hover">
+                        <div class="collapse navbar-collapse" id="navbarHover">
+                            <ul class="navbar-nav">      
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        DropdownConSensualHover
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">Link</a></li>
+                                        <li><a class="dropdown-item" href="#">Link</a></li>
+                                        <li><a class="dropdown-item dropdown-toggle" href="#">Submenu</a>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="#">Submenu link</a></li>
+                                                <li><a class="dropdown-item" href="#">Submenu link 2</a></li>
+                                                <li><a class="dropdown-item dropdown-toggle" href="#">Subsubmenu</a>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a class="dropdown-item" href="#">Subsubmenu 1</a></li>
+                                                        <li><a class="dropdown-item" href="#">Subsubmenu 2</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a class="dropdown-item dropdown-toggle" href="#">Subsubmenu 2</a>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a class="dropdown-item" href="#">Subsubmenu 2.1</a></li>
+                                                        <li><a class="dropdown-item" href="#">Subsubmenu 2.2</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                     
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('/products/destacados') }}">Productos Destacados</a>
                     </li>
