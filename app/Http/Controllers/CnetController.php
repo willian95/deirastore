@@ -15978,7 +15978,7 @@ class CnetController extends Controller
 
         ];
 
-        $products = new \LimitIterator(new \ArrayIterator($array), 162, 300);
+        $products = new \LimitIterator(new \ArrayIterator($array), 5455);
         foreach($products as $arr){
             $client = new \GuzzleHttp\Client();
             $request = $client->request("GET", 'http://ws.cnetcontent.com/a67a9f7e/api/72a5f0b5f9?cpn='.$arr.'&lang=es&market=cl');
@@ -15994,10 +15994,10 @@ class CnetController extends Controller
                     }
                     
                     if(file_put_contents("assets/cnet/images/".$arr."/".$file_name,file_get_contents($value))) { 
-                        echo "File downloaded successfully"; 
+                        //"File downloaded successfully"; 
                     } 
                     else { 
-                        echo "File downloading failed."; 
+                        //echo "File downloading failed."; 
                     } 
 
                 }
