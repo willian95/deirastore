@@ -15978,7 +15978,7 @@ class CnetController extends Controller
 
         ];
 
-        $products = new \LimitIterator(new \ArrayIterator($array), 3455, 1001);
+        $products = new \LimitIterator(new \ArrayIterator($array), 4455, 1001);
         foreach($products as $arr){
             $client = new \GuzzleHttp\Client();
             $request = $client->request("GET", 'http://ws.cnetcontent.com/a67a9f7e/api/72a5f0b5f9?cpn='.$arr.'&lang=es&market=cl');
