@@ -1,7 +1,7 @@
 <!-- productos relacionados -->
 
 <section>
-    <div class="title__general">
+    <div class="title__general fadeInUp wow animated">
         <p><strong>Productos </strong>relacionados</p>
     </div>
 

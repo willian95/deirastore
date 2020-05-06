@@ -3,7 +3,7 @@
 @section('content')
 
     @include('partials.navbar')
-    <div class="container">
+    <div class="container bg">
         <div class="row">
 
             @foreach(App\Product::with('category')->inRandomOrder()->take(20)->get() as $product)

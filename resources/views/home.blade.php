@@ -98,7 +98,7 @@
 
         <!-- categorias -->
         <section>
-            <div class="title__general">
+            <div class="title__general fadeInUp wow animated">
                 <p><strong>Categorías</strong> principales</p>
             </div>
 
@@ -163,7 +163,7 @@
         </section>
         <!-- producto destacado -->
         <section>
-            <div class="title__general">
+            <div class="title__general fadeInUp wow animated">
                 <p><strong>Productos </strong>Destacados</p>
             </div>
 

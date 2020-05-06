@@ -37,7 +37,7 @@
                                             <div class="icono-carrito"></div>
                                             <div class="icono-carrito"></div>
                                         </div> -->
-                            <div class="title__general">
+                            <div class="title__general fadeInUp wow animated">
                                 <p><strong>Carrito </strong>de compras</p>
                             </div>
                             <div class="row">
@@ -141,7 +141,7 @@
 
             <!-- ofertas -->
             <section>
-                <div class="title__general">
+                <div class="title__general fadeInUp wow animated">
 
                     <p><strong>Te puede</strong> Interesar</p>
                 </div>
