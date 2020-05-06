@@ -6,133 +6,135 @@
 
     <div class="container pagina bg">
         <div class="carrito">
-            <div class="iconos-buy">
-                <div class="icono-p">
-                    <div class="icono-buy__item">
-                        <img src="assets/img/deira-48.png" alt="">
-                    </div>
-                    <div class="icono-buy__item">
-                        <img src="assets/img/deira-49.png" alt="">
-                    </div>
-                    <div class="icono-buy__item">
-                        <img src="assets/img/deira-50.png" alt="">
-                    </div>
-                    <div class="icono-buy__item">
-                        <img src="assets/img/deira-51.png" alt="">
-                    </div>
-                    <div class="icono-buy__item">
-                        <img src="assets/img/deira-52.png" alt="">
+            <div id="cart">
+                <div class="iconos-buy">
+                    <div class="icono-p">
+                        <div class="icono-buy__item">
+                            <img src="assets/img/deira-48.png" alt="">
+                        </div>
+                        <div class="icono-buy__item">
+                            <img src="assets/img/deira-49.png" alt="">
+                        </div>
+                        <div class="icono-buy__item">
+                            <img src="assets/img/deira-50.png" alt="">
+                        </div>
+                        <div class="icono-buy__item">
+                            <img src="assets/img/deira-51.png" alt="">
+                        </div>
+                        <div class="icono-buy__item">
+                            <img src="assets/img/deira-52.png" alt="">
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="col-sm-12 ">
-                    <div class="div-carrito">
-                        <!-- <div class="iconos-carrito">
-                                        <div class="icono-carrito"></div>
-                                        <div class="icono-carrito"></div>
-                                        <div class="icono-carrito"></div>
-                                        <div class="icono-carrito"></div>
-                                        <div class="icono-carrito"></div>
-                                    </div> -->
-                        <div class="title__general">
-                            <p><strong>Carrito </strong>de compras</p>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-8">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <td>Producto</td>
-                                            <td>Marca</td>
-                                            <td>Nombre</td>
-                                            <td>Precio</td>
-                                            <td>Cantidad</td>
-                                            <td>Total</td>
-                                            <td></td>
+                <div class="row">
+                    <div class="col-sm-12 ">
+                        <div class="div-carrito">
+                            <!-- <div class="iconos-carrito">
+                                            <div class="icono-carrito"></div>
+                                            <div class="icono-carrito"></div>
+                                            <div class="icono-carrito"></div>
+                                            <div class="icono-carrito"></div>
+                                            <div class="icono-carrito"></div>
+                                        </div> -->
+                            <div class="title__general">
+                                <p><strong>Carrito </strong>de compras</p>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <td>Producto</td>
+                                                <td>Marca</td>
+                                                <td>Nombre</td>
+                                                <td>Precio</td>
+                                                <td>Cantidad</td>
+                                                <td>Total</td>
+                                                <td></td>
 
-                                        </tr>
-                                    </thead>
-                                    @if(\Auth::check())
-                                    <tbody>
-                                        <tr v-for="item in items">
-                                            <td v-if="item.product.is_external"><img class="lista-pedido" :src="item.product.picture" alt=""></td>
-                                            <td v-else><img class="lista-pedido" :src="'{{ url('/') }}'+'/images/products/'+item.product.picture" alt=""></td>
-                                            <td><img class="lista-pedido" :src="'{{ url('/') }}'+'/images/brands/'+item.product.brand.image" alt=""></td>
-                                            <td>
-                                                <span>@{{ item.product.name }} </span>
-                                                <p>@{{ item.product.sub_title }}</p>
-                                            </td>
-                                            <td v-if="item.product.external_price > 0">$ @{{ parseInt(item.product.external_price * parseFloat(dolarPrice)).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</td>
-                                            <td v-else>$ @{{ item.product.price }}</td>
-                                            <td>@{{ item.amount }}</td>
-                                            <td>$ @{{ parseInt(item.price).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</td>
-                                            <td><button class="btn btn-danger" @click="erase(item.id)">X</button></td>
-                                        </tr>
+                                            </tr>
+                                        </thead>
+                                        @if(\Auth::check())
+                                        <tbody>
+                                            <tr v-for="item in items">
+                                                <td v-if="item.product.is_external"><img class="lista-pedido" :src="item.product.picture" alt=""></td>
+                                                <td v-else><img class="lista-pedido" :src="'{{ url('/') }}'+'/images/products/'+item.product.picture" alt=""></td>
+                                                <td><img class="lista-pedido" :src="'{{ url('/') }}'+'/images/brands/'+item.product.brand.image" alt=""></td>
+                                                <td>
+                                                    <span>@{{ item.product.name }} </span>
+                                                    <p>@{{ item.product.sub_title }}</p>
+                                                </td>
+                                                <td v-if="item.product.external_price > 0">$ @{{ parseInt(item.product.external_price * parseFloat(dolarPrice)).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</td>
+                                                <td v-else>$ @{{ item.product.price }}</td>
+                                                <td>@{{ item.amount }}</td>
+                                                <td>$ @{{ parseInt(item.price).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</td>
+                                                <td><button class="btn btn-danger" @click="erase(item.id)">X</button></td>
+                                            </tr>
 
-                                    </tbody>
-                                    @else
+                                        </tbody>
+                                        @else
 
-                                    <tbody>
-                                        <tr v-for="(item, index) in guestItem">
-                                            <td v-if="item.is_external"><img class="lista-pedido" :src="item.picture" alt=""></td>
-                                            <td v-else><img class="lista-pedido" :src="'{{ url('/') }}'+'/images/products/'+item.picture" alt=""></td>
-                                            <td><img class="lista-pedido" :src="'{{ url('/') }}'+'/images/brands/'+item.brand_image" alt=""></td>
-                                            <td>
-                                                <span>@{{ item.name }} </span>
-                                                <p>@{{ item.sub_title }}</p>
-                                            </td>
-                                            <td>$ @{{ item.price }}</td>
-                                            <td>@{{ item.amount }}</td>
-                                            <td>$ @{{ parseInt(item.price).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</td>
-                                            <td><button class="btn btn-danger" @click="eraseGuestProduct(index)">X</button></td>
-                                        </tr>
+                                        <tbody>
+                                            <tr v-for="(item, index) in guestItem">
+                                                <td v-if="item.is_external"><img class="lista-pedido" :src="item.picture" alt=""></td>
+                                                <td v-else><img class="lista-pedido" :src="'{{ url('/') }}'+'/images/products/'+item.picture" alt=""></td>
+                                                <td><img class="lista-pedido" :src="'{{ url('/') }}'+'/images/brands/'+item.brand_image" alt=""></td>
+                                                <td>
+                                                    <span>@{{ item.name }} </span>
+                                                    <p>@{{ item.sub_title }}</p>
+                                                </td>
+                                                <td>$ @{{ item.price }}</td>
+                                                <td>@{{ item.amount }}</td>
+                                                <td>$ @{{ parseInt(item.price).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</td>
+                                                <td><button class="btn btn-danger" @click="eraseGuestProduct(index)">X</button></td>
+                                            </tr>
 
-                                    </tbody>
+                                        </tbody>
 
-                                    @endif
-                                </table>
-                                <div class="carrito-informacion">
-                                    <div class="carrito_item">
-                                        <img src="assets/img/estadocompra.svg" alt="">
-                                        <div>
-                                            <p>ESTADO DE COMPRA </p>
-                                            <span>Seguimiento online</span>
+                                        @endif
+                                    </table>
+                                    <div class="carrito-informacion">
+                                        <div class="carrito_item">
+                                            <img src="assets/img/estadocompra.svg" alt="">
+                                            <div>
+                                                <p>ESTADO DE COMPRA </p>
+                                                <span>Seguimiento online</span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="carrito_item">
-                                        <img src="assets/img/deira-47.png" alt="">
-                                    </div>
-                                    <div class="carrito_item">
-                                        <img src="assets/img/auricular.svg" alt="">
-                                        <div>
-                                            <p>CONTÁCTANOS </p>
-                                            <span>+56 22 674 8000</span>
+                                        <div class="carrito_item">
+                                            <img src="assets/img/deira-47.png" alt="">
+                                        </div>
+                                        <div class="carrito_item">
+                                            <img src="assets/img/auricular.svg" alt="">
+                                            <div>
+                                                <p>CONTÁCTANOS </p>
+                                                <span>+56 22 674 8000</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="pedido">
-                                    <h3>Tu pedido</h3>
-                                    <h5>Total de tu compra</h5>
-                                    @if(\Auth::check())
-                                        <h2>$ @{{ parseInt(total).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</h2>
-                                    @else
-                                        <h2>$ @{{ parseInt(totalGuest).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</h2>
-                                    @endif
-                                    <p>Todos los valores incluyen iva</p>
-                                    <button @click="checkout()" class="finalizar-compra">checkout</button>
+                                <div class="col-md-4">
+                                    <div class="pedido">
+                                        <h3>Tu pedido</h3>
+                                        <h5>Total de tu compra</h5>
+                                        @if(\Auth::check())
+                                            <h2>$ @{{ parseInt(total).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</h2>
+                                        @else
+                                            <h2>$ @{{ parseInt(totalGuest).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</h2>
+                                        @endif
+                                        <p>Todos los valores incluyen iva</p>
+                                        <button @click="checkout()" class="finalizar-compra">checkout</button>
 
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
 
+
                 </div>
-
-
             </div>
 
 
@@ -212,7 +214,7 @@
     <script>
         
         const app = new Vue({
-            el: '#dev-app',
+            el: '#cart',
             data(){
                 return{
                     modalTitle:"Editar articulo del carrito",

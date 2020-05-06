@@ -31,7 +31,7 @@
 <br><br>
                         <div class="form-group pass text-center" style="font-size: 1rem;
                         font-weight: 600;">
-                            <a href="{{ url('/register') }}}">¿Aun no se registra?</a>
+                            <a href="{{ url('/register') }}">¿Aun no se registra?</a>
                         </div>
                     </div>
                 </div>
