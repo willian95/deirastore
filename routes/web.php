@@ -73,6 +73,8 @@ Route::get('/cnet', "CnetController@index");
 Route::get('/cnet/images', "CnetController@imagesDownload");
 Route::get('/cnet/decode', "CnetController@decode");
 
+Route::get('/export/products', "CsvExportController@index");
+
 Route::get('/terms', function(){
     return view('terms');
 });
