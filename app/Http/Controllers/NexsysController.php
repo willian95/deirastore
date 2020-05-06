@@ -20,7 +20,7 @@ class NexsysController extends Controller
         
             $client = new \SoapClient($url);
             $products = $client->StoreProductByMarks(["Marks" => $mark, "WSClient"=> ["country" => "Chile", "username" => "78198200"]]);
-            dd($products);
+            //dd($products);
             $brandSlug = str_replace(" ", "-", $mark);
             $brand = Brand::firstOrCreate(
                 ['name' => $mark],
