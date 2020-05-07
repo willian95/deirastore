@@ -64,7 +64,7 @@
                 <ul class="navbar-nav m-auto">
 
 
-                    <li class="nav-item dropdown mega-menu">
+                    <!--<li class="nav-item dropdown mega-menu">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false" id="menu-categories">Categorías</a>
                         <div class="dropdown-menu" style="opacity: 1;" id="menu-categories-dropdown">
                             <div class="grid-menu">
@@ -80,7 +80,7 @@
 
                             </div>
                         </div>
-                    </li>
+                    </li>-->
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('brands.all') }}">Marcas</a>
                     </li>
@@ -90,10 +90,30 @@
                             <ul class="navbar-nav">      
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        DropdownConSensualHover
+                                        Categorías
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Link</a></li>
+                                        @foreach(App\Category::where('parent_id', null)->get() as $category)
+
+                                            @if(App\Category::where('parent_id', $category->id)->count() == 0)
+                                                <li>
+                                                    <a class="dropdown-item" href="{{ url('/category/'.$category->slug) }}">{{ $category->name }}</a>
+                                                </li>
+                                            @else
+
+                                                <li><a class="dropdown-item dropdown-toggle" href="{{ url('/category/'.$category->slug) }}">{{ $category->name }}</a>
+                                                    <ul class="dropdown-menu">
+                                                    @foreach(App\Category::where('parent_id', $category->id)->get() as $category)
+                                                        <li><a class="dropdown-item" href="{{ url('/category/'.$category->slug) }}">{{ $category->name }}</a></li>
+                                                    @endforeach
+                                                    </ul>   
+                                                </li>     
+
+                                            @endif
+                                            
+                                        @endforeach
+
+                                        <!--<li><a class="dropdown-item" href="#">Link</a></li>
                                         <li><a class="dropdown-item" href="#">Link</a></li>
                                         <li><a class="dropdown-item dropdown-toggle" href="#">Submenu</a>
                                             <ul class="dropdown-menu">
@@ -112,7 +132,7 @@
                                                     </ul>
                                                 </li>
                                             </ul>
-                                        </li>
+                                        </li>-->
                                      
                                     </ul>
                                 </li>
