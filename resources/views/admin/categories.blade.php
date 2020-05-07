@@ -159,7 +159,7 @@
                             formData.append("name", this.name)
                             formData.append("image", this.picture)
                             formData.append("parentId", this.parentId)
-
+                            
                             axios.post("{{ route('admin.categories.store') }}", formData)
                             .then(res => {
                                 
@@ -227,14 +227,18 @@
                     this.parentId =""
                 },
                 edit(category){
-                    
+                    console.log("test-category", category)
                     this.name = category.name
                     this.modalTitle = "Editar Categoría"
                     this.categoryId = category.id
                     this.isEdit = true
                     if(category.image != null)
                         this.imagePreview = "{{ url('/') }}"+"/images/categories/"+category.image
+                    else
+                        this.imagePreview = ""
+                    
                     this.parentId = category.parent_id
+                    console.log("test-parentId-edit", this.parentId)
 
                 },
                 update(){
@@ -243,7 +247,10 @@
                     formData.append("id", this.categoryId)
                     formData.append("name", this.name)
                     formData.append("image", this.picture)
-                    formData.append("parentId", this.parentId)
+                    if(this.parentId != undefined)
+                        formData.append("parentId", this.parentId)
+
+                    
 
                     axios.post("{{ route('admin.categories.update') }}", formData)
                     .then(res => {
