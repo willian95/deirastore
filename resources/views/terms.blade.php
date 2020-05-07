@@ -4,7 +4,7 @@
 
     @include('partials.navbar')
 
-        <div class="container">
+        <div class="container bg">
             
         <h2>Términos y Condiciones sitio web Deira Store</h2>
 
