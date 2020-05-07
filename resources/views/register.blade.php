@@ -16,12 +16,12 @@
                             <!-- input -->
                             <div class="form-grid__item">
                                 <label  for="name">Nombre</label>
-                                <input  placeholder="Nombre" type="text" class="form-control" id="name" aria-describedby="emailHelp" v-model="name">
+                                <input  placeholder="Ej: Pedro" type="text" class="form-control" id="name" aria-describedby="emailHelp" v-model="name">
                             </div>
                             <!-- input -->
                             <div class="form-grid__item">
                                 <label  for="name">Apellido</label>
-                                <input  placeholder="Apellido" type="text" class="form-control" aria-describedby="emailHelp" v-model="lastname">
+                                <input  placeholder="Ej: Perez " type="text" class="form-control" aria-describedby="emailHelp" v-model="lastname">
                             </div>
                             <!-- input -->
                             <div class="form-grid__item">
@@ -36,12 +36,12 @@
                             <!-- input -->
                             <div class="form-grid__item">
                                 <label  for="birthDate">Fec. Nacimiento</label>
-                                <input  placeholder="Fec. Nacimiento" type="date" class="form-control" id="birthDate" aria-describedby="emailHelp" v-model="birthDate">
+                                <input  placeholder="Fec. Nacimiento " type="date" class="form-control" id="birthDate" aria-describedby="emailHelp" v-model="birthDate">
                             </div>
                                 <!-- input -->
                                 <div class="form-grid__item inputcontainer">
                                     <label  for="rut">Rut</label>
-                                    <input placeholder="Rut" type="text" class="form-control" id="rut" aria-describedby="emailHelp" v-model="rut" @keypress="isAlphaNumeric($event)" @blur="validateRut()">
+                                    <input placeholder="Ej: 121456789" type="text" class="form-control" id="rut" aria-describedby="emailHelp" v-model="rut" @keypress="isAlphaNumeric($event)" @blur="validateRut()">
                                     <div class="icon-container" v-if="loading == true">
                                         <i class="loader"></i>
                                     </div>
@@ -57,26 +57,26 @@
                                 <!-- input -->
                                 <div class="form-grid__item">
                                     <label  for="phoneNumber">Celular</label>
-                                    <input  placeholder="Celular" type="text" class="form-control" id="phoneNumber" aria-describedby="emailHelp" v-model="phoneNumber" @keypress="isTelephoneNumber($event)">
+                                    <input  placeholder="Ej: +00 1234567" type="text" class="form-control" id="phoneNumber" aria-describedby="emailHelp" v-model="phoneNumber" @keypress="isTelephoneNumber($event)">
                                 </div>
                                     <!-- input -->
                             <div class="form-grid__item">
                                 <label  for="email">Email</label>
-                                <input  placeholder="Email" type="email" class="form-control" id="email" aria-describedby="emailHelp" v-model="email">
+                                <input  placeholder="Ej: email@gmail.com " type="email" class="form-control" id="email" aria-describedby="emailHelp" v-model="email">
                             </div>
                             <div class="form-grid__item">
                                 <label  for="password">Contraseña</label>
-                                <input  placeholder="Contraseña" type="password" class="form-control" id="password" v-model="password">
+                                <input  placeholder="Contraseña " type="password" class="form-control" id="password" v-model="password">
                             </div>
 
                             <div class="form-grid__item">
                                 <label  for="passwordRepeat">Repetir Contraseña</label>
-                                <input  placeholder="Repetir Contraseña" type="password" class="form-control" id="passwordRepeat" v-model="passwordRepeat">
+                                <input  placeholder="Repetir Contraseña " type="password" class="form-control" id="passwordRepeat" v-model="passwordRepeat">
                             </div>
 
                             <div class="form-grid__item form-check">
-                                <input  type="checkbox" class="form-check-input" id="terms" v-model="terms">
-                                <label  class="form-check-label" for="terms"><a href="{{ url('/terms') }}" target="_blank">Acepto terminos y condiciones</a></label>
+                                <input  type="checkbox" class="form-check-input mt-2" id="terms" v-model="terms">
+                                <label  class="form-check-label mt-3" for="terms"><a href="{{ url('/terms') }}" target="_blank">Acepto terminos y condiciones</a></label>
                             </div>
                             <div class="form-grid__item mt-5 mb-3"> </div>
                             <div class="form-grid__item">

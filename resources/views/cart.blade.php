@@ -124,7 +124,11 @@
                                             <h2>$ @{{ parseInt(totalGuest).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</h2>
                                         @endif
                                         <p>Todos los valores incluyen iva</p>
+                                      <div class="btn-buy">
+                                        <button  class="finalizar-compra finalizar-compra--go">seguir comprando</button>
                                         <button @click="checkout()" class="finalizar-compra">checkout</button>
+                                 
+                                      </div>
 
                                     </div>
                                 </div>

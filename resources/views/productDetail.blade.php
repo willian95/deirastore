@@ -84,7 +84,7 @@
                             @endif
                             <div class="logo-detalle">
                                 @if($product->brand->image != null)
-                                    <img src="{{ asset('/images/brands/'.$product->brand->image) }}" alt="">
+                                    <img class="style-marcas" src="{{ asset('/images/brands/'.$product->brand->image) }}" alt="">
                                 @endif
                             </div>
                             <!--<div class="imagen-detalles-sub">

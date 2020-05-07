@@ -137,7 +137,7 @@
                         <a href="{{ url('/brand/'.$brand->slug) }}">
                             <div class="main-shop__item">
                                 
-                                <img src="{{ asset('/images/brands/'.$brand->image) }}" alt="">
+                                <img class="style-marcas"  src="{{ asset('/images/brands/'.$brand->image) }}" alt="">
                                 
                                 <p>{{ $brand->name }}</p>
                                 <div class="main-shop__card">

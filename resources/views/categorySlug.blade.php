@@ -4,7 +4,7 @@
 
     @include('partials.navbar')
 
-    <div class="container">
+    <div class="container bg">
         <div class="title__general title__general-start">
             <p><strong>{{ $category->name }}</strong></p>
         </div>
