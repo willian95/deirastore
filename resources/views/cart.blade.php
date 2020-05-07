@@ -157,7 +157,7 @@
                                 array_push($products, $cart->product->brand_id);
                             }
 
-                            $query = App\Product::with('category');
+                            $query = App\Product::with("category");
 
                         @endphp
 
