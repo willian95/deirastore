@@ -1504,6 +1504,8 @@ button.finalizar-compra {
     padding: 6px 6px;
 	border-radius: 11px;
 	margin-bottom: 10%;
+	transition: .5s;
+	cursor: pointer;
 
 }
 button.finalizar-compra--go {
@@ -1513,6 +1515,15 @@ button.finalizar-compra--go {
     margin-right: 10px;
 }
 
+button.finalizar-compra:hover {
+    background: #ffffff;
+    color: #87b4be;
+ 
+}
+button.finalizar-compra--go:hover {
+
+    color: #dc3545;
+}
 .pedido {
 	border: 1px solid;
 	margin-right: 10%;
