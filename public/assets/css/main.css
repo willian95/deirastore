@@ -1501,10 +1501,16 @@ button.finalizar-compra {
 	border: 1px solid #87b4be;
 	color: #fff;
 	font-weight: bold;
-	padding: 5px 12px;
+    padding: 6px 6px;
 	border-radius: 11px;
 	margin-bottom: 10%;
 
+}
+button.finalizar-compra--go {
+
+    background: #dc3545;
+    border: 1px solid #d32b2b;
+    margin-right: 10px;
 }
 
 .pedido {
@@ -1533,7 +1539,7 @@ button.finalizar-compra {
 }
 
 img.lista-pedido {
-	width: 40px;
+	width: 100px;
 }
 
 .pedido h2 {
@@ -2027,4 +2033,8 @@ img.lista-pedido {
 	object-fit: contain;
 	border-radius: 50%;
     background: #fff;
+}
+
+.btn-buy{
+	display: flex;
 }
