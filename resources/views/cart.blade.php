@@ -152,7 +152,7 @@
                         
                             $carts = App\Cart::with('product')->get();
                             $products = [];
-                            dd($carts);
+                            
                             foreach($carts as $cart){
                                 array_push($products, $cart->product->brand_id);
                             }
