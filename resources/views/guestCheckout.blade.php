@@ -7,7 +7,7 @@
             <div class="col-lg-4  col-md-6  col-12">
                 <div class="card">
                     <div class="card-body">
-                        <div class="title__general">
+                        <div class="title__general fadeInUp wow animated">
                             <p><strong>Información</strong> de usuario invitado</p>
                         </div>
                         <div class="form-group">

@@ -8,7 +8,7 @@
             <div class="col-lg-6  col-md-6  col-12">
                 <div class="card">
                     <div class="card-body">
-                        <div class="title__general">
+                        <div class="title__general fadeInUp wow animated">
                             <p><strong>Registro</strong> de usuario </p>
                         </div>
 

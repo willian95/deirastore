@@ -7,7 +7,7 @@
     <div class="container bg">
         <!-- banner -->
         <div class="row">
-
+            <div class="main-banner__content container">
             @foreach(App\Banner::where('size', 'large')->where('location', 'landing')->get() as $banner)
 
                 @php
@@ -21,7 +21,7 @@
                 @endphp
 
           
-                  <div class="main-banner__content">
+          
                         <div class="main-banner__item">
                             <div class="main-banner__img">
                                 <img src="{{ asset('/images/banners/'.$banner->image) }}" alt="" style="width: 100%;">
@@ -32,9 +32,10 @@
                                     <a href="{{ $banner->link }}" target="_blank" class="btn-general" style="color: {{ $banner->button_color }}; background-color: {{ $banner->button_text_color }};">{{ $banner->button_text }}</a>
                                 </div>
                             </div>
-                        </div>                     
+                        
+                                          
             @endforeach
-
+        </div> 
         </div>
 
 
@@ -97,7 +98,7 @@
 
         <!-- categorias -->
         <section>
-            <div class="title__general">
+            <div class="title__general fadeInUp wow animated">
                 <p><strong>Categorías</strong> principales</p>
             </div>
 
@@ -162,7 +163,7 @@
         </section>
         <!-- producto destacado -->
         <section>
-            <div class="title__general">
+            <div class="title__general fadeInUp wow animated">
                 <p><strong>Productos </strong>Destacados</p>
             </div>
 
