@@ -95,7 +95,7 @@
                                         @endif
                                     </table>
                                     <div class="carrito-informacion">
-                                        <div class="carrito_item">
+                                        <div class="carrito_item" style="visibility: hidden;">
                                             <img src="assets/img/estadocompra.svg" alt="">
                                             <div>
                                                 <p>ESTADO DE COMPRA </p>
