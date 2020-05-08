@@ -20,12 +20,12 @@
                             </div>
                             <!-- input -->
                             <div class="form-grid__item">
-                                <label  for="name">Apellido</label>
+                                <label  for="name">* Apellido</label>
                                 <input  placeholder="Ej: Perez " type="text" class="form-control" aria-describedby="emailHelp" v-model="lastname">
                             </div>
                             <!-- input -->
                             <div class="form-grid__item">
-                                <label  for="genre">Género</label>
+                                <label  for="genre">* Género</label>
                                 <select class="form-control" id="genre" v-model="genre">
                                     <option>Género</option>
                                     <option value="masculino">Masculino</option>
@@ -35,12 +35,12 @@
                             </div>
                             <!-- input -->
                             <div class="form-grid__item">
-                                <label  for="birthDate">Fec. Nacimiento</label>
+                                <label  for="birthDate">* Fec. Nacimiento</label>
                                 <input  placeholder="Fec. Nacimiento " type="date" class="form-control" id="birthDate" aria-describedby="emailHelp" v-model="birthDate">
                             </div>
                                 <!-- input -->
                                 <div class="form-grid__item inputcontainer">
-                                    <label  for="rut">Rut</label>
+                                    <label  for="rut">* Rut</label>
                                     <input placeholder="Ej: 121456789" type="text" class="form-control" id="rut" aria-describedby="emailHelp" v-model="rut" @keypress="isAlphaNumeric($event)" @blur="validateRut()">
                                     <div class="icon-container" v-if="loading == true">
                                         <i class="loader"></i>
@@ -56,21 +56,21 @@
                         
                                 <!-- input -->
                                 <div class="form-grid__item">
-                                    <label  for="phoneNumber">Celular</label>
+                                    <label  for="phoneNumber">* Celular</label>
                                     <input  placeholder="Ej: 1234567" type="text" class="form-control" id="phoneNumber" aria-describedby="emailHelp" v-model="phoneNumber" @keypress="isTelephoneNumber($event)">
                                 </div>
                                     <!-- input -->
                             <div class="form-grid__item">
-                                <label  for="email">Email</label>
+                                <label  for="email">* Email</label>
                                 <input  placeholder="Ej: email@gmail.com " type="email" class="form-control" id="email" aria-describedby="emailHelp" v-model="email">
                             </div>
                             <div class="form-grid__item">
-                                <label  for="password">Contraseña</label>
+                                <label  for="password">* Contraseña</label>
                                 <input  placeholder="Contraseña " type="password" class="form-control" id="password" v-model="password">
                             </div>
 
                             <div class="form-grid__item">
-                                <label  for="passwordRepeat">Repetir Contraseña</label>
+                                <label  for="passwordRepeat">* Repetir Contraseña</label>
                                 <input  placeholder="Repetir Contraseña " type="password" class="form-control" id="passwordRepeat" v-model="passwordRepeat">
                             </div>
 
