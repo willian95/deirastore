@@ -19,6 +19,11 @@
                         </div>-->
                     </div>
                     <div class="row">
+                        <div class="col-12">
+                            <a class="btn btn-primary btn-general btn-general--form" style="color: #fff;" href="{{ url()->previous() }}"><i class="fa fa-arrow-left"></i></a>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-sm-6">
 
                             <div class="div-informacion-detalles">

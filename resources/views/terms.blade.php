@@ -5,6 +5,12 @@
     @include('partials.navbar')
 
         <div class="container bg">
+
+        <div class="row">
+            <div class="col-12">
+                <a class="btn btn-primary btn-general btn-general--form" style="color: #fff;" href="{{ url()->previous() }}"><i class="fa fa-arrow-left"></i></a>
+            </div>
+        </div>
             
         <h2>Términos y Condiciones sitio web Deira Store</h2>
 
