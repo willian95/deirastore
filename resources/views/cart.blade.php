@@ -171,7 +171,7 @@
                             @endphp
                         @else
                             @php
-                                $randomProducts = $query->inRandomOrder()->take(10)->get()
+                                $randomProducts = $query->inRandomOrder()->where('amount', '>', 0)->take(10)->get()
                             @endphp
                         @endif
 

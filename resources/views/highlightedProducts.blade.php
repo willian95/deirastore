@@ -6,7 +6,7 @@
     <div class="container bg">
         <div class="row">
 
-            @foreach(App\Product::with('category')->inRandomOrder()->take(20)->get() as $product)
+            @foreach(App\Product::with('category')->inRandomOrder()->where('amount', '>', 0)->take(20)->get() as $product)
 
         
                 <div class="col-3">
