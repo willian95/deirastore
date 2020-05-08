@@ -125,7 +125,7 @@
                                         @endif
                                         <p>Todos los valores incluyen iva</p>
                                       <div class="btn-buy">
-                                        <a href="{{ url('/') }}"  class="finalizar-compra finalizar-compra--go">seguir comprando</a>
+                                        <button @click="keepShopping()"  class="finalizar-compra finalizar-compra--go">seguir comprando</button>
                                         <button @click="checkout()" class="finalizar-compra">checkout</button>
                                  
                                       </div>
@@ -249,6 +249,9 @@
                         console.log(err.response)
                     })
                 
+                },
+                keepShopping(){
+                    window.location.href="{{ url('/') }}"
                 },
                 edit(id, currentAmount, maxAmount){
 

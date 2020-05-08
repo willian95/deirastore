@@ -15,7 +15,7 @@
                         <div class="form-grid">
                             <!-- input -->
                             <div class="form-grid__item">
-                                <label  for="name">Nombre</label>
+                                <label  for="name">* Nombre</label>
                                 <input  placeholder="Ej: Pedro" type="text" class="form-control" id="name" aria-describedby="emailHelp" v-model="name">
                             </div>
                             <!-- input -->
