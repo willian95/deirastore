@@ -93,7 +93,25 @@
                                         Categorías
                                     </a>
                                     <ul class="dropdown-menu">
-                                        
+                                        @foreach(App\Category::where('parent_id', null)->get() as $category)
+
+                                            @if(App\Category::where('parent_id', $category->id)->count() == 0)
+                                                <li>
+                                                    <a class="dropdown-item" href="{{ url('/category/'.$category->slug) }}">{{ $category->name }}</a>
+                                                </li>
+                                            @else
+
+                                                <li><a class="dropdown-item dropdown-toggle" href="{{ url('/category/'.$category->slug) }}">{{ $category->name }}</a>
+                                                    <ul class="dropdown-menu">
+                                                    @foreach(App\Category::where('parent_id', $category->id)->get() as $category)
+                                                        <li><a class="dropdown-item" href="{{ url('/category/'.$category->slug) }}">{{ $category->name }}</a></li>
+                                                    @endforeach
+                                                    </ul>   
+                                                </li>     
+
+                                            @endif
+                                            
+                                        @endforeach
 
                                         <!--<li><a class="dropdown-item" href="#">Link</a></li>
                                         <li><a class="dropdown-item" href="#">Link</a></li>
