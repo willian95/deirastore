@@ -69,6 +69,10 @@ Route::get("products/destacados", "ProductController@highlighted");
 Route::get('/validate/rut/{rut}', "RutController@validateRut");
 Route::get('/confirm/email/{hash}', "RegisterController@confirmEmail");
 
+Route::get('/ayuda', function(){
+    return view('help');
+});
+
 Route::get('/cnet', "CnetController@index");
 Route::get('/cnet/images', "CnetController@imagesDownload");
 Route::get('/cnet/decode', "CnetController@decode");
