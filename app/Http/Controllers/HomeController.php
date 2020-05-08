@@ -13,7 +13,7 @@ class HomeController extends Controller
     function index(){
         
         //$products = Product::all();
-        $categories = Category::whereHas('image')->get();
+        $categories = Category::all();
         $brands = Brand::all();
         
         return view('home', ["products" => $products, "categories" => $categories, "brands" => $brands]);
