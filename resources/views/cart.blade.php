@@ -125,7 +125,7 @@
                                         @endif
                                         <p>Todos los valores incluyen iva</p>
                                       <div class="btn-buy">
-                                        <button  class="finalizar-compra finalizar-compra--go">seguir comprando</button>
+                                        <a href="{{ url('/') }}"  class="finalizar-compra finalizar-compra--go">seguir comprando</a>
                                         <button @click="checkout()" class="finalizar-compra">checkout</button>
                                  
                                       </div>

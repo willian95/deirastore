@@ -57,7 +57,7 @@
                                 <!-- input -->
                                 <div class="form-grid__item">
                                     <label  for="phoneNumber">Celular</label>
-                                    <input  placeholder="Ej: +00 1234567" type="text" class="form-control" id="phoneNumber" aria-describedby="emailHelp" v-model="phoneNumber" @keypress="isTelephoneNumber($event)">
+                                    <input  placeholder="Ej: 1234567" type="text" class="form-control" id="phoneNumber" aria-describedby="emailHelp" v-model="phoneNumber" @keypress="isTelephoneNumber($event)">
                                 </div>
                                     <!-- input -->
                             <div class="form-grid__item">
