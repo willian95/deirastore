@@ -5,11 +5,11 @@
                 <p class="description">Empresa de Servicio, Soporte, Soluciones y Venta de
                     Productos Informáticos, dando respuesta a requerimientos
                     de integración de harreare y software.</p>
-                <a class="contact" href=tel:+56226748000><img src="assets/img/telefono.svg" alt="">+56 22 674 8000</a>
+                <a class="contact" href=tel:+56226748000><img src="{{ assets('assets/img/telefono.svg') }}" alt="">+56 22 674 8000</a>
 
                 <ul class="social">
-                    <li><a href=""><img src="assets/img/deira-74.png" alt=""></a></li>
-                    <li><a href=""><img src="assets/img/deira-76.png" alt=""></a></li>
+                    <li><a href=""><img src="{{ assets('assets/img/deira-74.png') }}" alt=""></a></li>
+                    <li><a href=""><img src="{{ assets('assets/img/deira-76.png') }}" alt=""></a></li>
                 </ul>
             </div>
             <div class="main-footer__item">
@@ -37,7 +37,7 @@
             </div>
             <div class="main-footer__item">
                 <div class="logo-grid">
-                  <img width="300px;" src="assets/img/deira-78.png" alt="">
+                  <img width="300px;" src="{{assets('assets/img/deira-78.png') }}" alt="">
                 </div>
             </div>
         </div>
