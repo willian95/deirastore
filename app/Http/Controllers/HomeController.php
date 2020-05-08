@@ -16,7 +16,7 @@ class HomeController extends Controller
         $categories = Category::all();
         $brands = Brand::all();
         
-        return view('home', ["products" => $products, "categories" => $categories, "brands" => $brands]);
+        return view('home', ["categories" => $categories, "brands" => $brands]);
     }
 
     function show($slug){
