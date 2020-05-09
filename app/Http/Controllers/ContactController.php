@@ -9,7 +9,7 @@ use App\Contact;
 class ContactController extends Controller
 {
     
-    function store(ContactStoreRequest $request){
+    function store(Request $request){
 
         try{
 
