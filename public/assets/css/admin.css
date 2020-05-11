@@ -1,0 +1,43 @@
+
+.admin-nav .navbar-nav{
+    display: flex;
+    flex-direction: column;
+}
+.admin__grid{
+    display: grid;
+    grid-template-columns: 15% 85%;
+}
+
+.main-admin .navbar {
+    background: #333333;
+    align-items: initial;
+    margin-top: 50px;
+    position: fixed;
+    height: 100vh;
+}
+.admin-nav .navbar-brand img {
+    width: 100%;
+}
+.admin_nav-top{
+    position: fixed;
+    width: 100%;
+    background: #333333;
+    display: flex;
+    height: 8vh;
+    z-index: 1;
+}
+
+.content__admin{
+    margin: 70px 160px 0;
+}
+
+.admin_nav-top .navbar-hover .collapse ul ul {
+    position: absolute;
+    top: 100%;
+    left: -70px;
+    min-width: 180px;
+    display: none;
+  
+    border-radius: 0;
+    box-shadow: none;
+}

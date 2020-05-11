@@ -4,7 +4,7 @@
     
     @include('partials.admin.navbar')
 
-    <div class="container">
+    <div class="container content__admin">
         <div class="row">
             <div class="col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-12">
 
