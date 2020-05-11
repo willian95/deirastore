@@ -92,7 +92,7 @@
                                     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Categorías
                                     </a>
-                                    <ul class="dropdown-menu">
+                                    <ul class="dropdown-menu hover--grid">
                                         @foreach(App\Category::where('parent_id', null)->get() as $category)
 
                                             @if(App\Category::where('parent_id', $category->id)->count() == 0)

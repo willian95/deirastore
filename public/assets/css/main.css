@@ -2049,3 +2049,13 @@ img.lista-pedido {
 .btn-buy{
 	display: flex;
 }
+.hover--grid {
+	display: grid;
+    grid-template-columns: repeat(5, 250px)!important;
+    overflow-y: scroll!important;
+    overflow-x: hidden!important;
+    height: 77vh!important;
+    left: -300px!important;
+    min-width: max-content!important;
+    width: 100%!important;
+}
