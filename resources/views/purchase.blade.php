@@ -15,7 +15,7 @@
                         </p>
                         <p class="text-center">
                             <button class="btn btn-success" @click="getProductDetails(purchase.product_purchase)" data-toggle="modal" data-target="#details">
-                                view details
+                                ver detalles
                             </button>
                         </p>
                     </div>

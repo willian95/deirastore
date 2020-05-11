@@ -27,8 +27,13 @@
                     </div>
                 </div>
 
+                <div class="col-12">
+                    <a class="btn btn-primary btn-general btn-general--form" style="color: #fff;" href="{{ url()->previous() }}"><i class="fa fa-arrow-left"></i></a>
+                </div>
+
                 <div class="row">
                     <div class="col-sm-12 ">
+
                         <div class="div-carrito">
                             <!-- <div class="iconos-carrito">
                                             <div class="icono-carrito"></div>
@@ -171,7 +176,7 @@
                             @endphp
                         @else
                             @php
-                                $randomProducts = $query->inRandomOrder()->take(10)->get()
+                                $randomProducts = $query->inRandomOrder()->where('amount', '>', 0)->take(10)->get()
                             @endphp
                         @endif
 

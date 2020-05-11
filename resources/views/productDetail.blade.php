@@ -19,6 +19,11 @@
                         </div>-->
                     </div>
                     <div class="row">
+                        <div class="col-12">
+                            <a class="btn btn-primary btn-general btn-general--form" style="color: #fff;" href="{{ url()->previous() }}"><i class="fa fa-arrow-left"></i></a>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-sm-6">
 
                             <div class="div-informacion-detalles">
@@ -301,7 +306,7 @@
                 <div class="container">
                     <div class="main-slider__content">
                         
-                        @foreach(App\Product::with('category')->inRandomOrder()->take(20)->get() as $product)
+                        @foreach(App\Product::with('category')->inRandomOrder()->where('amount', '>', 0)->take(20)->get() as $product)
                             <a href="{{ url('/product/'.$product->slug) }}">
                                 <div class="main-slider__item">
                                     <div class="content-slider">

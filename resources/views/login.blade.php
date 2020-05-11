@@ -3,6 +3,11 @@
 @section('content')
     @include('partials.navbar')
     <div class="container bg card-form">
+        <div class="row">
+            <div class="col-12">
+                <a class="btn btn-primary btn-general btn-general--form" style="color: #fff;" href="{{ url()->previous() }}"><i class="fa fa-arrow-left"></i></a>
+            </div>
+        </div>
         <div class="row center-form">
             <div class="col-lg-4  col-md-6  col-12">
                 <div class="card">
