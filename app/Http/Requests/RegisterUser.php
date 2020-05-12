@@ -30,7 +30,8 @@ class RegisterUser extends FormRequest
             "name" => 'required',
             "password" => 'required',
             'phoneNumber' => 'required',
-            'genre' => 'required'
+            'genre' => 'required',
+            "address" => "required"
         ];
     }
 
@@ -46,8 +47,8 @@ class RegisterUser extends FormRequest
             "name.required" => "Nombre es requerido",
             "password.required" => "Clave es requerida",
             "phoneNumber.required" => "Teléfono es requerido",
-            "genre.required" => "Género es requerido"
-
+            "genre.required" => "Género es requerido",
+            "address.required" => "Dirección es requerida"
         ];
     }
 }

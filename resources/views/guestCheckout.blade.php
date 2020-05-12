@@ -67,7 +67,7 @@
                 })
                 .catch(err => {
                     $.each(err.response.data.errors, function(key, value) {
-                        alert(value)
+                        alertify.error(value)
                     });
                 })
 

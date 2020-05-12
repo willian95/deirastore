@@ -130,6 +130,12 @@
                                         @endif
                                         <p>Todos los valores incluyen iva</p>
                                       <div class="btn-buy">
+                                        
+                                            <div class="form-check">
+                                                <input  type="checkbox" class="form-check-input mt-2" id="terms" v-model="terms">
+                                                <label  class="form-check-label mt-3" for="terms"><a href="{{ url('/terms') }}" target="_blank">Acepto terminos y condiciones</a></label>
+                                            </div>
+                                       
                                         <button @click="keepShopping()"  class="finalizar-compra finalizar-compra--go">seguir comprando</button>
                                         <button @click="checkout()" class="finalizar-compra">checkout</button>
                                  
@@ -236,7 +242,8 @@
                     dolarPrice:'{!! App\DolarPrice::first()->price !!}',
                     authCheck:'{!! Auth::check() !!}',
                     guestItem:[],
-                    totalGuest:0
+                    totalGuest:0,
+                    terms:false
                 }
             },
             methods:{
@@ -274,13 +281,13 @@
 
                             if(res.data.success == true){
 
-                                alert(res.data.msg)
+                                alertify.success(res.data.msg)
                                 this.getItems()
 
                             }
                             else{
 
-                                alert(res.data.msg)
+                                alertify.error(res.data.msg)
 
                             }
 
@@ -288,13 +295,13 @@
                         .catch(err => {
 
                             $.each(err.response.data.errors, function(key, value){
-                                alert(value)
+                                alertify.error(value)
                             });
 
                         })
 
                     }else{
-                        alert("Campo cantidad no puede estar vacío")
+                        alertify.error("Campo cantidad no puede estar vacío")
                     }
 
                 },
@@ -306,19 +313,19 @@
                             
                             if(res.data.success == true){
 
-                                alert(res.data.msg)
+                                alertify.success(res.data.msg)
                                 this.getItems()
 
                             }else{
 
-                                alert(res.data.msg)
+                                alertify.error(res.data.msg)
 
                             }
 
                         })
                         .catch(err => {
                             $.each(err.response.data.errors, function(key, value){
-                                alert(value)
+                                alertify.error(value)
                             });
                         })
                     }
@@ -362,24 +369,28 @@
                 },
                 payProducts(){
 
-                    axios.post("{{ route('checkout') }}")
-                    .then(res => {
+                    if(this.terms == true){
+                        alertify.success("Debe aceptar los terminos y condiciones antes de continuar")
+                    }else{
+                        axios.post("{{ route('checkout') }}")
+                        .then(res => {
 
-                        if(res.data.success == true){
-                            
-                            this.getItems()
-                            alert(res.data.msg)
+                            if(res.data.success == true){
+                                
+                                this.getItems()
+                                alertify.success(res.data.msg)
 
-                        }else{
-                            alert(res.data.msg)
-                        }
+                            }else{
+                                alertify.error(res.data.msg)
+                            }
 
-                    })
-                    .cacth(err => {
-                        $.each(err.response.data.errors, function(key, value){
-                            alert(value)
-                        });
-                    })
+                        })
+                        .cacth(err => {
+                            $.each(err.response.data.errors, function(key, value){
+                                alertify.error(value)
+                            });
+                        })
+                    }
 
                 },
                 checkout(){

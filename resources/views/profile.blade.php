@@ -104,20 +104,20 @@
 
                             if(res.data.success == true){
                                 
-                                alert(res.data.msg)
+                                alertify.success(res.data.msg)
                                 this.password = ""
                                 this.passwordRepeat = ""
                             
                             }else{
 
-                                alert(res.data.msg)
+                                alertify.error(res.data.msg)
 
                             }
 
                         })
                         .catch(err => {
                             $.each(err.response.data.errors, function(key, value){
-                                alert(value)
+                                alertify.error(value)
                             });
                         })
 
@@ -129,22 +129,22 @@
                     let error = false
 
                     if(this.name == ""){
-                        alert('Campo nombre es requerido')
+                        alertify.error('Campo nombre es requerido')
                         error = true
                     }
 
                     if(this.genre == ""){
-                        alert('Campo genero es requerido')
+                        alertify.error('Campo genero es requerido')
                         error = true
                     }
 
                     if(this.birthDate == ""){
-                        alert('Campo fecha de nacimiento es requerido')
+                        alertify.error('Campo fecha de nacimiento es requerido')
                         error = true
                     }
 
                     if(this.phoneNumber == ""){
-                        alert('Campo numero de telefono es requerido')
+                        alertify.error('Campo numero de telefono es requerido')
                         error = true
                     }
 

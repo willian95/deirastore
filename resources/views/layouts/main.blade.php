@@ -16,6 +16,9 @@
         <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet" />
         <link href="{{ asset('assets/css/admin.css') }}" rel="stylesheet" />
         <link href="{{ asset('assets/css/responsive.css') }}" rel="stylesheet" />
+        <link href="{{ asset('alertify/css/alertify.min.css') }}" rel="stylesheet" />
+        <link href="{{ asset('alertify/css/themes/bootstrap.min.css') }}" rel="stylesheet" />
+
     </head>
     <body>
 
@@ -30,10 +33,12 @@
         <script src="{{ asset('assets/js/slick.min.js') }}"></script>
         <script src="{{ asset('assets/js/setting-slick.js') }}"></script>
         <script src="{{ asset('assets/js/main.js') }}"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="{{ asset('alertify/alertify.min.js') }}"></script>
         <script src="{{ asset('/js/app.js') }}"></script>
 
-        <script src="">
-
+        <script>
+            alertify.set('notifier','position', 'top-right');
             (function($){
                 $('.dropdown-menu a.dropdown-toggle').on('click', function(e) {
                 if (!$(this).next().hasClass('show')) {

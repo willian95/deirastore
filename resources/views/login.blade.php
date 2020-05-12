@@ -72,7 +72,7 @@
                         .then(res => {
 
                             if (res.data.success == false) {
-                                alert(res.data.msg)
+                                alertify.error(res.data.msg)
                             } else {
 
                                 if (res.data.user.rol_id == 1) {
@@ -86,7 +86,8 @@
                         })
                         .catch(err => {
                             $.each(err.response.data.errors, function(key, value) {
-                                alert(value)
+                                alertify.error(value);
+                                //alertify.alert('Basic: true').set('basic', true); 
                             });
                         })
 
@@ -98,12 +99,13 @@
                 let error = false
 
                 if (this.email == "") {
-                    alert('Campo email es obligatorio')
+                    //alert('Campo email es obligatorio')
+                    alertify.error('Campo email es obligatorio');
                     error = true
                 }
 
                 if (this.password == "") {
-                    alert('Campo clave es obligatorio')
+                    alertify.error('Campo clave es obligatorio');
                     error = true
                 }
 

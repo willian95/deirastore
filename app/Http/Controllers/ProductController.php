@@ -10,10 +10,11 @@ use App\Product;
 use App\Category;
 use Carbon\Carbon;
 use App\Brand;
+use App\Traits\CartAbandonTrait;
 
 class ProductController extends Controller
 {
-    
+    use CartAbandonTrait;
     function index(){
         return view('admin.products');
     }
@@ -195,6 +196,7 @@ class ProductController extends Controller
     }
 
     function highlighted(){
+        $this->sendMessage();
         return view('highlightedProducts');
     }
 

@@ -9,10 +9,13 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Category;
 use App\Product;
+use App\Traits\CartAbandonTrait;
 
 class CategoriesController extends Controller
 {
     
+    use CartAbandonTrait;
+
     function index(){
         return view('admin.categories');
     }
@@ -145,8 +148,8 @@ class CategoriesController extends Controller
 
     function slug($slug){
 
+        $this->sendMessage();
         $category = Category::where('slug', $slug)->first();
-
         return view('categorySlug', ["slug" => $slug, "category" => $category]);
 
     }

@@ -1,6 +1,7 @@
 @extends("layouts.main")
 
 @section('content')
+    
     @include('partials.navbar')
 
     <div class="container bg card-form">
@@ -62,7 +63,7 @@
                                 <!-- input -->
                                 <div class="form-grid__item">
                                     <label  for="phoneNumber">* Celular</label>
-                                    <input  placeholder="Ej: 1234567" type="text" class="form-control" id="phoneNumber" aria-describedby="emailHelp" v-model="phoneNumber" @keypress="isTelephoneNumber($event)">
+                                    <input  placeholder="Ej: 933123123" type="text" class="form-control" id="phoneNumber" aria-describedby="emailHelp" v-model="phoneNumber" @keypress="isTelephoneNumber($event)">
                                 </div>
                                     <!-- input -->
                             <div class="form-grid__item">
@@ -77,6 +78,13 @@
                             <div class="form-grid__item">
                                 <label  for="passwordRepeat">* Repetir Contraseña</label>
                                 <input  placeholder="Repetir Contraseña " type="password" class="form-control" id="passwordRepeat" v-model="passwordRepeat">
+                            </div>
+                            <div class="form-grid__item">
+                                <label  for="address">* Dirección</label>
+                                <input  placeholder="Tu dirección actual" type="text" class="form-control" id="address" v-model="address">
+                            </div>
+                            <div class="form-grid__item">
+                               
                             </div>
 
                             <div class="form-grid__item form-check">
@@ -113,6 +121,7 @@
                 genre: "masculino",
                 birthDate: "",
                 rut: "",
+                address:"",
                 phoneNumber: "",
                 email: '',
                 password: "",
@@ -136,14 +145,19 @@
                             phoneNumber: this.phoneNumber,
                             email: this.email,
                             password: this.password,
-                            lastname: this.lastname
+                            lastname: this.lastname,
+                            address: this.address
                         })
                         .then(res => {
                             
 
                             if(res.data.success == true){
-
-                                alert(res.data.msg)
+ 
+                                swal({
+                                    icon: "success",
+                                    title: res.data.msg,
+                                    text:"Revise su correo"
+                                })
 
                                 this.name = ""
                                 this.genre = "masculino"
@@ -156,20 +170,27 @@
                                 this.lastname = ""
                                 this.terms = ""
 
-                                window.location.href="{{ url('/') }}"
+                                window.setTimeout(() => {
+                                    window.location.href="{{ url('/') }}"
+                                }, 5000);
+                                
                             }else{
 
-                                alert(res.data.msg)
+                                swal({
+                                    icon: "error",
+                                    title: "Error",
+                                    text: res.data.msg
+                                })
 
                             }
 
                         })
                         .catch(err => {
                             $.each(err.response.data.errors, function(key, value) {
-                                alert(value)
+                                alertify.error(value)
                             });
                         })
-
+                        
                 }
 
             },
@@ -178,67 +199,77 @@
                 let error = false
 
                 if (this.name == "") {
-                    alert("Campo nombre es requerido")
+                    alertify.error("Campo nombre es requerido")
                     error = true
                 }
 
                 if (this.lastname == "") {
-                    alert("Campo apellido es requerido")
+                    alertify.error("Campo apellido es requerido")
                     error = true
                 }
 
                 if (this.genre == "") {
-                    alert("Campo genero es requerido")
+                    alertify.error("Campo genero es requerido")
                     error = true
                 }
 
                 if (this.birthDate == "") {
-                    alert("Campo fecha de nacimiento es requerido")
+                    alertify.error("Campo fecha de nacimiento es requerido")
                     error = true
                 }
 
                 if (this.rut == "") {
-                    alert("Campo rut es requerido")
+                    alertify.error("Campo rut es requerido")
                     error = true
                 }
 
                 if (this.phoneNumber == "") {
-                    alert("Campo celular es requerido")
+                    alertify.error("Campo celular es requerido")
                     error = true
+
+                }else{
+                    let regexp = /^(\+?56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/
+                    let phone = "+56"+this.phoneNumber
+                    if(this.phoneNumber.match(regexp)){
+                    
+                    }else{
+                        alertify.error("Número telefónico no válido")
+                    }
+
                 }
 
                 if (this.email == "") {
-                    alert("Campo email es requerido")
+                    alertify.error("Campo email es requerido")
                     error = true
                 }
 
                 if (this.password == "") {
-                    alert("Campo clave es requerido")
+                    alertify.error("Campo clave es requerido")
                     error = true
                 }
 
                 if (this.password == "") {
-                    alert("Campo repetir clave es requerido")
+                    alertify.error("Campo repetir clave es requerido")
                     error = true
                 }
 
                 if (this.password != this.passwordRepeat) {
-                    alert("Claves no coinciden")
+                    alertify.error("Claves no coinciden")
                     error = true
                 }
 
                 if (this.terms == false) {
-                    alert("Debe aceptar los terminos y condiciones")
+                    alertify.error("Debe aceptar los terminos y condiciones")
                     error = true
                 }
 
                 if(this.isRutValid == false){
-                    alert("Rut no válido")
+                    alertify.error("Rut no válido")
                     error = true
                 }
 
                 if(!this.reg.test(this.email)){
-                    alert("Email no válido")
+                    alertify.error("Email no válido")
                     error = true
                 }
 
@@ -292,7 +323,7 @@
                             
                         }else{
                             this.isRutValid = res.data.data
-                            alert(res.data.msg)
+                            alertify.error(res.data.msg)
 
                         }
 

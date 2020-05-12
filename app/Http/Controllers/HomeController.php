@@ -7,12 +7,17 @@ use App\Product;
 use App\Category;
 use App\Brand;
 use DB;
+use App\Traits\CartAbandonTrait;
 
 class HomeController extends Controller
 {
+
+    use CartAbandonTrait;
+
     function index(){
         
         //$products = Product::all();
+        $this->sendMessage();
         $categories = Category::all();
         $brands = Brand::all();
         
@@ -21,8 +26,9 @@ class HomeController extends Controller
 
     function show($slug){
 
-        $product = Product::where('slug', $slug)->first();
+        $this->sendMessage();
 
+        $product = Product::where('slug', $slug)->first();
         return view('productDetail', ["product" => $product]);
 
     }
@@ -143,7 +149,7 @@ class HomeController extends Controller
                 $query->orWhere('categories.name', 'like',  '%' . $words[$i] .'%');
             }      
         })->get();
-
+        $this->sendMessage();
         return view('search', ["products" => $products, "brands" => $brands, "categories" => $categories, "search" => $request->search]);
 
     }

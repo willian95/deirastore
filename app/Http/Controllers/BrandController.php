@@ -9,10 +9,13 @@ use Intervention\Image\Facades\Image;
 use App\Brand;
 use Carbon\Carbon;
 use App\Product;
+use App\Traits\CartAbandonTrait;
 
 class BrandController extends Controller
 {
     
+    use CartAbandonTrait;
+
     function index(){
         return view('admin.brands');
     }
@@ -143,15 +146,14 @@ class BrandController extends Controller
     }
 
     function brands(){
-
+        $this->sendMessage();
         return view('allBrands');
 
     }
 
     function slug($slug){
-
+        $this->sendMessage();
         $brand = Brand::where('slug', $slug)->first();
-
         return view('brandSlug', ["slug" => $slug, "brand" => $brand]);
 
     }

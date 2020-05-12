@@ -64,13 +64,14 @@
                         this.brands = res.data.brands
                     }else{
 
-                        alert(res.data.msg)
+                        alertify.error(res.data.msg)
 
                     }
 
                 })
                 .catch(err => {
-                    console.log(err.response.data)
+                    alertify.error("Error en el servidor")
+                    //console.log(err.response.data)
                 })
 
             },

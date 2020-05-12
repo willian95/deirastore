@@ -100,13 +100,14 @@
                         this.subCategories = res.data.subCategories
                     }else{
 
-                        alert(res.data.msg)
+                        alertify.error(res.data.msg)
 
                     }
 
                 })
                 .catch(err => {
-                    console.log(err.response.data)
+                    alertify.error("Error en el servidor")
+                    //console.log(err.response.data)
                 })
 
             }

@@ -7,10 +7,15 @@ use App\Http\Requests\RegisterUser;
 use Illuminate\Support\Str;
 use App\User;
 use Carbon\Carbon;
+use App\Traits\CartAbandonTrait;
 
 class RegisterController extends Controller
 {
+
+    use CartAbandonTrait; 
+
     function index(){
+        $this->sendMessage();
         return view("register");
     }
     
@@ -30,6 +35,7 @@ class RegisterController extends Controller
             $user->lastname = $request->lastname;
             $user->phone_number = $request->phoneNumber;
             $user->register_hash = $hash;
+            $user->address = $request->address;
             $user->save();
             
             $data = ["user" => $user, "hash" => $hash];
@@ -43,7 +49,7 @@ class RegisterController extends Controller
 			});
 
 
-            return response()->json(["success" => true, "msg" => "Has sido registrado"]);
+            return response()->json(["success" => true, "msg" => "Gracias por registrarte"]);
 
         }catch(\Exception $e){
 
