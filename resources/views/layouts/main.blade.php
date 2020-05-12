@@ -105,10 +105,12 @@
                             if(res.data.success == true){
                                 if(this.categories == null){
                                     this.categories = res.data.categories
-                                    this.maxPages = Math.ceil(res.data.categoriesCount/40)
+                                    
                                 }else{
                                     this.categories.push(res.data.categories)
                                 }
+
+                                this.maxPages = Math.ceil(res.data.categoriesCount/40)
     
                             }else{
 
