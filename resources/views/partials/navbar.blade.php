@@ -94,30 +94,48 @@
                                     </a>
                                     <ul class="dropdown-menu dropdown-left  ">
                                         <div class="hover--grid">
-                                            @foreach(App\Category::with("products")->where('parent_id', null)->get() as $category)
+                                            @foreach(App\Category::where('parent_id', null)->get() as $category)
 
-                                                @if(App\Category::where('parent_id', $category->id)->count() == 0)
-                                                    
-                                                    @if(Count($category->products) > 0 )
-                                                    <li>
-                                                        <a class="dropdown-item" href="{{ url('/category/'.$category->slug) }}">{{ $category->name }}</a>
-                                                    </li>
-                                                    @endif
-                                                
-                                                @elseif(App\Category::where('parent_id', $category->id)->count() > 0)
+                                            @if(App\Category::where('parent_id', $category->id)->count() == 0)
+                                                <li>
+                                                    <a class="dropdown-item" href="{{ url('/category/'.$category->slug) }}">{{ $category->name }}</a>
+                                                </li>
+                                            @else
 
-                                                    <li><a class="dropdown-item dropdown-toggle" href="{{ url('/category/'.$category->slug) }}">{{ $category->name }}</a>
-                                                        <ul class="dropdown-menu">
-                                                        @foreach(App\Category::where('parent_id', $category->id)->get() as $category)
-                                                            <li><a class="dropdown-item" href="{{ url('/category/'.$category->slug) }}">{{ $category->name }}</a></li>
-                                                        @endforeach
-                                                        </ul>   
-                                                    </li>     
+                                                <li><a class="dropdown-item dropdown-toggle" href="{{ url('/category/'.$category->slug) }}">{{ $category->name }}</a>
+                                                    <ul class="dropdown-menu">
+                                                    @foreach(App\Category::where('parent_id', $category->id)->get() as $category)
+                                                        <li><a class="dropdown-item" href="{{ url('/category/'.$category->slug) }}">{{ $category->name }}</a></li>
+                                                    @endforeach
+                                                    </ul>   
+                                                </li>     
 
-                                                @endif
-                                                
-                                            @endforeach
+                                            @endif
+                                            
+                                        @endforeach
                                         </div>
+                               
+
+                                        <!--<li><a class="dropdown-item" href="#">Link</a></li>
+                                        <li><a class="dropdown-item" href="#">Link</a></li>
+                                        <li><a class="dropdown-item dropdown-toggle" href="#">Submenu</a>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="#">Submenu link</a></li>
+                                                <li><a class="dropdown-item" href="#">Submenu link 2</a></li>
+                                                <li><a class="dropdown-item dropdown-toggle" href="#">Subsubmenu</a>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a class="dropdown-item" href="#">Subsubmenu 1</a></li>
+                                                        <li><a class="dropdown-item" href="#">Subsubmenu 2</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a class="dropdown-item dropdown-toggle" href="#">Subsubmenu 2</a>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a class="dropdown-item" href="#">Subsubmenu 2.1</a></li>
+                                                        <li><a class="dropdown-item" href="#">Subsubmenu 2.2</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>-->
                                      
                                     </ul>
                                 </li>
