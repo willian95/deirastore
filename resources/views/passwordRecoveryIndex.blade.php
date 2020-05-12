@@ -2,7 +2,7 @@
 
 @section('content')
 
-    @include('partials.navbar')
+ 
     <div class="container bg card-form">
         <div class="row center-form">
             <div class="col-lg-4  col-md-6  col-12">

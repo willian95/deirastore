@@ -2,7 +2,6 @@
 
 @section('content')
 
-    @include('partials.navbar')
     <div class="container bg">
         <div class="row">
             <div class="col-12">

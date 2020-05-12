@@ -2,8 +2,6 @@
 
 @section('content')
 
-    @include('partials.navbar')
-
     <div class="container bg">
         <div id="product-detail">
             <section class="informacion-detalles container">

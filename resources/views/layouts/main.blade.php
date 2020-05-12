@@ -22,6 +22,7 @@
     </head>
     <body>
 
+        @include('partials.navbar')
         <div id="dev-app">
             @yield('content')
         </div>
@@ -83,6 +84,57 @@
 
             });
             
+        </script>
+
+        <script>
+            const app2 = new Vue({
+                el: '#mega-menu',
+                data(){
+                    return{
+                        categories:null,
+                        page:1,
+                        maxPages:0
+                    }
+                },
+                methods:{
+                    
+                    getItems(){
+                        axios.get("{{ url('/categories/menu') }}"+"/"+this.page)
+                        .then(res => {
+
+                            if(res.data.success == true){
+                                if(this.categories == null){
+                                    this.categories = res.data.categories
+                                    this.maxPages = Math.ceil(res.data.categoriesCount/40)
+                                }else{
+                                    this.categories.push(res.data.categories)
+                                }
+    
+                            }else{
+
+                                alertify.error(res.data.msg)
+
+                            }
+
+                        })
+                        .catch(err => {
+                            alertify.error("Error en el servidor")
+                            //console.log(err.response.data)
+                        })
+                    },
+                    moreItems(){
+                        this.page ++;
+                        this.getItems()
+                    }
+
+                },
+                mounted(){
+                    
+                    this.getItems()
+
+                }
+
+            })
         </script>
         
         @stack('scripts')

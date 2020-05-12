@@ -48,6 +48,7 @@ Route::post('/brand/products', "BrandController@products")->name('brands.product
 Route::get('/brands/fetch/all', "BrandController@fetchAll");
 
 Route::get('/categories/all', "CategoriesController@categoriesAll");
+Route::get('/categories/menu/{page}', "CategoriesController@megaMenu");
 
 Route::get('/category/{slug}', "CategoriesController@slug");
 Route::post('/category/products', "CategoriesController@products")->name('category.products');

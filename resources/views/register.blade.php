@@ -1,8 +1,6 @@
 @extends("layouts.main")
 
 @section('content')
-    
-    @include('partials.navbar')
 
     <div class="container bg card-form">
         <div class="row">

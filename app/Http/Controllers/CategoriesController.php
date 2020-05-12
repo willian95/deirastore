@@ -142,8 +142,6 @@ class CategoriesController extends Controller
 
         }
 
-
-
     }
 
     function slug($slug){
@@ -185,6 +183,24 @@ class CategoriesController extends Controller
         }catch(\Exception $e){
 
             return response()->json(["success" => false, "msg" => "Error en el servidor"]);
+
+        }
+
+    }
+
+    function megaMenu($page = 1){
+
+        try{
+
+            $skip = ($page-1) * 40;
+            $categories = Category::has('products', '>', 0)->with('child')->skip($skip)->take(40)->get();
+            $categoriesCount = Category::has('products', '>', 0)->with('child')->count();
+
+            return response()->json(["success" => true, "categories" => $categories, "categoriesCount" => $categoriesCount]);
+
+        }catch(\Exception $e){
+
+            return response()->json(["success" => false, "msg" => "error en el servidor", "err" => $e->getMessage(), "ln" => $e->getLine()]);
 
         }
 

@@ -2,8 +2,6 @@
 
 @section('content')
 
-    @include('partials.navbar')
-
     <div class="container pagina bg">
         <div class="carrito">
             <div id="cart">

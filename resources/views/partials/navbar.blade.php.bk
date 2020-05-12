@@ -63,6 +63,24 @@
             <div class="navbar-collapse offcanvas-collapse">
                 <ul class="navbar-nav m-auto">
 
+
+                    <!--<li class="nav-item dropdown mega-menu">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false" id="menu-categories">Categorías</a>
+                        <div class="dropdown-menu" style="opacity: 1;" id="menu-categories-dropdown">
+                            <div class="grid-menu">
+                                <div class="grid-menu__item">
+                                    <ul>
+                                        @foreach(App\Category::all() as $category)
+                                            <li>
+                                                <a href="{{ url('/category/'.$category->slug) }}">{{ $category->name }}</a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                    </li>-->
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('brands.all') }}">Marcas</a>
                     </li>
@@ -75,26 +93,26 @@
                                         Categorías
                                     </a>
                                     <ul class="dropdown-menu dropdown-left  ">
-                                        <div class="hover--grid" id="mega-menu">
-                                            
-                                            <li v-for="category in categories">
-                                                
-                                                <a v-if="category.child.length == 0" class="dropdown-item" :href='"{{ url("/category/") }}"+"/"+category.slug'>@{{ category.name }}</a>
+                                        <div class="hover--grid">
+                                            @foreach(App\Category::where('parent_id', null)->get() as $category)
 
-                                                <a v-if="category.child.length > 0" class="dropdown-item dropdown-toggle" :href='"{{ url("/category/") }}"+"/"+category.slug'>@{{ category.name }}</a>
-                                                <ul v-if="category.child.length > 0" class="dropdown-menu">
-                                                    <li v-for="child in category.child"><a class="dropdown-item" :href='"{{ url("/category/") }}"+"/"+child.slug'>@{{ child.name }}</a></li>
-                                                    
-                                                </ul>
-                                                <!--<a class="dropdown-item dropdown-toggle" v-else :href='"{{ url("/category/") }}"+"/"+category.slug'>@{{ category.name }}</a>
-                                                <ul class="dropdown-menu">
-                                                
-                                                    <li v-for="child in category.child"><a class="dropdown-item" :href='"{{ url("/category/") }}"+"/"+child.slug'>@{{ $child.name }}</a></li>
-                                            
-                                                </ul>-->   
+                                                @if(App\Category::where('parent_id', $category->id)->count() == 0)
+                                                    <li>
+                                                        <a class="dropdown-item" href="{{ url('/category/'.$category->slug) }}">{{ $category->name }}</a>
+                                                    </li>
+                                                @else
 
-                                            </li>
-                                            <button @click="moreItems()" v-if="page < maxPages" class="btn btn-primary btn-general btn-general--form" style="color: #fff; height: 60px; width: 120px;">cargar más</button>
+                                                    <li><a class="dropdown-item dropdown-toggle" href="{{ url('/category/'.$category->slug) }}">{{ $category->name }}</a>
+                                                        <ul class="dropdown-menu">
+                                                        @foreach(App\Category::where('parent_id', $category->id)->get() as $category)
+                                                            <li><a class="dropdown-item" href="{{ url('/category/'.$category->slug) }}">{{ $category->name }}</a></li>
+                                                        @endforeach
+                                                        </ul>   
+                                                    </li>     
+
+                                                @endif
+                                                
+                                            @endforeach
                                         </div>
                                
 
