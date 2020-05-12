@@ -80,6 +80,12 @@ Route::get('/cnet/compare', "CnetController@compare");
 
 Route::get('/export/products', "CsvExportController@index");
 
+Route::get('/test/categories', function(){
+
+    dd(App\Category::has('products')->with('products')->get());
+
+});
+
 
 Route::get('/terms', function(){
     return view('terms');
