@@ -192,8 +192,8 @@ class CategoriesController extends Controller
 
         try{
 
-            $skip = ($page-1) * 40;
-            $categories = Category::has('products', '>', 0)->with('child')->skip($skip)->take(40)->orderBy('name')->get();
+            $skip = ($page-1) * 25;
+            $categories = Category::has('products', '>', 0)->with('child')->skip($skip)->take(25)->orderBy('name')->get();
             $categoriesCount = Category::has('products', '>', 0)->with('child')->count();
 
             return response()->json(["success" => true, "categories" => $categories, "categoriesCount" => $categoriesCount]);
