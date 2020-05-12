@@ -101,7 +101,7 @@
                     getItems(){
                         axios.get("{{ url('/categories/menu') }}"+"/"+this.page)
                         .then(res => {
-
+                            console.log(res)
                             if(res.data.success == true){
                                 if(this.categories == null){
                                     this.categories = res.data.categories
