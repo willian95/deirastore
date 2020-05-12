@@ -90,7 +90,7 @@
                                                 </ul>
 
                                             </li>
-                                            <button @click="moreItems()" v-if="page < maxPages" class="btn btn-primary btn-general btn-general--form" style="color: #fff; height: 60px; width: 120px;">cargar más</button>
+                                            <button @click="moreItems()" v-if="page < maxPages && loading == false" class="btn btn-primary btn-general btn-general--form" style="color: #fff; height: 60px; width: 120px;">cargar más</button>
                                         </div>
                                
 
