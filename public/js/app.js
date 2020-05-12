@@ -49661,8 +49661,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /media/willian/d82cfc8a-c2ee-4ba9-b77d-3f32037be4263/Dev/laravel/DeiraStore/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /media/willian/d82cfc8a-c2ee-4ba9-b77d-3f32037be4263/Dev/laravel/DeiraStore/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\willi\Documents\dev\laravel\deirastore\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\willi\Documents\dev\laravel\deirastore\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
