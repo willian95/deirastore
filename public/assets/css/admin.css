@@ -9,11 +9,11 @@
 }
 
 .main-admin .navbar {
-    background: #333333;
+    background: #1b2338;
     align-items: initial;
-    margin-top: 50px;
     position: fixed;
     height: 100vh;
+    width: 200px;
 }
 .admin-nav .navbar-brand img {
     width: 100%;
@@ -21,23 +21,127 @@
 .admin_nav-top{
     position: fixed;
     width: 100%;
-    background: #333333;
+    background: transparent;
     display: flex;
     height: 8vh;
     z-index: 1;
 }
 
 .content__admin{
-    margin: 70px 160px 0;
+    margin: 70px 200px 0;
 }
 
 .admin_nav-top .navbar-hover .collapse ul ul {
     position: absolute;
     top: 100%;
-    left: -70px;
-    min-width: 180px;
+    left: 0;
+    min-width: 150px;
     display: none;
-  
-    border-radius: 0;
+    border-radius: 5px;
     box-shadow: none;
+    background: #fff;
+    border: 1px solid #1b233842;
+}
+
+.admin_nav-top .navbar-nav .nav-link {
+    margin-right: 50px;
+    margin-top: 10px;
+    background: #1b2338;
+    border-radius: 50px;
+    color: #fff;
+    font-size: 1rem;
+    box-shadow: 0 0 9px #0000002e;
+}
+.admin_nav-top .navbar-nav .nav-link .fa {
+    color: #fff;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+/*dash*/
+.dash-grid{
+    display: grid;
+    grid-template-columns: 40% 40%;
+    padding: 20px;
+    gap: 30px;
+}
+.dash-grid__item{
+    background: #fff;
+    color:#1b2338;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #00000014;
+    padding: 20px;
+    transition: .6s;
+    position: relative;
+}
+.dash-grid__item:hover {
+    transform: translateY(-20px);
+}
+.dash-grid__item:nth-child(1){
+    background: #fff;
+ 
+}
+.dash-grdi__content{
+    display: flex;
+    margin: 15px;
+}
+
+.dash-grdi__content i{
+    background: #1b2338;
+    padding: 10px;
+    border-radius: 20px;
+    color: #fff;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.dash-grid__item:nth-child(1) i{
+    background: #007bff;
+    
+}
+.dash-grid__item:nth-child(2) i{
+    background: #dc3573;  
+}
+.dash-grid__item:nth-child(3) i{
+    background: #ffc107;  
+}
+.dash-grid__item:nth-child(4) i{
+    background: #28a745;  
+}
+
+.dash-grdi__content p{
+    font-size: 2rem;
+    margin-left: 22px;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.info{
+    position: absolute;
+    right: 20px;
+    background: transparent!important;
+    top: 10px;
+    color: #0000002e;
+}
+.admin-nav   .nav-item:nth-child(3),.nav-item:nth-child(4),.nav-item:nth-child(5) ,.nav-item:nth-child(6)  {
+    list-style: none;
+
+    margin-left: 0;
+}
+.admin-nav .navbar-nav{
+    margin-left: 20px;
+}
+
+.admin-nav .nav-link i{
+    margin-right: 12px;
+}
+
+.admin-nav .active{
+    background: white;
+    color: #1b2338!important;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
 }

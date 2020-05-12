@@ -88,12 +88,13 @@
                     <div class="navbar navbar-expand-md  navbar-hover">
                         <div class="collapse navbar-collapse" id="navbarHover">
                             <ul class="navbar-nav">      
-                                <li class="nav-item dropdown">
+                                <li class="nav-item dropdown ">
                                     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Categorías
                                     </a>
-                                    <ul class="dropdown-menu hover--grid">
-                                        @foreach(App\Category::where('parent_id', null)->get() as $category)
+                                    <ul class="dropdown-menu dropdown-left  ">
+                                        <div class="hover--grid">
+                                            @foreach(App\Category::where('parent_id', null)->get() as $category)
 
                                             @if(App\Category::where('parent_id', $category->id)->count() == 0)
                                                 <li>
@@ -112,6 +113,8 @@
                                             @endif
                                             
                                         @endforeach
+                                        </div>
+                               
 
                                         <!--<li><a class="dropdown-item" href="#">Link</a></li>
                                         <li><a class="dropdown-item" href="#">Link</a></li>

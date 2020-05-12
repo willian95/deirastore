@@ -30,3 +30,12 @@ $(window).scroll(function () {
     // $('.navbar-fixed-js').removeClasss('top');
   }
 });
+let navLanguage = $('.nav-focus').find('a.focus__link')
+
+$('.language').click(function () {
+  var $this = $(this);
+  if (navLanguage.hasClass('active')) {
+    navLanguage.toggleClass('active');
+  }
+});
+
