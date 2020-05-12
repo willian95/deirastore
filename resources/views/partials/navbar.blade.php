@@ -96,7 +96,7 @@
                                         <div class="hover--grid">
                                             @foreach(App\Category::where('parent_id', null)->get() as $category)
 
-                                                @if(App\Category::with('products')->whereHas("products", '>', 0)->where('parent_id', $category->id)->count() == 0)
+                                                @if(App\Category::with('products')->whereHas("products", null, '>', 0)->where('parent_id', $category->id)->count() == 0)
                                                     
                                                         <li>
                                                             <a class="dropdown-item" href="{{ url('/category/'.$category->slug) }}">{{ $category->name }}</a>
@@ -116,28 +116,6 @@
                                                 
                                             @endforeach
                                         </div>
-                               
-
-                                        <!--<li><a class="dropdown-item" href="#">Link</a></li>
-                                        <li><a class="dropdown-item" href="#">Link</a></li>
-                                        <li><a class="dropdown-item dropdown-toggle" href="#">Submenu</a>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="#">Submenu link</a></li>
-                                                <li><a class="dropdown-item" href="#">Submenu link 2</a></li>
-                                                <li><a class="dropdown-item dropdown-toggle" href="#">Subsubmenu</a>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a class="dropdown-item" href="#">Subsubmenu 1</a></li>
-                                                        <li><a class="dropdown-item" href="#">Subsubmenu 2</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a class="dropdown-item dropdown-toggle" href="#">Subsubmenu 2</a>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a class="dropdown-item" href="#">Subsubmenu 2.1</a></li>
-                                                        <li><a class="dropdown-item" href="#">Subsubmenu 2.2</a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>-->
                                      
                                     </ul>
                                 </li>
