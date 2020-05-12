@@ -82,7 +82,7 @@ Route::get('/export/products', "CsvExportController@index");
 
 Route::get('/test/categories', function(){
 
-    dd(App\Category::has('products')->with('products')->get());
+    dd(App\Category::has('products', '>', 0)->with('products')->get());
 
 });
 
