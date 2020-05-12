@@ -96,12 +96,12 @@
                                         <div class="hover--grid">
                                             @foreach(App\Category::where('parent_id', null)->get() as $category)
 
-                                                @if(App\Category::with('products')->where('parent_id', $category->id)->count() == 0)
-                                                    @if(count($category->products) > 0)
+                                                @if(App\Category::with('products')->whereHas("products")->where('parent_id', $category->id)->count() == 0)
+                                                    
                                                         <li>
                                                             <a class="dropdown-item" href="{{ url('/category/'.$category->slug) }}">{{ $category->name }}</a>
                                                         </li>
-                                                    @endif
+                                                
                                                 @else
 
                                                     <li><a class="dropdown-item dropdown-toggle" href="{{ url('/category/'.$category->slug) }}">{{ $category->name }}</a>
