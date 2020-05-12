@@ -101,13 +101,15 @@
                     getItems(){
                         axios.get("{{ url('/categories/menu') }}"+"/"+this.page)
                         .then(res => {
-                            console.log(res)
+                            //console.log(res)
                             if(res.data.success == true){
                                 if(this.categories == null){
                                     this.categories = res.data.categories
                                     
                                 }else{
-                                    this.categories.push(res.data.categories)
+                                    res.data.categories.forEach((data, index) => {
+                                        this.categories.push(data)
+                                    })
                                 }
 
                                 this.maxPages = Math.ceil(res.data.categoriesCount/40)
