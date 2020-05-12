@@ -102,7 +102,7 @@
                                                             <a class="dropdown-item" href="{{ url('/category/'.$category->slug) }}">{{ $category->name }}</a>
                                                         </li>
                                                 
-                                                @else if(App\Category::where('parent_id', $category->id)->count() > 0)
+                                                @elseif(App\Category::where('parent_id', $category->id)->count() > 0)
 
                                                     <li><a class="dropdown-item dropdown-toggle" href="{{ url('/category/'.$category->slug) }}">{{ $category->name }}</a>
                                                         <ul class="dropdown-menu">
