@@ -93,15 +93,18 @@
                     return{
                         categories:null,
                         page:1,
-                        maxPages:0
+                        maxPages:0,
+                        loading:false
                     }
                 },
                 methods:{
                     
                     getItems(){
+                        this.loading = true
                         axios.get("{{ url('/categories/menu') }}"+"/"+this.page)
                         .then(res => {
                             //console.log(res)
+                            this.loading = false
                             if(res.data.success == true){
                                 if(this.categories == null){
                                     this.categories = res.data.categories
@@ -112,7 +115,7 @@
                                     })
                                 }
 
-                                this.maxPages = Math.ceil(res.data.categoriesCount/40)
+                                this.maxPages = Math.ceil(res.data.categoriesCount/25)
     
                             }else{
 
@@ -122,6 +125,7 @@
 
                         })
                         .catch(err => {
+                            this.loading = false
                             alertify.error("Error en el servidor")
                             //console.log(err.response.data)
                         })

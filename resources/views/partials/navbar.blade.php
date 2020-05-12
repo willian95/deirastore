@@ -76,7 +76,9 @@
                                     </a>
                                     <ul class="dropdown-menu dropdown-left  ">
                                         <div class="hover--grid" id="mega-menu">
-                                            
+                                            <div v-if="loading == true">
+                                                <h2>Cargando</h2>
+                                            </div>
                                             <li v-for="category in categories">
                                                 
                                                 <a v-if="category.child.length == 0" class="dropdown-item" :href='"{{ url("/category/") }}"+"/"+category.slug'>@{{ category.name }}</a>
@@ -86,12 +88,6 @@
                                                     <li v-for="child in category.child"><a class="dropdown-item" :href='"{{ url("/category/") }}"+"/"+child.slug'>@{{ child.name }}</a></li>
                                                     
                                                 </ul>
-                                                <!--<a class="dropdown-item dropdown-toggle" v-else :href='"{{ url("/category/") }}"+"/"+category.slug'>@{{ category.name }}</a>
-                                                <ul class="dropdown-menu">
-                                                
-                                                    <li v-for="child in category.child"><a class="dropdown-item" :href='"{{ url("/category/") }}"+"/"+child.slug'>@{{ $child.name }}</a></li>
-                                            
-                                                </ul>-->   
 
                                             </li>
                                             <button @click="moreItems()" v-if="page < maxPages" class="btn btn-primary btn-general btn-general--form" style="color: #fff; height: 60px; width: 120px;">cargar más</button>
