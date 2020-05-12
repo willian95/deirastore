@@ -96,7 +96,7 @@
                                         <div class="hover--grid">
                                             @foreach(App\Category::where('parent_id', null)->get() as $category)
 
-                                                @if(App\Category::with('products')->whereHas("products", null, '>', 0)->where('parent_id', $category->id)->count() == 0)
+                                                @if(App\Category::has("products")->where('parent_id', $category->id)->count() == 0)
                                                     
                                                         <li>
                                                             <a class="dropdown-item" href="{{ url('/category/'.$category->slug) }}">{{ $category->name }}</a>
