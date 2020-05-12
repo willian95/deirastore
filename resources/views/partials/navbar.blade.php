@@ -94,9 +94,9 @@
                                     </a>
                                     <ul class="dropdown-menu dropdown-left  ">
                                         <div class="hover--grid">
-                                            @foreach(App\Category::where('parent_id', null)->get() as $category)
+                                            @foreach(App\Category::with("products")->where('parent_id', null)->get() as $category)
 
-                                                @if(App\Category::has("products")->where('parent_id', $category->id)->count() == 0)
+                                                @if(App\Category::where('parent_id', $category->id)->count() == 0 && count($category->products) > 0)
                                                     
                                                         <li>
                                                             <a class="dropdown-item" href="{{ url('/category/'.$category->slug) }}">{{ $category->name }}</a>
