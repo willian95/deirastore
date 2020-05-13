@@ -42813,7 +42813,7 @@ class CnetController extends Controller
             $product->price = 0;
             $product->sub_price = 0;
             $product->picture = $mainImage;
-            $product->sub_title = $data->data->{'ccs-standard-desc'};
+            $product->sub_title = $data->data->{'ccs-product-name'};
             $product->description = $desc;
             $product->category_id = 0;
             $product->amount = 0;
