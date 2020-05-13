@@ -42829,8 +42829,6 @@ class CnetController extends Controller
             $product->ingram_part_number = $partNumber;
             $product->save();
 
-            dd($data->data->{"ccs-gallery"}->images[0]);
-
             foreach($data->data->{"ccs-gallery"}->images[0] as $key => $value){
                 if(strpos($value, "http://")){
                     $secondaryImage = new SecondaryImage;
