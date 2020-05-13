@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Category;
 use App\Product;
 use App\Item;
-use App\SecondatyImage;
+use App\SecondaryImage;
 use Storage;
 
 class CnetController extends Controller
@@ -42792,66 +42792,74 @@ class CnetController extends Controller
             $index = 0;
             $mainImage = "";
 
-            foreach($data->data->{"ccs-gallery"}->images[0] as $key => $value){
-                if(strpos($value, "http://")){
-                    $mainImage = $value;
+            if(isset($data->data->{'ccs-product-name'}) && Product::where('ingram_part_number', $partNumber)->count() == 0 ){
+
+                foreach($data->data->{"ccs-gallery"}->images[0] as $key => $value){
+                    if(strpos($value, "http://")){
+                        $mainImage = $value;
+                        break;
+                    }
                 }
-            }
-
-            $slug =  str_replace($data->data->{'ccs-product-name'}, " ", "-");
-            $slug = str_replace($slug, "/", "-");
-            
-            $desc = "";
-            if(isset($data->data->{'ccs-mkt-desc'})){
-                $desc = $data->data->{'ccs-mkt-desc'}->lines[0];
-            }else{
-                $desc = $data->data->{'ccs-standard-desc'};
-            }
-
-            $product = new Product;
-            $product->name = $data->data->{'ccs-product-name'};
-            $product->price = 0;
-            $product->sub_price = 0;
-            $product->picture = $mainImage;
-            $product->sub_title = $data->data->{'ccs-product-name'};
-            $product->description = $desc;
-            $product->category_id = 0;
-            $product->amount = 0;
-            $product->slug = $slug;
-            $product->sku = 0;
-            $product->vpn = 0;
-            $product->min_description = $data->data->{'ccs-standard-desc'};
-            $product->brand_id = 0;
-            $product->is_external = 1;
-            $product->tax_excluded = 0;
-            $product->external_price = 0;
-            $product->data_source_id = 2;
-            $product->ingram_part_number = $partNumber;
-            $product->save();
-
-            foreach($data->data->{"ccs-gallery"}->images[0] as $key => $value){
-                if(strpos($value, "http://")){
-                    $secondaryImage = new SecondaryImage;
-                    $secondaryImage->image = $value;
-                    $secondaryImage->product_id = $product->id;
-                    $secondaryImage->is_external = true;
-                    $secondaryImage->save();
-
+    
+                $slug =  str_replace($data->data->{'ccs-product-name'}, " ", "-");
+                $slug = str_replace($slug, "/", "-");
+                
+                $desc = "";
+                if(isset($data->data->{'ccs-mkt-desc'})){
+                    $desc = $data->data->{'ccs-mkt-desc'}->lines[0];
+                }else{
+                    $desc = $data->data->{'ccs-standard-desc'};
                 }
+    
+                $product = new Product;
+                $product->name = $data->data->{'ccs-product-name'};
+                $product->price = 0;
+                $product->sub_price = 0;
+                $product->picture = $mainImage;
+                $product->sub_title = $data->data->{'ccs-product-name'};
+                $product->description = $desc;
+                $product->category_id = 0;
+                $product->amount = 0;
+                $product->slug = $slug;
+                $product->sku = 0;
+                $product->vpn = 0;
+                $product->min_description = $data->data->{'ccs-standard-desc'};
+                $product->brand_id = 0;
+                $product->is_external = 1;
+                $product->tax_excluded = 0;
+                $product->external_price = 0;
+                $product->data_source_id = 2;
+                $product->ingram_part_number = $partNumber;
+                $product->save();
+    
+                foreach($data->data->{"ccs-gallery"}->images[0] as $key => $value){
+                   
+                    if(strpos($value, "http://") >= 0){
+                       
+                        $secondaryImage = new SecondaryImage;
+                        $secondaryImage->image = $value;
+                        $secondaryImage->product_id = $product->id;
+                        $secondaryImage->is_external = true;
+                        $secondaryImage->save();
+                        
+                    }
+                }
+    
+                foreach($data->data->{'ccs-main-spec'}->items as $item){
+                  
+                    $itemProduct = new Item;
+                    $itemProduct->name = $item->name;
+                    $itemProduct->description = $item->lines[0];
+                    $itemProduct->product_id = $product->id;
+                    $itemProduct->save();
+    
+                }
+
             }
 
-            foreach($data->data->{'ccs-main-spec'}->items as $item){
-              
-                $itemProduct = new Item;
-                $itemProduct->name = $item->name;
-                $itemProduct->description = $item->lines[0];
-                $itemProduct->product_id = $product->id;
-                $itemProduct->save();
-
-            }
-            
             $counter++;
-
+            echo $counter."<br>";
+            //dd("stop");
         }
         echo $counter;
         //$data = json_decode($content);
