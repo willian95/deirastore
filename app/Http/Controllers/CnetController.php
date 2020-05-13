@@ -42852,7 +42852,6 @@ class CnetController extends Controller
             
             $counter++;
 
-            dd($product);
         }
         echo $counter;
         //$data = json_decode($content);
