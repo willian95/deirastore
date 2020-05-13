@@ -18,6 +18,7 @@
         <link href="{{ asset('assets/css/responsive.css') }}" rel="stylesheet" />
         <link href="{{ asset('alertify/css/alertify.min.css') }}" rel="stylesheet" />
         <link href="{{ asset('alertify/css/themes/bootstrap.min.css') }}" rel="stylesheet" />
+        {!! ReCaptcha::htmlScriptTagJsApi() !!}
 
     </head>
     <body>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Product;
+use App\Item;
+use App\SecondatyImage;
 use Storage;
 
 class CnetController extends Controller
@@ -42777,10 +42779,85 @@ class CnetController extends Controller
 
     function decode(){
 
-        $content = Storage::disk('cnet_upload')->get('/file/file1000264.txt');
-        $data = json_decode($content);
+        $counter = 0;
+        $array = Storage::disk('cnet_upload')->files('file/');
+        $files = new \LimitIterator(new \ArrayIterator($array), 1000);
+        foreach($files as $file){
+
+            $partNumber = str_replace("file/file", "", $file);
+            $partNumber = $partNumber = str_replace(".txt", "", $partNumber);
+
+            $content = Storage::disk('cnet_upload')->get($file);
+            $data = json_decode($content);
+            $index = 0;
+            $mainImage = "";
+
+            foreach($data->data->{"ccs-gallery"}->images[0] as $key => $value){
+                if(strpos($value, "http://")){
+                    $mainImage = $value;
+                }
+            }
+
+            $slug =  str_replace($data->data->{'ccs-product-name'}, " ", "-");
+            $slug = str_replace($slug, "/", "-");
+            
+            $desc = "";
+            if(isset($data->data->{'ccs-mkt-desc'})){
+                $desc = $data->data->{'ccs-mkt-desc'}->lines[0];
+            }else{
+                $desc = $data->data->{'ccs-standard-desc'};
+            }
+
+            $product = new Product;
+            $product->name = $data->data->{'ccs-product-name'};
+            $product->price = 0;
+            $product->sub_price = 0;
+            $product->picture = $mainImage;
+            $product->sub_title = $data->data->{'ccs-standard-desc'};
+            $product->description = $desc;
+            $product->category_id = 0;
+            $product->amount = 0;
+            $product->slug = $slug;
+            $product->sku = 0;
+            $product->vpn = 0;
+            $product->min_description = $data->data->{'ccs-standard-desc'};
+            $product->brand_id = 0;
+            $product->is_external = 1;
+            $product->tax_excluded = 0;
+            $product->external_price = 0;
+            $product->data_source_id = 2;
+            $product->ingram_part_number = $partNumber;
+            $product->save();
+
+            foreach($data->data->{"ccs-gallery"}->images[0] as $key => $value){
+                if(strpos($value, "http://")){
+                    $secondaryImage = new SecondaryImage;
+                    $secondaryImage->image = $value;
+                    $secondaryImage->product_id = $product->id;
+                    $secondaryImage->is_external = true;
+                    $secondaryImage->save();
+
+                }
+            }
+
+            foreach($data->data->{'ccs-main-spec'}->items as $item){
+              
+                $itemProduct = new Item;
+                $itemProduct->name = $item->name;
+                $itemProduct->description = $item->lines[0];
+                $itemProduct->product_id = $product->id;
+                $itemProduct->save();
+
+            }
+            
+            $counter++;
+
+            dd($product);
+        }
+        echo $counter;
+        //$data = json_decode($content);
         
-        echo $data->data->{'ccs-mkt-desc'}->lines[0];
+        //echo $data->data->{'ccs-mkt-desc'}->lines[0];
     }   
 
     function imagesDownload(){

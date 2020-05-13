@@ -31,7 +31,8 @@ class RegisterUser extends FormRequest
             "password" => 'required',
             'phoneNumber' => 'required',
             'genre' => 'required',
-            "address" => "required"
+            "address" => "required",
+            "recaptcha" => "recaptcha"
         ];
     }
 
@@ -48,7 +49,8 @@ class RegisterUser extends FormRequest
             "password.required" => "Clave es requerida",
             "phoneNumber.required" => "Teléfono es requerido",
             "genre.required" => "Género es requerido",
-            "address.required" => "Dirección es requerida"
+            "address.required" => "Dirección es requerida",
+            "recaptcha.recaptcha" => "Captcha no válido"
         ];
     }
 }

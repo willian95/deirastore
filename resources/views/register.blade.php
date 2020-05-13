@@ -82,7 +82,7 @@
                                 <input  placeholder="Tu dirección actual" type="text" class="form-control" id="address" v-model="address">
                             </div>
                             <div class="form-grid__item">
-                               
+                                {!! htmlFormSnippet() !!}
                             </div>
 
                             <div class="form-grid__item form-check">
@@ -126,15 +126,16 @@
                 passwordRepeat: "",
                 terms: "",
                 loading:false,
-                reg: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/
+                reg: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/,
+                captchaResponse:""
             }
         },
         methods: {
 
             register() {
-
+                this.captchaResponse = $("#g-recaptcha-response").val()
                 if (!this.formHasErrors()) {
-
+                    
                     axios.post("{{ url('/register') }}", {
                             name: this.name,
                             genre: this.genre,
@@ -144,11 +145,11 @@
                             email: this.email,
                             password: this.password,
                             lastname: this.lastname,
-                            address: this.address
+                            address: this.address,
+                            recaptcha: this.captchaResponse
                         })
                         .then(res => {
                             
-
                             if(res.data.success == true){
  
                                 swal({
@@ -185,7 +186,7 @@
                         })
                         .catch(err => {
                             $.each(err.response.data.errors, function(key, value) {
-                                alertify.error(value)
+                                alertify.error(value[0])
                             });
                         })
                         
