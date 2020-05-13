@@ -42792,8 +42792,6 @@ class CnetController extends Controller
             $index = 0;
             $mainImage = "";
 
-            dd($data);
-
             foreach($data->data->{"ccs-gallery"}->images[0] as $key => $value){
                 if(strpos($value, "http://")){
                     $mainImage = $value;
@@ -42830,6 +42828,8 @@ class CnetController extends Controller
             $product->data_source_id = 2;
             $product->ingram_part_number = $partNumber;
             $product->save();
+
+            dd($data->data->{"ccs-gallery"}->images[0]);
 
             foreach($data->data->{"ccs-gallery"}->images[0] as $key => $value){
                 if(strpos($value, "http://")){
