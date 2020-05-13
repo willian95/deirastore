@@ -42792,6 +42792,8 @@ class CnetController extends Controller
             $index = 0;
             $mainImage = "";
 
+            dd($data);
+
             foreach($data->data->{"ccs-gallery"}->images[0] as $key => $value){
                 if(strpos($value, "http://")){
                     $mainImage = $value;
