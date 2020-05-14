@@ -42781,7 +42781,7 @@ class CnetController extends Controller
         ini_set('max_execution_time', 0);
         $counter = 0;
         $array = Storage::disk('cnet_upload')->files('file/');
-        $files = new \LimitIterator(new \ArrayIterator($array), 0, 3000);
+        $files = new \LimitIterator(new \ArrayIterator($array), 2995, 3000);
         foreach($files as $file){
 
             $partNumber = str_replace("file/file", "", $file);
