@@ -10,7 +10,8 @@ class IngramController extends Controller
 {
     public function import() 
     {
-        dd("hey");
+        //dd("hey");
+        Excel::import(new IngramImport, 'CLPriceFileDeira.csv', "ingram");
         /*ini_set('max_execution_time', 0);
         try{
 
