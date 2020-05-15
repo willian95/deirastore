@@ -79,6 +79,8 @@ Route::get('/cnet/images', "CnetController@imagesDownload");
 Route::get('/cnet/decode', "CnetController@decode");
 Route::get('/cnet/compare', "CnetController@compare");
 
+Route::get('/ingram/import', 'IngramController@import');
+
 Route::get('/export/products', "CsvExportController@index");
 
 Route::get('/test/categories', function(){
