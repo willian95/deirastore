@@ -11,8 +11,14 @@ class IngramController extends Controller
     public function import() 
     {
         ini_set('max_execution_time', 0);
-        Excel::import(new IngramImport, 'CLPriceFileDeira.csv', "ingram");
-        dd("done");
+        try{
+
+            Excel::import(new IngramImport, 'CLPriceFileDeira.csv', "ingram");
+            dd("done");
+
+        }catch(\Exception $e){
+            dd($e->getMessage(), $e->getLine());
+        }
         //return redirect('/')->with('success', 'All good!');
     }
 }
