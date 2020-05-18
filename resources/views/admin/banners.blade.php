@@ -5,38 +5,45 @@
     @include('partials.admin.navbar')
  
     <div class="container content__admin">
-        <div class="row">
-            <div class="col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-12">
+        <div class="grid_content">
+            <div class="grid_content--item">
+             <div class="title mr-5">
+                Banners
+             </div>
 
-                <div class="card">
-                    <div class="card-body">
-                        <p class="text-center">
-                            <button class="btn btn-success" data-toggle="modal" data-target="#createBanner" @click="changeTitle()">añadir</button>
-                        </p>
+             <button class="btn btn-success btn-admin" data-toggle="modal" data-target="#createBanner" @click="changeTitle()">añadir</button>
+
+            </div>
+        
+      
+            </div>
+        <div class="">
+            <div class="">
+            
+                <div class="grid__product">
+                    <div class="card" >
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Imagen</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(banner, index) in banners">
+                                    <td>@{{ index + 1 }}</td>
+                                    <td><img :src="'{{ url('/') }}'+'/images/banners/'+banner.image" alt="" style="width: 300px"></td>
+                                    <td>
+                                        <button class="btn btn-success" @click="edit(banner)" data-toggle="modal" data-target="#createBanner"><i class="fa fa-edit"></i></button>
+                                        <button class="btn btn-danger" @click="erase(banner.id)"><i class="fa fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-
-                <div class="card" >
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Imagen</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="(banner, index) in banners">
-                                <td>@{{ index + 1 }}</td>
-                                <td><img :src="'{{ url('/') }}'+'/images/banners/'+banner.image" alt="" style="width: 30%"></td>
-                                <td>
-                                    <button class="btn btn-success" @click="edit(banner)" data-toggle="modal" data-target="#createBanner">editar</button>
-                                    <button class="btn btn-danger" @click="erase(banner.id)">eliminar</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+            
 
             </div>
         </div>

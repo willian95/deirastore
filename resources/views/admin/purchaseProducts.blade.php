@@ -3,27 +3,61 @@
 @section('content')
     @include('partials.admin.navbar')
     <div class="container content__admin">
-        <div class="row">
-            <div class="col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-12">
-
-                <div class="card">
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label for="name">Buscar</label>
-                            <input type="text" class="form-control" id="name" v-model="query" @keyup="search()">
-                        </div>
-                    </div>
+        <div class="bsucador_admin col-md-8">
+            <div class="card-body">
+                <div class="form-group buscardor-admin">
+                   <label for="" class="fa fa-search"></label>
+                    <input  type="text" placeholder="Buscar producto..." class="form-control fa fa-search" id="name" v-model="query" @keyup="search()">
                 </div>
+            </div>
+        </div>
+        <div class="">
+
+            <div class="grid_content">
+                <div class="grid_content--item">
+                 <div class="title mr-5">
+                   Compras
+                 </div>
+
+
+                </div>
+            
+                <div class="grid_content--item ml-auto mr-4">
+                    <div class="title">
+                        <span class="page">Pagina:</span>
+                        
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item" v-for="index in pages">
+                                    <a class="page-link" href="#"  :key="index" @click="fetch(index)" >@{{ index }}</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                   </div>
+                </div>
+
+            <div class="content_title">
+                <div class="content_title__item">
+                    <p>Nombre</p>
+                </div>
+                <div class="content_title__item ml-auto mr-12">
+                    <p>Acciones</p>
+                </div>
+            </div>
+            <div class="grid__product">
+
+             
 
                 <div class="card" v-for="product in products">
                     <div class="card-body">
-                        <p class="text-center">
+                        <p >
                             @{{ product.name }}
                         </p>
                         <p>
                             Cantidad: @{{ product.amount }}
                         </p>
-                        <button class="btn btn-success" @click="goToPurchases(product.id)">añadir</button>
+                        <button class="btn btn-success color-blue" @click="goToPurchases(product.id)">añadir</button>
                     </div>
                 </div>
 

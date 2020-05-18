@@ -5,35 +5,63 @@
     @include('partials.admin.navbar')
 
     <div class="container content__admin">
-        <div class="row">
-            <div class="col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-12">
 
-                <div class="card">
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label for="name">Buscar</label>
-                            <input type="text" class="form-control" v-model="query" @keyup="search()">
-                        </div>
-                    </div>
+        <div class="bsucador_admin col-md-8">
+            <div class="card-body">
+                <div class="form-group buscardor-admin">
+                   <label for="" class="fa fa-search"></label>
+                    <input  type="text" placeholder="Buscar producto..." class="form-control fa fa-search" id="name" v-model="query" @keyup="search()">
+                </div>
+            </div>
+        </div>
+
+        <div class="">
+
+
+            <div class="grid_content">
+                <div class="grid_content--item">
+                 <div class="title mr-5">
+                    Tiendas
+                 </div>
+                 <button class="btn btn-success btn-admin" data-toggle="modal" data-target="#createBrand" @click="changeTitle()">añadir</button>
+                </div>
+            
+                <div class="grid_content--item ml-auto mr-4">
+                
+                   </div>
                 </div>
 
-                <div class="card">
+            <div class="">
+
+            
+
+                <!--<div class="card">
                     <div class="card-body">
                         <p class="text-center">
                             <button class="btn btn-success" data-toggle="modal" data-target="#createBrand" @click="changeTitle()">añadir</button>
                         </p>
                     </div>
-                </div>
-
-                <div class="card" v-for="brand in brands">
-                    <div class="card-body">
-                        <p class="text-center">
-                        @{{ brand.name }}
-                        </p>
-                        <button class="btn btn-success" @click="edit(brand)" data-toggle="modal" data-target="#createBrand">editar</button>
-                        <button class="btn btn-danger" @click="erase(brand.id)">eliminar</button>
+                </div>-->
+                <div class="content_title">
+                    <div class="content_title__item">
+                        <p>Nombre</p>
+                    </div>
+                    <div class="content_title__item ml-auto mr-12">
+                        <p>Acciones</p>
                     </div>
                 </div>
+                    <div class="grid__product">
+                        <div class="card" v-for="brand in brands">
+                            <div class="card-body">
+                                <p class="">
+                                @{{ brand.name }}
+                                </p>
+                                <button class="btn btn-success" @click="edit(brand)" data-toggle="modal" data-target="#createBrand"><i class="fa fa-edit"></i></button>
+                                <button class="btn btn-danger" @click="erase(brand.id)"><i class="fa fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </div>
+       
 
             </div>
         </div>

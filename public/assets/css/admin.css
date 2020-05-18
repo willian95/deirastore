@@ -13,7 +13,8 @@
     align-items: initial;
     position: fixed;
     height: 100vh;
-    width: 200px;
+    width: 190px;
+    z-index: 1;
 }
 .admin-nav .navbar-brand img {
     width: 100%;
@@ -21,14 +22,15 @@
 .admin_nav-top{
     position: fixed;
     width: 100%;
-    background: transparent;
+    background: #ffffff;
     display: flex;
-    height: 8vh;
+    height: 10vh;
+    border-bottom: 1px solid #1b233805;
     z-index: 1;
 }
 
 .content__admin{
-    margin: 70px 200px 0;
+    margin: 130px 215px 0;
 }
 
 .admin_nav-top .navbar-hover .collapse ul ul {
@@ -46,14 +48,14 @@
 .admin_nav-top .navbar-nav .nav-link {
     margin-right: 50px;
     margin-top: 10px;
-    background: #1b2338;
+    background: #fff;
     border-radius: 50px;
-    color: #fff;
+    color: #1b2338;
     font-size: 1rem;
     box-shadow: 0 0 9px #0000002e;
 }
 .admin_nav-top .navbar-nav .nav-link .fa {
-    color: #fff;
+    color: #1b2338;
     margin-right: 10px;
     margin-left: 10px;
 }
@@ -138,10 +140,223 @@
 .admin-nav .nav-link i{
     margin-right: 12px;
 }
-
+.admin-nav .nav-item{
+    transition: .8s;
+}
 .admin-nav .active{
     background: white;
     color: #1b2338!important;
     border-bottom-left-radius: 10px;
     border-top-left-radius: 10px;
+    position: relative;
+}
+.admin-nav .nav-item:hover {
+    background: white;
+    color: #1b2338!important;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+   /* transform: translate(15px, 0px);*/
+}
+.admin-nav .navbar-nav .nav-link:hover {
+    color: #1b2338!important;
+}
+
+.bsucador_admin{
+    position:fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0px 0 0 200px;
+    z-index: 1;
+}
+
+.grid_content{
+    display: grid;
+    grid-template-columns: 1fr 1fr ;
+    margin-bottom: 50px;
+}
+
+
+
+.admin-nav .nav-link:before{
+    content: "";
+    background: #ffffff;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    right: -5px;
+    top: 87px;
+    border-radius: 50%;
+}
+.admin-nav .nav-link:after{
+    content: "";
+    background: #1b2338;
+    position: absolute;
+    width: 25px;
+    height: 20px;
+    right: 0;
+    top: 77px;
+    border-radius: 50%;
+}
+.admin-nav .active:after{
+    content: "";
+    background: #1b2338;
+    position: absolute;
+    width: 25px;
+    height: 20px;
+    right: 0px;
+    top: 44px;
+    border-radius: 50%;
+}
+.admin-nav .active:before{
+    content: "";
+    background: #ffffff;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    right: -5px;
+    top: 36px;
+    border-radius: 50%;
+}
+.buscardor-admin label{
+    position: absolute;
+    top: 10px;
+    color: #1b2338;
+    left: 15px;
+}
+.buscardor-admin{
+    position: relative;
+}
+.buscardor-admin .form-control {
+
+    border: 1px solid #ced4da00;
+    padding-left: 50px;
+}
+.buscardor-admin .form-control:focus {
+    border-color: #ffffff;
+    box-shadow: 0 0 0 0.2rem rgba(51, 51, 51, 0);
+}
+
+.grid_content--item .title{
+    font-size: 2rem;
+    color: #1b2338;
+    font-weight: bold;
+    display: flex;
+}
+.grid_content--item:nth-child(3){
+    text-align: end;
+}
+
+.btn-admin{
+    background: #1b2338;
+    border: 1px solid #1b2338;
+    box-shadow: 0 0 9px #0000002e;
+    color: #ffffff;
+}
+.btn-admin:hover, .btn-admin:focus ,.btn-admin:active{
+    background: #ffffff;
+    border: 1px solid #1b233800;
+    color: #1b2338;
+}
+
+.grid_content--item{
+    display: flex;
+    align-items: center;
+}
+.btn-admin .btn-success.focus, .btn-success:focus {
+    box-shadow: 0 0 9px #0000002e!important;
+}
+.main-admin .btn-success:not(:disabled):not(.disabled).active, .btn-success:not(:disabled):not(.disabled):active, .show > .btn-success.dropdown-toggle{
+    background: #ffffff;
+    border: 1px solid #1b233800;
+    color: #1b2338;
+}
+.page{
+    font-size: 1rem;
+}
+ .page-link {
+ 
+    padding: 1px 10px!important;
+    font-weight: lighter;
+    color: #b5b5b5;
+    border: 0;
+    font-size: 1rem;
+}
+
+.grid__product .card-body{
+    display: grid;
+    grid-template-columns: 78% 10% 10%;
+    gap: 10px;
+}
+.content_title{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.mr-12{
+    margin-right: 12rem !important;
+}
+.grid__product .card {
+border: 0;
+    border-bottom: 1px solid #0000000d;
+    border-radius: 0;
+}
+.grid__product .btn-success {
+   
+    background-color: #fff;
+    box-shadow: 0 0 9px #0000002e!important;
+    border: 0;
+}
+.grid__product .btn-success i{
+    color: #989898;
+
+}
+.content_title__item{
+    color: #000;
+}
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 1px solid #dee2e6;
+    border-top: 0;
+    font-weight: lighter;
+}
+.color-blue{
+    COLOR: #1b2338;
+}
+
+/*modal styles*/
+.modal-admin .modal-dialog {
+    max-width: 900px;
+  
+}
+.modal-admin .modal-body {
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px 50px;
+
+    display: flex;
+    flex-wrap: wrap;
+}
+.modal-admin  .form-control {
+
+}
+.modal-admin  .form-group {
+    margin-bottom: 1rem;
+    width: 50%;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.modal-admin  .form-control:focus {
+    
+    box-shadow: 0 0 0 0.2rem rgba(51, 51, 51, 0);
+}
+.modal-admin label {
+    display: inline-block;
+    margin-bottom: .5rem;
+    font-size: 1rem;
+    color: #07090e;
+    font-weight: bold;
+}
+.modal-admin label::after {
+  
 }

@@ -5,55 +5,81 @@
     @include('partials.admin.navbar')
 
     <div class="container content__admin">
-        <div class="row">
-            <div class="col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-12">
-
-                <div class="card">
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label for="name">Buscar</label>
-                            <input type="text" class="form-control" id="name" v-model="query" @keyup="search()">
-                        </div>
-                    </div>
+        <div class="bsucador_admin col-md-8">
+            <div class="card-body">
+                <div class="form-group buscardor-admin">
+                   <label for="" class="fa fa-search"></label>
+                    <input  type="text" placeholder="Buscar producto..." class="form-control fa fa-search" id="name" v-model="query" @keyup="search()">
                 </div>
-
-                <div class="card">
+            </div>
+        </div>
+        <div class="">
+            <div class="">
+                <div class="grid_content">
+                    <div class="grid_content--item">
+                     <div class="title mr-5">
+                         Productos
+                     </div>
+    
+                     <button class="btn btn-success btn-admin" data-toggle="modal" data-target="#createCategory" @click="changeTitle()">añadir</button>
+    
+                    </div>
+                
+                    <div class="grid_content--item ml-auto mr-4">
+                        <div class="title">
+                            <span class="page">Pagina:</span>
+                            
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination">
+                                    <li class="page-item" v-for="index in pages">
+                                        <a class="page-link" href="#"  :key="index" @click="fetch(index)" >@{{ index }}</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                       </div>
+                    </div>
+         
+              <!--  <div class="card">
                     <div class="card-body">
                         <p class="text-center">
                             <button class="btn btn-success" data-toggle="modal" data-target="#createCategory" @click="changeTitle()">añadir</button>
                         </p>
                     </div>
+                </div>-->
+                <div class="grid__product">
+                    <div class="card">
+                        <div class="card-bod">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <td>#</td>
+                                        <td>Categoría</td>
+                                        <td>Categoría superior</td>
+                                        <td>Acciones</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="(category, index) in categories">
+                                        <td>@{{ index + 1 }}</td>
+                                        <td>@{{ category.name }}</td>
+                                        <td>
+                                            <div v-if="category.parent != null">
+                                                @{{ category.parent.name }}
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-success" @click="edit(category)" data-toggle="modal" data-target="#createCategory"><i class="fa fa-edit"></i></button>
+                                            <!-----------PORQUE SE REPITE DOS VECES EL ICONO DE TRASH?------------------>
+                                            <button class="btn btn-danger" @click="erase(category.id)"><i class="fa fa-trash"></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div> 
                 </div>
-
-                <div class="card">
-                    <div class="card-body">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <td>#</td>
-                                    <td>Categoría</td>
-                                    <td>Categoría superior</td>
-                                    <td>Acciones</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="(category, index) in categories">
-                                    <td>@{{ index + 1 }}</td>
-                                    <td>@{{ category.name }}</td>
-                                    <td>
-                                        <div v-if="category.parent != null">
-                                            @{{ category.parent.name }}
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-success" @click="edit(category)" data-toggle="modal" data-target="#createCategory">editar</button>
-                                        <button class="btn btn-danger" @click="erase(category.id)">eliminar</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+               
 
                 <!--<div class="card" v-for="category in categories">
                     <div class="card-body">
@@ -67,17 +93,7 @@
 
             </div>
         </div>
-        <div class="row">
-            <div class="col-12">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                        <li class="page-item" v-for="index in pages">
-                            <a class="page-link" href="#"  :key="index" @click="fetch(index)" >@{{ index }}</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
+   
     </div>
 
     <!-- Create Modal -->

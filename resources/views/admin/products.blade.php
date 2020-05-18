@@ -5,56 +5,67 @@
     @include('partials.admin.navbar')
 
     <div class="container content__admin">
-        <div class="row">
-            <div class="col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-12">
-
-                <div class="card">
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label for="name">Buscar</label>
-                            <input type="text" class="form-control" id="name" v-model="query" @keyup="search()">
-                        </div>
-                    </div>
+        <div class="bsucador_admin col-md-8">
+            <div class="card-body">
+                <div class="form-group buscardor-admin">
+                   <label for="" class="fa fa-search"></label>
+                    <input  type="text" placeholder="Buscar producto..." class="form-control fa fa-search" id="name" v-model="query" @keyup="search()">
                 </div>
+            </div>
+        </div>
 
-                <div class="card">
-                    <div class="card-body">
-                        <p class="text-center">
-                            <button class="btn btn-success" data-toggle="modal" data-target="#createProduct" @click="changeTitle()">añadir</button>
-                        </p>
-                    </div>
+        <div class="">
+            <div class="grid_content">
+                <div class="grid_content--item">
+                 <div class="title mr-5">
+                     Productos
+                 </div>
+
+                 <button class="btn btn-success btn-admin" data-toggle="modal" data-target="#createProduct" @click="changeTitle()">añadir</button>
+
                 </div>
-
+            
+                <div class="grid_content--item ml-auto mr-4">
+                    <div class="title">
+                        <span class="page">Pagina:</span>
+                        
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item" v-for="index in pages">
+                                    <a class="page-link" href="#"  :key="index" @click="fetch(index)" >@{{ index }}</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                   </div>
+                </div>
+     
+            <div class="content_title">
+                <div class="content_title__item">
+                    <p>Nombre</p>
+                </div>
+                <div class="content_title__item ml-auto mr-12">
+                    <p>Acciones</p>
+                </div>
+            </div>
+            <div class="grid__product">
                 <div class="card" v-for="product in products">
-                    <div class="card-body">
-                        <p class="text-center">
+                    <div class="card-body ">
+                        <p class="">
                         @{{ product.name }}
                         </p>
-                        <button class="btn btn-success" @click="edit(product)" data-toggle="modal" data-target="#createProduct">editar</button>
-                        <button class="btn btn-danger" @click="erase(product.id)">eliminar</button>
+                        <button class="btn btn-success" @click="edit(product)" data-toggle="modal" data-target="#createProduct"><i class="fa fa-edit"></i></button>
+                        <button class="btn btn-danger" @click="erase(product.id)"><i class="fa fa-trash"></i></button>
                     </div>
                 </div>
-
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col-12">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                        <li class="page-item" v-for="index in pages">
-                            <a class="page-link" href="#"  :key="index" @click="fetch(index)" >@{{ index }}</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
         </div>
-
     </div>
 
     <!-- Create Modal -->
 
-    <div class="modal fade" id="createProduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade modal-admin" id="createProduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -64,13 +75,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label for="picture">Imagen</label>
-                        <input type="file" class="form-control" id="picture" ref="file" @change="onImageChange" accept="image/*">
-                    </div>
-                    <div class="form-group">
-                        <img id="blah" :src="imagePreview" class="full-image" style="margin-top: 10px; width: 40%">
-                    </div>
+                 
                     <div class="form-group">
                         <label for="name">Titulo</label>
                         <input type="text" class="form-control" id="name" v-model="name">
@@ -78,6 +83,22 @@
                     <div class="form-group">
                         <label for="subTitle">Sub-titulo</label>
                         <input type="text" class="form-control" id="subTitle" v-model="subTitle">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="picture">Imagen</label>
+                        <input type="file" class="form-control" id="picture" ref="file" @change="onImageChange" accept="image/*">
+                    </div>
+                    <div class="form-group">
+                        <img id="blah" :src="imagePreview" class="full-image" style="margin-top: 10px; width: 40%">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="min_description">Descripción minima</label>
+                        <input type="text" class="form-control" id="min_description" v-model="min_description">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="description">Descripción</label>
+                        <textarea class="form-control" v-model="description"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="sku">SKU</label>
@@ -87,10 +108,7 @@
                         <label for="vpn">VPN</label>
                         <input type="text" class="form-control" id="vpn" v-model="vpn">
                     </div>
-                    <div class="form-group">
-                        <label for="min_description">Descripción minima</label>
-                        <input type="text" class="form-control" id="min_description" v-model="min_description">
-                    </div>
+                  
                     <div class="form-group">
                         <label for="product_type">Tipo de producto</label>
                         <input type="text" class="form-control" id="product_type" v-model="product_type">
@@ -123,8 +141,85 @@
                         <label for="color">Color</label>
                         <input type="text" class="form-control" id="color" v-model="color">
                     </div>
-                    <div class="container-fluid">
-                        <div class="row">
+
+                        <!----categoria ---->
+                    <div class="form-group">
+                        <div class="">
+                            <label style="visibility:hidden;">c</label>
+                            <button class="btn btn-success" @click="openCategoryForm()">
+                                +
+                            </button>
+
+                            <label for="category">categoría</label>
+                            <select class="form-control" v-model="categoryId">
+                                <option :value="category.id" v-for="category in categories">@{{ category.name }}</option>
+                            </select>
+                        </div>
+
+                        
+                        <div class="row" v-if="showCategoryForm == true">
+                            <div class="col-12">
+                                <h3 class="text-center">Nueva categoría</h3>
+                                <div class="form-group">
+                                    <label for="name">nombre</label>
+                                    <input type="text" class="form-control" id="categoryName" v-model="categoryName">
+                                    <label for="name">Imagen</label>
+                                    <input type="file" class="form-control"  id="categoryImage" @change="onImageCategoryChange" accept="image/*">
+                                    <div class="form-group">
+                                        <img :src="imageCategoryPreview" class="full-image" style="margin-top: 10px; width: 40%">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button type="button" class="btn btn-secondary" @click="closeCategoryForm()">Close</button>
+                                <button type="button" class="btn btn-primary" @click="storeCategory()">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-------Brand---->
+                    <div class="form-group">
+                        <div class="">
+                            <div class="">
+                                <label style="visibility:hidden;">c</label>
+                                <button class="btn btn-success" @click="openBrandForm()">
+                                    +
+                                </button>
+                            
+                         
+                                
+                                    <label for="brand">Tienda</label>
+                                    <select class="form-control" v-model="brandId">
+                                        <option :value="brand.id" v-for="brand in brands">@{{ brand.name }}</option>
+                                    </select>
+                         
+                                </div>
+                        </div>
+
+                        <div class="row" v-if="showBrandForm == true">
+                            <div class="col-12">
+                                <h3 class="text-center">Nueva tienda</h3>
+                                <div class="form-group">
+                                    <label for="name">nombre</label>
+                                    <input type="text" class="form-control" id="brandName" v-model="brandName">
+                                    <label for="name">Imagen</label>
+                                    <input type="file" class="form-control"  id="brandImage" @change="onImageBrandChange" accept="image/*">
+                                    <div class="form-group">
+                                        <img :src="imageBrandPreview" class="full-image" style="margin-top: 10px; width: 40%">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button type="button" class="btn btn-secondary" @click="closeBrandForm()">Close</button>
+                                <button type="button" class="btn btn-primary" @click="storeBrand()">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                  <!--   <div class="container-fluid">
+                       <div class="row">
                             <div class="col-1">
                                 <label style="visibility:hidden;">c</label>
                                 <button class="btn btn-success" @click="openCategoryForm()">
@@ -197,6 +292,11 @@
                         </div>
 
                     </div>
+-->
+
+
+
+
                     <div class="form-group">
                         <label for="price">precio</label>
                         <input type="text" class="form-control" id="price" v-model="price" @keypress="isNumber()">
@@ -205,10 +305,7 @@
                         <label for="subPrice">precio alternativo</label>
                         <input type="text" class="form-control" id="price" v-model="subPrice" @keypress="isNumber()">
                     </div>
-                    <div class="form-group">
-                        <label for="description">descripción</label>
-                        <textarea class="form-control" v-model="description"></textarea>
-                    </div>
+                  
                     
                 </div>
                 <div class="modal-footer">
@@ -224,7 +321,7 @@
 
     <!-- add category modal -->
 
-    <div class="modal fade" id="createCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade  modal-admin" id="createCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
