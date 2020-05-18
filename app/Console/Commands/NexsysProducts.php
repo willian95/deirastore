@@ -44,6 +44,7 @@ class NexsysProducts extends Command
     {
         ini_set('max_execution_time', 0);
         //$params = ["encoding" => "UTF-8", "verifypeer" => false, "verifyhost" => false];
+        Log::info('Nexsys');
         $mark = "ADATA";
         $url = "https://app.nexsysla.com/nexsysServiceSoap/NexsysServiceSoap?wsdl";
 
