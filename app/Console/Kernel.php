@@ -26,7 +26,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
-        $schedule->command('products:nexsys')->everyTenMinutes();
+        $schedule->command('products:nexsys')->everyMinute();
     }
 
     /**
