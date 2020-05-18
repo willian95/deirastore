@@ -139,7 +139,7 @@
                 },
                 mounted(){
                     
-                    this.getItems()
+                    //this.getItems()
 
                 }
 
