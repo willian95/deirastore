@@ -51,6 +51,10 @@ return [
             'driver' => 'local',
             'root'   => public_path() . '/assets/cnet',
         ],
+        'ingram' => [
+            'driver' => 'local',
+            'root'   => public_path() . '/assets/ingram',
+        ],
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
