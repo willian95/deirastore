@@ -5,25 +5,25 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <meta name='description', content='Descripcion del sitio'>
-        <meta name='keywords', content='La mejor tienda de productos electrónicos, '>
+        <title>Deira store | Productos Informáticos \</title>  
+        <meta name="description" content= "Compra online tecnología, informática ,Amplia variedad de productos descubre las mejores marcas del mercado tecnológico" />
+        <meta name="robots" content= "index, follow">
+        <meta content='Computación, ventas, ecommerce,informatica,DeiraTic,Deira, DeiraStore,DeiraStore Venta de Productos Informáticos ,Santiago, Chile ' property='og:description'>
         <meta name="robots" content="index, follow">
         <meta name="dc.language" content="es">
         <meta name="dc.source" content="url del sitio">
         <meta itemprop="url" content="url temporal del sitio">
-        <meta content='descripcion' property='og:description'>
+
         <meta content='iso' property='og:image'>
         <meta property="og:site_name" content="">
-        <meta property="og:title" content="">
-        <meta property="og:type" content="">
-        <meta property="og:image" content=""> 
+ 
         <meta property="og:locale" content="es_ES" />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Deira" />
         <meta property="og:description" content="La mejor tienda de productos electrónicos" />
+        <meta http-equiv="cache-control" content="no-cache"/>
 
-
-        <title>Deira</title>
+      
         <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
         <link href="{{ asset('assets/css/slick.css') }}" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
