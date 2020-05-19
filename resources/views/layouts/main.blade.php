@@ -7,13 +7,12 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <title>Deira store | Productos Informáticos \</title>  
         <meta name="description" content= "Compra online tecnología, informática ,Amplia variedad de productos descubre las mejores marcas del mercado tecnológico" />
-        <meta name="robots" content= "index, follow">
         <meta content='Computación, ventas, ecommerce,informatica,DeiraTic,Deira, DeiraStore,DeiraStore Venta de Productos Informáticos ,Santiago, Chile ' property='og:description'>
         <meta name="robots" content="index, follow">
         <meta name="dc.language" content="es">
         <meta name="dc.source" content="url del sitio">
         <meta itemprop="url" content="url temporal del sitio">
-
+        <meta name="keywords" content="usb,disco duro, memorias ram, ADATA , 3nstar, Aoc , Sophos,ram ddr2,comprar memoria ram, disco duro ">
         <meta content='iso' property='og:image'>
         <meta property="og:site_name" content="">
  
