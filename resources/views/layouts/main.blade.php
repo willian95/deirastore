@@ -12,17 +12,14 @@
         <meta name="dc.language" content="es">
         <meta name="dc.source" content="url del sitio">
         <meta itemprop="url" content="url temporal del sitio">
-        <meta name="keywords" content="usb,disco duro, memorias ram, ADATA , 3nstar, Aoc , Sophos,ram ddr2,comprar memoria ram, disco duro ">
+        <meta name="keywords" content="informática ,usb,disco duro,Productos Informáticos, memorias ram, ADATA , 3nstar, Aoc , Sophos,ram ddr2,comprar memoria ram, disco duro ">
         <meta content='iso' property='og:image'>
-        <meta property="og:site_name" content="">
- 
         <meta property="og:locale" content="es_ES" />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Deira" />
         <meta property="og:description" content="La mejor tienda de productos electrónicos" />
         <meta http-equiv="cache-control" content="no-cache"/>
-
-      
+         <!---links----->
         <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
         <link href="{{ asset('assets/css/slick.css') }}" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">

@@ -94,6 +94,12 @@ Route::get('/terms', function(){
     return view('terms');
 });
 
+/*para ver la page xD  */
+
+Route::get('/categories', function(){
+    return view('categories');
+});
+
 Route::prefix('admin')->group(function () {
     
     Route::get('/dashboard', function(){

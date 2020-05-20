@@ -2158,3 +2158,15 @@ img.lista-pedido {
 .dropdown-left  {
     left: -300px!important;
 }
+
+.categories__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+}
+.categories__grid .nav-item:nth-child(3), .nav-item:nth-child(4), .nav-item:nth-child(5), .nav-item:nth-child(6) {
+    list-style: unset!important;
+    color: #3e3e3e;
+    margin-left: 0;
+}
