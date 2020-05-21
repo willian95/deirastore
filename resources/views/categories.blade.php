@@ -2,7 +2,7 @@
 
 @section('content')
 
-        <div class="container bg">
+    <div class="container bg" id="dev-categories">
 
         <div class="row">
             <div class="col-12">
@@ -13,54 +13,52 @@
             <p><strong>Todas las </strong>Categorias</p>
         </div>
         <div class="">
-           <ul class="categories__grid">
-            <li class="nav-item dropdown mega-menu">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                    aria-haspopup="true" aria-expanded="false">Categorías</a>
-                <div class="dropdown-menu" style="opacity: 1;">
-                    <div class="grid-menu">
-                        <div class="grid-menu__item">
-                            <ul>
-                                <li>Cables</li>
-                                <li>Cámara y Escáners</li>
-                                <li>Componentes de sistema</li>                            
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="">hola</a>
-            </li>
-            <li class="nav-item dropdown mega-menu">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                    aria-haspopup="true" aria-expanded="false">Categorías</a>
-                <div class="dropdown-menu" style="opacity: 1;">
-                    <div class="grid-menu">
-                        <div class="grid-menu__item">
-                            <ul>
-                                <li>Cables</li>
-                                <li>Cámara y Escáners</li>
-                                <li>Componentes de sistema</li>                            
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="">hola 2</a>
-            </li>
+            <ul class="categories__grid">
+                <div v-for="category in categories">
 
-            <li class="nav-item">
-                <a class="nav-link" href="">hola 2</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="">hola 2</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="">hola 2</a>
-            </li>
-           </ul>
+                    <li class="nav-item" v-if="category.child.length == 0">
+                        <a class="nav-link" :href='"{{ url("/category/") }}"+"/"+category.slug'>@{{ category.name }}</a>
+                    </li>
+
+                    <li class="nav-item dropdown mega-menu" v-if="category.child.length > 0">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Categorías</a>
+                        <div class="dropdown-menu" style="opacity: 1;">
+                            <div class="grid-menu">
+                                <div class="grid-menu__item">
+                                    <ul v-if="category.child.length > 0">
+                                        <li v-for="child in category.child">
+                                            <a class="dropdown-item" :href='"{{ url("/category/") }}"+"/"+child.slug'>@{{ child.name }}</a>
+                                        </li>                         
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                </div>
+                
+            </ul>
+
+            <button @click="moreItems()" v-if="page < maxPages && loading == false" class="btn btn-primary btn-general btn-general--form" style="color: #fff; height: 60px; width: 120px;">cargar más</button>
+
+           <!--<ul class="dropdown-menu dropdown-left  ">
+                <div class="hover--grid">
+                    
+                    <li v-for="category in categories">
+                        
+                        <a v-if="category.child.length == 0" class="dropdown-item" :href='"{{ url("/category/") }}"+"/"+category.slug'>@{{ category.name }}</a>
+
+                        <a v-if="category.child.length > 0" class="dropdown-item dropdown-toggle" :href='"{{ url("/category/") }}"+"/"+category.slug'>@{{ category.name }}</a>
+                        <ul v-if="category.child.length > 0" class="dropdown-menu">
+                            <li v-for="child in category.child"><a class="dropdown-item" :href='"{{ url("/category/") }}"+"/"+child.slug'>@{{ child.name }}</a></li>
+                            
+                        </ul>
+
+                    </li>
+                    <button @click="moreItems()" v-if="page < maxPages && loading == false" class="btn btn-primary btn-general btn-general--form" style="color: #fff; height: 60px; width: 120px;">cargar más</button>
+                </div>
+                
+            </ul>-->
           
         </div>
 
@@ -71,3 +69,67 @@
     @include('partials.footer')
 
 @endsection
+
+@push('scripts')
+
+    <script>
+        const navbar = new Vue({
+            el: '#dev-categories',
+            data(){
+                return{
+                    categories:null,
+                    page:1,
+                    maxPages:0,
+                    loading:false
+                }
+            },
+            methods:{
+                
+                getItems(){
+                   
+                    this.loading = true
+                    axios.get("{{ url('/categories/menu') }}"+"/"+this.page)
+                    .then(res => {
+                        //console.log(res)
+                        this.loading = false
+                        if(res.data.success == true){
+                            if(this.categories == null){
+                                this.categories = res.data.categories
+                                
+                            }else{
+                                res.data.categories.forEach((data, index) => {
+                                    this.categories.push(data)
+                                })
+                            }
+
+                            this.maxPages = Math.ceil(res.data.categoriesCount/25)
+
+                        }else{
+
+                            alertify.error(res.data.msg)
+
+                        }
+
+                    })
+                    .catch(err => {
+                        this.loading = false
+                        alertify.error("Error en el servidor")
+                        //console.log(err.response.data)
+                    })
+                },
+                moreItems(){
+                    this.page ++;
+                    this.getItems()
+                }
+
+            },
+            mounted(){
+                
+                this.getItems()
+
+            }
+
+        })
+    </script>
+
+@endpush

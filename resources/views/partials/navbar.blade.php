@@ -67,59 +67,13 @@
                         <a class="nav-link" href="{{ route('brands.all') }}">Marcas</a>
                     </li>
 
-                    <div class="navbar navbar-expand-md  navbar-hover">
-                        <div class="collapse navbar-collapse" id="navbarHover">
-                            <ul class="navbar-nav">      
-                                <li class="nav-item dropdown ">
-                                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Categorías
-                                    </a>
-                                    <ul class="dropdown-menu dropdown-left  ">
-                                        <div class="hover--grid" id="mega-menu">
-                                            <div v-if="loading == true">
-                                                <h2>Cargando</h2>
-                                            </div>
-                                            <li v-for="category in categories">
-                                                
-                                                <a v-if="category.child.length == 0" class="dropdown-item" :href='"{{ url("/category/") }}"+"/"+category.slug'>@{{ category.name }}</a>
-
-                                                <a v-if="category.child.length > 0" class="dropdown-item dropdown-toggle" :href='"{{ url("/category/") }}"+"/"+category.slug'>@{{ category.name }}</a>
-                                                <ul v-if="category.child.length > 0" class="dropdown-menu">
-                                                    <li v-for="child in category.child"><a class="dropdown-item" :href='"{{ url("/category/") }}"+"/"+child.slug'>@{{ child.name }}</a></li>
-                                                    
-                                                </ul>
-
-                                            </li>
-                                            <button @click="moreItems()" v-if="page < maxPages && loading == false" class="btn btn-primary btn-general btn-general--form" style="color: #fff; height: 60px; width: 120px;">cargar más</button>
-                                        </div>
-                               
-
-                                        <!--<li><a class="dropdown-item" href="#">Link</a></li>
-                                        <li><a class="dropdown-item" href="#">Link</a></li>
-                                        <li><a class="dropdown-item dropdown-toggle" href="#">Submenu</a>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="#">Submenu link</a></li>
-                                                <li><a class="dropdown-item" href="#">Submenu link 2</a></li>
-                                                <li><a class="dropdown-item dropdown-toggle" href="#">Subsubmenu</a>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a class="dropdown-item" href="#">Subsubmenu 1</a></li>
-                                                        <li><a class="dropdown-item" href="#">Subsubmenu 2</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a class="dropdown-item dropdown-toggle" href="#">Subsubmenu 2</a>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a class="dropdown-item" href="#">Subsubmenu 2.1</a></li>
-                                                        <li><a class="dropdown-item" href="#">Subsubmenu 2.2</a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>-->
-                                     
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                      
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/categories') }}">
+                            Categorías
+                        </a>
+                    </li>
+                            
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('/products/destacados') }}">Productos Destacados</a>
                     </li>

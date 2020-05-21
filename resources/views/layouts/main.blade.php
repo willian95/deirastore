@@ -100,65 +100,6 @@
             });
             
         </script>
-
-        <script>
-            const app2 = new Vue({
-                el: '#mega-menu',
-                data(){
-                    return{
-                        categories:null,
-                        page:1,
-                        maxPages:0,
-                        loading:false
-                    }
-                },
-                methods:{
-                    
-                    getItems(){
-                        this.loading = true
-                        axios.get("{{ url('/categories/menu') }}"+"/"+this.page)
-                        .then(res => {
-                            //console.log(res)
-                            this.loading = false
-                            if(res.data.success == true){
-                                if(this.categories == null){
-                                    this.categories = res.data.categories
-                                    
-                                }else{
-                                    res.data.categories.forEach((data, index) => {
-                                        this.categories.push(data)
-                                    })
-                                }
-
-                                this.maxPages = Math.ceil(res.data.categoriesCount/25)
-    
-                            }else{
-
-                                alertify.error(res.data.msg)
-
-                            }
-
-                        })
-                        .catch(err => {
-                            this.loading = false
-                            alertify.error("Error en el servidor")
-                            //console.log(err.response.data)
-                        })
-                    },
-                    moreItems(){
-                        this.page ++;
-                        this.getItems()
-                    }
-
-                },
-                mounted(){
-                    
-                    //this.getItems()
-
-                }
-
-            })
-        </script>
         
         @stack('scripts')
     </body>
