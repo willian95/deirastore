@@ -21,7 +21,7 @@
                     </li>
 
                     <li class="nav-item dropdown mega-menu" v-if="category.child.length > 0">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Categorías</a>
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">@{{ category.name }}</a>
                         <div class="dropdown-menu" style="opacity: 1;">
                             <div class="grid-menu">
                                 <div class="grid-menu__item">
