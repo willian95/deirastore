@@ -200,7 +200,7 @@ class CategoriesController extends Controller
             $categoriesArray= [];
             foreach($categories as $category){
 
-                if(Category::find($category->id)->has('child') || Product::where('category_id', $category->id)->count() > 0){
+                if(count($category->child) || Product::where('category_id', $category->id)->count() > 0){
 
                     $categoriesArray[] = [
                         "id" => $category->id,
