@@ -100,6 +100,11 @@ Route::get('/categories', function(){
     return view('categories');
 });
 
+Route::get('/categories/check', function(){
+    ini_set('max_execution_time', 0);
+    App\Category::doesntHave('products')->delete();
+});
+
 Route::prefix('admin')->group(function () {
     
     Route::get('/dashboard', function(){

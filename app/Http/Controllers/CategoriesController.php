@@ -188,37 +188,19 @@ class CategoriesController extends Controller
 
     }
 
-    function megaMenu($skip = 0){
+    function megaMenu($page = 1){
 
         try{
+
             
-            $take = 18;
-            $categories = Category::with('child')->skip($skip)->take($take)->orderBy('name')->get();
+            $take = 25;
+            $skip = ($page-1) * $take;
+            $categories = Category::with('child')->skip($skip)->take(25)->orderBy('name')->get();
             $categoriesCount = Category::with('child')->count();
+            //$categories = Category::has('products', '>', 0)->with('child')->skip($skip)->take(25)->orderBy('name')->get();
+            //$categoriesCount = Category::has('products', '>', 0)->with('child')->count();
 
-            $categoriesArray= [];
-            $index = 0;
-            
-            foreach($categories as $category){
-
-                if($index < $take){
-                    if(count($category->child) || Product::where('category_id', $category->id)->count() > 0){
-
-                        $categoriesArray[] = [
-                            "id" => $category->id,
-                            "name" => $category->name,
-                            "slug" => $category->slug,
-                            "child" => $category->child
-                        ];
-    
-                    }
-                    $index++;
-                }
-                $skip++;
-            }
-
-            //return response()->json(["success" => true, "categories" => $categoriesArray, "categoriesCount" => $categoriesCount]);
-            return response()->json(["success" => true, "categories" => $categoriesArray, "categoriesCount" => $categoriesCount, "skip" => $skip]);
+            return response()->json(["success" => true, "categories" => $categories, "categoriesCount" => $categoriesCount]);
 
         }catch(\Exception $e){
 

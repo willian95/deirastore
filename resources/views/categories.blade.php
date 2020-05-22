@@ -39,7 +39,7 @@
                 
             </ul>
 
-            <button @click="moreItems()" v-if="skip < categoriesCount && loading == false" class="btn btn-primary btn-general btn-general--form" style="color: #fff; height: 60px; width: 120px;">cargar más</button>
+            <button @click="moreItems()" v-if="page < maxPages && loading == false" class="btn btn-primary btn-general btn-general--form" style="color: #fff; height: 60px; width: 120px;">cargar más</button>
           
         </div>
 
@@ -60,8 +60,7 @@
                 return{
                     categories:null,
                     page:1,
-                    categoriesAmount:0,
-                    skip:0,
+                    maxPages:0,
                     loading:false
                 }
             },
@@ -70,7 +69,7 @@
                 getItems(){
                    
                     this.loading = true
-                    axios.get("{{ url('/categories/menu') }}"+"/"+this.skip)
+                    axios.get("{{ url('/categories/menu') }}"+"/"+this.page)
                     .then(res => {
                         //console.log(res)
                         this.loading = false
@@ -84,8 +83,7 @@
                                 })
                             }
 
-                            this.categoriesAmount = res.data.categoriesCount
-                            this.skip = res.data.skip
+                            this.maxPages = Math.ceil(res.data.categoriesCount/25)
 
                         }else{
 
