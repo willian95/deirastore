@@ -17,7 +17,7 @@
                 
                 @foreach(App\Category::with('child')->orderBy('name')->get() as $category)
 
-                    @if(count($category->child) == 0)
+                    @if(count($category->child) == 0 && Product::where('category_id', $category->id)->count() > 0)
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('/category/'.$category->slug) }}">{{ $category->name }}</a>
                         </li>
