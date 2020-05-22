@@ -14,32 +14,41 @@
         </div>
         <div class="">
             <ul class="categories__grid">
-                <div v-for="category in categories">
+                
+                @foreach(Category::with('child')->orderBy('name')->get() as $categoy)
 
-                    <li class="nav-item" v-if="category.child.length == 0">
-                        <a class="nav-link" :href='"{{ url("/category/") }}"+"/"+category.slug'>@{{ category.name }}</a>
-                    </li>
+                    @if(count($category->child) == 0)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/category/'.$category->slug) }}">{{ $category->name }}</a>
+                        </li>
+                    @endif
 
-                    <li class="nav-item dropdown mega-menu" v-if="category.child.length > 0">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">@{{ category.name }}</a>
-                        <div class="dropdown-menu" style="opacity: 1;">
-                            <div class="grid-menu">
-                                <div class="grid-menu__item">
-                                    <ul v-if="category.child.length > 0">
-                                        <li v-for="child in category.child">
-                                            <a class="dropdown-item" :href='"{{ url("/category/") }}"+"/"+child.slug'>@{{ child.name }}</a>
-                                        </li>                         
-                                    </ul>
+                    @if(count($category->child) > 0)
+                        <li class="nav-item dropdown mega-menu">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="{{ url('/category/'.$category->slug) }}" role="button" aria-haspopup="true" aria-expanded="false">{{ $category->name }}</a>
+                            <div class="dropdown-menu" style="opacity: 1;">
+                                <div class="grid-menu">
+                                    <div class="grid-menu__item">
+                                        <ul>
+                                            @foreach($category->child as $child)
+                                                <li>
+                                                    <a class="dropdown-item" href="{{ url('/category/'.$child->slug) }}">{{ $child->name }}</a>
+                                                </li> 
+                                            @endforeach                        
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </li>
+                        </li>
+                    @endif
+                    
 
-                </div>
+                @endforeach
+                
                 
             </ul>
 
-            <button @click="moreItems()" v-if="page < maxPages && loading == false" class="btn btn-primary btn-general btn-general--form" style="color: #fff; height: 60px; width: 120px;">cargar más</button>
+            <!--<button @click="moreItems()" v-if="page < maxPages && loading == false" class="btn btn-primary btn-general btn-general--form" style="color: #fff; height: 60px; width: 120px;">cargar más</button>-->
           
         </div>
 
