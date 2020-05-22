@@ -15,7 +15,7 @@
         <div class="">
             <ul class="categories__grid">
                 
-                @foreach(Category::with('child')->orderBy('name')->get() as $categoy)
+                @foreach(App\Category::with('child')->orderBy('name')->get() as $categoy)
 
                     @if(count($category->child) == 0)
                         <li class="nav-item">
