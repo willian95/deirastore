@@ -193,12 +193,27 @@ class CategoriesController extends Controller
         try{
             $take = 25;
             $skip = ($page-1) * $take;
-            $categories = Category::has('products')->with('child')->skip($skip)->take($take)->orderBy('name')->get();
-            $categoriesCount = Category::has('products')->with('child')->count();
+            $categories = Category::with('child')->skip($skip)->take($take)->orderBy('name')->get();
+            $categoriesCount = Category::with('child')->count();
             //$categories = Category::has('products', '>', 0)->with('child')->skip($skip)->take(25)->orderBy('name')->get();
             //$categoriesCount = Category::has('products', '>', 0)->with('child')->count();
+            $categoriesArray= [];
+            foreach($categories as $category){
 
-            return response()->json(["success" => true, "categories" => $categories, "categoriesCount" => $categoriesCount]);
+                if(Category::find($category->id)->has('child') || Product::where('category_id', $category->id)->count() > 0){
+
+                    $categoriesArray[] = [
+                        "id" => $category->id,
+                        "name" => $category->name,
+                        "slug" => $category->slug,
+                        "child" => $category->child
+                    ];
+
+                }
+
+            }
+
+            return response()->json(["success" => true, "categories" => $categoriesArray, "categoriesCount" => $categoriesCount]);
 
         }catch(\Exception $e){
 
