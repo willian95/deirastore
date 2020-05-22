@@ -191,6 +191,8 @@ class NexsysProducts extends Command
                 Log::info($fault);
             }
         }
+
+        Category::doesntHave('products')->delete();
     
     }
 }
