@@ -22,7 +22,6 @@
          <!---links----->
         <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
         <link href="{{ asset('assets/css/slick.css') }}" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" rel="stylesheet" />
         <link href="{{ asset('assets/css/slick-theme.css') }}" rel="stylesheet" />
         <link href="{{ asset('assets/css/font-awesome.css') }}" rel="stylesheet" />
