@@ -14,41 +14,32 @@
         </div>
         <div class="">
             <ul class="categories__grid">
-                
-                @foreach(App\Category::with('child')->orderBy('name')->get() as $category)
+                <div v-for="category in categories">
 
-                    @if(count($category->child) == 0 && App\Category::find($category->id)->has('product'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/category/'.$category->slug) }}">{{ $category->name }}</a>
-                        </li>
-                    @endif
+                    <li class="nav-item" v-if="category.child.length == 0">
+                        <a class="nav-link" :href='"{{ url("/category/") }}"+"/"+category.slug'>@{{ category.name }}</a>
+                    </li>
 
-                    @if(count($category->child) > 0)
-                        <li class="nav-item dropdown mega-menu">
-                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="{{ url('/category/'.$category->slug) }}" role="button" aria-haspopup="true" aria-expanded="false">{{ $category->name }}</a>
-                            <div class="dropdown-menu" style="opacity: 1;">
-                                <div class="grid-menu">
-                                    <div class="grid-menu__item">
-                                        <ul>
-                                            @foreach($category->child as $child)
-                                                <li>
-                                                    <a class="dropdown-item" href="{{ url('/category/'.$child->slug) }}">{{ $child->name }}</a>
-                                                </li> 
-                                            @endforeach                        
-                                        </ul>
-                                    </div>
+                    <li class="nav-item dropdown mega-menu" v-if="category.child.length > 0">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">@{{ category.name }}</a>
+                        <div class="dropdown-menu" style="opacity: 1;">
+                            <div class="grid-menu">
+                                <div class="grid-menu__item">
+                                    <ul v-if="category.child.length > 0">
+                                        <li v-for="child in category.child">
+                                            <a class="dropdown-item" :href='"{{ url("/category/") }}"+"/"+child.slug'>@{{ child.name }}</a>
+                                        </li>                         
+                                    </ul>
                                 </div>
                             </div>
-                        </li>
-                    @endif
-                    
+                        </div>
+                    </li>
 
-                @endforeach
-                
+                </div>
                 
             </ul>
 
-            <!--<button @click="moreItems()" v-if="page < maxPages && loading == false" class="btn btn-primary btn-general btn-general--form" style="color: #fff; height: 60px; width: 120px;">cargar más</button>-->
+            <button @click="moreItems()" v-if="page < maxPages && loading == false" class="btn btn-primary btn-general btn-general--form" style="color: #fff; height: 60px; width: 120px;">cargar más</button>
           
         </div>
 
@@ -69,7 +60,8 @@
                 return{
                     categories:null,
                     page:1,
-                    maxPages:0,
+                    categoriesAmount:0,
+                    skip:0,
                     loading:false
                 }
             },
@@ -78,7 +70,7 @@
                 getItems(){
                    
                     this.loading = true
-                    axios.get("{{ url('/categories/menu') }}"+"/"+this.page)
+                    axios.get("{{ url('/categories/menu') }}"+"/"+this.skip)
                     .then(res => {
                         //console.log(res)
                         this.loading = false
@@ -92,7 +84,8 @@
                                 })
                             }
 
-                            //this.maxPages = Math.ceil(res.data.categoriesCount/25)
+                            this.categoriesAmount = res.data.categoriesCount
+                            this.skip = res.data.skip
 
                         }else{
 

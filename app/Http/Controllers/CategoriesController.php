@@ -188,33 +188,37 @@ class CategoriesController extends Controller
 
     }
 
-    function megaMenu($page = 1){
+    function megaMenu($skip = 0){
 
         try{
-            //$take = 25;
-            //$skip = ($page-1) * $take;
-            $categories = Category::with('child')->orderBy('name')->get();
-            //$categoriesCount = Category::with('child')->count();
-            //$categories = Category::has('products', '>', 0)->with('child')->skip($skip)->take(25)->orderBy('name')->get();
-            //$categoriesCount = Category::has('products', '>', 0)->with('child')->count();
+            
+            $take = 18;
+            $categories = Category::with('child')->skip($skip)->take($take)->orderBy('name')->get();
+            $categoriesCount = Category::with('child')->count();
+
             $categoriesArray= [];
+            $index = 0;
+            
             foreach($categories as $category){
 
-                if(count($category->child) || Product::where('category_id', $category->id)->count() > 0){
+                if($index < $take){
+                    if(count($category->child) || Product::where('category_id', $category->id)->count() > 0){
 
-                    $categoriesArray[] = [
-                        "id" => $category->id,
-                        "name" => $category->name,
-                        "slug" => $category->slug,
-                        "child" => $category->child
-                    ];
-
+                        $categoriesArray[] = [
+                            "id" => $category->id,
+                            "name" => $category->name,
+                            "slug" => $category->slug,
+                            "child" => $category->child
+                        ];
+    
+                    }
+                    $index++;
                 }
-
+                $skip++;
             }
 
             //return response()->json(["success" => true, "categories" => $categoriesArray, "categoriesCount" => $categoriesCount]);
-            return response()->json(["success" => true, "categories" => $categoriesArray]);
+            return response()->json(["success" => true, "categories" => $categoriesArray, "categoriesCount" => $categoriesCount, "skip" => $skip]);
 
         }catch(\Exception $e){
 
