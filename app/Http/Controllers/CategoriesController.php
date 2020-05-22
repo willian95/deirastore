@@ -194,7 +194,7 @@ class CategoriesController extends Controller
             //$take = 25;
             //$skip = ($page-1) * $take;
             $categories = Category::with('child')->orderBy('name')->get();
-            $categoriesCount = Category::with('child')->count();
+            //$categoriesCount = Category::with('child')->count();
             //$categories = Category::has('products', '>', 0)->with('child')->skip($skip)->take(25)->orderBy('name')->get();
             //$categoriesCount = Category::has('products', '>', 0)->with('child')->count();
             $categoriesArray= [];

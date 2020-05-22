@@ -83,7 +83,7 @@
                                 })
                             }
 
-                            this.maxPages = Math.ceil(res.data.categoriesCount/25)
+                            //this.maxPages = Math.ceil(res.data.categoriesCount/25)
 
                         }else{
 
