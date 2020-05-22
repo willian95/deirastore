@@ -191,9 +191,9 @@ class CategoriesController extends Controller
     function megaMenu($page = 1){
 
         try{
-            $take = 25;
-            $skip = ($page-1) * $take;
-            $categories = Category::with('child')->skip($skip)->take($take)->orderBy('name')->get();
+            //$take = 25;
+            //$skip = ($page-1) * $take;
+            $categories = Category::with('child')->orderBy('name')->get();
             $categoriesCount = Category::with('child')->count();
             //$categories = Category::has('products', '>', 0)->with('child')->skip($skip)->take(25)->orderBy('name')->get();
             //$categoriesCount = Category::has('products', '>', 0)->with('child')->count();
@@ -213,7 +213,8 @@ class CategoriesController extends Controller
 
             }
 
-            return response()->json(["success" => true, "categories" => $categoriesArray, "categoriesCount" => $categoriesCount]);
+            //return response()->json(["success" => true, "categories" => $categoriesArray, "categoriesCount" => $categoriesCount]);
+            return response()->json(["success" => true, "categories" => $categoriesArray]);
 
         }catch(\Exception $e){
 
