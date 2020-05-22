@@ -40,25 +40,6 @@
             </ul>
 
             <button @click="moreItems()" v-if="page < maxPages && loading == false" class="btn btn-primary btn-general btn-general--form" style="color: #fff; height: 60px; width: 120px;">cargar más</button>
-
-           <!--<ul class="dropdown-menu dropdown-left  ">
-                <div class="hover--grid">
-                    
-                    <li v-for="category in categories">
-                        
-                        <a v-if="category.child.length == 0" class="dropdown-item" :href='"{{ url("/category/") }}"+"/"+category.slug'>@{{ category.name }}</a>
-
-                        <a v-if="category.child.length > 0" class="dropdown-item dropdown-toggle" :href='"{{ url("/category/") }}"+"/"+category.slug'>@{{ category.name }}</a>
-                        <ul v-if="category.child.length > 0" class="dropdown-menu">
-                            <li v-for="child in category.child"><a class="dropdown-item" :href='"{{ url("/category/") }}"+"/"+child.slug'>@{{ child.name }}</a></li>
-                            
-                        </ul>
-
-                    </li>
-                    <button @click="moreItems()" v-if="page < maxPages && loading == false" class="btn btn-primary btn-general btn-general--form" style="color: #fff; height: 60px; width: 120px;">cargar más</button>
-                </div>
-                
-            </ul>-->
           
         </div>
 
