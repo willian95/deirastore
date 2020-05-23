@@ -54,8 +54,12 @@ class Product extends Model
         return $this->hasMany(ProductPurchase::class);
     }
 
-    function brand(){
+    public function brand(){
         return $this->belongsTo('App\Brand');
+    }
+
+    public function items(){
+        return $this->hasMany(Item::class);
     }
 
 }

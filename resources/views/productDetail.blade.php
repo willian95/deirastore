@@ -174,7 +174,23 @@
                                     </div>
                             </div>
                             </a>
-                            <div id="collapseDos" class="collapse" data-parent="#accordion">
+                            <div id="collapseDos" class="collapse" data-parent="#accordion" v-if="product.items">
+                                <div class="card-body">
+                                    <div class="container">
+                                        <table class="table table-bordered">
+                                            <tbody>
+                                                <tr v-for="item in product.items">
+                                                    <td>@{{ item.name }}</td>
+                                                    <td>@{{ item.description }}
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="collapseDos" class="collapse" data-parent="#accordion" v-else>
                                 <div class="card-body">
                                     <div class="container">
                                         <table class="table table-bordered">
@@ -237,6 +253,7 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
 
                         <div class="card">
