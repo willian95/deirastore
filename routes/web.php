@@ -47,6 +47,31 @@ Route::get('brand/{slug}', "BrandController@slug")->name('brands.slug');
 Route::post('/brand/products', "BrandController@products")->name('brands.products');
 Route::get('/brands/fetch/all', "BrandController@fetchAll");
 
+Route::get('/check/slug', function(){
+
+    $products = App\Product::where('slug', 'like', '%/%')->get();
+    foreach($products as $product){
+
+        $obj = App\Product::find($product->id);
+        $obj->slug = str_replace("/", "-", $obj->slug);
+        $obj->update();
+    }
+});
+
+Route::get('/check/slug/slash', function(){
+
+    $products = App\Product::where('slug','/')->get();
+    foreach($products as $product){
+
+        $slug = str_replace("/", "-", $obj->name);
+        $slug = str_replace(" ", "-", $slug);
+
+        $obj = App\Product::find($product->id);
+        $obj->slug = $slug;
+        $obj->update();
+    }
+});
+
 Route::get('/categories/all', "CategoriesController@categoriesAll");
 Route::get('/categories/menu/{page}', "CategoriesController@megaMenu");
 
@@ -98,11 +123,6 @@ Route::get('/terms', function(){
 
 Route::get('/categories', function(){
     return view('categories');
-});
-
-Route::get('/categories/check', function(){
-    ini_set('max_execution_time', 0);
-    App\Category::doesntHave('products')->delete();
 });
 
 Route::prefix('admin')->group(function () {
