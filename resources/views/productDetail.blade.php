@@ -190,7 +190,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="collapseDos" class="collapse" data-parent="#accordion" v-else>
+                            <!--<div id="collapseDos" class="collapse" data-parent="#accordion" v-else>
                                 <div class="card-body">
                                     <div class="container">
                                         <table class="table table-bordered">
@@ -252,7 +252,7 @@
                                         </table>
                                     </div>
                                 </div>
-                            </div>
+                            </div>-->
 
                         </div>
 
