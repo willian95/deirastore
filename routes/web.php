@@ -47,7 +47,7 @@ Route::get('brand/{slug}', "BrandController@slug")->name('brands.slug');
 Route::post('/brand/products', "BrandController@products")->name('brands.products');
 Route::get('/brands/fetch/all', "BrandController@fetchAll");
 
-Route::get('/check/slug', function(){
+/*Route::get('/check/slug', function(){
     ini_set('max_execution_time', 0);
     $products = App\Product::where('slug', 'like', '%/%')->get();
     foreach($products as $product){
@@ -70,7 +70,7 @@ Route::get('/check/slug/slash', function(){
         $obj->slug = $slug;
         $obj->update();
     }
-});
+});*/
 
 Route::get('/categories/all', "CategoriesController@categoriesAll");
 Route::get('/categories/menu/{page}', "CategoriesController@megaMenu");
