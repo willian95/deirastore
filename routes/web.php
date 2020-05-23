@@ -48,7 +48,7 @@ Route::post('/brand/products', "BrandController@products")->name('brands.product
 Route::get('/brands/fetch/all', "BrandController@fetchAll");
 
 Route::get('/check/slug', function(){
-
+    ini_set('max_execution_time', 0);
     $products = App\Product::where('slug', 'like', '%/%')->get();
     foreach($products as $product){
 
@@ -59,7 +59,7 @@ Route::get('/check/slug', function(){
 });
 
 Route::get('/check/slug/slash', function(){
-
+    ini_set('max_execution_time', 0);
     $products = App\Product::where('slug','/')->get();
     foreach($products as $product){
 
