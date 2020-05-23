@@ -63,7 +63,7 @@ Route::get('/check/slug/slash', function(){
     $products = App\Product::where('slug','/')->get();
     foreach($products as $product){
 
-        $slug = str_replace("/", "-", $obj->name);
+        $slug = str_replace("/", "-", $product->name);
         $slug = str_replace(" ", "-", $slug);
 
         $obj = App\Product::find($product->id);
