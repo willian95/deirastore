@@ -184,7 +184,8 @@ class ProductController extends Controller
 
         try{
 
-            $product = Product::with('category', 'brand', 'items')->where('id', $id)->first();          
+            $product = Product::with('category', 'brand', 'items')->where('id', $id)->first();  
+            dd($product);        
             return response()->json(["success" => true, "product" => $product]);
 
         }catch(\Exception $e){
