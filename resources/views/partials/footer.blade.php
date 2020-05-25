@@ -1,7 +1,7 @@
 <footer>
         <div class="main-footer__content container">
             <div class="main-footer__item">
-                <img class="logo-footer" src="assets/img/logo-cap.png" alt="">
+                <img class="logo-footer" src="{{ asset('assets/img/logo-cap.png') }}" alt="">
                 <p class="description">Empresa de Servicio, Soporte, Soluciones y Venta de
                     Productos Informáticos, dando respuesta a requerimientos
                     de integración de harreare y software.</p>
