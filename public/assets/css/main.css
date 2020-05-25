@@ -2142,9 +2142,6 @@ img.lista-pedido {
     background: #fff;
 }
 
-.btn-buy {
-    display: flex;
-}
 
 .hover--grid {
     display: grid !important;

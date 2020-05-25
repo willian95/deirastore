@@ -10,7 +10,7 @@
             <p><strong>{{ $brand->name }}</strong></p>
         </div>
         <div class="row">
-            <div class="col-3" v-for="product in products">
+            <div class="col-md-3 col-xs-12 " v-for="product in products">
                 <div class="main-slider__item">
                     <a :href=" '{{ url('/') }}' + '/product/' + product.slug">
                         <div class="content-slider">
