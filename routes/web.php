@@ -99,7 +99,7 @@ Route::get('/ayuda', function(){
     return view('help');
 });
 
-Route::get('/cnet', "CnetController@index");
+/*Route::get('/cnet', "CnetController@index");
 Route::get('/cnet/images', "CnetController@imagesDownload");
 Route::get('/cnet/decode', "CnetController@decode");
 Route::get('/cnet/compare', "CnetController@compare");
@@ -112,7 +112,7 @@ Route::get('/test/categories', function(){
 
     dd(App\Category::has('products', '>', 0)->get());
 
-});
+});*/
 
 
 Route::get('/terms', function(){
@@ -172,4 +172,4 @@ Route::prefix('admin')->group(function () {
     
 });
 
-Route::get('/nexsys/{mark}', "NexsysController@index");
+//Route::get('/nexsys/{mark}', "NexsysController@index");

@@ -12,12 +12,15 @@ trait CartAbandonTrait
             $data = ["products" => $products];
             $to_email = \Auth::user()->email;
             $to_name = \Auth::user()->name;
-            \Mail::send("emails.cartAbandon", $data, function($message) use ($to_name, $to_email) {// se envía el email
+            if(count($products) > 0){
+                \Mail::send("emails.cartAbandon", $data, function($message) use ($to_name, $to_email) {// se envía el email
 
-                $message->to($to_email, $to_name)->subject("¡Tienes productos en tu carro de compras!");
-                $message->from("rodriguezwillian95@gmail.com","Deira");
-
-            });
+                    $message->to($to_email, $to_name)->subject("¡Tienes productos en tu carro de compras!");
+                    $message->from("rodriguezwillian95@gmail.com","Deira");
+    
+                });
+            }
+            
         }
     }
 
