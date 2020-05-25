@@ -51,8 +51,14 @@
             <div class="col-12">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination">
+                        <li>
+                            <a class="page-link" v-if="page > 1" href="#" @click="fetch(page - 1)">Anterior</a>
+                        </li>
                         <li class="page-item" v-for="index in pages">
-                            <a class="page-link" href="#"  :key="index" @click="fetch(index)" >@{{ index }}</a>
+                            <a class="page-link" href="#" v-if="index > page &&  index < page + 6"  :key="index" @click="fetch(index)" >@{{ index }}</a>
+                        </li>
+                        <li>
+                            <a class="page-link" v-if="page < pages" href="#" @click="fetch(page + 6)">Siguiente</a>
                         </li>
                     </ul>
                 </nav>
@@ -207,6 +213,7 @@
                     bannerId:'',
                     banners:[],
                     pages:0,
+                    page:1,
                     query:"",
                     text:"",
                     position:"izquierda",
@@ -382,6 +389,8 @@
 
                 },
                 fetch(page = 1){
+
+                    this.page = page
 
                     axios.get("{{ url('/admin/banner/fetch/') }}"+"/"+page)
                     .then(res => {

@@ -25,8 +25,14 @@
             <div class="col-12">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination">
+                        <li>
+                            <a class="page-link" v-if="page > 1" href="#" @click="fetch(page - 1)">Anterior</a>
+                        </li>
                         <li class="page-item" v-for="index in pages">
-                            <a class="page-link" href="#"  :key="index" @click="fetch(index)" >@{{ index }}</a>
+                            <a class="page-link" href="#" v-if="index > page &&  index < page + 6"  :key="index" @click="fetch(index)" >@{{ index }}</a>
+                        </li>
+                        <li>
+                            <a class="page-link" v-if="page < pages" href="#" @click="fetch(page + 6)">Siguiente</a>
                         </li>
                     </ul>
                 </nav>
@@ -99,7 +105,8 @@
                 return{
                     productDetails:[],
                     pages:0,
-                    purchases:[]
+                    purchases:[],
+                    page:1
                 }
             },
             methods:{
@@ -107,6 +114,8 @@
                     this.productDetails = details
                 },
                 fetch(page = 1){
+
+                    this.page = page
 
                     axios.post("{{ route('user.purchase.fetch') }}", {page: page})
                     .then(res => {
