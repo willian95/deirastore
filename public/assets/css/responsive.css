@@ -538,4 +538,8 @@
         text-align: start;
  
     }
+    .reverse_colum{
+        display: flex;
+    flex-direction: column-reverse;
+    }
 }
