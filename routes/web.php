@@ -47,6 +47,31 @@ Route::get('brand/{slug}', "BrandController@slug")->name('brands.slug');
 Route::post('/brand/products', "BrandController@products")->name('brands.products');
 Route::get('/brands/fetch/all', "BrandController@fetchAll");
 
+/*Route::get('/check/slug', function(){
+    ini_set('max_execution_time', 0);
+    $products = App\Product::where('slug', 'like', '%/%')->get();
+    foreach($products as $product){
+
+        $obj = App\Product::find($product->id);
+        $obj->slug = str_replace("/", "-", $obj->slug);
+        $obj->update();
+    }
+});
+
+Route::get('/check/slug/slash', function(){
+    ini_set('max_execution_time', 0);
+    $products = App\Product::where('slug','/')->get();
+    foreach($products as $product){
+
+        $slug = str_replace("/", "-", $product->name);
+        $slug = str_replace(" ", "-", $slug);
+
+        $obj = App\Product::find($product->id);
+        $obj->slug = $slug;
+        $obj->update();
+    }
+});*/
+
 Route::get('/categories/all', "CategoriesController@categoriesAll");
 Route::get('/categories/menu/{page}', "CategoriesController@megaMenu");
 
@@ -74,7 +99,7 @@ Route::get('/ayuda', function(){
     return view('help');
 });
 
-Route::get('/cnet', "CnetController@index");
+/*Route::get('/cnet', "CnetController@index");
 Route::get('/cnet/images', "CnetController@imagesDownload");
 Route::get('/cnet/decode', "CnetController@decode");
 Route::get('/cnet/compare', "CnetController@compare");
@@ -87,7 +112,7 @@ Route::get('/test/categories', function(){
 
     dd(App\Category::has('products', '>', 0)->get());
 
-});
+});*/
 
 
 Route::get('/terms', function(){
@@ -98,11 +123,6 @@ Route::get('/terms', function(){
 
 Route::get('/categories', function(){
     return view('categories');
-});
-
-Route::get('/categories/check', function(){
-    ini_set('max_execution_time', 0);
-    App\Category::doesntHave('products')->delete();
 });
 
 Route::prefix('admin')->group(function () {
@@ -152,4 +172,4 @@ Route::prefix('admin')->group(function () {
     
 });
 
-Route::get('/nexsys/{mark}', "NexsysController@index");
+//Route::get('/nexsys/{mark}', "NexsysController@index");

@@ -174,7 +174,27 @@
                                     </div>
                             </div>
                             </a>
-                            <div id="collapseDos" class="collapse" data-parent="#accordion">
+                            @if($product->items)
+                            <div id="collapseDos" class="collapse" data-parent="#accordion" >
+                                <div class="card-body">
+                                    <div class="container">
+                                        <table class="table table-bordered">
+                                            <tbody>
+                                                @foreach($product->items as $item)
+                                                <tr >
+                                                    <td>{{ $item->name }}</td>
+                                                    <td>{{ $item->description }}
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            @else
+                            <div id="collapseDos" class="collapse" data-parent="#accordion" v-else>
                                 <div class="card-body">
                                     <div class="container">
                                         <table class="table table-bordered">
@@ -237,9 +257,11 @@
                                     </div>
                                 </div>
                             </div>
+                            @endif
+
                         </div>
 
-                        <div class="card">
+                        <!--<div class="card">
                             <a class="collapsed card-link" data-toggle="collapse" href="#collapseTres">
                                 <div class="card-header acordeon-2">
                                     <h2><strong>Calificación </strong>y Comentarios</h2>
@@ -289,7 +311,7 @@
                                     <a href="" class="agregar-comentario">Agregar Comentario</a>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
             </div>
