@@ -22,7 +22,7 @@
             @foreach(App\Product::with('category')->inRandomOrder()->where('amount', '>', 0)->take(20)->get() as $product)
 
         
-                <div class="col-3">
+                <div class="col-md-3 col-xs-12 ">
                     <div class="main-slider__item">
                         <a href="{{ url('/product/'.$product->slug) }}">
                             <div class="content-slider">

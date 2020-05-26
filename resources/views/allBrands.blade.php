@@ -7,10 +7,10 @@
             <a class="btn btn-primary btn-general btn-general--form" style="color: #fff;" href="{{ url()->previous() }}"><i class="fa fa-arrow-left"></i></a>
         </div>
         <div class="row">
-            <div class="col-3" v-for="brand in brands">
+            <div class="col-md-3 col-xs-12 " v-for="brand in brands">
                 <div class="main-slider__item">
                     <a :href="'{{ url('/') }}' + '/brand/' + brand.slug">
-                        <div class="content-slider">
+                        <div class="content-slider brands-center">
                             <img :src="'{{ url('/') }}' + '/images/brands/'+brand.image" alt="" v-if="brand.image != null" style="width: 100%">
                             <img :src="'{{ url('/') }}' + '/images/brands/default.png'" alt="" v-else style="width: 100%">
                         </div>

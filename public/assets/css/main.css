@@ -2167,3 +2167,15 @@ img.lista-pedido {
     color: #3e3e3e;
     margin-left: 0;
 }
+.brands-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    margin-top: 15px;
+}
+.brands-center .main-slider__text span{
+    font-size: 1.2rem;
+    color: #333333;
+    font-weight: bold;
+}
