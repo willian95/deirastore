@@ -44,7 +44,7 @@
                                 <p><strong>Carrito </strong>de compras</p>
                             </div>
                             <div class="row">
-                                <div class="col-md-8">
+                                <div class="col-md-12 col-lg-8">
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
@@ -117,7 +117,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-12 col-lg-4">
                                     <div class="pedido">
                                         <h3>Tu pedido</h3>
                                         <h5>Total de tu compra</h5>

@@ -90,7 +90,7 @@ $('.main-slider__content').slick({
   {
     breakpoint: 900,
     settings: {
-      slidesToShow: 1,
+      slidesToShow: 2,
       slidesToScroll: 1
     }
   },
