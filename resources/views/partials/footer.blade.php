@@ -16,21 +16,19 @@
                 <div class="menu-grid">
                     <ul>
                         <p class="title">DEIRA STORE</p>
-                        <li><a href="#">Categorías</a></li>
-                        <li><a href="#">Productos Destacados</a></li>
-                        <li><a href="#">Ofertas Imperdibles</a></li>
-                        <li><a href="#">Impresión</a></li>
-                        <li><a href="#">Software</a></li>
+                        <li><a href="{{ url('/brands') }}">Marcas</a></li>
+                        <li><a href="{{ url('/categories') }}">Categorías</a></li>
+                        <li><a href="{{ url('/products/destacados') }}">Productos Destacados</a></li>
+                        <li><a href="{{ url('/somos') }}">Quienes somos</a></li>
                     </ul>
                     <ul>
                         <p class="title">SERVICIO AL CLIENTE</p>
                         <li><a href="{{ url('/ayuda') }}">Centro de ayuda</a></li>
-                        <li><a href="#">¿Por qué comprar en Deira Store?</a></li>
+                        <!--<li><a href="#">¿Por qué comprar en Deira Store?</a></li>
                         <li><a href="#">Métodos y costos de envío</a></li>
                         <li><a href="#">Seguimiento de mi orden</a></li>
-                        <li><a href="#">Cambios y devoluciones</a></li>
-                        <li><a href="#">Términos y condiciones</a></li>
-               
+                        <li><a href="#">Cambios y devoluciones</a></li>-->
+                        <li><a href="{{ url('terms') }}">Términos y condiciones</a></li>
 
                     </ul>
                 </div>

@@ -78,7 +78,7 @@
                         <a class="nav-link" href="{{ url('/products/destacados') }}">Productos Destacados</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Quienes somos</a>
+                        <a class="nav-link" href="{{ url('/somos') }}">Quienes somos</a>
                     </li>
                     <li class="nav-item dropdown mega-menu">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" id="menu-brands">Mejores tiendas</a>

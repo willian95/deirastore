@@ -63,7 +63,10 @@
                                             <tr v-for="item in items">
                                                 <td v-if="item.product.is_external"><img class="lista-pedido" :src="item.product.picture" alt=""></td>
                                                 <td v-else><img class="lista-pedido" :src="'{{ url('/') }}'+'/images/products/'+item.product.picture" alt=""></td>
-                                                <td><img class="lista-pedido" :src="'{{ url('/') }}'+'/images/brands/'+item.product.brand.image" alt=""></td>
+                                                <td>
+                                                    <img class="lista-pedido" v-if="item.product.brand.image != null" :src="'{{ url('/') }}'+'/images/brands/'+item.product.brand.image" alt="">
+                                                    <span v-else>item.product.brand.name</span>
+                                                </td>
                                                 <td>
                                                     <span>@{{ item.product.name }} </span>
                                                     <p>@{{ item.product.sub_title }}</p>
@@ -134,8 +137,8 @@
                                                 <label  class="form-check-label mt-3" for="terms"><a href="{{ url('/terms') }}" target="_blank">Acepto terminos y condiciones</a></label>
                                             </div>
                                        
-                                        <button @click="keepShopping()"  class="finalizar-compra finalizar-compra--go">seguir comprando</button>
-                                        <button @click="checkout()" class="finalizar-compra">checkout</button>
+                                        <button @click="keepShopping()"  class="finalizar-compra finalizar-compra--go">Seguir Comprando</button>
+                                        <button @click="checkout()" class="finalizar-compra">Check Out</button>
                                  
                                       </div>
 
@@ -392,10 +395,14 @@
 
                 },
                 checkout(){
-                    if(this.authCheck == 1)
-                        window.location.href="{{ route('checkout') }}"
-                    else
-                        window.location.href="{{ url('/guest/checkout/') }}"
+                    if(this.terms == true){
+                        if(this.authCheck == 1)
+                            window.location.href="{{ route('checkout') }}"
+                        else
+                            window.location.href="{{ url('/guest/checkout/') }}"
+                    }else{
+                        alertify.error("Debe aceptar los terminos y condiciones")
+                    }
         
                 },
                 getGuestItems(){

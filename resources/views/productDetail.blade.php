@@ -62,7 +62,7 @@
                                             </div>
                                             <div class="amount_item ml-5">   
                                                                                                                 
-                                                <button class="btn btn-info" @click="store()">añadir al carrito</button>                                     
+                                                <button class="btn btn-info" @click="store()">Añadir al Carrito</button>                                     
                                             </div>
                                         </div>
                                         
@@ -455,7 +455,7 @@
                     
                     window.localStorage.setItem("cart", JSON.stringify(cart))
 
-                    alert("Producto añadido al carrito")
+                    alertify.success("Producto añadido al carrito")
 
                 }
 
