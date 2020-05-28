@@ -10,7 +10,7 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <h2 class="text-center">Quiénes 3 somos</h2>
+                <h2 class="text-center">Quiénes somos</h2>
             </div> 
 
         </div>

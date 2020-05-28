@@ -2277,3 +2277,10 @@ padding-bottom: 110px;
     align-items: stretch;
     display: inline-table;
 }
+.about_content img{
+    border-radius: 10px;
+    width: 100%;
+}
+.about_text p{
+    font-size: 1.2rem;
+}
