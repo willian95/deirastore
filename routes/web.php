@@ -99,6 +99,10 @@ Route::get('/ayuda', function(){
     return view('help');
 });
 
+Route::get('/somos', function(){
+    return view('aboutUs');
+});
+
 /*Route::get('/cnet', "CnetController@index");
 Route::get('/cnet/images', "CnetController@imagesDownload");
 Route::get('/cnet/decode', "CnetController@decode");

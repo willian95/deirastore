@@ -22,7 +22,7 @@
                             <p class="title">@{{ product.category.name }}</p>
                             <span class="price" v-if="product.external_price > 0">$ @{{ parseInt(product.external_price * dolarPrice).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</span>
                             <span class="price" v-else>$ @{{ product.price }}</span>
-                            <p v-if="product.sub_price > 0" class="price-old">Normal <span>$ @{{ product.sub_price }}</span></p>
+                            <!--<p v-if="product.sub_price > 0" class="price-old">Normal <span>$ @{{ product.sub_price }}</span></p>-->
                         </div>
                     </a>
                 </div>
@@ -62,15 +62,17 @@
 
                 <div class="col-12">
                     <!--<div class="main-banner">-->
-                        <div class="main-banner__img">
+                        <div class="main-banner__card-img">
                             <img src="{{ asset('/images/banners/'.$banner->image) }}" alt="" style="width: 100%;">
-                            <div class="main-banner__content">
+                            <!--<div class="main-banner__content">-->
                                 <div class="title" style="text-align: {{ $float }};">
                                     <h3 style="color: {{ $banner->title_color }}">{{ $banner->title }}</h3>
                                     <p style="color: {{ $banner->text_color }}">{{ $banner->text }}</p>
+                                    @if($banner->link != "" || $banner->button_text != "")
                                     <a href="{{ $banner->link }}" target="_blank" class="btn-general" style="color: {{ $banner->button_color }}; background-color: {{ $banner->button_text_color }};">{{ $banner->button_text }}</a>
+                                    @endif
                                 </div>
-                            </div>
+                            <!--</div>-->
                         </div>
 
 
@@ -130,7 +132,9 @@
                     <div class="title" style="text-align: {{ $float }} !important">
                         <h3 style="color: {{ $banner->title_color }}">{{ $banner->title }}</h3>
                         <p style="color: {{ $banner->text_color }}">{{ $banner->text }}</p>
+                        @if($banner->link != "" || $banner->button_text != "")
                         <a href="{{ $banner->link }}" target="_blank" class="btn-general" style="color: {{ $banner->button_color }}; background-color: {{ $banner->button_text_color }};">{{ $banner->button_text }}</a>
+                        @endif
                     </div>
                 </div>
             </div>

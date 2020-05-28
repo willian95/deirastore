@@ -22,8 +22,9 @@ class LoginController extends Controller
 
         $credentials = $request->only('email', 'password');
         
-        if(User::where('email', $request->email)->first()->email_verified_at == null){
-            return response()->json(["success" => false, "msg" => "Aún no has verificado tu correo"]);
+        if(User::where('email', $request->email)->first()){
+            if(User::where('email', $request->email)->first()->email_verified_at == null)
+                return response()->json(["success" => false, "msg" => "Aún no has verificado tu correo"]);
         }
 
         if (Auth::attempt($credentials)) {

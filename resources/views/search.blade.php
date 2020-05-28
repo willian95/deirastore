@@ -37,7 +37,7 @@
                                 @else
                                     <span class="price">$ {{ $product->price }}</span>
                                 @endif
-                                <p class="price-old">Normal <span>$ {{ $product->sub_price }}</span></p>
+                                <!--<p class="price-old">Normal <span>$ {{ $product->sub_price }}</span></p>-->
                             </div>
                         </a>
                     </div>
