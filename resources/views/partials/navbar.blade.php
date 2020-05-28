@@ -15,7 +15,7 @@
             <div class="main-menu__top-item">
                 <ul>
                     
-                    <li class="nav-item dropdown arrow">
+                    <li class="nav-item dropdown arrow  btn__user">
                         @if(\Auth::check() && \Auth::user()->id)
                             <a class="nav-link dropdown-toggle user_content"  href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img src="{{ asset('assets/img/persona2.svg') }}" alt="" style="    width: 20px;
@@ -42,7 +42,7 @@
 
                     <!--<li><a href=""><img src="{{ asset('assets/img/telefono.svg') }}" alt=""></a></li>-->
                     
-                    <li><a href="{{ url('/cart') }}"><img src="{{ asset('assets/img/carro2.svg') }}" alt=""></a></li>
+                    <li><a class="cart__btn" href="{{ url('/cart') }}"><img src="{{ asset('assets/img/carro2.svg') }}" alt=""></a></li>
                    
 
                 </ul>
