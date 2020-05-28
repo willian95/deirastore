@@ -100,7 +100,7 @@ Route::get('/ayuda', function(){
 });
 
 Route::get('/somos', function(){
-    return view('aboutUs');
+    return view('about');
 });
 
 /*Route::get('/cnet', "CnetController@index");
