@@ -17,10 +17,10 @@
             </div>
             <div class="row">
                 
-                <div class="col-lg-6">
+                <div class="col-lg-6 col-xs-12">
                     <img src="https://images.unsplash.com/photo-1542744095-291d1f67b221?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="">
                 </div>
-                <div class="col-lg-6 about_text">
+                <div class="col-lg-6 col-xs-12 about_text">
                     <p>Somos DeiraStore el ecommerce tecnológico más importante para las personas y las empresas de Chile.  Navega en nuestra plataforma y disfruta los más de 7000 productos de las marcas tecnológicas más grandes del mundo. </p>
 
                     <p>En DeiraStore encontrarás todo lo necesario para abastecer de tecnología tu oficina y tu espacio de trabajo en pocos clicks, de forma rápida y sencilla.  Disfrútalo!</p>
