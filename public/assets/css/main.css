@@ -44,6 +44,7 @@ strong {
 
 body {
     scroll-behavior: smooth !important;
+        background: #e6e6e6;
 }
 
 html {
@@ -247,7 +248,7 @@ header {
 }
 
 .bg {
-    background: #e6e6e6;
+    background: #fff;
     margin-top: -70px;
     padding: 30px 20px;
     z-index: 1;
