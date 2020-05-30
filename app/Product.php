@@ -62,4 +62,8 @@ class Product extends Model
         return $this->hasMany(Item::class);
     }
 
+    public function secondaryPictures(){
+        return $this->hasMany(SecondaryImage::class);
+    }
+
 }

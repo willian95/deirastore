@@ -28,7 +28,7 @@ class HomeController extends Controller
 
         $this->sendMessage();
 
-        $product = Product::where('slug', $slug)->with('items')->first();
+        $product = Product::where('slug', $slug)->with('items', "secondaryPictures")->first();
         return view('productDetail', ["product" => $product]);
 
     }

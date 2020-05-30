@@ -15,7 +15,8 @@
                     <a :href=" '{{ url('/') }}' + '/product/' + product.slug">
                         <div class="content-slider">
                             <img :src="'{{ url('/') }}' + '/images/products/' +product.picture" alt="" v-if="product.external == false">
-                            <img :src="product.picture" style="width: 100%;" alt="" v-else>
+                            <img :src="product.picture" style="width: 100%;" alt="" v-if="product.external == true && product.data_source_id == 1">
+                            <img :src="product.secondary_pictures[0]['image']" style="width: 100%;" alt="" v-if="product.data_source_id == 2 && product.secondary_pictures">
                         </div>
                         <div class="main-slider__text">
                             <span>@{{ product.name }}</span>
@@ -172,7 +173,7 @@
 
                 axios.post("{{ route('brands.products') }}", {page: page, slug: this.slug})
                 .then(res => {
-
+                    console.log(res.data)
                     if(res.data.success == true){
                         this.pages = Math.ceil(res.data.productsCount / 20)
                         this.products = res.data.products

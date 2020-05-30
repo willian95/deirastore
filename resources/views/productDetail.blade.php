@@ -82,8 +82,10 @@
                         <div class="col-sm-6">
                             @if($product->is_external == false)
                                 <img class="imagen-detalles" src="{{ asset('/images/products/'.$product->picture) }}" alt="">
-                            @else
+                            @elseif($product->is_external == true && $product->data_source_id == 1)
                                 <img class="imagen-detalles" src="{{ $product->picture }}" alt="">
+                            @elseif($product->data_source_id == true && $product->secondary_pictures)
+                                <img class="imagen-detalles" src="{{ $product->secondary_pictures[0]['image'] }}" alt="">
                             @endif
                             <div class="logo-detalle">
                                 @if($product->brand->image != null)
@@ -172,8 +174,9 @@
                                     <div class="card-header acordeon-2">
                                         <h2><strong>Especificaciones</strong></h2>
                                     </div>
+                                </a>
                             </div>
-                            </a>
+                            
                             @if($product->items)
                             <div id="collapseDos" class="collapse" data-parent="#accordion" >
                                 <div class="card-body">
@@ -326,14 +329,16 @@
                 <div class="container">
                     <div class="main-slider__content">
                         
-                        @foreach(App\Product::with('category')->inRandomOrder()->where('amount', '>', 0)->take(20)->get() as $related)
+                        @foreach(App\Product::with('category', "secondaryPictures")->inRandomOrder()->where('amount', '>', 0)->take(20)->get() as $related)
                             <a href="{{ url('/product/'.$related->slug) }}">
                                 <div class="main-slider__item">
                                     <div class="content-slider">
                                         @if($related->is_external == false)
                                             <img src="{{ asset('/images/products/'.$related->picture) }}" alt="" style="width: 100%">
-                                        @else
+                                        @elseif($related->data_source_id == 1 && $related->is_external == true)
                                             <img src="{{ $related->picture }}" alt="" style="width: 100%">
+                                        @elseif($related->data_source_id == 2 && $related->secondary_pictures)
+                                            <img src="{{ $related->secondary_pictures[0]['image'] }}" alt="" style="width: 100%">
                                         @endif
                                     </div>
                                     <div class="main-slider__text">
