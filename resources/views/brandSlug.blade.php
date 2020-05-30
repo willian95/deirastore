@@ -6,7 +6,7 @@
         <div class="col-12">
             <a class="btn btn-primary btn-general btn-general--form" style="color: #fff;" href="{{ url()->previous() }}"><i class="fa fa-arrow-left"></i></a>
         </div>
-        <div class="title__general title__general-start">
+        <div class="title__general title__general-start fadeInUp wow animated">
             <p><strong>{{ $brand->name }}</strong></p>
         </div>
         <div class="row">

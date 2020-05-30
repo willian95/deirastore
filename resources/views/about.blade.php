@@ -13,7 +13,7 @@
 
         <div class="about_content">
             <div class="title__general fadeInUp wow animated">
-                <p><strong>Quines </strong>somos</p>
+                <p><strong>Quienes </strong>somos</p>
             </div>
             <div class="row">
                 
