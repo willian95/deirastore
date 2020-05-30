@@ -11,7 +11,7 @@
 
         <div class="row">
             <div class="col-12">
-                <div class="title__general title__general-start">
+                <div class="title__general title__general-start fadeInUp wow animated">
                     <p><strong>Productos destacados</strong></p>
                 </div>
             </div>
