@@ -61,7 +61,8 @@
                                         @if(\Auth::check())
                                         <tbody>
                                             <tr v-for="item in items">
-                                                <td v-if="item.product.is_external"><img class="lista-pedido" :src="item.product.picture" alt=""></td>
+                                                <td v-if="item.product.is_external && item.product.data_source_id == 1"><img class="lista-pedido" :src="item.product.picture" alt=""></td>
+                                                <td v-if="item.product.secondary_pictures && item.product.data_source_id == 2"><img class="lista-pedido" :src="item.product.secondary_pictures[0]['image']" alt=""></td>
                                                 <td v-else><img class="lista-pedido" :src="'{{ url('/') }}'+'/images/products/'+item.product.picture" alt=""></td>
                                                 <td>
                                                     <img class="lista-pedido" v-if="item.product.brand.image != null" :src="'{{ url('/') }}'+'/images/brands/'+item.product.brand.image" alt="">
