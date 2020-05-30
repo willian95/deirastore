@@ -173,17 +173,15 @@
                                 array_push($products, $cart->product->brand_id);
                             }
 
-                            $query = App\Product::with("category", "secondaryPictures");
-
                         @endphp
 
                         @if(count($carts) > 0)
                             @php
-                                $randomProducts = $query->whereIn('brand_id', $products)->inRandomOrder()->take(10)->get();
+                                $randomProducts = App\Product::with("category", "secondaryPictures")->whereIn('brand_id', $products)->where('amount', '>', 0)->inRandomOrder()->take(10)->get();
                             @endphp
                         @else
                             @php
-                                $randomProducts = $query->inRandomOrder()->where('amount', '>', 0)->take(10)->get()
+                                $randomProducts = App\Product::with("category", "secondaryPictures")->inRandomOrder()->where('amount', '>', 0)->take(10)->get()
                             @endphp
                         @endif
 
