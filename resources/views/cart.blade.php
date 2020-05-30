@@ -173,7 +173,7 @@
                                 array_push($products, $cart->product->brand_id);
                             }
 
-                            $query = App\Product::with("category");
+                            $query = App\Product::with("category", "secondaryPictures");
 
                         @endphp
 
@@ -191,10 +191,12 @@
                             <a href="{{ url('/product/'.$related->slug) }}">
                                 <div class="main-slider__item">
                                     <div class="content-slider">
-                                        @if($related->is_external == true)
+                                        @if($related->is_external == false)
+                                            <img src="{{ asset('/images/products/'.$related->picture) }}" alt="" style="width: 100%">
+                                        @elseif($related->is_external == true && $related->data_source_id == 1)
                                             <img src="{{ $related->picture }}" alt="" style="width: 100%">
-                                        @else
-                                            <img src="{{ asset('images/products/'.$related->picture) }}" alt="">
+                                        @elseif($related->data_source_id == 2 && $related->secondaryPictures)
+                                            <img src="{{ $related->secondaryPictures[0]['image'] }}" alt="" style="width: 100%">
                                         @endif
                                     </div>
                                     <div class="main-slider__text">
