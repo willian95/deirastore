@@ -65,7 +65,7 @@
                                                 <td v-else><img class="lista-pedido" :src="'{{ url('/') }}'+'/images/products/'+item.product.picture" alt=""></td>
                                                 <td>
                                                     <img class="lista-pedido" v-if="item.product.brand.image != null" :src="'{{ url('/') }}'+'/images/brands/'+item.product.brand.image" alt="">
-                                                    <span v-else>item.product.brand.name</span>
+                                                    <span v-else>@{{ item.product.brand.name }}</span>
                                                 </td>
                                                 <td>
                                                     <span>@{{ item.product.name }} </span>
