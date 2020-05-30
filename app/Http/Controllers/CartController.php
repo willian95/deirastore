@@ -142,7 +142,7 @@ class CartController extends Controller
             array_push($array, $product["productId"]);
         }
 
-        $products = Product::with('category', 'brand')->whereIn('id', $array)->get();
+        $products = Product::with('category', 'brand', "secondaryPictures")->whereIn('id', $array)->get();
         $loop = 0;
         $total = 0;
 
@@ -155,12 +155,28 @@ class CartController extends Controller
             }
 
             $total += $price;
+            $picture = "";
+
+            if($product->data_source_id == 2){
+
+                $picture = $product->secondaryPictures[0]["image"];
+
+            }else if($product->data_source_id == 1){
+
+                $picture = $product->picture;
+
+            }else{
+
+                $picture = asset('/images/products/'.$product->picture);
+
+            }
 
             $cart[] = [
                 "id" => $product->id,
-                "picture" => $product->picture,
+                "picture" => $picture,
                 "name" => $product->name,
                 "brand_image" => $product->brand->image,
+                "brand_name" => $product->brand->name,
                 "sub_title" => $product->sub_title,
                 "price" => intval($price),
                 "amount" => $request->products[$loop]["amount"],

@@ -83,9 +83,9 @@
 
                                         <tbody>
                                             <tr v-for="(item, index) in guestItem">
-                                                <td v-if="item.is_external"><img class="lista-pedido" :src="item.picture" alt=""></td>
-                                                <td v-else><img class="lista-pedido" :src="'{{ url('/') }}'+'/images/products/'+item.picture" alt=""></td>
-                                                <td><img class="lista-pedido" :src="'{{ url('/') }}'+'/images/brands/'+item.brand_image" alt=""></td>
+                                                <td><img class="lista-pedido" :src="item.picture" alt=""></td>
+                                                <td v-if="item.brand_image != null"><img class="lista-pedido" :src="'{{ url('/') }}'+'/images/brands/'+item.brand_image" alt=""></td>
+                                                <td v-else>@{{ item.brand_name }}</td>
                                                 <td>
                                                     <span>@{{ item.name }} </span>
                                                     <p>@{{ item.sub_title }}</p>
