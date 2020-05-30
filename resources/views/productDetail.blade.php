@@ -84,8 +84,8 @@
                                 <img class="imagen-detalles" src="{{ asset('/images/products/'.$product->picture) }}" alt="">
                             @elseif($product->is_external == true && $product->data_source_id == 1)
                                 <img class="imagen-detalles" src="{{ $product->picture }}" alt="">
-                            @elseif($product->data_source_id == true && $product->secondary_pictures)
-                                <img class="imagen-detalles" src="{{ $product->secondary_pictures[0]['image'] }}" alt="">
+                            @elseif($product->data_source_id == true && $product->secondaryPictures)
+                                <img class="imagen-detalles" src="{{ $product->secondaryPictures[0]['image'] }}" alt="">
                             @endif
                             <div class="logo-detalle">
                                 @if($product->brand->image != null)
@@ -337,8 +337,8 @@
                                             <img src="{{ asset('/images/products/'.$related->picture) }}" alt="" style="width: 100%">
                                         @elseif($related->data_source_id == 1 && $related->is_external == true)
                                             <img src="{{ $related->picture }}" alt="" style="width: 100%">
-                                        @elseif($related->data_source_id == 2 && $related->secondary_pictures)
-                                            <img src="{{ $related->secondary_pictures[0]['image'] }}" alt="" style="width: 100%">
+                                        @elseif($related->data_source_id == 2 && $related->secondaryPictures)
+                                            <img src="{{ $related->secondaryPictures[0]['image'] }}" alt="" style="width: 100%">
                                         @endif
                                     </div>
                                     <div class="main-slider__text">
