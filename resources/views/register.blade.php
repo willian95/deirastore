@@ -85,8 +85,8 @@
                                 {!! htmlFormSnippet() !!}
                             </div>
 
-                            <div class="form-grid__item form-check" style="display:none">
-                                <input  type="checkbox" class="form-check-input mt-2">
+                            <div class="form-grid__item form-check" style="visibility: hidden">
+                                <input  type="checkbox" class="form-check-input mt-2" >
                                 <label  class="form-check-label mt-3" for="terms">Acepto terminos y condiciones</label>
                             </div>
 
@@ -95,6 +95,8 @@
                                 <input  type="checkbox" class="form-check-input mt-2" id="terms" v-model="terms">
                                 <label  class="form-check-label mt-3" for="terms"><a href="{{ url('/terms') }}" target="_blank">Acepto terminos y condiciones</a></label>
                             </div>
+
+                            
                          
                             <div class="form-grid__item mt-5 mb-3"> </div>
                             <div class="form-grid__item">
