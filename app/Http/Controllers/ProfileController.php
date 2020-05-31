@@ -29,6 +29,12 @@ class ProfileController extends Controller
 
             }
 
+            if(User::where('rut', $request->rut)->where('id', '<>', \Auth::user()->id)->count() > 0){
+
+                return response()->json(["success" => false, "msg" => "Este rut pertenece a otra persona"]);
+
+            }
+
             $user = User::find(\Auth::user()->id);
             $user->name = $request->name;
             $user->genre = $request->genre;

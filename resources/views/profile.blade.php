@@ -21,6 +21,11 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="rut">RUT</label>
+                            <input type="text" class="form-control" id="rut" aria-describedby="rut" v-model="rut">
+                        </div>
+
+                        <div class="form-group">
                             <label for="name">Apellido</label>
                             <input type="text" class="form-control" aria-describedby="emailHelp" v-model="lastname">
                         </div>
@@ -77,6 +82,8 @@
                     genre: "{!! Auth::user()->genre !!}",
                     birthDate: "{!! Auth::user()->birth_date !!}",
                     phoneNumber: "{!! Auth::user()->phone_number !!}",
+                    rut:"{!! Auth::user()->rut !!}",
+                    address:"{!! Auth::user()->address !!}"
                     password:"",
                     passwordRepeat:""
 
@@ -96,6 +103,8 @@
                         formData.append("phoneNumber", this.phoneNumber)
                         formData.append("password", this.password)
                         formData.append("passwordRepeat", this.passwordRepeat)
+                        formData.append("rut", this.rut)
+                        formData.append("address", this.address)
 
                         axios.post("{{ route('profile.update') }}", formData)
                         .then(res => {

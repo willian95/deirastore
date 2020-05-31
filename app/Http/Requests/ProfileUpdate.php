@@ -28,7 +28,9 @@ class ProfileUpdate extends FormRequest
             "lastname" => "required",
             "genre" => "required",
             "birthDate" => "required|date",
-            "phoneNumber" => "required"
+            "phoneNumber" => "required",
+            "rut" => "required",
+            "address" => "required"
         ];
     }
 
