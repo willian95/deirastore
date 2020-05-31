@@ -31,6 +31,11 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="address">Dirección</label>
+                            <input type="text" class="form-control" id="address" v-model="address">
+                        </div>
+
+                        <div class="form-group">
                             <label for="genre">Género</label>
                             <select class="form-control" id="genre" v-model="genre">
                                 <option value="masculino">Masculino</option>
