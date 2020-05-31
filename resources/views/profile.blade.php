@@ -83,7 +83,7 @@
                     birthDate: "{!! Auth::user()->birth_date !!}",
                     phoneNumber: "{!! Auth::user()->phone_number !!}",
                     rut:"{!! Auth::user()->rut !!}",
-                    address:"{!! Auth::user()->address !!}"
+                    address:"{!! Auth::user()->address !!}",
                     password:"",
                     passwordRepeat:""
 
