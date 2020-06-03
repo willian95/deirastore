@@ -43,8 +43,23 @@
                     <!--<li><a href=""><img src="{{ asset('assets/img/telefono.svg') }}" alt=""></a></li>-->
                     
                     <li><a class="cart__btn" href="{{ url('/cart') }}"><img src="{{ asset('assets/img/carro2.svg') }}" alt=""></a></li>
-                   
+                    @if(\Auth::check() && \Auth::user()->id)
+                        {{ App\Cart::where('user_id', \Auth::user()->id)->sum('amount') }}
+                    @else
+                        <script>
+                            var total = 0;
+                            if(window.localStorage.getItem('cart') != null){
+                                cart =JSON.parse(window.localStorage.getItem('cart'))
+                            }
 
+                            cart.forEach((data, index)=>{
+
+                                total = total + this.amount
+
+                            })
+                        
+                        </script>
+                    @endif
                 </ul>
             </div>
         </div>
@@ -64,7 +79,7 @@
                 <ul class="navbar-nav m-auto">
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('brands.all') }}">Marcas</a>
+                        <a class="nav-link" href="{{ route('brands.all') }}">Marcas </a>
                     </li>
 
                       

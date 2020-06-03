@@ -14,6 +14,7 @@ use App\Product;
 use App\User;
 use App\Guest;
 use App\DolarPrice;
+use App\Shipping;
 use DB;
 
 class CheckoutController extends Controller
@@ -25,28 +26,103 @@ class CheckoutController extends Controller
 			session(["cart" => $request->cart, "email" => $request->email, "name" => $request->name]);
 			$products = json_decode($request->cart);
 			$total = 0;
+			$totalWeight = 0;
 
 			foreach($products as $product){
 				
-				$val = Product::find($product->productId);
+				$val = Product::with("items")->where("id", $product->productId)->first();
 
 				if($val->external_price > 0 && $val->price == 0){ //si el precio externo es mayor a 0 y precio es igual 0
-					$total += intval($val->external_price * DolarPrice::first()->price);
+					$total += intval($val->external_price * DolarPrice::first()->price) * $product->amount;
 				}else{
-					$total += intval($val->price);
+					$total += intval($val->price * $product->amount);
+				}
+
+				foreach($val->items as $item){
+						
+					if($item->name == "Peso"){
+						
+						$parts = explode(" ", $item->description);
+						$weight = $parts[0];
+						if($parts[1] == "g"){
+							$weight = $parts[0] / 1000;
+						}
+						$totalWeight = ($totalWeight + $weight) * $product->amount;
+
+					}
+
 				}
 
 			}
+
+			/*$shippingCost = 0;
+			$totalWeight = 0;
+
+			foreach($products as $product){
+
+				if($product->items){
+					
+					
+
+				}
+
+			}*/
+	
+			$shipping = Shipping::where('location_id', $request->location)->where("min_weight", "<=", $totalWeight)->where("max_weight", ">=", $totalWeight)->first();
+        	$total = $total + $shipping->price * $totalWeight;
 			
 		}else{ // si el usuario está registrado
+
 			$carts = Cart::with('product')->where('user_id', \Auth::user()->id)->get();
-			$total = Cart::where('user_id', \Auth::user()->id)->sum('price');
+			$total = 0;
+
+			foreach($carts as $cart){
+
+				$total = $total + ($cart->price * $cart->amount);
+
+			}
+
+			$shippingCost = 0;
+			$totalWeight = 0;
+
+			foreach($carts as $cart){
+
+				if($cart->product != null){
+
+					if($cart->product->items){
+						
+						foreach($cart->product->items as $item){
+							
+							if($item->name == "Peso"){
+								
+								$parts = explode(" ", $item->description);
+								$weight = $parts[0];
+								if($parts[1] == "g"){
+									$weight = $parts[0] / 1000;
+								}
+								$totalWeight = ($totalWeight + $weight) * $cart->amount;
+
+							}
+
+						}
+
+					}
+
+				}
+
+			}
+
+			$shipping = Shipping::where('location_id', \Auth::user()->location_id)->where("min_weight", "<=", $totalWeight)->where("max_weight", ">=", $totalWeight)->first();
+			$shippingCost = $shipping->price * $totalWeight;
+
+			$total = $total + $shippingCost;
+
 		}
 
 		$order = Carbon::now()->timestamp.uniqid();
 		session(['order' =>$order]);
 
-		$webpayNormal->addTransactionDetail($total, $order);  
+		$webpayNormal->addTransactionDetail(intval($total), $order);  
 		$response = $webpayNormal->initTransaction(route('checkout.webpay.response'), route('checkout.webpay.finish'), null, 'TR_NORMAL_WS', null, null); 
 		// Probablemente también quieras crear una orden o transacción en tu base de datos y guardar el token ahí.
 

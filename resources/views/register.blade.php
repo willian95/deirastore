@@ -60,8 +60,8 @@
                         
                                 <!-- input -->
                                 <div class="form-grid__item">
-                                    <label  for="phoneNumber">* Celular</label>
-                                    <input  placeholder="Ej: 933123123" type="text" class="form-control" id="phoneNumber" aria-describedby="emailHelp" v-model="phoneNumber" @keypress="isTelephoneNumber($event)">
+                                    <label  for="phoneNumber">* Celular +569</label>
+                                    <input  placeholder="Ej: 33123123" type="text" class="form-control" id="phoneNumber" aria-describedby="emailHelp" v-model="phoneNumber" @keypress="isTelephoneNumber($event)">
                                 </div>
                                     <!-- input -->
                             <div class="form-grid__item">
@@ -78,8 +78,32 @@
                                 <input  placeholder="Repetir Contraseña " type="password" class="form-control" id="passwordRepeat" v-model="passwordRepeat">
                             </div>
                             <div class="form-grid__item">
-                                <label  for="address">* Dirección</label>
-                                <input  placeholder="Tu dirección actual" type="text" class="form-control" id="address" v-model="address">
+                                <label >* Región</label>
+                                <select class="form-control" v-model="location" @change="regionChange()">
+                                    @foreach(App\Region::all() as $region)
+                                        <option :value="{{ $region->id }}">{{ $region->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-grid__item">
+                                <label  for="comuna">* Comuna</label>
+                                <select class="form-control" v-model="selectedComune">
+                                   
+                                    <option v-for="comune in communes" :value="comune.id">@{{ comune.name }}</option>
+                                    
+                                </select>
+                            </div>
+                            <div class="form-grid__item">
+                                <label  for="street">* Calle</label>
+                                <input  placeholder="Ingresa nombre de la calle" type="text" class="form-control" id="street" v-model="street">
+                            </div>
+                            <div class="form-grid__item">
+                                <label  for="number">* Número</label>
+                                <input  placeholder="Ingresa número" type="text" class="form-control" id="number" v-model="number">
+                            </div>
+                            <div class="form-grid__item">
+                                <label  for="house">Dpto. / Casa / Oficna (Opcional)</label>
+                                <input  placeholder="Ingresa número" type="text" class="form-control" id="house" v-model="house">
                             </div>
                             <div class="form-grid__item">
                                 {!! htmlFormSnippet() !!}
@@ -128,15 +152,21 @@
                 genre: "masculino",
                 birthDate: "",
                 rut: "",
-                address:"",
+                street:"",
+                house:"",
                 phoneNumber: "",
                 email: '',
                 password: "",
                 passwordRepeat: "",
                 terms: "",
+                location:"",
                 loading:false,
                 reg: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/,
-                captchaResponse:""
+                captchaResponse:"",
+                communes:[],
+                selectedComune:"",
+                house:"",
+                number:""
             }
         },
         methods: {
@@ -154,8 +184,12 @@
                             email: this.email,
                             password: this.password,
                             lastname: this.lastname,
-                            address: this.address,
-                            recaptcha: this.captchaResponse
+                            street: this.street,
+                            recaptcha: this.captchaResponse,
+                            location: this.location,
+                            comune_id: this.selectedComune,
+                            house: this.house,
+                            number: this.number
                         })
                         .then(res => {
                             
@@ -176,7 +210,12 @@
                                 this.password = ""
                                 this.passwordRepeat = ""
                                 this.lastname = ""
-                                this.terms = ""
+                                this.terms = "",
+                                this.stree = ""
+                                this.location = ""
+                                this.comune_id = ""
+                                this.house = ""
+                                this.number = ""
 
                                 window.setTimeout(() => {
                                     window.location.href="{{ url('/') }}"
@@ -188,7 +227,10 @@
                                     icon: "error",
                                     title: "Error",
                                     text: res.data.msg
+                                    
                                 })
+
+                                grecaptcha.reset();
 
                             }
 
@@ -236,7 +278,8 @@
                     error = true
 
                 }else{
-                    let regexp = /^(\+?56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/
+                    //let regexp = /^(\+?56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/
+                    let regexp = /^(\+?56)?(\s?)(\s?)[9876543]\d{7}$/
                     let phone = "+56"+this.phoneNumber
                     if(this.phoneNumber.match(regexp)){
                     
@@ -294,6 +337,16 @@
                 } else {
                     return true;
                 }
+            },
+            regionChange(){
+
+                axios.get("{{ url('/comune/by-region') }}"+"/"+this.location).then(res =>{
+                    //console.log("test-region-change", res)
+                    if(res.data.success == true){
+                        this.communes = res.data.comunes
+                    }
+                })
+
             },
             isAlphaNumeric(evt){
 

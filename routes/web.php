@@ -36,6 +36,8 @@ Route::get('/login', "LoginController@index");
 Route::post('/login', "LoginController@logIn");
 Route::get('/logout', "LoginController@logout");
 
+Route::get("/comune/by-region/{region_id}", "ComuneController@getComunesByRegion");
+
 Route::get('/password/recovery', "RecoveryPasswordController@index");
 Route::post('/password/recovery/send', "RecoveryPasswordController@send");
 Route::get('/password/recovery/restore/{recovery_hash}', "RecoveryPasswordController@restore");
@@ -48,19 +50,28 @@ Route::post('/brand/products', "BrandController@products")->name('brands.product
 Route::get('/brands/fetch/all', "BrandController@fetchAll");
 
 /*Route::get('/check/slug', function(){
-    ini_set('max_execution_time', 0);
-    $products = App\Product::where('slug', 'like', '%/%')->get();
+    ini_set('max_execution_time', 0);*/
+    /*$products = App\Product::where('slug', 'like', '%/%')->get();
     foreach($products as $product){
 
         $obj = App\Product::find($product->id);
         $obj->slug = str_replace("/", "-", $obj->slug);
         $obj->update();
-    }
-});
+    }*/
 
-Route::get('/check/slug/slash', function(){
+    /*$categories = App\Category::where('slug', 'like', '%/%')->get();
+    foreach($categories as $category){
+
+        $obj = App\Category::find($category->id);
+        $obj->slug = str_replace("/", "-", $obj->slug);
+        $obj->update();
+    }*/
+
+//});
+
+/*Route::get('/check/slug/slash', function(){
     ini_set('max_execution_time', 0);
-    $products = App\Product::where('slug','/')->get();
+    $products = App\Product::where('slug','-')->get();
     foreach($products as $product){
 
         $slug = str_replace("/", "-", $product->name);
@@ -89,6 +100,7 @@ Route::post("/guestCart", "CartController@getGuestCarts");
 
 Route::get("/guest/checkout", "GuestController@guestCheckoutIndex");
 Route::post("/guest/store", "GuestController@store");
+Route::post("/guest/carts/prices", "GuestController@cartPrices");
 
 Route::get("products/destacados", "ProductController@highlighted");
 
@@ -104,13 +116,13 @@ Route::get('/somos', function(){
 });
 
 /*Route::get('/cnet', "CnetController@index");
-Route::get('/cnet/images', "CnetController@imagesDownload");
+Route::get('/cnet/images', "CnetController@imagesDownload");*/
 Route::get('/cnet/decode', "CnetController@decode");
-Route::get('/cnet/compare', "CnetController@compare");
+//Route::get('/cnet/compare', "CnetController@compare");
 
-Route::get('/ingram/import', 'IngramController@import');
+//Route::get('/ingram/import', 'IngramController@import');
 
-Route::get('/export/products', "CsvExportController@index");
+/*Route::get('/export/products', "CsvExportController@index");
 
 Route::get('/test/categories', function(){
 

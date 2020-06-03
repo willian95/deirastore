@@ -171,7 +171,7 @@
 
             <div class="container">
                 <div class="main-slider__content">
-                    @foreach(App\Product::with('category', 'secondaryPictures')->inRandomOrder()->where('amount', '>', 0)->take(20)->get() as $product)
+                    @foreach(App\Product::with('category')->inRandomOrder()->where('amount', '>', 0)->where("picture", "<>", "http://servertest.sytes.net/deirastore/public/images/not_found.svg")->take(20)->get() as $product)
            
                         <a href="{{ url('/product/'.$product->slug) }}">
                             <div class="main-slider__item">
@@ -179,10 +179,8 @@
 
                                     @if($product->is_external == false)
                                         <img src="{{ asset('/images/products/'.$product->picture) }}" alt="" style="width: 100%">
-                                    @elseif($product->is_external == true && $product->data_source_id == 1)
+                                    @elseif($product->data_source_id == 2)
                                         <img src="{{ $product->picture }}" alt="" style="width: 100%">
-                                    @elseif($product->data_source_id == 2 && $product->secondaryPictures)
-                                        <img src="{{ $product->secondaryPictures[0]['image'] }}" alt="" style="width: 100%">
                                     @endif
                                 </div>
                                 <div class="main-slider__text">

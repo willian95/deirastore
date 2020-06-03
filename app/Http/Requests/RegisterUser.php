@@ -31,8 +31,11 @@ class RegisterUser extends FormRequest
             "password" => 'required',
             'phoneNumber' => 'required',
             'genre' => 'required',
-            "address" => "required",
-            "recaptcha" => "recaptcha"
+            "recaptcha" => "recaptcha",
+            "location" => "required",
+            "comune_id" => "required",
+            "street" => "required",
+            "number" => "required"
         ];
     }
 
@@ -50,7 +53,11 @@ class RegisterUser extends FormRequest
             "phoneNumber.required" => "Teléfono es requerido",
             "genre.required" => "Género es requerido",
             "address.required" => "Dirección es requerida",
-            "recaptcha.recaptcha" => "Captcha no válido"
+            "recaptcha.recaptcha" => "Captcha no válido",
+            "location.required" => "Región es requerida",
+            "comune_id.required" => "Comuna es requerida",
+            "street.required" => "Calle es requerida",
+            "number.required" => "Númeroes requerido"
         ];
     }
 }

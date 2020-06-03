@@ -7,6 +7,7 @@ use App\Http\Requests\StoreCart;
 use App\Product;
 use App\Cart;
 use App\DolarPrice;
+use App\Shipping;
 
 class CartController extends Controller
 {
@@ -16,8 +17,40 @@ class CartController extends Controller
 
     function getItems(){
 
-        $carts = Cart::with("product", "product.brand", "product.secondaryPictures")->where('user_id', \Auth::user()->id)->get();
+        $carts = Cart::with("product", "product.brand", "product.items")->where('user_id', \Auth::user()->id)->get();
         $total = Cart::where('user_id', \Auth::user()->id)->sum('price');
+        /*$shippingCost = 0;
+        $totalWeight = 0;
+
+        foreach($carts as $cart){
+
+            if($cart->product != null){
+
+                if($cart->product->items){
+                    
+                    foreach($cart->product->items as $item){
+                        
+                        if($item->name == "Peso"){
+                            
+                            $parts = explode(" ", $item->description);
+                            $weight = $parts[0];
+                            if($parts[1] == "g"){
+                                $weight = $parts[0] / 1000;
+                            }
+                            $totalWeight = ($totalWeight + $weight) * $cart->amount;
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+        $shipping = Shipping::where('location_id', \Auth::user()->location_id)->where("min_weight", "<=", $totalWeight)->where("max_weight", ">=", $totalWeight)->first();
+        $shippingCost = $shipping->price * $totalWeight;*/
 
         return response()->json(["products" => $carts, "total" => $total]);
 
@@ -137,58 +170,66 @@ class CartController extends Controller
         
         $array = [];
         $cart = [];
-
-        foreach($request->products as $product){
-            array_push($array, $product["productId"]);
-        }
-
-        $products = Product::with('category', 'brand', "secondaryPictures")->whereIn('id', $array)->get();
         $loop = 0;
         $total = 0;
+        $totalWeight = 0;
 
-        foreach($products as $product){
+        foreach($request->products as $product){
+            $products = Product::with('category', 'brand', "items")->where('id', $product['productId'])->first();
+        
             $price = 0;
-            if($product->external_price > 0 && $product->price == 0){
-                $price = $product->external_price * DolarPrice::first()->price;
-            }else if($product->price > 0){
-                $price = $product->price;
+            if($products->external_price > 0 && $products->price == 0){
+                $price = ($products->external_price * DolarPrice::first()->price) * $product["amount"];
+            }else if($products->price > 0){
+                $price = $products->price * $product["amount"];
             }
 
             $total += $price;
             $picture = "";
 
-            if($product->data_source_id == 2){
+            if($products->data_source_id == 2){
 
-                $picture = $product->secondaryPictures[0]["image"];
+                $picture = $products->picture;
 
-            }else if($product->data_source_id == 1){
+            }else if($products->data_source_id == 1){
 
-                $picture = $product->picture;
+                $picture = $products->picture;
 
             }else{
 
-                $picture = asset('/images/products/'.$product->picture);
+                $picture = asset('/images/products/'.$products->picture);
 
             }
 
+            $individualPrice =0;
+            if($products->external_price > 0 && $products->price == 0){
+                $individualPrice = ($products->external_price * DolarPrice::first()->price);
+            }else if($products->price > 0){
+                $individualPrice = $products->price;
+            }
+
             $cart[] = [
-                "id" => $product->id,
+                "id" => $product["productId"],
                 "picture" => $picture,
-                "name" => $product->name,
-                "brand_image" => $product->brand->image,
-                "brand_name" => $product->brand->name,
-                "sub_title" => $product->sub_title,
-                "price" => intval($price),
+                "name" => $products->name,
+                "brand_image" => $products->brand->image,
+                "brand_name" => $products->brand->name,
+                "sub_title" => $products->sub_title,
+                "price" => intval($individualPrice),
                 "amount" => $request->products[$loop]["amount"],
-                "is_external" => $product->is_external
+                "is_external" => $products->is_external
             ];
 
             $loop++;
 
         }
 
+
+
         return response()->json(["cart" => $cart, "total" => $total]);
 
     }
+
+    
 
 }

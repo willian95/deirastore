@@ -27,7 +27,7 @@ class LoginController extends Controller
                 return response()->json(["success" => false, "msg" => "Aún no has verificado tu correo"]);
         }
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials, true)){
             
             $user = User::where('email', $request->email)->first();
             return response()->json(["success" => true, "msg" => "Has iniciado sesión", "user" => $user]);

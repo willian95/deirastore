@@ -165,8 +165,8 @@ class BrandController extends Controller
             $skip = ($request->page-1) * 20;
             $brand = Brand::where('slug', $request->slug)->first();
 
-            $products = Product::where('brand_id', $brand->id)->with('category', "secondaryPictures")->skip($skip)->take(20)->get();
-            $productsCount = Product::where('brand_id', $brand->id)->with('category', "secondaryPictures")->count();
+            $products = Product::where('brand_id', $brand->id)->with('category')->skip($skip)->take(20)->get();
+            $productsCount = Product::where('brand_id', $brand->id)->with('category')->count();
 
             return response()->json(["success" => true, "products" => $products, "productsCount" => $productsCount]);
 

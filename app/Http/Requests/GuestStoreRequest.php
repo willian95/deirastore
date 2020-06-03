@@ -25,7 +25,9 @@ class GuestStoreRequest extends FormRequest
     {
         return [
             "email" => "required|email",
-            "name" => "required"
+            "name" => "required",
+            "location" => "required",
+            "address" => "required"
         ];
     }
 
@@ -35,6 +37,8 @@ class GuestStoreRequest extends FormRequest
             "email.required" => "Correo es requerido",
             "email.email" => "Correo debe ser un correo válido",
             "name.required" => "Nombre es requerido",
+            "location.required" => "Debe elegir una región",
+            "address.required" => "Dirección es requerida"
 
         ];
     }

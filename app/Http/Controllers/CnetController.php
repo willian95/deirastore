@@ -42781,7 +42781,7 @@ class CnetController extends Controller
         ini_set('max_execution_time', 0);
         $counter = 0;
         $array = Storage::disk('cnet_upload')->files('file/');
-        $files = new \LimitIterator(new \ArrayIterator($array), 5990, 3000);
+        $files = new \LimitIterator(new \ArrayIterator($array), 8997, 2000);
         foreach($files as $file){
 
             $partNumber = str_replace("file/file", "", $file);
@@ -42792,18 +42792,15 @@ class CnetController extends Controller
             $index = 0;
             $mainImage = "";
 
-            if(isset($data->data->{'ccs-product-name'}) && Product::where('ingram_part_number', $partNumber)->count() == 0 ){
+            if(isset($data->data->{'ccs-product-name'}) && Product::where('ingram_part_number', $partNumber)->count() > 0 ){
 
                 foreach($data->data->{"ccs-gallery"}->images[0] as $key => $value){
-                    if(strpos($value, "http://")){
+                    if($key == "full"){
                         $mainImage = $value;
                         break;
                     }
                 }
     
-                $slug =  str_replace($data->data->{'ccs-product-name'}, " ", "-");
-                $slug = str_replace($slug, "/", "-");
-                
                 $desc = "";
                 if(isset($data->data->{'ccs-mkt-desc'})){
                     $desc = $data->data->{'ccs-mkt-desc'}->lines[0];
@@ -42811,28 +42808,14 @@ class CnetController extends Controller
                     $desc = $data->data->{'ccs-standard-desc'};
                 }
     
-                $product = new Product;
-                $product->name = $data->data->{'ccs-product-name'};
-                $product->price = 0;
-                $product->sub_price = 0;
+                $product = Product::where('ingram_part_number', $partNumber)->first();
                 $product->picture = $mainImage;
                 $product->sub_title = $data->data->{'ccs-product-name'};
                 $product->description = $desc;
-                $product->category_id = 0;
-                $product->amount = 0;
-                $product->slug = $slug;
-                $product->sku = 0;
-                $product->vpn = 0;
                 $product->min_description = $data->data->{'ccs-standard-desc'};
-                $product->brand_id = 0;
-                $product->is_external = 1;
-                $product->tax_excluded = 0;
-                $product->external_price = 0;
-                $product->data_source_id = 2;
-                $product->ingram_part_number = $partNumber;
-                $product->save();
+                $product->update();
     
-                foreach($data->data->{"ccs-gallery"}->images[0] as $key => $value){
+                /*foreach($data->data->{"ccs-gallery"}->images[0] as $key => $value){
                    
                     if(strpos($value, "http://") >= 0){
                        
@@ -42843,15 +42826,17 @@ class CnetController extends Controller
                         $secondaryImage->save();
                         
                     }
-                }
+                }*/
     
                 foreach($data->data->{'ccs-main-spec'}->items as $item){
                   
-                    $itemProduct = new Item;
-                    $itemProduct->name = $item->name;
-                    $itemProduct->description = $item->lines[0];
-                    $itemProduct->product_id = $product->id;
-                    $itemProduct->save();
+                   //if(Item::where("product_id", $product->id)->count() <= 0){
+                        $itemProduct = new Item;
+                        $itemProduct->name = $item->name;
+                        $itemProduct->description = $item->lines[0];
+                        $itemProduct->product_id = $product->id;
+                        $itemProduct->save();
+                   //}
     
                 }
 

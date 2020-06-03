@@ -62,7 +62,7 @@
                                         <tbody>
                                             <tr v-for="item in items">
                                                 <td v-if="item.product.is_external && item.product.data_source_id == 1"><img class="lista-pedido" :src="item.product.picture" alt=""></td>
-                                                <td v-if="item.product.secondary_pictures && item.product.data_source_id == 2"><img class="lista-pedido" :src="item.product.secondary_pictures[0]['image']" alt=""></td>
+                                                <td v-if="item.product.data_source_id == 2"><img class="lista-pedido" :src="item.product.picture" alt=""></td>
                                                 <td v-if="item.product.is_external == false"><img class="lista-pedido" :src="'{{ url('/') }}'+'/images/products/'+item.product.picture" alt=""></td>
                                                 <td>
                                                     <img class="lista-pedido" v-if="item.product.brand.image != null" :src="'{{ url('/') }}'+'/images/brands/'+item.product.brand.image" alt="">
@@ -93,7 +93,7 @@
                                                 </td>
                                                 <td>$ @{{ item.price }}</td>
                                                 <td>@{{ item.amount }}</td>
-                                                <td>$ @{{ parseInt(item.price).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</td>
+                                                <td>$ @{{ parseInt(item.price * item.amount).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</td>
                                                 <td><button class="btn btn-danger" @click="eraseGuestProduct(index)">X</button></td>
                                             </tr>
 
@@ -127,6 +127,7 @@
                                         <h5>Total de tu compra</h5>
                                         @if(\Auth::check())
                                             <h2>$ @{{ parseInt(total).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</h2>
+                                            
                                         @else
                                             <h2>$ @{{ parseInt(totalGuest).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</h2>
                                         @endif
@@ -137,9 +138,9 @@
                                                 <input  type="checkbox" class="form-check-input mt-2" id="terms" v-model="terms">
                                                 <label  class="form-check-label mt-3" for="terms"><a href="{{ url('/terms') }}" target="_blank">Acepto terminos y condiciones</a></label>
                                             </div>
-                                       
-                                        <button @click="keepShopping()"  class="finalizar-compra finalizar-compra--go">Seguir Comprando</button>
                                         <button @click="checkout()" class="finalizar-compra">Check Out</button>
+                                        <button @click="keepShopping()"  class="finalizar-compra finalizar-compra--go">Seguir Comprando</button>
+                                        
                                  
                                       </div>
 
@@ -178,11 +179,11 @@
 
                         @if(count($carts) > 0)
                             @php
-                                $randomProducts = App\Product::with("category", "secondaryPictures")->whereIn('brand_id', $products)->where('amount', '>', 0)->inRandomOrder()->take(10)->get();
+                                $randomProducts = App\Product::with("category")->whereIn('brand_id', $products)->where('amount', '>', 0)->inRandomOrder()->take(10)->get();
                             @endphp
                         @else
                             @php
-                                $randomProducts = App\Product::with("category", "secondaryPictures")->inRandomOrder()->where('amount', '>', 0)->take(10)->get()
+                                $randomProducts = App\Product::with("category")->inRandomOrder()->where('amount', '>', 0)->take(10)->get()
                             @endphp
                         @endif
 
@@ -194,8 +195,8 @@
                                             <img src="{{ asset('/images/products/'.$related->picture) }}" alt="" style="width: 100%">
                                         @elseif($related->is_external == true && $related->data_source_id == 1)
                                             <img src="{{ $related->picture }}" alt="" style="width: 100%">
-                                        @elseif($related->data_source_id == 2 && $related->secondaryPictures)
-                                            <img src="{{ $related->secondaryPictures[0]['image'] }}" alt="" style="width: 100%">
+                                        @elseif($related->data_source_id == 2)
+                                            <img src="{{ $related->picture }}" alt="" style="width: 100%">
                                         @endif
                                     </div>
                                     <div class="main-slider__text">
@@ -215,9 +216,6 @@
                     </div>
                 </div>
             </section>
-
-
-
 
         </div>
 
@@ -245,6 +243,7 @@
                     authCheck:'{!! Auth::check() !!}',
                     guestItem:[],
                     totalGuest:0,
+                    shippingCost:0,
                     terms:false
                 }
             },
@@ -256,6 +255,7 @@
                     .then(res => {
                         console.log("text-items", res)
                         this.items = res.data.products
+                        //this.shippingCost = res.data.shippingCost
                         this.total = res.data.total
 
                     })

@@ -19,6 +19,7 @@ class NexsysController extends Controller
         try{
         
             $client = new \SoapClient($url);
+           
             $products = $client->StoreProductByMarks(["Marks" => $mark, "WSClient"=> ["country" => "Chile", "username" => "78198200"]]);
             //dd($products);
             $brandSlug = str_replace(" ", "-", $mark);
@@ -28,54 +29,9 @@ class NexsysController extends Controller
             );
 
             foreach($products as $product){
+       
                 foreach($product as $value){
                     
-                    if(is_string($value->category)){
-
-                        $fullCategory = substr($value->category, 3);
-
-                        $categories = explode('>', $fullCategory);
-
-                        $index = 0;
-                        $model = null;
-
-                        if(count($categories) > 2){
-                            array_pop($categories);
-                        }
-
-                        foreach($categories as $category){
-                          
-                            $string = trim($category);
-                            $slug = str_replace(" ", "-", $string);
-                            $slug = str_replace("/", "-", $slug);
-
-                            if($index == 1){
-
-                                $previousSlug = str_replace(" ", "-", trim($categories[$index - 1]));
-                                $previousSlug = str_replace("/", "-", $previousSlug);
-                                
-                                
-                                $previousCategory = Category::where('slug', $previousSlug)->first();
-                                if(Category::where('slug', $slug)->where('parent_id', $previousCategory->id)->count() == 0){
-                                    $model = new Category;
-                                    $model->name = $string;
-                                    $model->slug = $slug;
-                                    $model->parent_id = $previousCategory->id;
-                                    $model->save();
-                                }
-
-                            }else{
-
-                                $model = Category::firstOrCreate(
-                                    ['name' => $string],
-                                    ['slug' => $slug]
-                                );
-
-                            }
-                            
-                            $index++;
-
-                        }
 
                         $productSlug = str_replace(" ", "-", $value->short_description);
                         $productSlug = str_replace("/", "-", $productSlug);
@@ -88,10 +44,10 @@ class NexsysController extends Controller
                         if($value->inventory != "null")
                             $amount = $value->inventory;
 
-                        $testProduct = Product::updateOrCreate(
+                        $testProduct = Product::firstOrCreate(
                             ["sku" => $value->sku],
                             [
-                                "category_id" => $model->id,
+                                "category_id" => 0,
                                 "brand_id" => $brand->id,
                                 "currency" => $value->currency,
                                 "picture" => $value->image,
@@ -110,7 +66,7 @@ class NexsysController extends Controller
                             ]
                         );
 
-                    }
+                    
 
                 }
             }
