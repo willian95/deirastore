@@ -62,31 +62,31 @@ class CheckoutController extends Controller
 		//$this->checkout($response->detailOutput->responseCode);
 		//dd(session("cart"));
 
+		$payment = new Payment; // creamos un nuevo pago
+		$payment->order_id = session('order');
+
+		if($response->detailOutput->responseCode == 0){ // si la respuesta de webpay es 0
+			$payment->status = "aprovado";
+		}
+		else{
+			$payment->status = "rechazado";
+		}
+		
+		if(\Auth::check()){ //si el usuario está logueado
+			$payment->user_id = \Auth::user()->id; // añadimos el id de usuario
+		}
+		
+		else{//si no está loguestado
+			$payment->guest_id = session('guestUser'); // añadimos el id de invitado
+		
+		}
+
+		$payment->save();
+
 		if($response->detailOutput->responseCode == 0){
 
-			$payment = new Payment; // creamos un nuevo pago
-			$payment->order_id = session('order');
-
-			if($responseCode == 0){ // si la respuesta de webpay es 0
-				$payment->status = "aprovado";
-			}
-			else{
-				$payment->status = "rechazado";
-			}
-			
-			if(\Auth::check()){ //si el usuario está logueado
-				$payment->user_id = \Auth::user()->id; // añadimos el id de usuario
-			}
-			
-			else{//si no está loguestado
-				$payment->guest_id = session('guestUser'); // añadimos el id de invitado
-			
-			}
-
-			$payment->save();
-
 			$carts = session("cart"); //obtenemos los productos de la sesión
-				
+			
 			foreach($carts as $cart){
 				dd($cart);
 				$product = Product::find($cart->id);
@@ -113,24 +113,28 @@ class CheckoutController extends Controller
 				$product->amount = $product->amount - $cart->amount; // descontamos del inventario
 				$product->update();
 
+				
+
+
+				$payment = Payment::where('order_id', session('order'))->first(); //obtenemos el pago registrado en la funcion checkout
+				$products = ProductPurchase::with('product')->where('payment_id', $payment->id)->get();
+				$this->sendMessage($products);
+				$name = "";
+				if(\Auth::guest()){
+
+					$name = session('name');
+					session()->forget(["cart", "email", "name", "response"]);
+					session()->flush();
+					session()->save();
+
+				}
+
+				return view('successPayment', ["products" => $products, "name" => $name]);
+
 			}
 
-
-			$payment = Payment::where('order_id', session('order'))->first(); //obtenemos el pago registrado en la funcion checkout
-			$products = ProductPurchase::with('product')->where('payment_id', $payment->id)->get();
-			$this->sendMessage($products);
-			$name = "";
-			if(\Auth::guest()){
-
-				$name = session('name');
-				session()->forget(["cart", "email", "name", "response"]);
-				session()->flush();
-				session()->save();
-
-			}
-			
-
-			return view('successPayment', ["products" => $products, "name" => $name]);
+		
+		
 		}else{
 			return view('failedPayment');
 		}
