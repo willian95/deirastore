@@ -102,6 +102,18 @@ Route::get("/guest/checkout", "GuestController@guestCheckoutIndex");
 Route::post("/guest/store", "GuestController@store");
 Route::post("/guest/carts/prices", "GuestController@cartPrices");
 
+Route::get("/cart/shipping", "CartController@cartShippingView");
+Route::post("/cart/shipping-price", "CartController@updateShippingPrice");
+Route::post("/cart/shipping-price/location", "CartController@updateCartLocation");
+
+Route::post("/checkout/store-session", "CheckoutController@storeSession");
+
+Route::get("/cart/ticket", function(){
+    return view("cartTicket");
+});
+
+Route::post("/cart/bill/type", "CartController@billType");
+
 Route::get("products/destacados", "ProductController@highlighted");
 
 Route::get('/validate/rut/{rut}', "RutController@validateRut");

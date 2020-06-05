@@ -29,11 +29,48 @@
                                 </div>
                             </div>
                         </div>
+                        
                         <div class="form-group">
-                            <label for="address">Dirección</label>
-                            <input type="text" class="form-control" id="address" v-model="address">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label >* Región</label>
+                                    <select class="form-control" v-model="location" @change="regionChange()">
+                                        @foreach(App\Region::all() as $region)
+                                            <option :value="{{ $region->id }}">{{ $region->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label  for="comuna">* Comuna</label>
+                                    <select class="form-control" v-model="selectedComune">
+                                        
+                                        <option v-for="comune in communes" :value="comune.id">@{{ comune.name }}</option>
+                                        
+                                    </select>
+                                </div>
+                            </div>
                         </div>
 
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label  for="street">* Calle</label>
+                                    <input  placeholder="Ingresa nombre de la calle" type="text" class="form-control" id="street" v-model="street">
+                                </div>
+                                <div class="col-md-6">
+                                    <label  for="number">* Número</label>
+                                    <input  placeholder="Ingresa número" type="text" class="form-control" id="number" v-model="number">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-grid__item">
+                            <label  for="house">Dpto. / Casa / Oficna (Opcional)</label>
+                            <input  placeholder="Ingresa número" type="text" class="form-control" id="house" v-model="house">
+                        </div>
+
+
+                        
+                            
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-6">
@@ -126,6 +163,12 @@
                     phoneNumber: "{!! Auth::user()->phone_number !!}",
                     rut:"{!! Auth::user()->rut !!}",
                     address:"{!! Auth::user()->address !!}",
+                    location:"{!! Auth::user()->location_id !!}",
+                    selectedComune:"{!! Auth::user()->comune_id !!}",
+                    street:"{!! Auth::user()->street  !!}",
+                    number:"{!! Auth::user()->number !!}",
+                    house:"{!! Auth::user()->house !!}",
+                    communes:[],
                     password:"",
                     passwordRepeat:""
 
@@ -199,10 +242,24 @@
 
                     return error
 
+                },
+                regionChange(){
+
+                    axios.get("{{ url('/comune/by-region') }}"+"/"+this.location).then(res =>{
+                        //console.log("test-region-change", res)
+                        if(res.data.success == true){
+                            this.communes = res.data.comunes
+                        }
+                    })
+
                 }
 
             },
-            mounted(){
+            created(){
+                
+                this.regionChange()
+
+                
                 //this.test()
             }
 

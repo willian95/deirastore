@@ -34,7 +34,9 @@
                             </div>
                             <div class="main-slider__text">
                                 <span>{{ $product->name }}</span>
+                                @if($product->category)
                                 <p class="title">{{ $product->category->name }}</p>
+                                @endif
                                 @if($product->external_price > 0 && $product->price == 0)
                                     <span class="price">$ {{ number_format($product->external_price * App\DolarPrice::first()->price, 0, ",", ".") }}</span>
                                 @else

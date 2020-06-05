@@ -20,7 +20,7 @@
                         </div>
                         <div class="main-slider__text">
                             <span>@{{ product.name }}</span>
-                            <p class="title">@{{ product.category.name }}</p>
+                            <p class="title" v-if="product.category">@{{ product.category.name }}</p>
                             <span class="price" v-if="product.external_price > 0">$ @{{ parseInt(product.external_price * dolarPrice).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</span>
                             <span class="price" v-else>$ @{{ product.price }}</span>
                             <!--<p v-if="product.sub_price > 0" class="price-old">Normal <span>$ @{{ product.sub_price }}</span></p>-->

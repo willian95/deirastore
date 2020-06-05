@@ -19,103 +19,14 @@ use DB;
 
 class CheckoutController extends Controller
 {
-    public function initTransaction(WebpayNormal $webpayNormal, Request $request)
+    public function initTransaction(WebpayNormal $webpayNormal)
 	{
 		//dd($request->all());
-		if($request->has("cart")){ // si el usuario es invitado
-			session(["cart" => $request->cart, "email" => $request->email, "name" => $request->name]);
-			$products = json_decode($request->cart);
-			$total = 0;
-			$totalWeight = 0;
+		$carts = session("cart");
+		$total = 0;
+		foreach($carts as $cart){
 
-			foreach($products as $product){
-				
-				$val = Product::with("items")->where("id", $product->productId)->first();
-
-				if($val->external_price > 0 && $val->price == 0){ //si el precio externo es mayor a 0 y precio es igual 0
-					$total += intval($val->external_price * DolarPrice::first()->price) * $product->amount;
-				}else{
-					$total += intval($val->price * $product->amount);
-				}
-
-				foreach($val->items as $item){
-						
-					if($item->name == "Peso"){
-						
-						$parts = explode(" ", $item->description);
-						$weight = $parts[0];
-						if($parts[1] == "g"){
-							$weight = $parts[0] / 1000;
-						}
-						$totalWeight = ($totalWeight + $weight) * $product->amount;
-
-					}
-
-				}
-
-			}
-
-			/*$shippingCost = 0;
-			$totalWeight = 0;
-
-			foreach($products as $product){
-
-				if($product->items){
-					
-					
-
-				}
-
-			}*/
-	
-			$shipping = Shipping::where('location_id', $request->location)->where("min_weight", "<=", $totalWeight)->where("max_weight", ">=", $totalWeight)->first();
-        	$total = $total + $shipping->price * $totalWeight;
-			
-		}else{ // si el usuario está registrado
-
-			$carts = Cart::with('product')->where('user_id', \Auth::user()->id)->get();
-			$total = 0;
-
-			foreach($carts as $cart){
-
-				$total = $total + ($cart->price * $cart->amount);
-
-			}
-
-			$shippingCost = 0;
-			$totalWeight = 0;
-
-			foreach($carts as $cart){
-
-				if($cart->product != null){
-
-					if($cart->product->items){
-						
-						foreach($cart->product->items as $item){
-							
-							if($item->name == "Peso"){
-								
-								$parts = explode(" ", $item->description);
-								$weight = $parts[0];
-								if($parts[1] == "g"){
-									$weight = $parts[0] / 1000;
-								}
-								$totalWeight = ($totalWeight + $weight) * $cart->amount;
-
-							}
-
-						}
-
-					}
-
-				}
-
-			}
-
-			$shipping = Shipping::where('location_id', \Auth::user()->location_id)->where("min_weight", "<=", $totalWeight)->where("max_weight", ">=", $totalWeight)->first();
-			$shippingCost = $shipping->price * $totalWeight;
-
-			$total = $total + $shippingCost;
+			$total = $total + ($cart["price"] * $cart["amount"]) + $cart["shipping_cost"];
 
 		}
 
@@ -193,10 +104,7 @@ class CheckoutController extends Controller
 			}
 			
 			else{//si no está loguestado
-
-				$email = session('email');
-				$guest = Guest::where("email", $email)->first();
-				$payment->guest_id = $guest->id; // añadimos el id de invitado
+				$payment->guest_id = session('guestUser'); // añadimos el id de invitado
 			
 			}
 
@@ -204,48 +112,29 @@ class CheckoutController extends Controller
 			
 			if($responseCode == 0){
 				//dd(\Auth::check());
-				if(\Auth::check()){ // si está logueado
-					$carts = Cart::with('product')->where('user_id', \Auth::user()->id)->get(); 
-					foreach($carts as $cart){
-
-						$productPurchase = new ProductPurchase; //creamos un nuevo producto comprado
-						$productPurchase->user_id = \Auth::user()->id; // añadimos el id de usuario
-						$productPurchase->payment_id = $payment->id;// añadimos el id de pago
-						$productPurchase->product_id = $cart->product_id; // añadimos el id de producto
-						$productPurchase->amount = $cart->amount; // añadimos la cantidad
-						
-						$productPurchase->price = $cart->price; // añadimos el prcio
-						$productPurchase->save(); // guardamos
-		
-						$product = Product::find($cart->product_id);
-						$product->amount = $product->amount - $cart->amount; // descontamos del inventario
-						$product->update();
-		
-					}
-		
-					$carts = Cart::where('user_id', \Auth::user()->id)->delete(); // borramos los productos de la tabla cart
 				
-				}else{ // si el usuario es invitado
 					
 					$carts = json_decode(session("cart")); //obtenemos los productos de la sesión
-					
-					$email = session('email');
-					$guest = Guest::where("email", $email)->first(); //obtenemos el id de invitado
 					
 					foreach($carts as $cart){
 
 						$product = Product::find($cart->productId);
 						
 						$productPurchase = new ProductPurchase;
-						$productPurchase->guest_id = $guest->id;
+						if(\Auth::check()){
+							$productPurchase->user_id = \Auth::user()->id;
+						}else{
+							$productPurchase->guest_id = $guest->id;
+						}
+						
 						$productPurchase->payment_id = $payment->id;
 						$productPurchase->product_id = $cart->productId;
 						$productPurchase->amount = $cart->amount;
 						
 						if($product->external_price > 0 && $product->price == 0){ //si el producto cuenta con precio externo mayor a 0 y precio = 0
-							$productPurchase->price = intval($product->external_price * DolarPrice::first()->price); //multiplica el precio en USD por el valor en CLP
+							$productPurchase->price = intval(($product->external_price * DolarPrice::first()->price) * $cart->amount); //multiplica el precio en USD por el valor en CLP
 						}else{	
-							$productPurchase->price = $product->price;
+							$productPurchase->price = $product->price * $cart->amount;
 						}
 						
 						//dd($productPurchase);
@@ -257,10 +146,8 @@ class CheckoutController extends Controller
 		
 					}
 
-				}
-				
-				//dd("finalizar");
 			}
+
 
 		}catch(\Exception $e){
 			//dd($e);
@@ -302,6 +189,47 @@ class CheckoutController extends Controller
             return response()->json(["success" => false, "msg" => "Error en el servidor", "err" => $e->getMessage(), "ln" => $e->getLine()]);
 
 		}
+	}
+
+	function storeSession(Request $request){
+
+		try{
+
+			$guestUserId =  0;
+			session(["cart" => $request->items, "type" => $request->type]);
+			if(isset($request->guestUser)){
+
+				if(!Guest::where("rut", $request->guestUser["rut"])->first()){
+
+					$guest = new Guest;
+					$guest->name = $request->guestUser["name"];
+					$guest->email = $request->guestUser["guestEmail"];
+					$guest->lastname = $request->guestUser["lastname"];
+					$guest->phone = $request->guestUser["phoneNumber"];
+					$guest->rut = $request->guestUser["rut"];
+					$guest->location_id = $request->guestUser["location_id"];
+					$guest->comune_id = $request->guestUser["comune_id"];
+					$guest->street = $request->guestUser["street"];
+					$guest->number = $request->guestUser["number"];
+					$guest->house = $request->guestUser["house"];
+					$guest->save();
+
+					$guestUserId = $guest->id;
+
+				}else{
+					session(["guestUser" => Guest::where("rut", $request->guestUser["rut"])->first()->id]);
+				}
+
+			}else{
+				session(["user" => \Auth::user()->id]);
+			}
+
+			return response()->json(["success" => true, "guestUserId" => $guestUserId]);
+
+		}catch(\Exception $e){
+			return response()->json(["success" => false, "err" => $e->getMessage(), "ln" => $e->getLine()]);
+		}
+		
 	}
 
 }

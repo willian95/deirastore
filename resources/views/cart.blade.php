@@ -58,29 +58,7 @@
 
                                             </tr>
                                         </thead>
-                                        @if(\Auth::check())
-                                        <tbody>
-                                            <tr v-for="item in items">
-                                                <td v-if="item.product.is_external && item.product.data_source_id == 1"><img class="lista-pedido" :src="item.product.picture" alt=""></td>
-                                                <td v-if="item.product.data_source_id == 2"><img class="lista-pedido" :src="item.product.picture" alt=""></td>
-                                                <td v-if="item.product.is_external == false"><img class="lista-pedido" :src="'{{ url('/') }}'+'/images/products/'+item.product.picture" alt=""></td>
-                                                <td>
-                                                    <img class="lista-pedido" v-if="item.product.brand.image != null" :src="'{{ url('/') }}'+'/images/brands/'+item.product.brand.image" alt="">
-                                                    <span v-else>@{{ item.product.brand.name }}</span>
-                                                </td>
-                                                <td>
-                                                    <span>@{{ item.product.name }} </span>
-                                                    <p>@{{ item.product.sub_title }}</p>
-                                                </td>
-                                                <td v-if="item.product.external_price > 0">$ @{{ parseInt(item.product.external_price * parseFloat(dolarPrice)).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</td>
-                                                <td v-else>$ @{{ item.product.price }}</td>
-                                                <td>@{{ item.amount }}</td>
-                                                <td>$ @{{ parseInt(item.price).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</td>
-                                                <td><button class="btn btn-danger" @click="erase(item.id)">X</button></td>
-                                            </tr>
 
-                                        </tbody>
-                                        @else
 
                                         <tbody>
                                             <tr v-for="(item, index) in guestItem">
@@ -99,7 +77,6 @@
 
                                         </tbody>
 
-                                        @endif
                                     </table>
                                     <div class="carrito-informacion">
                                         <div class="carrito_item" style="visibility: hidden;">
@@ -125,24 +102,21 @@
                                     <div class="pedido">
                                         <h3>Tu pedido</h3>
                                         <h5>Total de tu compra</h5>
-                                        @if(\Auth::check())
-                                            <h2>$ @{{ parseInt(total).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</h2>
-                                            
-                                        @else
+                                        
                                             <h2>$ @{{ parseInt(totalGuest).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</h2>
-                                        @endif
+                                        
                                         <p>Todos los valores incluyen iva</p>
-                                      <div class="btn-buy">
-                                        
-                                            <div class="form-check">
-                                                <input  type="checkbox" class="form-check-input mt-2" id="terms" v-model="terms">
-                                                <label  class="form-check-label mt-3" for="terms"><a href="{{ url('/terms') }}" target="_blank">Acepto terminos y condiciones</a></label>
-                                            </div>
-                                        <button @click="checkout()" class="finalizar-compra">Check Out</button>
-                                        <button @click="keepShopping()"  class="finalizar-compra finalizar-compra--go">Seguir Comprando</button>
-                                        
-                                 
-                                      </div>
+                                        <div class="btn-buy">
+                                            
+                                                <div class="form-check">
+                                                    <input  type="checkbox" class="form-check-input mt-2" id="terms" v-model="terms">
+                                                    <label  class="form-check-label mt-3" for="terms"><a href="{{ url('/terms') }}" target="_blank">Acepto terminos y condiciones</a></label>
+                                                </div>
+                                            <button @click="checkout()" class="finalizar-compra">Ir a pagar</button>
+                                            <button @click="keepShopping()"  class="finalizar-compra finalizar-compra--go">Seguir Comprando</button>
+                                            
+                                    
+                                        </div>
 
                                     </div>
                                 </div>
@@ -201,7 +175,9 @@
                                     </div>
                                     <div class="main-slider__text">
                                         <span>{{ $related->name }}</span>
-                                        <p class="title">{{ $related->category->name }}</p>
+                                        @if($related->category)
+                                            <p class="title">{{ $related->category->name }}</p>
+                                        @endif
                                         @if($related->external_price > 0 && $related->price == 0)
                                             <span class="price">$ {{ number_format($related->external_price * App\DolarPrice::first()->price, 0, ",", ".") }}</span>
                                         @else
@@ -398,7 +374,7 @@
                 checkout(){
                     if(this.terms == true){
                         if(this.authCheck == 1)
-                            window.location.href="{{ route('checkout') }}"
+                            window.location.href="{{ url('/cart/shipping') }}"
                         else
                             window.location.href="{{ url('/guest/checkout/') }}"
                     }else{
@@ -424,12 +400,12 @@
 
             },
             mounted(){
-                if(this.authCheck == 1){
-                    this.getItems()
-                }
-                else{   
+                //if(this.authCheck == 1){
+                    //this.getItems()
+                //}
+                //else{   
                     this.getGuestItems()
-                }
+                //}
                     
             }
 

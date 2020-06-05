@@ -5,9 +5,6 @@
     <div class="container bg">
         <div id="product-detail">
             <section class="informacion-detalles container">
-                <div class="desc">
-                    <p><strong>30</strong>%<br> DCTO.</p>
-                </div>
                 <div class="">
 
                     <div class="col-sm-12 banner-productos">
@@ -111,7 +108,7 @@
                             <div class="compra-protegida">
                                 <div class="row">
                                     <div class="col-sm-4">
-                                        <img src="{{ asset('assets/img/entrega.svg') }}" alt="">
+                                        <img src="{{ asset('/images/compra_segura_ds.png') }}" alt="">
                                     </div>
                                     <div class="col-sm-8">
                                         <h3>COMPRA PROTEGIDA</h3>
@@ -124,7 +121,7 @@
                             <div class="medios-pago">
                                 <div class="row">
                                     <div class="col-sm-4">
-                                        <img src="{{ asset('assets/img/entrega.svg') }}" alt="">
+                                        <img src="{{ asset('/images/modo_de_pago_ds.png') }}" alt="">
                                     </div>
                                     <div class="col-sm-8">
                                         <h3>MEDIOS DE PAGO</h3>
@@ -137,7 +134,7 @@
                             <div class="despachos">
                                 <div class="row">
                                     <div class="col-sm-4">
-                                        <img src="{{ asset('assets/img/entrega.svg') }}" alt="">
+                                        <img src="{{ asset('/images/despacho-ds.png') }}" alt="">
                                     </div>
                                     <div class="col-sm-8">
                                         <h3>DESPACHOS </h3>
@@ -385,11 +382,11 @@
 
                 store(){
 
-                    if(this.auth == ""){
+                    //if(this.auth == ""){
 
                         this.localCart()
 
-                    }else{
+                    /*}else{
 
                         let formData = new FormData()
                         formData.append("productId", this.productId)
@@ -418,7 +415,7 @@
 
                         })
 
-                    }
+                    }*/
 
                 },
                 add(){
