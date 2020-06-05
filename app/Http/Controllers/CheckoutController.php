@@ -60,74 +60,7 @@ class CheckoutController extends Controller
 		//dd();
 
 		//$this->checkout($response->detailOutput->responseCode);
-		try{
-
-		
-			$payment = new Payment; // creamos un nuevo pago
-			$payment->order_id = session('order');
-
-			if($responseCode == 0){ // si la respuesta de webpay es 0
-				$payment->status = "aprovado";
-			}
-			else{
-				$payment->status = "rechazado";
-			}
-			
-			if(\Auth::check()){ //si el usuario está logueado
-				$payment->user_id = \Auth::user()->id; // añadimos el id de usuario
-			}
-			
-			else{//si no está loguestado
-				$payment->guest_id = session('guestUser'); // añadimos el id de invitado
-			
-			}
-
-			$payment->save();
-			
-			if($responseCode == 0){
-				//dd(\Auth::check());
-				
-					
-				$carts = json_decode(session("cart")); //obtenemos los productos de la sesión
-				dd($carts);
-				foreach($carts as $cart){
-
-					$product = Product::find($cart->productId);
-					
-					$productPurchase = new ProductPurchase;
-					if(\Auth::check()){
-						$productPurchase->user_id = \Auth::user()->id;
-					}else{
-						$productPurchase->guest_id = session('guestUser');
-					}
-					
-					$productPurchase->payment_id = $payment->id;
-					$productPurchase->product_id = $cart->productId;
-					$productPurchase->amount = $cart->amount;
-					
-					if($product->external_price > 0 && $product->price == 0){ //si el producto cuenta con precio externo mayor a 0 y precio = 0
-						$productPurchase->price = intval(($product->external_price * DolarPrice::first()->price) * $cart->amount); //multiplica el precio en USD por el valor en CLP
-					}else{	
-						$productPurchase->price = $product->price * $cart->amount;
-					}
-					
-					//dd($productPurchase);
-
-					$productPurchase->save();
-	
-					$product->amount = $product->amount - $cart->amount; // descontamos del inventario
-					$product->update();
-	
-				}
-
-			}
-
-
-		}catch(\Exception $e){
-			//dd($e);
-			return redirect()->to('cart');
-
-		}
+		dd(session("cart"));
 		
 		
 		if($response->detailOutput->responseCode == 0){
