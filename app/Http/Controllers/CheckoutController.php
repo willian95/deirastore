@@ -60,7 +60,7 @@ class CheckoutController extends Controller
 		//dd();
 
 		//$this->checkout($response->detailOutput->responseCode);
-		$carts = json_decode(session("cart")); //obtenemos los productos de la sesión
+		$carts = session("cart"); //obtenemos los productos de la sesión
 		//dd($carts);
 		foreach($carts as $cart){
 			dd($cart);
