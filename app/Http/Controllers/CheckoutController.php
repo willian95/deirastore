@@ -115,7 +115,7 @@ class CheckoutController extends Controller
 				
 					
 					$carts = json_decode(session("cart")); //obtenemos los productos de la sesión
-					
+					dd($carts);
 					foreach($carts as $cart){
 
 						$product = Product::find($cart->productId);
