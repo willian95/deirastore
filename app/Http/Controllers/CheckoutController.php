@@ -80,7 +80,7 @@ class CheckoutController extends Controller
 			$payment->guest_id = session('guestUser'); // añadimos el id de invitado
 		
 		}
-
+		$payment->location_id = Guest::where("id", session('guestUser'))->first()->location_id;
 		$payment->save();
 
 		if($response->detailOutput->responseCode == 0){
@@ -97,6 +97,11 @@ class CheckoutController extends Controller
 					$productPurchase->guest_id = session('guestUser');
 				}
 				
+				if($cart["shipping_method"] == 2){
+					$productPurchase->shipping_method = "despacho";
+				}else{
+					$productPurchase->shipping_method = "retiro";
+				}
 				$productPurchase->payment_id = $payment->id;
 				$productPurchase->product_id = $cart["id"];
 				$productPurchase->amount = $cart["amount"];

@@ -11,7 +11,8 @@
                     @if(\Auth::check())
                         <p>Nombre: {{ \Auth::user()->name }}</p>
                     @else
-                        <p>Nombre: {{ $name }}</p>
+                        <p>Nombre: @{{ user.name }}</p>
+                        <p>Apellido: @{{ user.lastname }}</p>
                     @endif
 
                     <table class="table">
@@ -54,17 +55,24 @@
         
         const app = new Vue({
             el: '#dev-app',
+            data(){
+                return{
+                    user:""
+                }
+            },
             methods:{
                 
-               deleteStorage(){
+                deleteStorage(){
                    window.localStorage.removeItem('cart')
-               }
+                }
 
 
             },
             mounted(){
                
                 this.deleteStorage()
+                this.user = JSON.parse(localStorage.getItem("guestUser"))
+
             }
 
         })
