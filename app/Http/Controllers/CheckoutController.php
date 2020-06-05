@@ -57,13 +57,14 @@ class CheckoutController extends Controller
 		//dd($_POST, session('response')); 
 		
 		$response = session('response'); // obtenemos la respuesta de webpay
-		dd($response);
+		
 
 		//$this->checkout($response->detailOutput->responseCode);
 		//dd(session("cart"));
 
 		$payment = new Payment; // creamos un nuevo pago
 		$payment->order_id = session('order');
+		dd($response->detailOutput->responseCode);
 
 		if($response->detailOutput->responseCode == 0){ // si la respuesta de webpay es 0
 			$payment->status = "aprovado";
