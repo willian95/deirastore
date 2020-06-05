@@ -59,8 +59,9 @@ class CheckoutController extends Controller
 		$response = session('response'); // obtenemos la respuesta de webpay
 		//dd();
 
-		$this->checkout($response->detailOutput->responseCode);
-		
+		//$this->checkout($response->detailOutput->responseCode);
+		dd(session("cart"));
+
 		if($response->detailOutput->responseCode == 0){
 
 			$payment = Payment::where('order_id', session('order'))->first(); //obtenemos el pago registrado en la funcion checkout
