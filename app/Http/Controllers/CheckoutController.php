@@ -59,10 +59,62 @@ class CheckoutController extends Controller
 		$response = session('response'); // obtenemos la respuesta de webpay
 		//dd();
 
-		$this->checkout($response->detailOutput->responseCode);
+		//$this->checkout($response->detailOutput->responseCode);
 		//dd(session("cart"));
 
 		if($response->detailOutput->responseCode == 0){
+
+			$payment = new Payment; // creamos un nuevo pago
+			$payment->order_id = session('order');
+
+			if($responseCode == 0){ // si la respuesta de webpay es 0
+				$payment->status = "aprovado";
+			}
+			else{
+				$payment->status = "rechazado";
+			}
+			
+			if(\Auth::check()){ //si el usuario está logueado
+				$payment->user_id = \Auth::user()->id; // añadimos el id de usuario
+			}
+			
+			else{//si no está loguestado
+				$payment->guest_id = session('guestUser'); // añadimos el id de invitado
+			
+			}
+
+			$payment->save();
+
+			$carts = session("cart"); //obtenemos los productos de la sesión
+				
+			foreach($carts as $cart){
+				dd($cart);
+				$product = Product::find($cart->id);
+				
+				$productPurchase = new ProductPurchase;
+				if(\Auth::check()){
+					$productPurchase->user_id = \Auth::user()->id;
+				}else{
+					$productPurchase->guest_id = session('guestUser');
+				}
+				
+				$productPurchase->payment_id = $payment->id;
+				$productPurchase->product_id = $cart->id;
+				$productPurchase->amount = $cart->amount;
+				
+				if($product->external_price > 0 && $product->price == 0){ //si el producto cuenta con precio externo mayor a 0 y precio = 0
+					$productPurchase->price = intval(($product->external_price * DolarPrice::first()->price)); //multiplica el precio en USD por el valor en CLP
+				}else{	
+					$productPurchase->price = $product->price * $cart->amount;
+				}
+
+				$productPurchase->save();
+
+				$product->amount = $product->amount - $cart->amount; // descontamos del inventario
+				$product->update();
+
+			}
+
 
 			$payment = Payment::where('order_id', session('order'))->first(); //obtenemos el pago registrado en la funcion checkout
 			$products = ProductPurchase::with('product')->where('payment_id', $payment->id)->get();
@@ -116,35 +168,35 @@ class CheckoutController extends Controller
 				//dd(\Auth::check());
 				
 					
-					$carts = session("cart"); //obtenemos los productos de la sesión
+				$carts = session("cart"); //obtenemos los productos de la sesión
+				
+				foreach($carts as $cart){
+
+					$product = Product::find($cart->id);
 					
-					foreach($carts as $cart){
-
-						$product = Product::find($cart->id);
-						
-						$productPurchase = new ProductPurchase;
-						if(\Auth::check()){
-							$productPurchase->user_id = \Auth::user()->id;
-						}else{
-							$productPurchase->guest_id = session('guestUser');
-						}
-						
-						$productPurchase->payment_id = $payment->id;
-						$productPurchase->product_id = $cart->id;
-						$productPurchase->amount = $cart->amount;
-						
-						if($product->external_price > 0 && $product->price == 0){ //si el producto cuenta con precio externo mayor a 0 y precio = 0
-							$productPurchase->price = intval(($product->external_price * DolarPrice::first()->price)); //multiplica el precio en USD por el valor en CLP
-						}else{	
-							$productPurchase->price = $product->price * $cart->amount;
-						}
-
-						$productPurchase->save();
-		
-						$product->amount = $product->amount - $cart->amount; // descontamos del inventario
-						$product->update();
-		
+					$productPurchase = new ProductPurchase;
+					if(\Auth::check()){
+						$productPurchase->user_id = \Auth::user()->id;
+					}else{
+						$productPurchase->guest_id = session('guestUser');
 					}
+					
+					$productPurchase->payment_id = $payment->id;
+					$productPurchase->product_id = $cart->id;
+					$productPurchase->amount = $cart->amount;
+					
+					if($product->external_price > 0 && $product->price == 0){ //si el producto cuenta con precio externo mayor a 0 y precio = 0
+						$productPurchase->price = intval(($product->external_price * DolarPrice::first()->price)); //multiplica el precio en USD por el valor en CLP
+					}else{	
+						$productPurchase->price = $product->price * $cart->amount;
+					}
+
+					$productPurchase->save();
+	
+					$product->amount = $product->amount - $cart->amount; // descontamos del inventario
+					$product->update();
+	
+				}
 
 			}
 
