@@ -59,8 +59,8 @@ class CheckoutController extends Controller
 		$response = session('response'); // obtenemos la respuesta de webpay
 		//dd();
 
-		//$this->checkout($response->detailOutput->responseCode);
-		dd(session("cart"));
+		$this->checkout($response->detailOutput->responseCode);
+		//dd(session("cart"));
 
 		if($response->detailOutput->responseCode == 0){
 
@@ -120,7 +120,7 @@ class CheckoutController extends Controller
 					
 					foreach($carts as $cart){
 
-						$product = Product::find($cart->productId);
+						$product = Product::find($cart->id);
 						
 						$productPurchase = new ProductPurchase;
 						if(\Auth::check()){
@@ -130,7 +130,7 @@ class CheckoutController extends Controller
 						}
 						
 						$productPurchase->payment_id = $payment->id;
-						$productPurchase->product_id = $cart->productId;
+						$productPurchase->product_id = $cart->id;
 						$productPurchase->amount = $cart->amount;
 						
 						if($product->external_price > 0 && $product->price == 0){ //si el producto cuenta con precio externo mayor a 0 y precio = 0
