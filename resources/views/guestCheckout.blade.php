@@ -113,7 +113,7 @@
                 phoneNumber:"",
                 rut:"",
                 guestEmail:"",
-                isRutValid:true
+                isRutValid:false
             }
         },
         methods: {
