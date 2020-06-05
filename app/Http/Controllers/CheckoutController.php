@@ -59,12 +59,7 @@ class CheckoutController extends Controller
 		$response = session('response'); // obtenemos la respuesta de webpay
 		//dd();
 
-		//$this->checkout($response->detailOutput->responseCode);
-		$carts = session("cart"); //obtenemos los productos de la sesión
-		//dd($carts);
-		foreach($carts as $cart){
-			dd($cart);
-		}
+		$this->checkout($response->detailOutput->responseCode);
 		
 		if($response->detailOutput->responseCode == 0){
 
@@ -120,7 +115,7 @@ class CheckoutController extends Controller
 				//dd(\Auth::check());
 				
 					
-					$carts = json_decode(session("cart")); //obtenemos los productos de la sesión
+					$carts = session("cart"); //obtenemos los productos de la sesión
 					
 					foreach($carts as $cart){
 
@@ -138,12 +133,10 @@ class CheckoutController extends Controller
 						$productPurchase->amount = $cart->amount;
 						
 						if($product->external_price > 0 && $product->price == 0){ //si el producto cuenta con precio externo mayor a 0 y precio = 0
-							$productPurchase->price = intval(($product->external_price * DolarPrice::first()->price) * $cart->amount); //multiplica el precio en USD por el valor en CLP
+							$productPurchase->price = intval(($product->external_price * DolarPrice::first()->price)); //multiplica el precio en USD por el valor en CLP
 						}else{	
 							$productPurchase->price = $product->price * $cart->amount;
 						}
-						
-						//dd($productPurchase);
 
 						$productPurchase->save();
 		
