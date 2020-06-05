@@ -395,15 +395,15 @@
                     }
 
                     if(error == false){
-
+                        this.confirmAddress = true
+                        alertify.success("Dirección confirmada")
                         axios.post("{{ url('/cart/shipping-price/location') }}", {products: this.guestItem, location: this.location}).then(res =>{
                         
                             this.guestItem = res.data.cart
                             this.totalGuest = 0;
                             this.shippingCost = 0;
                             this.shippingAmount = 0;
-                            this.confirmAddress = true
-                            alertify.success("Dirección confirmada")
+                            
 
                             this.guestItem.forEach((data, index) => {
 
