@@ -57,7 +57,7 @@ class CheckoutController extends Controller
 		//dd($_POST, session('response')); 
 		
 		$response = session('response'); // obtenemos la respuesta de webpay
-		//dd();
+		dd($response);
 
 		//$this->checkout($response->detailOutput->responseCode);
 		//dd(session("cart"));
