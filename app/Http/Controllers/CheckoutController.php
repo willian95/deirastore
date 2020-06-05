@@ -88,7 +88,6 @@ class CheckoutController extends Controller
 			$carts = session("cart"); //obtenemos los productos de la sesión
 			
 			foreach($carts as $cart){
-				dd($cart);
 				$product = Product::find($cart->id);
 				
 				$productPurchase = new ProductPurchase;
