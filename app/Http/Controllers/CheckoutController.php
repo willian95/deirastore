@@ -64,7 +64,6 @@ class CheckoutController extends Controller
 
 		$payment = new Payment; // creamos un nuevo pago
 		$payment->order_id = session('order');
-		dd($response->detailOutput->responseCode);
 
 		if($response->detailOutput->responseCode == 0){ // si la respuesta de webpay es 0
 			$payment->status = "aprovado";
