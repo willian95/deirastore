@@ -124,7 +124,7 @@ class CheckoutController extends Controller
 						if(\Auth::check()){
 							$productPurchase->user_id = \Auth::user()->id;
 						}else{
-							$productPurchase->guest_id = $guest->id;
+							$productPurchase->guest_id = session('guestUser');
 						}
 						
 						$productPurchase->payment_id = $payment->id;
