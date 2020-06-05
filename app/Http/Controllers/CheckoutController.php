@@ -88,7 +88,7 @@ class CheckoutController extends Controller
 			$carts = session("cart"); //obtenemos los productos de la sesión
 			
 			foreach($carts as $cart){
-				$product = Product::find($cart->id);
+				$product = Product::find($cart["id"]);
 				
 				$productPurchase = new ProductPurchase;
 				if(\Auth::check()){
@@ -98,18 +98,18 @@ class CheckoutController extends Controller
 				}
 				
 				$productPurchase->payment_id = $payment->id;
-				$productPurchase->product_id = $cart->id;
-				$productPurchase->amount = $cart->amount;
+				$productPurchase->product_id = $cart["id"];
+				$productPurchase->amount = $cart["amount"];
 				
 				if($product->external_price > 0 && $product->price == 0){ //si el producto cuenta con precio externo mayor a 0 y precio = 0
 					$productPurchase->price = intval(($product->external_price * DolarPrice::first()->price)); //multiplica el precio en USD por el valor en CLP
 				}else{	
-					$productPurchase->price = $product->price * $cart->amount;
+					$productPurchase->price = $product->price * $cart["amount"];
 				}
 
 				$productPurchase->save();
 
-				$product->amount = $product->amount - $cart->amount; // descontamos del inventario
+				$product->amount = $product->amount - $cart["amount"]; // descontamos del inventario
 				$product->update();
 
 				
