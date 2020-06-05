@@ -169,7 +169,7 @@
             },
             validateRut(){
                
-               /*if(this.rut != ""){
+               if(this.rut != ""){
                    this.loading = true
                    axios.get("{{ url('/validate/rut/') }}"+"/"+this.rut).then(res => {
                        this.loading = false
@@ -187,7 +187,7 @@
                    .catch(err => {
 
                    })
-               }*/
+               }
                
            },
            logIn() {
