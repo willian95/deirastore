@@ -60,8 +60,11 @@ class CheckoutController extends Controller
 		//dd();
 
 		//$this->checkout($response->detailOutput->responseCode);
-		dd(session("cart"));
-		
+		$carts = json_decode(session("cart")); //obtenemos los productos de la sesión
+		//dd($carts);
+		foreach($carts as $cart){
+			dd($cart);
+		}
 		
 		if($response->detailOutput->responseCode == 0){
 
@@ -118,7 +121,7 @@ class CheckoutController extends Controller
 				
 					
 					$carts = json_decode(session("cart")); //obtenemos los productos de la sesión
-					dd($carts);
+					
 					foreach($carts as $cart){
 
 						$product = Product::find($cart->productId);
