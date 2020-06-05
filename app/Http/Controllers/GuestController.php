@@ -80,4 +80,17 @@ class GuestController extends Controller
 
     }
 
+    function getGuestUser(Request $request){
+
+        try{
+
+            $guest = Guest::where("id", $request->id)->first();
+            return response()->json(["guest" => $guest]);
+
+        }catch(\Exception $e){
+            return response()->json(["success" => false, "msg" => "Error en el servidor", "err" => $e->getMessage(), "ln" => $e->getLine()]);
+        }
+
+    }
+
 }
