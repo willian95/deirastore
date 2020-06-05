@@ -13,7 +13,7 @@ class AddLocationIdToPayment extends Migration
      */
     public function up()
     {
-        Schema::table('payment', function (Blueprint $table) {
+        Schema::table('payments', function (Blueprint $table) {
             $table->integer("location_id")->nullable();
         });
     }
