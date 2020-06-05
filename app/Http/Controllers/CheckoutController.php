@@ -102,6 +102,7 @@ class CheckoutController extends Controller
 				}else{
 					$productPurchase->shipping_method = "retiro";
 				}
+				$productPurchase->shipping_cost = $cart["shipping_cost"];
 				$productPurchase->payment_id = $payment->id;
 				$productPurchase->product_id = $cart["id"];
 				$productPurchase->amount = $cart["amount"];
