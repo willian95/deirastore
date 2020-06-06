@@ -24,7 +24,7 @@
                             email: @{{ sale.guest.email }}
                         </p>
                         <p class="text-center" v-if="sale.guest">
-                            status: @{{ sale.status }}
+                            status: <span v-if="sale.status == 'aprovado'">Aprobado</span><span v-else>Rechazado</span>
                         </p>
                         <p class="text-center">
                             <button class="btn btn-success" @click="getProductDetails(sale.product_purchase)" data-toggle="modal" data-target="#details">
@@ -66,9 +66,11 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Product</th>
-                                <th>Amount</th>
-                                <th>Price</th>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Precio</th>
+                                <th>Tipo de envío </th>
+                                <th>Costo de envío </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -83,7 +85,13 @@
                                     @{{ productDetail.amount }}
                                 </td>
                                 <td>
-                                    @{{ productDetail.product.price }}
+                                    @{{ productDetail.price }}
+                                </td>
+                                <td>
+                                    @{{ productDetail.shippingMethod }}
+                                </td>
+                                <td>
+                                    @{{ productDetail.shippingCost }}
                                 </td>
                             </tr>
                         </tbody>
