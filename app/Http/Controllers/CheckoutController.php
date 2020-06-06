@@ -98,7 +98,7 @@ class CheckoutController extends Controller
 		if($response->detailOutput->responseCode == 0){
 
 			$carts = session("cart"); //obtenemos los productos de la sesión
-			
+			dd($carts);
 			foreach($carts as $cart){
 				$product = Product::find($cart["id"]);
 				
