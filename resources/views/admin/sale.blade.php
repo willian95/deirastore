@@ -10,13 +10,20 @@
 
                 <div class="card" v-for="sale in sales">
                     <div class="card-body">
-                        <p class="text-center">
+                        <p class="text-center" v-if="sale.user">
                             user: @{{ sale.user.name }}
                         </p>
-                        <p class="text-center">
+                        <p class="text-center" v-if="sale.user">
                             email: @{{ sale.user.email }}
                         </p>
-                        <p class="text-center">
+
+                        <p class="text-center" v-if="sale.guest">
+                            user: @{{ sale.user.name }}
+                        </p>
+                        <p class="text-center" v-if="sale.guest">
+                            email: @{{ sale.user.email }}
+                        </p>
+                        <p class="text-center" v-if="sale.guest">
                             status: @{{ sale.status }}
                         </p>
                         <p class="text-center">
