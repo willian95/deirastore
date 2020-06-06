@@ -87,7 +87,12 @@ class CheckoutController extends Controller
 			$payment->ticket_type = "boleta";
 		}
 
-		$payment->location_id = Guest::where("id", session('guestUser'))->first()->location_id;
+		@if(\Auth::guest()){
+			$payment->location_id = Guest::where("id", session('guestUser'))->first()->location_id;
+		}else{
+			$payment->location_id = \Auth::user()->location_id;
+		}
+
 		$payment->save();
 
 		if($response->detailOutput->responseCode == 0){
