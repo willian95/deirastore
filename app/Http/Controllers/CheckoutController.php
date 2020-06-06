@@ -98,11 +98,12 @@ class CheckoutController extends Controller
 		if($response->detailOutput->responseCode == 0){
 
 			$carts = session("cart"); //obtenemos los productos de la sesión
-			dd($carts);
+		
 			foreach($carts as $cart){
 				$product = Product::find($cart["id"]);
 				
 				$productPurchase = new ProductPurchase;
+				
 				if(\Auth::check()){
 					$productPurchase->user_id = \Auth::user()->id;
 				}else{
@@ -130,27 +131,24 @@ class CheckoutController extends Controller
 				$product->amount = $product->amount - $cart["amount"]; // descontamos del inventario
 				$product->update();
 
-				
+			}
 
+			$payment = Payment::where('order_id', session('order'))->first(); //obtenemos el pago registrado en la funcion checkout
+			$products = ProductPurchase::with('product')->where('payment_id', $payment->id)->get();
+			$this->sendMessage($products);
+			$name = "";
+			if(\Auth::guest()){
 
-				$payment = Payment::where('order_id', session('order'))->first(); //obtenemos el pago registrado en la funcion checkout
-				$products = ProductPurchase::with('product')->where('payment_id', $payment->id)->get();
-				$this->sendMessage($products);
-				$name = "";
-				if(\Auth::guest()){
-
-					$name = session('name');
-					session()->forget(["cart", "email", "name", "response"]);
-					session()->flush();
-					session()->save();
-
-				}
-
-				$type = session("type");
-
-				return view('successPayment', ["products" => $products, "type" => $type]);
+				$name = session('name');
+				session()->forget(["cart", "email", "name", "response"]);
+				session()->flush();
+				session()->save();
 
 			}
+
+			$type = session("type");
+
+			return view('successPayment', ["products" => $products, "type" => $type]);
 
 		
 		
