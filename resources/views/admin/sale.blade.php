@@ -88,10 +88,10 @@
                                     @{{ productDetail.price }}
                                 </td>
                                 <td>
-                                    @{{ productDetail.shippingMethod }}
+                                    @{{ productDetail.shipping_method }}
                                 </td>
                                 <td>
-                                    @{{ productDetail.shippingCost }}
+                                    @{{ productDetail.shipping_cost }}
                                 </td>
                             </tr>
                         </tbody>
