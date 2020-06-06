@@ -9,4 +9,8 @@ class Guest extends Model
     
     protected $fillable=["email", "name"];
 
+    public function sales(){
+        return $this->hasMany(Payment::class);
+    }
+
 }
