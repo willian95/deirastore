@@ -18,10 +18,10 @@
                         </p>
 
                         <p class="text-center" v-if="sale.guest">
-                            user: @{{ sale.user.name }}
+                            user: @{{ sale.guest.name }}
                         </p>
                         <p class="text-center" v-if="sale.guest">
-                            email: @{{ sale.user.email }}
+                            email: @{{ sale.guest.email }}
                         </p>
                         <p class="text-center" v-if="sale.guest">
                             status: @{{ sale.status }}
