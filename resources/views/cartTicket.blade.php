@@ -17,7 +17,7 @@
                     <button class="btn btn-success" @click="boleta()">Boleta</button>
                 </p>
             </div>
-            @if(\Auth::check())
+            @if(\Auth::check() && \Auth::user()->business_name != "" && \Auth::user()->business_rut != "")
                 <div class="col-6">
                     <p class="text-center">
                         <button class="btn btn-success" @click="factura()">Factura</button>

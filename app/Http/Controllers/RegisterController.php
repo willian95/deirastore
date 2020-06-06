@@ -40,6 +40,15 @@ class RegisterController extends Controller
             $user->comune_id = $request->comune_id;
             $user->house = $request->house;
             $user->number = $request->number;
+
+            if($request->showBusiness == true){
+                $user->business_name = $request->businessName;
+                $user->business_rut = $request->businessRut;
+                $user->business_address = $request->businessAddress;
+                $user->business_phone = $request->businessPhone;
+                $user->business_mail = $request->businessMail;
+            }
+
             $user->save();
             
             $data = ["user" => $user, "hash" => $hash];

@@ -80,6 +80,13 @@ class CheckoutController extends Controller
 			$payment->guest_id = session('guestUser'); // añadimos el id de invitado
 		
 		}
+
+		if(session("type") == "factura"){
+			$payment->ticket_type = "factura";
+		}else if(session("type") == "boleta"){
+			$payment->ticket_type = "boleta";
+		}
+
 		$payment->location_id = Guest::where("id", session('guestUser'))->first()->location_id;
 		$payment->save();
 
@@ -134,7 +141,9 @@ class CheckoutController extends Controller
 
 				}
 
-				return view('successPayment', ["products" => $products, "name" => $name]);
+				$type = session("type");
+
+				return view('successPayment', ["products" => $products, "type" => $type]);
 
 			}
 

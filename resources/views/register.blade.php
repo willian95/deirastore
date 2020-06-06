@@ -105,6 +105,47 @@
                                 <label  for="house">Dpto. / Casa / Oficna (Opcional)</label>
                                 <input  placeholder="Ingresa número" type="text" class="form-control" id="house" v-model="house">
                             </div>
+
+                            <div class="row" style="width: 100%">
+                                <div class="col-12">
+                                    
+                                    <div class="form-grid__item form-check">
+                                        <input  type="checkbox" class="form-check-input mt-2" id="showBusiness" v-model="showBusiness">
+                                        <label  class="form-check-label mt-3" for="showBusiness"><h3 class="text-center">Empresa</h3></label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-grid__item" v-if="showBusiness == true">
+                                <label  for="businessName">* Razón social</label>
+                                <input  placeholder="Razón social" type="text" class="form-control" id="businessName" v-model="businessName">
+                            </div>
+
+                            <div class="form-grid__item" v-if="showBusiness == true">
+                                <label  for="businessRut">* RUT de empresa</label>
+                                <input  placeholder="RUT" type="text" class="form-control" id="businessRut" v-model="businessRut">
+                            </div>
+
+                            <div class="form-grid__item" v-if="showBusiness == true">
+                                <label  for="businessAddress">* Dirección de la razón social</label>
+                                <input  placeholder="Dirección" type="text" class="form-control" id="businessAddress" v-model="businessAddress">
+                            </div>
+
+                            <div class="form-grid__item" v-if="showBusiness == true">
+                                <label  for="businessPhone">* Teléfono de contacto de razón social</label>
+                                <input  placeholder="Teléfono de contacto" type="text" class="form-control" id="businessPhone" v-model="businessPhone">
+                            </div>
+
+                            <div class="form-grid__item" v-if="showBusiness == true">
+                                <label  for="businessMail">* Mail de adminsitración</label>
+                                <input  placeholder="Email de adminstradción" type="text" class="form-control" id="businessMail" v-model="businessMail">
+                            </div>
+
+                            <div class="form-grid__item form-check" style="visibility: hidden" v-if="showBusiness == true">
+                                <input  type="checkbox" class="form-check-input mt-2" >
+                                <label  class="form-check-label mt-3" for="terms">Acepto terminos y condiciones</label>
+                            </div>
+
                             <div class="form-grid__item">
                                 {!! htmlFormSnippet() !!}
                             </div>
@@ -166,7 +207,14 @@
                 communes:[],
                 selectedComune:"",
                 house:"",
-                number:""
+                number:"",
+                businessName:"",
+                businessRut:"",
+                businessAddress:"",
+                businessPhone:"",
+                businessMail:"",
+                showBusiness:false
+
             }
         },
         methods: {
@@ -189,7 +237,13 @@
                             location: this.location,
                             comune_id: this.selectedComune,
                             house: this.house,
-                            number: this.number
+                            number: this.number,
+                            showBusiness: this.showBusiness,
+                            businessName: this.businessName,
+                            businessRut:this.businessRut,
+                            businessAddress:this.businessAddress,
+                            businessPhone:this.businessPhone,
+                            businessMail:this.businessMail,
                         })
                         .then(res => {
                             
@@ -322,6 +376,31 @@
 
                 if(!this.reg.test(this.email)){
                     alertify.error("Email no válido")
+                    error = true
+                }
+
+                if(this.showBusiness == true && this.businessName == ""){
+                    alertify.error("Razón social es requerida")
+                    error = true
+                }
+
+                if(this.showBusiness == true && this.businessRut == ""){
+                    alertify.error("RUT de empresa es requerido")
+                    error = true
+                }
+
+                if(this.showBusiness == true && this.businessAddress == ""){
+                    alertify.error("Dirección de empresa es requerida")
+                    error = true
+                }
+
+                if(this.showBusiness == true && this.businessPhone == ""){
+                    alertify.error("Teléfono de empresa es requerido")
+                    error = true
+                }
+
+                if(this.showBusiness == true && this.businessMail == ""){
+                    alertify.error("Email de empresa es requerido")
                     error = true
                 }
 
