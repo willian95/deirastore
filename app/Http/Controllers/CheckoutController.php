@@ -87,7 +87,7 @@ class CheckoutController extends Controller
 			$payment->ticket_type = "boleta";
 		}
 
-		@if(\Auth::guest()){
+		if(\Auth::guest()){
 			$payment->location_id = Guest::where("id", session('guestUser'))->first()->location_id;
 		}else{
 			$payment->location_id = \Auth::user()->location_id;
