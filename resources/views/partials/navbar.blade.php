@@ -34,7 +34,7 @@
                                 <a href="{{ url('/profile') }}" class="drow-none">Mis Datos</a>
                                 <a href="{{ url('/logout') }}" class="drow-none">Cerrar sesión</a>
                             @else
-                                <a class="drow-none" href="{{ url('/login') }}">Iniciar sesion</a>
+                                <a class="drow-none" href="{{ url('/login') }}">Iniciar sesión</a>
                                 <a class="drow-none" href="{{ url('/register') }}">Registrarme</a>
                             @endif
                         </div>
@@ -93,7 +93,7 @@
                         <a class="nav-link" href="{{ url('/products/destacados') }}">Productos Destacados</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/somos') }}">Quienes somos</a>
+                        <a class="nav-link" href="{{ url('/somos') }}">Quiénes somos</a>
                     </li>
                     <li class="nav-item dropdown mega-menu">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" id="menu-brands">Mejores tiendas</a>

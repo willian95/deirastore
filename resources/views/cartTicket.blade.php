@@ -6,8 +6,8 @@
 
         <div class="row">
             <div class="col-12">
-                <a class="btn btn-primary btn-general btn-general--form" style="color: #fff;" href="{{ url()->previous() }}"><i class="fa fa-arrow-left"></i></a>
-            </div>
+               <!--- <a class="btn btn-primary btn-general btn-general--form" style="color: #fff;" href="{{ url()->previous() }}"><i class="fa fa-arrow-left"></i></a>
+            </div>--->
             <div class="col-12">
                 <h2 class="text-center">Tipo de Facturación</h2>
             </div>

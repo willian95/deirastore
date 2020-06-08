@@ -3,11 +3,27 @@
 @section('content')
 
     <div class="container bg">
-        <div class="col-12">
-            <a class="btn btn-primary btn-general btn-general--form" style="color: #fff;" href="{{ url()->previous() }}"><i class="fa fa-arrow-left"></i></a>
-        </div>
-        <div class="title__general title__general-start fadeInUp wow animated">
+       
+        <div class="title__general title__general-start fadeInUp wow animated pag-center">
             <p><strong>{{ $category->name }}</strong></p>
+
+            <div class="row">
+                <div class="col-12">
+                    <nav aria-label="Page navigation example" style="margin-top: 10px;">
+                        <ul class="pagination">
+                            <li>
+                                <a class="page-link" v-if="page > 1" href="#" @click="fetch(page - 1)">Anterior</a>
+                            </li>
+                            <li class="page-item" v-for="index in pages">
+                                <a class="page-link" href="#" v-if="index > page &&  index < page + 6"  :key="index" @click="fetch(index)" >@{{ index }}</a>
+                            </li>
+                            <li>
+                                <a class="page-link" v-if="page < pages" href="#" @click="fetch(page + 6)">Siguiente</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
         </div>
         <div class="row">
             <div class="col-12 col-md-6 col-lg-3" v-for="product in products">
@@ -29,23 +45,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-12">
-                <nav aria-label="Page navigation example" style="margin-top: 10px;">
-                    <ul class="pagination">
-                        <li>
-                            <a class="page-link" v-if="page > 1" href="#" @click="fetch(page - 1)">Anterior</a>
-                        </li>
-                        <li class="page-item" v-for="index in pages">
-                            <a class="page-link" href="#" v-if="index > page &&  index < page + 6"  :key="index" @click="fetch(index)" >@{{ index }}</a>
-                        </li>
-                        <li>
-                            <a class="page-link" v-if="page < pages" href="#" @click="fetch(page + 6)">Siguiente</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
+     
 
         <div class="row" v-if="subCategories.length > 0">
             <div class="col-12">

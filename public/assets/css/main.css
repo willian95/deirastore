@@ -249,7 +249,7 @@ header {
 
 .bg {
     background: #fff;
-    margin-top: -70px;
+    margin-top: -30px;
     padding: 30px 20px;
     z-index: 1;
     position: relative;
@@ -258,6 +258,10 @@ header {
 .btn-form img {
     width: 20px;
     filter: opacity(0.5);
+}
+
+.navbar-collapse{
+    margin-top: 20px;
 }
 
 .btn-form {
@@ -495,7 +499,17 @@ header {
     display: block;
     width: 100%;
 }
+.main-categorias__content .slick-slide img {
+    display: block;
+    width: 100%;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 15px;
+}
 
+.main-slider__item{
+    margin-bottom: 100px;
+}
 .main-categorias__item {
     width: 100px;
 }
@@ -508,7 +522,7 @@ header {
     cursor: pointer;
     text-align: center;
     text-decoration: none;
-    margin-left: 2px;
+    margin-left: -1px;
     transition: .5s;
 
 
@@ -527,6 +541,7 @@ header {
 .main-categorias-txt {
     transition: .5s;
     line-height: 1;
+    border: 1px solid #0000001a;
 }
 
 .main-categorias-txt:hover {
@@ -540,7 +555,7 @@ header {
 }
 
 .main-categorias-txt:hover img {
-    filter: brightness(3.5);
+    /*filter: brightness(3.5);*/
     transition: .5s;
 }
 
@@ -662,14 +677,15 @@ header {
 .slick-next:before {
     font-size: 14px;
     color: #d80000;
-    content: url(../img/deira-64.png);
+    background-image: url(../img/deira-64.png);
     z-index: 3;
+ 
 }
 
 .slick-prev:before {
     font-size: 14px;
     color: #d80000;
-    content: url(../img/deira-65.png);
+    background-image: url(../img/deira-65.png);
     z-index: 3;
 }
 
@@ -766,7 +782,7 @@ footer {
 }
 
 .contact img {
-    width: 30px;
+    width: 20px;
     filter: invert(1);
 }
 
@@ -1910,7 +1926,7 @@ img.lista-pedido {
 
 .main-banner__card-img img:hover {
 
-    box-shadow: 0px 0px 12px black;
+    box-shadow: 0px 0px 12px #00000024;
 
 }
 
@@ -2283,4 +2299,16 @@ padding-bottom: 110px;
 }
 .about_text p{
     font-size: 1.2rem;
+}
+
+.pag-center{
+    display: flex;
+    justify-content: space-between;
+}
+
+.pag-center .page-link:hover {
+
+    color: #d32b2b;
+    background-color: transparent;
+   
 }

@@ -5,9 +5,9 @@
     <div class="container bg" id="dev-categories">
 
         <div class="row">
-            <div class="col-12">
+           <!--- <div class="col-12">
                 <a class="btn btn-primary btn-general btn-general--form" style="color: #fff;" href="{{ url()->previous() }}"><i class="fa fa-arrow-left"></i></a>
-            </div>
+            </div>--->
         </div>
         <div class="title__general fadeInUp wow animated">
             <p><strong>Todas las </strong>Categorias</p>

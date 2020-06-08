@@ -3,9 +3,9 @@
 @section('content')
 
     <div class="container bg">
-        <div class="col-12">
+       <!-- <div class="col-12">
             <a class="btn btn-primary btn-general btn-general--form" style="color: #fff;" href="{{ url()->previous() }}"><i class="fa fa-arrow-left"></i></a>
-        </div>
+        </div>-->
         <div class="row">
             <div class="col-md-3 col-xs-12 " v-for="brand in brands">
                 <div class="main-slider__item">

@@ -3,11 +3,11 @@
 @section('content')
 
     <div class="container bg card-form">
-        <div class="row">
+       <!--- <div class="row">
             <div class="col-12">
                 <a class="btn btn-primary btn-general btn-general--form" style="color: #fff;" href="{{ url()->previous() }}"><i class="fa fa-arrow-left"></i></a>
             </div>
-        </div>
+        </div>--->
         <div class="row">
             <div class="col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-12">
                 

@@ -4,16 +4,16 @@
 
     <div class="container bg card-form">
         <div class="row">
-            <div class="col-12">
+           <!-- <div class="col-12">
                 <a class="btn btn-primary btn-general btn-general--form" style="color: #fff;" href="{{ url()->previous() }}"><i class="fa fa-arrow-left"></i></a>
-            </div>
+            </div>-->
         </div>
         <div class="row center-form">
             <div class="col-lg-4  col-md-6  col-12">
                 <div class="card">
                     <div class="card-body">
                         <div class="title__general fadeInUp wow animated">
-                            <p><strong>Inicio</strong> de sesion</p>
+                            <p><strong>Inicio</strong> de sesión</p>
                         </div>
                         <div class="form-group">
                             <!-- <label for="email">Email</label> -->
@@ -36,7 +36,7 @@
 <br><br>
                         <div class="form-group pass text-center" style="font-size: 1rem;
                         font-weight: 600;">
-                            <a href="{{ url('/register') }}">¿Aun no se registra?</a>
+                            <a href="{{ url('/register') }}">¿Aún no se registra?</a>
                         </div>
                     </div>
                 </div>

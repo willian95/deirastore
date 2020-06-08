@@ -5,6 +5,7 @@
                 <p class="description">Empresa de Servicio, Soporte, Soluciones y Venta de
                     Productos Informáticos, dando respuesta a requerimientos
                     de integración de harreare y software.</p>
+                    <a class="contact mr-4"  href="mailto:contacto@deira-it.com"> <i class="fa fa-envelope"></i> contacto@deira-it.com</a>
                 <a class="contact" href=tel:+56226748000><img src="{{ asset('assets/img/telefono.svg') }}" alt="">+56 22 674 8000</a>
 
                 <ul class="social">
