@@ -131,12 +131,13 @@ section {
     padding-right: 1.5rem !important;
     color: #ffffff;
     font-weight: lighter;
+    list-style: initial;
 }
 
 .nav-item:nth-child(3) {
     list-style: initial;
-    color: white;
-    margin-left: 9px;
+ 
+  
 }
 
 .nav-item:nth-child(4) {
@@ -182,6 +183,12 @@ header {
     padding: 0;
 }
 
+.cart__btn:hover i{
+    
+    color: #d32b2b;
+    transition: .6s;
+}
+
 .main-menu__top-item ul li img {
     width: 25px;
 }
@@ -195,6 +202,8 @@ header {
     justify-content: center;
     border-radius: 100%;
     overflow: hidden;
+    color: #fff;
+    align-items: center;
 }
 
 .main-menu__top-item ul li:nth-child(2) a {
