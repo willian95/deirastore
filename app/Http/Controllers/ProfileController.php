@@ -47,6 +47,14 @@ class ProfileController extends Controller
 
             }
 
+            if($request->showBusiness == true){
+                $user->business_name = $request->businessName;
+                $user->business_rut = $request->businessRut;
+                $user->business_address = $request->businessAddress;
+                $user->business_phone = $request->businessPhone;
+                $user->business_mail = $request->businessMail;
+            }
+
             $user->update();
 
             return response()->json(["success" => true, "msg" => "Perfil actualizado"]);

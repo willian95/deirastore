@@ -115,12 +115,23 @@ class CheckoutController extends Controller
 					$productPurchase->guest_id = session('guestUser');
 				}
 				
-				if($cart["shipping_method"] == 2){
-					$productPurchase->shipping_method = "despacho";
+				if(isset($cart["shipping_method"])){
+					if($cart["shipping_method"] == 2){
+						$productPurchase->shipping_method = "despacho";
+					}else{
+						$productPurchase->shipping_method = "retiro";
+					}
 				}else{
 					$productPurchase->shipping_method = "retiro";
 				}
-				$productPurchase->shipping_cost = $cart["shipping_cost"];
+
+				if(isset($cart["shipping_cost"])){
+					$productPurchase->shipping_cost = $cart["shipping_cost"];
+				}else{
+					$productPurchase->shipping_cost = 0;
+				}
+				
+				
 				$productPurchase->payment_id = $payment->id;
 				$productPurchase->product_id = $cart["id"];
 				$productPurchase->amount = $cart["amount"];
