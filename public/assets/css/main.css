@@ -675,18 +675,26 @@ header {
 }
 
 .slick-next:before {
-    font-size: 14px;
-    color: #d80000;
-    background-image: url(../img/deira-64.png);
+    font-size: 200px;
+    color: transparent;
+    content: ".";
     z-index: 3;
+    background-image: url(../img/deira-64.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    width: 100%;
  
 }
 
 .slick-prev:before {
-    font-size: 14px;
-    color: #d80000;
-    background-image: url(../img/deira-65.png);
+    font-size: 200px;
+    color: transparent;
+    content: ".";
     z-index: 3;
+    background-image: url(../img/deira-65.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    width: 100%;
 }
 
 .slick-prev {
