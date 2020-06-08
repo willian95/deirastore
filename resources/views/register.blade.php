@@ -402,6 +402,16 @@
                 if(this.showBusiness == true && this.businessMail == ""){
                     alertify.error("Email de empresa es requerido")
                     error = true
+                }else if(this.showBusiness == true && this.businessMail != ""){
+
+                    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                    if(re.test(this.businessMail)){
+
+                    }else{
+                        alertify.error("Email no válido")
+                        error = true
+                    }
+
                 }
 
                 return error

@@ -30,7 +30,10 @@ class ProfileUpdate extends FormRequest
             "birthDate" => "required|date",
             "phoneNumber" => "required",
             "rut" => "required",
-            "address" => "required"
+            "location" => "required",
+            "comune_id" => "required",
+            "street" => "required",
+            "number" => "required"
         ];
     }
 
