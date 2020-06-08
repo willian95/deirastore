@@ -1928,13 +1928,13 @@ img.lista-pedido {
 }
 
 .main-banner__card-img:hover {
-
-    transform: translateY(-20px);
+    transform: translateY(-5px);
+    transition: .3s;
 }
 
 .main-banner__card-img img:hover {
-
-    box-shadow: 0px 0px 12px #00000024;
+    transition: .3s;
+    box-shadow: 0px 0px 12px #00000047;
 
 }
 
