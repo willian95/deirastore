@@ -436,8 +436,6 @@
                     this.number = "{!! Auth::check() ? Auth::user()->number : '' !!}"
                     this.house = "{!! Auth::check() ? Auth::user()->house : '' !!}"
 
-                    this.confirmAddress = true
-
                 }
 
                 axios.get("{{ url('/comune/by-region') }}"+"/"+this.location).then(res =>{
