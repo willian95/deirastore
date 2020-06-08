@@ -26,13 +26,18 @@ class CheckoutController extends Controller
 		$total = 0;
 		foreach($carts as $cart){
 
-			$total = $total + ($cart["price"] * $cart["amount"]) + $cart["shipping_cost"];
+			if(isset($cart["shipping_cost"])){
+				$total = $total + ($cart["price"] * $cart["amount"]) + $cart["shipping_cost"];
+			}else{
+				$total = $total + ($cart["price"] * $cart["amount"]);
+			}
+			
 
 		}
 
 		$order = Carbon::now()->timestamp.uniqid();
 		session(['order' =>$order]);
-
+	
 		$webpayNormal->addTransactionDetail(intval($total), $order);  
 		$response = $webpayNormal->initTransaction(route('checkout.webpay.response'), route('checkout.webpay.finish'), null, 'TR_NORMAL_WS', null, null); 
 		// Probablemente también quieras crear una orden o transacción en tu base de datos y guardar el token ahí.
