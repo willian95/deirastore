@@ -95,7 +95,32 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('/somos') }}">Quiénes somos</a>
                     </li>
-                    <li class="nav-item dropdown mega-menu">
+
+                    <li class="navbar-expand-md  navbar-hover ">
+                        <div class="collapse navbar-collapse m-0" id="navbarHover">
+                            <ul class="navbar-nav">      
+                               
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                     
+                                        Mejores tiendas
+                                    </a>
+                                    <ul class="dropdown-menu p-3">            
+                                        @foreach(App\Brand::inRandomOrder()->take(10)->get() as $brand)
+                                        <li class="mb-2">
+                                            <a href="{{ url('/brand/'.$brand->slug) }}">{{ $brand->name }}</a>
+                                        </li>
+                                    @endforeach
+                                       
+                                    </ul>
+                                </li>
+                          
+                            </ul>
+                        </div>
+                    </li>
+
+
+                  <!---  <li class="nav-item dropdown mega-menu">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" id="menu-brands">Mejores tiendas</a>
                         <div class="dropdown-menu" style="opacity: 1;" id="menu-brands-dropdown">
                             <div class="grid-menu">
@@ -111,7 +136,7 @@
 
                             </div>
                         </div>
-                    </li>
+                    </li>--->
                     <!--<li class="nav-item">
                         <a class="nav-link" href="#">Software</a>
                     </li>-->
