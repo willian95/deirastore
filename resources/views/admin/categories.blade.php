@@ -76,8 +76,8 @@
                                         </td>
                                         <td>
                                             <button class="btn btn-success" @click="edit(category)" data-toggle="modal" data-target="#createCategory"><i class="fa fa-edit"></i></button>
-                                            <!-----------PORQUE SE REPITE DOS VECES EL ICONO DE TRASH?------------------>
-                                            <button class="btn btn-danger" @click="erase(category.id)"><i class="fa fa-trash"></button>
+                                            <!-----------PORQUE SE REPITE DOS VECES EL ICONO DE TRASH? Faltaba cerrar la etiqueta i------------------>
+                                            <button class="btn btn-danger" @click="erase(category.id)"><i class="fa fa-trash"></i></button>
                                         </td>
                                     </tr>
                                 </tbody>

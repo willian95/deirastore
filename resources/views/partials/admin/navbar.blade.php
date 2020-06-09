@@ -73,11 +73,14 @@
                         <li class="nav-item nav-focus">
                             <a class="nav-link focus__link" href="{{ route('admin.categories') }}"><i class="fa fa-tags"></i> Categorías</a>
                         </li>
-                        <li class="nav-item nav-focus">
+                        <!--<li class="nav-item nav-focus">
                             <a class="nav-link   focus__link" href="{{ route('admin.purchase') }}"><i class="fa fa-shopping-cart"></i> Compras</a>
-                        </li>
+                        </li>-->
                         <li class="nav-item nav-focus">
                             <a class="nav-link    focus__link" href="{{ route('admin.sale') }}"><i class="fa fa-dollar"></i> Ventas</a>
+                        </li>
+                        <li class="nav-item nav-focus">
+                            <a class="nav-link focus__link" href="{{ url('/admin/text/index') }}"><i class="fa fa-tags"></i> Textos</a>
                         </li>
                     @endif
                   <!-----  <li class="nav-item active">

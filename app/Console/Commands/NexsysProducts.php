@@ -42,7 +42,7 @@ class NexsysProducts extends Command
      */
     public function handle()
     {
-        ini_set('max_execution_time', 0);
+        /*ini_set('max_execution_time', 0);
         //$params = ["encoding" => "UTF-8", "verifypeer" => false, "verifyhost" => false];
 
         $url = "https://app.nexsysla.com/nexsysServiceSoap/NexsysServiceSoap?wsdl";
@@ -192,7 +192,7 @@ class NexsysProducts extends Command
             }
         }
 
-        Category::doesntHave('products')->delete();
+        Category::doesntHave('products')->delete();*/
     
     }
 }

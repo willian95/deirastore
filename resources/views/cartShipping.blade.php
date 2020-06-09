@@ -152,6 +152,17 @@
                             <button class="btn btn-success" @click="updateCartLocation()">Confirmar ubicación</button>
                         </p>
 
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <p>
+                                    {{ App\Text::where("site_location", "Selección de despacho")->where("type", "texto")->first()->text }}
+                                </p>
+                            </div>
+                            <div class="col-lg-4">
+                                <img style="width: 100%" src="{{ url('/images/texts').'/'.App\Text::where('site_location', 'Selección de despacho')->where('type', 'imagen')->first()->image }}" alt="">
+                            </div>
+                        </div>
+
                     </div>
                     <div class="col-md-12 col-lg-4">
                         <div class="pedido">
@@ -185,6 +196,7 @@
 
                         </div>
                     </div>
+                    
                 </div>
 
             </div>

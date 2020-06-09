@@ -197,6 +197,10 @@ Route::prefix('admin')->group(function () {
     Route::post('/banner/update', "BannerController@update")->name('admin.banner.update');
     Route::get('/banner/fetch/{page}', "BannerController@fetchAdmin");
     Route::post('/banner/delete', "BannerController@delete")->name('admin.banner.delete');
+
+    Route::get("/text/index", "TextController@index");
+    Route::get('/text/fetch/{page}', "TextController@fetch");
+    Route::post('/text/update', "TextController@update");
     
 });
 
