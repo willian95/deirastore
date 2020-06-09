@@ -381,6 +381,31 @@ header {
     outline: transparent;
     text-decoration: none !important;
 }
+.btn-general2 {
+    color: #fff;
+    background: #d32b2b;
+    padding: 10px 10px 10px 10px;
+    border-radius: 50px;
+    font-size: 16px;
+    outline: #d32b2b;
+    border: 1px solid #d32b2b;
+    text-decoration: none !important;
+    transition: .5s;
+    font-weight: 400;
+}
+.btn-general2_bg {
+    color: #d32b2b;
+    background: #ffffff;
+}
+.btn-general2:hover {
+    background: #fff;
+    color: #019a3e;
+
+    border-radius: 50px;
+    font-size: 1rem;
+    outline: transparent;
+    text-decoration: none !important;
+}
 
 .main-banner__card {
     display: grid;
@@ -728,7 +753,7 @@ header {
 }
 
 .slick-next {
-    right: 25px;
+    right: 0px;
 }
 
 /* card slider */
@@ -1196,18 +1221,30 @@ div#collapseTres {
 
 .table-bordered {
     position: relative;
-    border: 1px solid #ddd;
     right: 48px;
     left: 0;
-    width: 90%;
+    width: 100%;
     margin-top: 4%;
-    margin-left: 5%;
+    margin-left: 0%;
     font-size: 10px;
 
 
 }
 
-/**/
+.text_shipping{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-bottom: 0;
+}
+.text_shipping p{
+    width: 360px;
+    color: #000;
+    font-size: 14px;
+}
+
+/*shipp*/
 .comentarios-calificacion h3 {
     position: relative;
     padding-top: 5%;
@@ -1500,13 +1537,13 @@ img.lista-pedido {
 /* carriro */
 
 .div-carrito {
-    height: 90vh;
+
     background-color: #fff;
     /* margin-top: 8%; */
     margin-right: 2%;
     margin-left: 2%;
-    margin-bottom: 5%;
-    padding-top: 70px;
+   
+   
 }
 
 .div-carrito h3 {
@@ -1517,9 +1554,6 @@ img.lista-pedido {
 
 }
 
-.carrito {
-    margin-top: 5%;
-}
 
 .div-carrito h3::after {
     background: #d32b2b;
@@ -1550,6 +1584,7 @@ img.lista-pedido {
 
 .pedido h3 {
     text-align: right;
+    position: relative;
 }
 
 .iconos-carrito {
@@ -1589,14 +1624,23 @@ button.finalizar-compra--go:hover {
 
 .pedido {
     border: 1px solid;
-    margin-right: 10%;
+    margin-right: 0%;
     border-radius: 15px;
     padding: 10px 30px;
     text-align: right;
     margin-top: 7%;
 
 }
-
+.form-check-label a{
+    color: #5494a3;
+}
+input[type=checkbox], input[type=radio] {
+    box-sizing: border-box;
+    padding: 6px;
+    width: 16px;
+    height: 20px;
+    cursor: pointer;
+}
 .pedido h3::after {
     background: #87b4be;
     content: "";
@@ -1604,7 +1648,7 @@ button.finalizar-compra--go:hover {
     width: 37%;
     border-radius: 5px;
     height: 2px;
-    top: 48px;
+    top: 37px;
     left: 62%;
     display: flex;
     right: 0;
@@ -1731,10 +1775,6 @@ img.lista-pedido {
     font-size: .8rem;
 }
 
-/* .carrito_item img{
-	filter: invert(1);
-    width: 40px;
-} */
 
 .iconos-buy {
     display: flex;
@@ -1743,35 +1783,7 @@ img.lista-pedido {
     align-items: center;
 }
 
-/* .iconos-buy img{
-	filter: invert(1);
 
-	width: 26px;
-}
-.icono-buy__item{
-	background: #fff;
-    padding: 10px;
-    border-radius: 50%;
-	width: 70px;
-    height: 70px;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-	display: flex;
-	box-shadow: 0px 0px 5px;
-} */
-
-/* .icono-buy__item:nth-child(1){
-	background: #d32b2b;
-    padding: 10px;
-    border-radius: 50%;
-
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-	display: flex;
-	box-shadow: 0px 0px 5px;
-} */
 
 .icono-buy__item img {
     width: 110px;
@@ -1800,39 +1812,25 @@ img.lista-pedido {
     padding-left: 20px;
 }
 
-/* .grid-menu__item:nth-child(2){
-	display:none ;
-}
-.grid-menu__item:nth-child(3){
-	display:none ;
-}
-.grid-menu__item:nth-child(4){
-	display:none ;
-} */
-
 .dropdown-menu {
 
     border: 0;
     box-shadow: 0px 0px 5px;
 }
 
-/*.arrow .dropdown-toggle::after {
-	display: inline-block;
-    width: 0;
-    height: 0;
-    margin-left: .255em;
-    vertical-align: .255em;
-    content: "";
-    border-top: .3em solid;
-    border-right: 0.5em solid transparent;
-    border-bottom: 0;
-    border-left: .5em solid transparent;
-    position: absolute;
-    bottom: -6px;
-    left: 50%;
-    z-index: 9999;
-    color: #333333;
-}*/
+/*vista de compra*/
+.table__title{
+    color: #000000e0;
+    font-weight: bold;
+    font-size: 15px;
+}
+.carrito td, .carrito th {
+ 
+    border-bottom: none;
+}
+
+/*vista de compra*/
+
 
 .drow-none {
     background: transparent !important;

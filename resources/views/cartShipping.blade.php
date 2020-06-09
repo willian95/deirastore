@@ -5,7 +5,7 @@
     <div class="container pagina bg">
         <div class="carrito">
             <div id="cart">
-                <div class="iconos-buy">
+              <!--  <div class="iconos-buy">
                     <div class="icono-p">
                         <div class="icono-buy__item">
                             <img src="{{ asset('assets/img/deira-48.png') }}" alt="">
@@ -23,7 +23,7 @@
                             <img src="{{ asset('assets/img/deira-52.png') }}" alt="">
                         </div>
                     </div>
-                </div>
+                </div>---<
 
                <!-- <div class="col-12">
                     <a class="btn btn-primary btn-general btn-general--form" style="color: #fff;" href="{{ url()->previous() }}"><i class="fa fa-arrow-left"></i></a>
@@ -48,13 +48,13 @@
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <td>Producto</td>
-                                                <td>Marca</td>
-                                                <td>Nombre</td>
-                                                <td>Precio</td>
-                                                <td>Cantidad</td>
-                                                <td>Total</td>
-                                                <td>Opciones de envío</td>
+                                                <td class="table__title">Producto</td>
+                                                <td class="table__title">Marca</td>
+                                                <td class="table__title">Nombre</td>
+                                                <td class="table__title">Precio</td>
+                                                <td class="table__title">Cantidad</td>
+                                                <td class="table__title">Total</td>
+                                                <td class="table__title">Opciones de envío</td>
 
                                             </tr>
                                         </thead>
@@ -101,7 +101,17 @@
 
                 </div>
 
-                <div class="row">
+                <div class="text_shipping">
+                    <p>Hay productos que solo pueden ser retirados en nuestras dependencias. En ese caso solo se deplegará la opción "Retiro en tienda"</p>
+                </div>
+
+
+                <div class="title__general fadeInUp wow animated mt-5">
+                    <p><strong>Completa tus datos </strong>  para recibir tu compra</p>
+                </div>
+                <div class="row container">
+                   
+                   
                     <div class="col-lg-8 col-md-12">
 
                         <div class="form-group">
@@ -148,8 +158,8 @@
                             
                         </div>
 
-                        <p class="text">
-                            <button class="btn btn-success" @click="updateCartLocation()">Confirmar ubicación</button>
+                        <p class="text text-center mt-5">
+                            <button class="btn btn-success btn-general2" @click="updateCartLocation()">Confirmar ubicación</button>
                         </p>
 
                         <div class="row">
@@ -166,7 +176,7 @@
                     </div>
                     <div class="col-md-12 col-lg-4">
                         <div class="pedido">
-                            <h3>Tu pedido</h3>
+                            <h3>Tú pedido</h3>
                             <h5>Total de tu compra</h5>
                             <strong><small>Solo productos</small></strong>
                             
@@ -178,19 +188,21 @@
                             <h2>$ @{{ parseInt(totalGuest +  shippingCost).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</h2>
                             
                             
+                          <div class="text-cente" style="    line-height: 1.2;">
                             <p>Todos los valores incluyen iva</p>
 
                             <p>Recuerda que @{{ shippingAmount }} de @{{ guestItem.length }} productos estará siendo despachado.</p>
                             <p>En caso de tener que retirar un producto deberás hacerlo en nuestras dependencias.</p>
                             <p>Más información al final del presente sitio</p>
 
+                          </div>
                             <div class="btn-buy">
                                 
                                 <div class="form-check">
                                     <input  type="checkbox" class="form-check-input mt-2" id="terms" v-model="terms">
                                     <label  class="form-check-label mt-3" for="terms"><a href="{{ url('/terms') }}" target="_blank">Acepto terminos y condiciones</a></label>
                                 </div>
-                                <button @click="ticketView()" class="btn btn-success">continuar</button>
+                                <button @click="ticketView()" class="btn btn-success btn-general2 mt-3 pr-4 pl-4">continuar</button>
                                 
                             </div>
 

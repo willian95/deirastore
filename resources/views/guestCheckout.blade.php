@@ -27,7 +27,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group text-center">
+                        <div class="form-group text-center mb-5 mt-3">
                             <button class="btn btn-primary btn-general btn-general--form" @click="logIn()">Login</button>
                         </div>
 
@@ -54,13 +54,13 @@
 
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="form-grid__item">
+                                <div class="">
                                     <label  for="phoneNumber">* Celular +569</label>
                                     <input  placeholder="Ej: 33123123" type="text" class="form-control" id="phoneNumber" aria-describedby="emailHelp" v-model="phoneNumber" @keypress="isTelephoneNumber($event)">
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-grid__item inputcontainer">
+                                <div class="inputcontainer">
                                     <label  for="rut">* Rut</label>
                                     <input placeholder="Ej: 121456789" type="text" class="form-control" id="rut" aria-describedby="emailHelp" v-model="rut" @keypress="isAlphaNumeric($event)" @blur="validateRut()">
                                     <div class="icon-container" v-if="loading == true">
