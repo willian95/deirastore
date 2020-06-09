@@ -6,6 +6,32 @@
        <!-- <div class="col-12">
             <a class="btn btn-primary btn-general btn-general--form" style="color: #fff;" href="{{ url()->previous() }}"><i class="fa fa-arrow-left"></i></a>
         </div>-->
+        <div class="title__general fadeInUp wow animated pag-center">
+            <p style="position: relative;"><strong>Todas las</strong> Marcas</p>
+
+            <div class="row">
+                <div class="col-12">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li>
+                                <a class="page-link" v-if="page > 1" href="#" @click="fetch(page - 1)">Anterior</a>
+                            </li>
+                            <li class="page-item" v-for="index in pages">
+                                <a class="page-link" href="#" v-if="index > page &&  index < page + 6"  :key="index" @click="fetch(index)" >@{{ index }}</a>
+                            </li>
+                            <li>
+                                <a class="page-link" v-if="page < pages" href="#" @click="fetch(page + 6)">Siguiente</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+       
+   
+
+
         <div class="row">
             <div class="col-md-3 col-xs-12 " v-for="brand in brands">
                 <div class="main-slider__item">
@@ -21,23 +47,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-12">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                        <li>
-                            <a class="page-link" v-if="page > 1" href="#" @click="fetch(page - 1)">Anterior</a>
-                        </li>
-                        <li class="page-item" v-for="index in pages">
-                            <a class="page-link" href="#" v-if="index > page &&  index < page + 6"  :key="index" @click="fetch(index)" >@{{ index }}</a>
-                        </li>
-                        <li>
-                            <a class="page-link" v-if="page < pages" href="#" @click="fetch(page + 6)">Siguiente</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
+   
     </div>
 
     @include('partials.footer')

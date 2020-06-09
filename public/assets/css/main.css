@@ -195,7 +195,7 @@ header {
 
 .main-menu__top-item ul li a {
     margin-left: 25px;
-    background-color: #e6e6e6;
+    background-color: #5494a3;
     height: 40px;
     width: 40px;
     display: flex;
@@ -218,11 +218,16 @@ header {
 .main-menu__top-item ul li:nth-child(2):hover img {
     filter: invert(0);
 }
+.main-menu__top-item ul li:nth-child(1):hover img {
+    filter: invert(0);
+}
+
 
 .main-menu__top-item ul li:nth-child(2) img {
 
     filter: invert(1);
 }
+
 .main-menu__top-item ul li:nth-child(1) img {
 
     filter: invert(1);
