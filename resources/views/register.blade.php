@@ -60,8 +60,8 @@
                         
                                 <!-- input -->
                                 <div class="form-grid__item">
-                                    <label  for="phoneNumber">* Celular +569</label>
-                                    <input  placeholder="Ej: 33123123" type="text" class="form-control" id="phoneNumber" aria-describedby="emailHelp" v-model="phoneNumber" @keypress="isTelephoneNumber($event)">
+                                    <label  for="phoneNumber">* Celular</label>
+                                    <input  placeholder="Ej: +56933123123" type="text" class="form-control" id="phoneNumber" aria-describedby="emailHelp" v-model="phoneNumber" @keypress="isTelephoneNumber($event)" @click="setNumber()">
                                 </div>
                                     <!-- input -->
                             <div class="form-grid__item">
@@ -334,7 +334,6 @@
                 }else{
                     //let regexp = /^(\+?56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/
                     let regexp = /^(\+?56)?(\s?)(\s?)[9876543]\d{7}$/
-                    let phone = "+56"+this.phoneNumber
                     if(this.phoneNumber.match(regexp)){
                     
                     }else{
@@ -461,6 +460,13 @@
                 } else {
                     return true;
                 }
+            },
+            setNumber(){
+
+                if(this.phoneNumber == ""){
+                    this.phoneNumber = "+569"
+                }
+
             },
             validateRut(){
                

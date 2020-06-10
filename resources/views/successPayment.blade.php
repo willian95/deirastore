@@ -64,6 +64,7 @@
                 
                 deleteStorage(){
                    window.localStorage.removeItem('cart')
+                   window.localStorage.removeItem('checkoutProduct')
                 }
 
 

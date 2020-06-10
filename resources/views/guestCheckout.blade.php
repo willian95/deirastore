@@ -55,8 +55,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="">
-                                    <label  for="phoneNumber">* Celular +569</label>
-                                    <input  placeholder="Ej: 33123123" type="text" class="form-control" id="phoneNumber" aria-describedby="emailHelp" v-model="phoneNumber" @keypress="isTelephoneNumber($event)">
+                                    <label  for="phoneNumber">* Celular</label>
+                                    <input  placeholder="Ej: +56933123123" type="text" class="form-control" @click="setNumber()" id="phoneNumber" aria-describedby="emailHelp" v-model="phoneNumber" @keypress="isTelephoneNumber($event)">
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -190,6 +190,13 @@
                }
                
            },
+           setNumber(){
+
+                if(this.phoneNumber == ""){
+                    this.phoneNumber = "+569"
+                }
+
+            },
            logIn() {
 
                 if (!this.formHasErrors()) {
