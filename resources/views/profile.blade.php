@@ -112,7 +112,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="phoneNumber">Celular</label>
-                                        <input type="text" class="form-control" id="phoneNumber" aria-describedby="emailHelp" v-model="phoneNumber" @keypress="isTelephoneNumber($event)" :disabled="readonly">
+                                        <input type="text" class="form-control" id="phoneNumber" aria-describedby="emailHelp" @focus="setNumber()" v-model="phoneNumber" @keypress="isTelephoneNumber($event)" :disabled="readonly">
                                     </div>
                                 </div>
                             </div>
@@ -178,7 +178,7 @@
 
                                     <div  v-if="showBusiness == true">
                                         <label  for="businessPhone">* Teléfono de contacto de razón social</label>
-                                        <input  placeholder="Teléfono de contacto" type="text" class="form-control" id="businessPhone" v-model="businessPhone" :disabled="readonly">
+                                        <input  placeholder="Teléfono de contacto" type="text" class="form-control" id="businessPhone" @focus="setBusinessNumber()" v-model="businessPhone" :disabled="readonly">
                                     </div>
                                 </div>
 
@@ -335,7 +335,6 @@
                         error = true
                     }else if(this.showBusiness == true && this.businessPhone != ""){
                         let regexp = /^(\+?56)?(\s?)(\s?)[9876543]\d{7}$/
-                        let phone = "+56"+this.businessPhone
                         if(this.businessPhone.match(regexp)){
                         
                         }else{
@@ -360,6 +359,20 @@
                     }
 
                     return error
+
+                },
+                setNumber(){
+
+                    if(this.phoneNumber == ""){
+                        this.phoneNumber = "+569"
+                    }
+
+                },
+                setBusinessNumber(){
+
+                    if(this.businessPhone == ""){
+                        this.businessPhone = "+569"
+                    }
 
                 },
                 regionChange(){
