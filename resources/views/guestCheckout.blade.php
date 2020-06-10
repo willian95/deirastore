@@ -16,7 +16,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input placeholder="Eamil" type="text" autocomplete="off" class="form-control" id="email" aria-describedby="emailHelp" v-model="email">
+                                    <input placeholder="Email" type="text" autocomplete="off" class="form-control" id="email" aria-describedby="emailHelp" v-model="email">
                                 </div>
                             </div>
                             <div class="col-md-6">

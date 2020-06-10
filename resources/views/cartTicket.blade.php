@@ -37,6 +37,8 @@
 
     </div>
 
+    @include('partials.footer')
+
 @endsection
 
 @push("scripts")
