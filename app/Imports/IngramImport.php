@@ -37,6 +37,12 @@ class IngramImport implements ToCollection
                         ["slug" =>  $brandSlug]
                     );
 
+                    $categoryName = $row[13];
+
+                    if($categoryName == "Printer/PlotterSupplies"){
+                        $categoryName = "Printer/Plotter Supplies";
+                    }
+
                     $categorySlug = str_replace("-", "", $row[13]);
                     $categorySlug = str_replace(" ", "-", $categorySlug);
                     $mainCategory = Category::firstOrCreate(

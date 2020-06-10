@@ -17,17 +17,18 @@
                 <div v-for="category in categories">
 
                     <li class="nav-item" v-if="category.child.length == 0">
-                        <a class="nav-link" :href='"{{ url("/category/") }}"+"/"+category.slug'>@{{ category.name }}</a>
+                        <a class="nav-link" :href='"{{ url("/category/") }}"+"/"+category.slug' v-if="category.esp_name">@{{ category.esp_name  }}</a>
+                        <a class="nav-link" :href='"{{ url("/category/") }}"+"/"+category.slug' v-else="category.name">@{{ category.name  }}</a>
                     </li>
 
                     <li class="nav-item dropdown mega-menu" v-if="category.child.length > 0">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">@{{ category.name }}</a>
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">@{{ category.esp_name }}</a>
                         <div class="dropdown-menu" style="opacity: 1;">
                             <div class="grid-menu">
                                 <div class="grid-menu__item">
                                     <ul v-if="category.child.length > 0">
                                         <li v-for="child in category.child">
-                                            <a class="dropdown-item" :href='"{{ url("/category/") }}"+"/"+child.slug'>@{{ child.name }}</a>
+                                            <a class="dropdown-item" :href='"{{ url("/category/") }}"+"/"+child.slug'>@{{ child.esp_name }}</a>
                                         </li>                         
                                     </ul>
                                 </div>

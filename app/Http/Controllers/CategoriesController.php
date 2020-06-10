@@ -10,6 +10,8 @@ use Carbon\Carbon;
 use App\Category;
 use App\Product;
 use App\Traits\CartAbandonTrait;
+use App\Imports\CategoriesWeightImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CategoriesController extends Controller
 {
@@ -107,7 +109,7 @@ class CategoriesController extends Controller
 
             $skip = ($request->page-1) * 10;
 
-            $categories = Category::with("parent")->skip($skip)->take(10)->get();
+            $categories = Category::with("parent")->skip($skip)->take(10)->orderBy("esp_name", "asc")->get();
             $categoriesCount = Category::count();
 
             return response()->json(["success" => true, "categories" => $categories, "categoriesCount" => $categoriesCount]);
@@ -195,7 +197,7 @@ class CategoriesController extends Controller
             
             $take = 25;
             $skip = ($page-1) * $take;
-            $categories = Category::with('child')->skip($skip)->take(25)->orderBy('name')->get();
+            $categories = Category::with('child')->skip($skip)->take(25)->orderBy('esp_name')->get();
             $categoriesCount = Category::with('child')->count();
             //$categories = Category::has('products', '>', 0)->with('child')->skip($skip)->take(25)->orderBy('name')->get();
             //$categoriesCount = Category::has('products', '>', 0)->with('child')->count();
@@ -208,6 +210,21 @@ class CategoriesController extends Controller
 
         }
 
+    }
+
+    public function import() 
+    {
+        ini_set('max_execution_time', 0);
+        
+        try{
+
+            Excel::import(new CategoriesWeightImport, 'categories_weight.xlsx', "ingram");
+            //dd("done");
+
+        }catch(\Exception $e){
+            dd($e->getMessage(), $e->getLine());
+        }
+        //return redirect('/')->with('success', 'All good!');
     }
 
 

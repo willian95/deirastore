@@ -108,7 +108,7 @@ class BrandController extends Controller
 
             $skip = ($request->page-1) * 10;
 
-            $brands = Brand::skip($skip)->take(10)->get();
+            $brands = Brand::skip($skip)->take(10)->orderBy("name", "asc")->get();
             $brandsCount = Brand::count();
 
             return response()->json(["success" => true, "brands" => $brands, "brandsCount" => $brandsCount]);

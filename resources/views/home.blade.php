@@ -56,9 +56,13 @@
                 <div class="main-banner__card-img">
                     <img src="{{ asset('/images/banners/'.$banner->image) }}" alt="" style="width: 100%;">
                     <div class="title" style="text-align: {{ $float }};">
+                        @if($banner->title != "" || $banner->title != "null")
                         <h3 style="color: {{ $banner->title_color }}">{{ $banner->title }}</h3>
+                        @endif
+                        @if($banner->text != "" || $banner->text != "null")
                         <p style="color: {{ $banner->text_color }}">{{ $banner->text }}</p>
-                        @if($banner->link != "" || $banner->button_text != "")
+                        @endif
+                        @if($banner->button_text != "" && $banner->button_text != "null")
                         <a href="{{ $banner->link }}" target="_blank" class="btn-general" style="color: {{ $banner->button_color }}; background-color: {{ $banner->button_text_color }};">{{ $banner->button_text }}</a>
                         @endif
                     </div>

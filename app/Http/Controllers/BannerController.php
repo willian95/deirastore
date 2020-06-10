@@ -106,20 +106,47 @@ class BannerController extends Controller
 
             
             $banner = Banner::find($request->id);
-            $banner->link = $request->link;
+        
             if($request->get('image') != null){
                 $banner->image = $fileName;
             }
+            if($request->link != "null")
+                $banner->link = $request->link;
+            else
+                $banner->link = null;
+
             $banner->size = $request->size;
             $banner->position = $request->position;
-            $banner->title = $request->title;
-            $banner->text = $request->text;
-            $banner->text_color = $request->textColor;
-            $banner->title_color = $request->titleColor;
-            $banner->button_text = $request->buttonText;
-            $banner->button_color = $request->buttonColor;
-            $banner->button_text_color = $request->buttonTextColor;
-            $banner->location = $request->location;
+            
+            if($request->title != "null")
+                $banner->title = $request->title;
+            else
+                $banner->title = null;
+            
+            if($request->text != "null")
+                $banner->text = $request->text;
+            else
+                $banner->text = null;
+            
+            if($request->text_color != "null")
+                $banner->text_color = $request->textColor;
+            else
+                $banner->text_color = null;
+            
+            if($request->title_color != "null")
+                $banner->title_color = $request->titleColor;
+            
+            if($request->button_text != null)
+                $banner->button_text = $request->buttonText;
+            
+            if($request->button_color != "null")
+                $banner->button_color = $request->buttonColor;
+            
+            if($request->button_text_color != "null")
+                $banner->button_text_color = $request->buttonTextColor;
+            
+            if($request->link != "null")
+                $banner->location = $request->location;
             $banner->update();
 
             return response()->json(["success" => true, "msg" => "Banner actualizado"]);

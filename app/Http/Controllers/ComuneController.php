@@ -12,7 +12,7 @@ class ComuneController extends Controller
 
         try{
 
-            $comune = Comune::where("region_id", $region_id)->get();
+            $comune = Comune::where("region_id", $region_id)->orderBy("name", "asc")->get();
 
             return response()->json(["success" => true, "comunes" => $comune]);
 

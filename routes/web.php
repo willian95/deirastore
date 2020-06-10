@@ -129,8 +129,9 @@ Route::get('/somos', function(){
 
 /*Route::get('/cnet', "CnetController@index");
 Route::get('/cnet/images', "CnetController@imagesDownload");*/
-Route::get('/cnet/decode', "CnetController@decode");
+//Route::get('/cnet/decode', "CnetController@decode");
 //Route::get('/cnet/compare', "CnetController@compare");
+//Route::get('/categories/import', "CategoriesController@import");
 
 //Route::get('/ingram/import', 'IngramController@import');
 
