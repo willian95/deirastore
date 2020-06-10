@@ -267,7 +267,6 @@
                 }else{
                     //let regexp = /^(\+?56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/
                     let regexp = /^(\+?56)?(\s?)(\s?)[9876543]\d{7}$/
-                    let phone = "+56"+this.phoneNumber
                     if(this.phoneNumber.match(regexp)){
                     
                     }else{
