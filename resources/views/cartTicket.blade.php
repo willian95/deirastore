@@ -9,18 +9,21 @@
                <!--- <a class="btn btn-primary btn-general btn-general--form" style="color: #fff;" href="{{ url()->previous() }}"><i class="fa fa-arrow-left"></i></a>
             </div>--->
             <div class="col-12">
-                <h2 class="text-center">Tipo de Facturación</h2>
+                <div class="title__general fadeInUp wow animated mt-5">
+                    <p><strong>Tipo de  </strong>  Facturación</p>
+                </div>
+               
             </div>
 
             <div class="col-6">
                 <p class="text-center">
-                    <button class="btn btn-success" @click="boleta()">Boleta</button>
+                    <button class="btn btn-success btn-general2 pl-4 pr-4" @click="boleta()">Boleta</button>
                 </p>
             </div>
             @if(\Auth::check() && \Auth::user()->business_name != "" && \Auth::user()->business_rut != "")
                 <div class="col-6">
                     <p class="text-center">
-                        <button class="btn btn-success" @click="factura()">Factura</button>
+                        <button class="btn btn-success btn-general2 pl-4 pr-4 btn-general2_bg" @click="factura()">Factura</button>
                     </p>
                 </div>
             @endif
