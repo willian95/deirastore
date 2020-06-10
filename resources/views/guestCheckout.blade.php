@@ -56,7 +56,7 @@
                             <div class="col-md-6">
                                 <div class="">
                                     <label  for="phoneNumber">* Celular</label>
-                                    <input  placeholder="Ej: +56933123123" type="text" class="form-control" @click="setNumber()" id="phoneNumber" aria-describedby="emailHelp" v-model="phoneNumber" @keypress="isTelephoneNumber($event)">
+                                    <input  placeholder="Ej: +56933123123" type="text" class="form-control" @focus="setNumber()" id="phoneNumber" aria-describedby="emailHelp" v-model="phoneNumber" @keypress="isTelephoneNumber($event)">
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -265,8 +265,8 @@
                     alertify.error("Número teléfonico de invitado es requerido")
                     error = true
                 }else{
-                    //let regexp = /^(\+?56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/
-                    let regexp = /^(\+?56)?(\s?)(\s?)[9876543]\d{7}$/
+                    let regexp = /^(\+?56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/
+                    //let regexp = /^(\+?56)?(\s?)(\s?)[9876543]\d{7}$/
                     if(this.phoneNumber.match(regexp)){
                     
                     }else{
