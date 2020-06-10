@@ -32,7 +32,7 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             @if(Auth::check() && Auth::user()->id)
                                 @if(Auth::user()->rol_id == 3)
-                                    <a href="{{ url('/admin/dashboard') }}">Administrador</a>
+                                    <a href="{{ url('/admin/dashboard') }}" class="drow-none">Administrador</a>
                                 @endif
                                 @if(Auth::user()->rol_id == 1)
                                     <a href="{{ url('/profile') }}" class="drow-none">Mis Datos</a>
