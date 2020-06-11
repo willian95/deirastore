@@ -72,7 +72,7 @@
                                                 <td>@{{ item.amount }}</td>
                                                 <td>$ @{{ parseInt(item.price * item.amount).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</td>
                                                 <td>
-                                                    <select class="form-control" @change="updateCart(item.id)" :id="'shippingChoice'+item.id">
+                                                    <select class="form-control shippingChoice" @change="updateCart(item.id)" :id="'shippingChoice'+item.id">
                                                         <option value="1">Retiro en tienda</option>
                                                         <option value="2" v-if="item.data_source_id == 2" :selected="item.shipping_method == 2">Despacho</option>
                                                     </select>
@@ -325,8 +325,19 @@
                 },
                 updateCart(id){
                     
-                    var  shippingMethod = $("#shippingChoice"+id).val()
-                    axios.post("{{ url('/cart/shipping-price') }}", {products: this.guestItem, productId: id, shippingMethod: shippingMethod, location: this.location})
+                    var shippingChoices = [];
+
+                    this.confirmAddress = false
+
+                    var element =$('.shippingChoice').map((_,el) => el).get()
+                    element.forEach((data, index) => {
+                        let shippingMethod = $("#"+data.id).val()
+                        //console.log()
+                        shippingChoices.push({id: data.id.toString().substring(14, data.id.toString().length), shippingMethod: shippingMethod})
+                    })
+
+                    //var  shippingMethod = $("#shippingChoice"+id).val()
+                    axios.post("{{ url('/cart/shipping-price') }}", {products: this.guestItem, shippingChoices: shippingChoices, location: this.location})
                     .then(res => {
 
                         this.guestItem = res.data.cart

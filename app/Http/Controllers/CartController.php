@@ -239,8 +239,13 @@ class CartController extends Controller
                 }
 
                 $shippingMethod = "1";
-                if($request->productId == $product['id']){
-                    $shippingMethod = $request->shippingMethod;
+
+                foreach($request->shippingChoices as $choice){
+
+                    if($choice["id"] == $product['id']){
+                        $shippingMethod = $choice["shippingMethod"];
+                    }
+
                 }
 
                 $shippingCost = 0;
