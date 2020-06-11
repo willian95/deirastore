@@ -43,8 +43,21 @@ class TextController extends Controller
                 try{
                     
                     $imageData = $request->get('image');
-                    $fileName = Carbon::now()->timestamp . '_' . uniqid() . '.' . explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
-                    Image::make($request->get('image'))->save(public_path('images/texts/').$fileName);
+
+                    if(strpos($imageData, "svg+xml") > 0){
+
+                        $data = explode( ',', $imageData);
+                        $fileName = Carbon::now()->timestamp . '_' . uniqid() . '.'."svg";
+                        $ifp = fopen($fileName, 'wb' );
+                        fwrite($ifp, base64_decode( $data[1] ) );
+                        rename($fileName, 'images/texts/'.$fileName);
+    
+                    }else{
+
+                        $fileName = Carbon::now()->timestamp . '_' . uniqid() . '.' . explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
+                        Image::make($request->get('image'))->save(public_path('images/texts/').$fileName);
+
+                    }
     
                 }catch(\Exception $e){
     

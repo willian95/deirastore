@@ -25,8 +25,19 @@ class BannerController extends Controller
             try{
 
                 $imageData = $request->get('image');
-                $fileName = Carbon::now()->timestamp . '_' . uniqid() . '.' . explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
-                Image::make($request->get('image'))->save(public_path('images/banners/').$fileName);
+
+                if(strpos($imageData, "svg+xml") > 0){
+
+                    $data = explode( ',', $imageData);
+                    $fileName = Carbon::now()->timestamp . '_' . uniqid() . '.'."svg";
+                    $ifp = fopen($fileName, 'wb' );
+                    fwrite($ifp, base64_decode( $data[1] ) );
+                    rename($fileName, 'images/banenrs/'.$fileName);
+
+                }else{
+                    $fileName = Carbon::now()->timestamp . '_' . uniqid() . '.' . explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
+                    Image::make($request->get('image'))->save(public_path('images/banners/').$fileName);
+                }
     
             }catch(\Exception $e){
     
@@ -93,8 +104,22 @@ class BannerController extends Controller
             try{
 
                 $imageData = $request->get('image');
-                $fileName = Carbon::now()->timestamp . '_' . uniqid() . '.' . explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
-                Image::make($request->get('image'))->save(public_path('images/banners/').$fileName);
+
+                if(strpos($imageData, "svg+xml") > 0){
+
+                    $data = explode( ',', $imageData);
+                    $fileName = Carbon::now()->timestamp . '_' . uniqid() . '.'."svg";
+                    $ifp = fopen($fileName, 'wb' );
+                    fwrite($ifp, base64_decode( $data[1] ) );
+                    rename($fileName, 'images/banners/'.$fileName);
+
+                }else{
+
+                    $fileName = Carbon::now()->timestamp . '_' . uniqid() . '.' . explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
+                    Image::make($request->get('image'))->save(public_path('images/banners/').$fileName);
+
+                }
+                
 
             }catch(\Exception $e){
 
