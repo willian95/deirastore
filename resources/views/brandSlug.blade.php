@@ -20,7 +20,7 @@
                             <a class="page-link" v-if="page > 1" href="#" @click="fetch(page - 1)">Anterior</a>
                         </li>
                         <li class="page-item" v-for="index in pages">
-                            <a class="page-link" href="#" v-if="index > page &&  index < page + 6"  :key="index" @click="fetch(index)" >@{{ index }}</a>
+                            <a class="page-link" href="#" v-if="index >= page &&  index < page + 6"  :key="index" @click="fetch(index)" >@{{ index }}</a>
                         </li>
                         <li>
                             <a class="page-link" v-if="page < pages" href="#" @click="fetch(page + 6)">Siguiente</a>
