@@ -202,7 +202,7 @@ header {
     justify-content: center;
     border-radius: 100%;
     overflow: hidden;
-    color: #5494a3;
+    color: #fff;
     align-items: center;
 }
 
@@ -210,9 +210,22 @@ header {
     background-color: #d32b2b;
 
 }
+.main-menu__top-item {
 
+    transition: .5s;
+}
+.drow-none {
+
+    color: #5494a3!important;
+  
+}
+.drow-none:hover {
+    color: #d32b2b!important;
+}
 .main-menu__top-item ul li a:hover {
     background-color: #ffffff;
+    color: #5494a3;
+    transition: .5s;
 }
 
 .main-menu__top-item ul li:nth-child(2):hover img {
@@ -500,6 +513,14 @@ header {
     position: relative;
     margin-bottom: 30px;
 }
+.title__general2 {
+    text-align: center;
+    font-size: 2.2rem;
+    color: #000;
+    position: relative;
+    margin-bottom: 30px;
+}
+
 
 .title__general-start {
     text-align: start;
@@ -529,7 +550,17 @@ header {
     background: #d32b2b;
     content: "";
 }
-
+.title__general2 p::after {
+    position: absolute;
+    width: 130px;
+    border-radius: 10px;
+    height: 5px;
+    top: 50px;
+    right: 81%;
+    bottom: 0;
+    background: #d32b2b;
+    content: "";
+}
 .title__general__blue p::after {
 
     background: #87b4be;
