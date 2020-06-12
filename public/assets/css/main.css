@@ -2378,3 +2378,31 @@ padding-bottom: 110px;
     background: transparent;
     border: none;
 }
+
+/*datos*/
+.grid__datos{
+    display: grid;
+    grid-template-columns: 1fr 1fr ;
+}
+
+.title__general_exit p::after {
+    position: absolute;
+    width: 130px;
+    border-radius: 10px;
+    height: 5px;
+    top: 50px;
+    right: 43%;
+    bottom: 0;
+    background: #1bf24c;
+    content: "";
+}
+.grid__datos{
+    
+}
+.datos_fecha{
+
+}
+.grid__datos__item{
+    border: 1px solid #0000004f;
+    padding: 15px;
+}

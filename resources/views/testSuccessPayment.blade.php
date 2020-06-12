@@ -2,27 +2,38 @@
 
 @section('content')
 
-    <div class="container">
+    <div class="container bg">
         <div class="row">
-            <div class="col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-12">
-                <div class="card">
-                    <h2>Pago exitoso</h2>
-
-                    <p>Fecha: 12-06-2020 Hora: 2:00pm</p>
-                    <p>Medio de pago: Factura</p>
-
-                    <h3>Datos de usuario</h3>
-                    <p>Nombre: Willian</p>
-                    <p>Nombre: Rodríguez</p>
-                    <p>RUT: 123123123</p>
-                    <p>Región: Antofagasta</p>
-                    <p>Comuna: San Juan</p>
-                    <p>Calle: Ribereña #4</p>
+            <div class="col-lg-12  col-md-12 col-12">
+                <div class="car">
+                    <div class="title__general fadeInUp wow animated title__general_exit">
+                        <p>¡Pago <strong>exitoso!</strong></p>                     
+                    </div>
+                    <div class="text-center datos_fecha">
+                        <p class="m-0">Fecha: 12-06-2020 - Hora: 2:00pm</p>
+                        <p>Medio de pago: Factura</p>
+                    </div>
                     
-                    <h3>Datos de empresa</h3>
-                    <p>Razón social: Tecnomarket Express</p>
-                    <p>RUT de empresa: 123123</p>
-                    <p>Dirección: Antofagasta San Pedro</p>
+                    <div class="grid__datos">           
+                       
+        
+                        <div class="grid__datos__item">
+                            <h3>Datos de usuario</h3>
+                            <p>Nombre: Willian</p>
+                            <p>Apellido: Rodríguez</p>
+                            <p>RUT: 123123123</p>
+                            <p>Región: Antofagasta</p>
+                            <p>Comuna: San Juan</p>
+                            <p>Calle: Ribereña #4</p>
+                        </div>
+                            
+                        <div class="grid__datos__item" style="    border-left: 0;">
+                            <h3>Datos de empresa</h3>
+                            <p>Razón social: Tecnomarket Express</p>
+                            <p>RUT de empresa: 123123</p>
+                            <p>Dirección: Antofagasta San Pedro</p>
+                        </div>
+                    </div>
                     
 
                     <table class="table">
