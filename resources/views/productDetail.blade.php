@@ -107,7 +107,7 @@
                         <div class="col-sm-4">
                             <div class="compra-protegida">
                                 <div class="row">
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-4 text-center">
                                         <img src="{{ asset('/images/compra_segura_ds.png') }}" alt="">
                                     </div>
                                     <div class="col-sm-8">
@@ -118,10 +118,10 @@
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <div class="medios-pago">
+                            <div class="compra-protegida p12">
                                 <div class="row">
                                     <div class="col-sm-4">
-                                        <img src="{{ asset('/images/modo_de_pago_ds.png') }}" alt="">
+                                        <img class="p-2" src="{{ asset('/images/modo_de_pago_ds.png') }}" alt="">
                                     </div>
                                     <div class="col-sm-8">
                                         <h3>MEDIOS DE PAGO</h3>
@@ -131,10 +131,10 @@
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <div class="despachos">
+                            <div class="compra-protegida p12 p-4">
                                 <div class="row">
                                     <div class="col-sm-4">
-                                        <img src="{{ asset('/images/despacho-ds.png') }}" alt="">
+                                        <img class="p-1" src="{{ asset('/images/despacho-ds.png') }}" alt="">
                                     </div>
                                     <div class="col-sm-8">
                                         <h3>DESPACHOS </h3>
