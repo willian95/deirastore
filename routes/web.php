@@ -17,6 +17,18 @@
 
 Route::get('/', "HomeController@index");
 
+Route::get("/test/success", function(){
+
+    return view("testSuccessPayment");
+
+});
+
+Route::get("/test/failed", function(){
+
+    return view("failedPayment");
+
+});
+
 Route::get('/product/{slug}', "HomeController@show");
 Route::get('/search', "HomeController@search");
 
