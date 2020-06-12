@@ -151,7 +151,7 @@
                             </div>
 
                             <div class="form-grid__item form-check" style="visibility: hidden">
-                                <input  type="checkbox" class="form-check-input mt-2" >
+                                 <input  type="checkbox" class="form-check-input mt-2" >
                                 <label  class="form-check-label mt-3" for="terms">Acepto términos y condiciones</label>
                             </div>
 

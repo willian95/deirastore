@@ -1068,7 +1068,7 @@ button.comprar-producto {
 }
 
 .compra-protegida img {
-    width: 70%;
+    width: 100%;
 }
 
 .compra-protegida:hover {
@@ -1086,10 +1086,11 @@ button.comprar-producto {
 
 .compra-protegida {
     display: flex;
-    background-color: #87b4be;
+    /* background-color: #87b4be; */
     border-radius: 10px;
-    padding: 15px;
-    color: #fff;
+    /*padding: 15px;*/
+    color: #87b4be;
+    border: 1px solid;
 }
 
 .medios-pago {
@@ -1117,13 +1118,17 @@ button.comprar-producto {
 }
 
 .medios-pago img {
-    width: 70%;
+    width: 100%;
 }
 
 .medios-pago h3 {
     font-size: 18px;
     font-weight: bold;
     margin: 0;
+}
+.p12{
+    padding-top: 12px;
+    padding-bottom: 12px;
 }
 
 .despachos {
