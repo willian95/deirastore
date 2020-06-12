@@ -112,7 +112,7 @@
                                                     <input  type="checkbox" class="form-check-input mt-2" id="terms" v-model="terms">
                                                     <label  class="form-check-label mt-3" for="terms"><a href="{{ url('/terms') }}" target="_blank">Acepto terminos y condiciones</a></label>
                                                 </div>
-                                            <button @click="checkout()" class="finalizar-compra">Ir a pagar</button>
+                                            <button @click="checkout()" class="finalizar-compra" v-if="guestItem.length > 0">Ir a pagar</button>
                                             <button @click="keepShopping()"  class="finalizar-compra finalizar-compra--go">Seguir Comprando</button>
                                             
                                     
