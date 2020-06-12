@@ -202,7 +202,7 @@ header {
     justify-content: center;
     border-radius: 100%;
     overflow: hidden;
-    color: #fff;
+    color: #5494a3;
     align-items: center;
 }
 
@@ -768,7 +768,7 @@ header {
 }
 
 .main-slider__text .title {
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     font-weight: bold;
     font-family: "Branding W00 Bold";
     margin: 0;
@@ -879,7 +879,7 @@ footer {
 
 .menu-grid .title {
     color: #fff;
-    padding-bottom: 5%;
+    margin-bottom: 0;
     font-weight: bold;
     font-size: .9rem;
 }
@@ -1653,7 +1653,7 @@ input[type=checkbox], input[type=radio] {
     width: 37%;
     border-radius: 5px;
     height: 2px;
-    top: 37px;
+    top: 40px;
     left: 62%;
     display: flex;
     right: 0;
@@ -1851,7 +1851,7 @@ img.lista-pedido {
 .dropdown-menu {
     border: 0;
     box-shadow: 0px 0px 5px;
-    background: #e6e6e6;
+    background: #ffffff;
 
 }
 
@@ -2335,4 +2335,10 @@ padding-bottom: 110px;
     color: #d32b2b;
     background-color: transparent;
    
+}
+
+.trash{
+    color: #d32b2b;
+    background: transparent;
+    border: none;
 }
