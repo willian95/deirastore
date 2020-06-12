@@ -176,7 +176,7 @@
                     </div>
                     <div class="col-md-12 col-lg-4">
                         <div class="pedido">
-                            <h3>Tú pedido</h3>
+                            <h3>Tu pedido</h3>
                             <h5>Total de tu compra</h5>
                             <strong><small>Solo productos</small></strong>
                             
@@ -200,9 +200,9 @@
                                 
                                 <div class="form-check">
                                     <input  type="checkbox" class="form-check-input mt-2" id="terms" v-model="terms">
-                                    <label  class="form-check-label mt-3" for="terms"><a href="{{ url('/terms') }}" target="_blank">Acepto terminos y condiciones</a></label>
+                                    <label  class="form-check-label mt-3" for="terms"><a href="{{ url('/terms') }}" target="_blank">Acepto términos y condiciones</a></label>
                                 </div>
-                                <button @click="ticketView()" class="btn btn-success btn-general2 mt-3 pr-4 pl-4">continuar</button>
+                                <button @click="ticketView()" class="btn btn-success btn-general2 mt-3 pr-4 pl-4">Continuar</button>
                                 
                             </div>
 
@@ -401,7 +401,7 @@
                         window.localStorage.setItem("checkoutProduct", JSON.stringify(this.guestItem))
                         window.location.href = "{{ url('/cart/ticket') }}"
                     }else{
-                        alertify.error("Debe aceptar los terminos y condiciones y confirma su dirección")
+                        alertify.error("Debe aceptar los términos y condiciones y confirma su dirección")
                     }
 
                 },

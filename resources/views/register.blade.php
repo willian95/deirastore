@@ -143,7 +143,7 @@
 
                             <div class="form-grid__item form-check" style="visibility: hidden" v-if="showBusiness == true">
                                 <input  type="checkbox" class="form-check-input mt-2" >
-                                <label  class="form-check-label mt-3" for="terms">Acepto terminos y condiciones</label>
+                                <label  class="form-check-label mt-3" for="terms">Acepto términos y condiciones</label>
                             </div>
 
                             <div class="form-grid__item">
@@ -152,13 +152,13 @@
 
                             <div class="form-grid__item form-check" style="visibility: hidden">
                                 <input  type="checkbox" class="form-check-input mt-2" >
-                                <label  class="form-check-label mt-3" for="terms">Acepto terminos y condiciones</label>
+                                <label  class="form-check-label mt-3" for="terms">Acepto términos y condiciones</label>
                             </div>
 
                             
                             <div class="form-grid__item form-check">
                                 <input  type="checkbox" class="form-check-input mt-2" id="terms" v-model="terms">
-                                <label  class="form-check-label mt-3" for="terms"><a href="{{ url('/terms') }}" target="_blank">Acepto terminos y condiciones</a></label>
+                                <label  class="form-check-label mt-3" for="terms"><a href="{{ url('/terms') }}" target="_blank">Acepto términos y condiciones</a></label>
                             </div>
 
                             
@@ -364,7 +364,7 @@
                 }
 
                 if (this.terms == false) {
-                    alertify.error("Debe aceptar los terminos y condiciones")
+                    alertify.error("Debe aceptar los términos y condiciones")
                     error = true
                 }
 

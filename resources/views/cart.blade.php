@@ -5,7 +5,7 @@
     <div class="container pagina bg">
         <div class="carrito">
             <div id="cart">
-                <div class="iconos-buy">
+              <!---  <div class="iconos-buy">
                     <div class="icono-p">
                         <div class="icono-buy__item">
                             <img src="assets/img/deira-48.png" alt="">
@@ -23,7 +23,7 @@
                             <img src="assets/img/deira-52.png" alt="">
                         </div>
                     </div>
-                </div>
+                </div>--->
 
                 <div class="col-12">
                     <a class="btn btn-primary btn-general btn-general--form" style="color: #fff;" href="{{ url()->previous() }}"><i class="fa fa-arrow-left"></i></a>
@@ -44,17 +44,17 @@
                                 <p><strong>Carrito </strong>de compras</p>
                             </div>
                             <div class="row">
-                                <div class="col-md-12 col-lg-8">
+                                <div class="col-md-12 col-lg-8 p-0">
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <td>Producto</td>
-                                                <td>Marca</td>
-                                                <td>Nombre</td>
-                                                <td>Precio</td>
-                                                <td>Cantidad</td>
-                                                <td>Total</td>
-                                                <td></td>
+                                                <td class="table__title" >Producto</td>
+                                                <td class="table__title" >Marca</td>
+                                                <td class="table__title" >Nombre</td>
+                                                <td class="table__title" >Precio</td>
+                                                <td class="table__title">Cantidad</td>
+                                                <td class="table__title">Total</td>
+                                                <td class="table__title"></td>
 
                                             </tr>
                                         </thead>
@@ -69,10 +69,10 @@
                                                     <span>@{{ item.name }} </span>
                                                     <p>@{{ item.sub_title }}</p>
                                                 </td>
-                                                <td>$ @{{ item.price }}</td>
-                                                <td>@{{ item.amount }}</td>
-                                                <td>$ @{{ parseInt(item.price * item.amount).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</td>
-                                                <td><button class="btn btn-danger" @click="eraseGuestProduct(index)">X</button></td>
+                                                <td class="p-0">$ @{{ item.price }}</td>
+                                                <td class="p-0">@{{ item.amount }}</td>
+                                                <td class="p-0">$ @{{ parseInt(item.price * item.amount).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</td>
+                                                <td><button class="btn btn-danger fa fa-trash trash " @click="eraseGuestProduct(index)"></button></td>
                                             </tr>
 
                                         </tbody>
@@ -110,7 +110,7 @@
                                             
                                                 <div class="form-check">
                                                     <input  type="checkbox" class="form-check-input mt-2" id="terms" v-model="terms">
-                                                    <label  class="form-check-label mt-3" for="terms"><a href="{{ url('/terms') }}" target="_blank">Acepto terminos y condiciones</a></label>
+                                                    <label  class="form-check-label mt-3" for="terms"><a href="{{ url('/terms') }}" target="_blank">Acepto términos y condiciones</a></label>
                                                 </div>
                                             <button @click="checkout()" class="finalizar-compra" v-if="guestItem.length > 0">Ir a pagar</button>
                                             <button @click="keepShopping()"  class="finalizar-compra finalizar-compra--go">Seguir Comprando</button>
@@ -348,7 +348,7 @@
                 payProducts(){
 
                     if(this.terms == true){
-                        alertify.success("Debe aceptar los terminos y condiciones antes de continuar")
+                        alertify.success("Debe aceptar los términos y condiciones antes de continuar")
                     }else{
                         axios.post("{{ route('checkout') }}")
                         .then(res => {
@@ -378,7 +378,7 @@
                         else
                             window.location.href="{{ url('/guest/checkout/') }}"
                     }else{
-                        alertify.error("Debe aceptar los terminos y condiciones")
+                        alertify.error("Debe aceptar los términos y condiciones")
                     }
         
                 },
