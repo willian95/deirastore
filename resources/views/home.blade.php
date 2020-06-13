@@ -116,7 +116,7 @@
                                 <div class="main-categorias-txt">
                                     <a href="{{ url('/category/'.$category->slug) }}"> 
                                         <img src="{{ asset('/images/categories/'.$category->image) }}" alt="">
-                                        <span>{{ $category->name}}</span>
+                                        <span>{{ $category->esp_name}}</span>
                                     </a>
                                 </div>
                             </div>
