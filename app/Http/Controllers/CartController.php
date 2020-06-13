@@ -38,7 +38,7 @@ class CartController extends Controller
                 $amount = $product->amount + $request->amount;
                 $productModel = Product::find($request->productId);
                 if($productModel->external_price > 0)
-                    $price = intval($productModel->external_price * DolarPrice::first()->price);
+                    $price = intval($productModel->external_price * DolarPrice::first()->price) + 1;
                 else
                     $price = $productModel->price;
 
@@ -59,7 +59,7 @@ class CartController extends Controller
 
                 $productModel = Product::find($request->productId);
                 if($productModel->external_price > 0)
-                    $price = intval($productModel->external_price * DolarPrice::first()->price);
+                    $price = intval($productModel->external_price * DolarPrice::first()->price) + 1;
                 else
                     $price = $productModel->price;
 
@@ -151,7 +151,7 @@ class CartController extends Controller
         
             $price = 0;
             if($products->external_price > 0 && $products->price == 0){
-                $price = ($products->external_price * DolarPrice::first()->price) * $product["amount"];
+                $price = (($products->external_price * DolarPrice::first()->price) ) * $product["amount"];
             }else if($products->price > 0){
                 $price = $products->price * $product["amount"];
             }
@@ -175,7 +175,7 @@ class CartController extends Controller
 
             $individualPrice =0;
             if($products->external_price > 0 && $products->price == 0){
-                $individualPrice = ($products->external_price * DolarPrice::first()->price);
+                $individualPrice = ($products->external_price * DolarPrice::first()->price) + 1;
             }else if($products->price > 0){
                 $individualPrice = $products->price;
             }
@@ -197,7 +197,7 @@ class CartController extends Controller
 
         }
 
-        return response()->json(["cart" => $cart, "total" => $total]);
+        return response()->json(["cart" => $cart, "total" => $total + 1]);
 
     }
 
@@ -210,7 +210,7 @@ class CartController extends Controller
             
                 $price = 0;
                 if($products->external_price > 0 && $products->price == 0){
-                    $price = ($products->external_price * DolarPrice::first()->price) * $product["amount"];
+                    $price = (($products->external_price * DolarPrice::first()->price) + 1) * $product["amount"];
                 }else if($products->price > 0){
                     $price = $products->price * $product["amount"];
                 }

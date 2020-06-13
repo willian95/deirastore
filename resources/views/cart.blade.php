@@ -179,7 +179,7 @@
                                             <p class="title">{{ $related->category->name }}</p>
                                         @endif
                                         @if($related->external_price > 0 && $related->price == 0)
-                                            <span class="price">$ {{ number_format($related->external_price * App\DolarPrice::first()->price, 0, ",", ".") }}</span>
+                                            <span class="price">$ {{ number_format(intval($related->external_price * App\DolarPrice::first()->price) + 1, 0, ",", ".") }}</span>
                                         @else
                                             <span class="price">$ {{ number_format($related->price, 0, ",", ".") }}</span>
                                         @endif

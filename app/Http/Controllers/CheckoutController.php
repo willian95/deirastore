@@ -137,7 +137,7 @@ class CheckoutController extends Controller
 				$productPurchase->amount = $cart["amount"];
 				
 				if($product->external_price > 0 && $product->price == 0){ //si el producto cuenta con precio externo mayor a 0 y precio = 0
-					$productPurchase->price = intval(($product->external_price * DolarPrice::first()->price)); //multiplica el precio en USD por el valor en CLP
+					$productPurchase->price = intval(($product->external_price * DolarPrice::first()->price) + 1); //multiplica el precio en USD por el valor en CLP
 				}else{	
 					$productPurchase->price = $product->price * $cart["amount"];
 				}
@@ -223,7 +223,7 @@ class CheckoutController extends Controller
 					$productPurchase->amount = $cart->amount;
 					
 					if($product->external_price > 0 && $product->price == 0){ //si el producto cuenta con precio externo mayor a 0 y precio = 0
-						$productPurchase->price = intval(($product->external_price * DolarPrice::first()->price)); //multiplica el precio en USD por el valor en CLP
+						$productPurchase->price = intval(($product->external_price * DolarPrice::first()->price) + 1); //multiplica el precio en USD por el valor en CLP
 					}else{	
 						$productPurchase->price = $product->price * $cart->amount;
 					}

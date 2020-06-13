@@ -107,12 +107,12 @@ td .es-button-border-2:hover {
                       
 
                     @foreach($products as $product)
-                        <tr style="border-collapse:collapse;">
-                            <td style="Margin:0;line-height:24px;mso-line-height-rule:exactly;font-family:tahoma, verdana, segoe, sans-serif;font-size:20px;font-style:normal;font-weight:bold;color:#D32B2B;">{{ $loop->index + 1 }}</td>
-                            <td style="Margin:0;line-height:24px;mso-line-height-rule:exactly;font-family:tahoma, verdana, segoe, sans-serif;font-size:20px;font-style:normal;font-weight:bold;color:#D32B2B;">{{ $product->product->name }}</td>
-                            <td style="Margin:0;line-height:24px;mso-line-height-rule:exactly;font-family:tahoma, verdana, segoe, sans-serif;font-size:20px;font-style:normal;font-weight:bold;color:#D32B2B;">{{  $product->amount }}</td>
-                            <td style="Margin:0;line-height:24px;mso-line-height-rule:exactly;font-family:tahoma, verdana, segoe, sans-serif;font-size:20px;font-style:normal;font-weight:bold;color:#D32B2B;">{{ number_format($product->price / $product->amount, 0, ",", ".") }}</td>
-                            <td style="Margin:0;line-height:24px;mso-line-height-rule:exactly;font-family:tahoma, verdana, segoe, sans-serif;font-size:20px;font-style:normal;font-weight:bold;color:#D32B2B;">{{ number_format($product->price, 0, ",", ".") }}</td>
+                        <tr >
+                            <td >{{ $loop->index + 1 }}</td>
+                            <td >{{ $product->product->name }}</td>
+                            <td >{{  $product->amount }}</td>
+                            <td >{{ number_format($product->price / $product->amount, 0, ",", ".") }}</td>
+                            <td >{{ number_format($product->price, 0, ",", ".") }}</td>
                         </tr>
 
                     @endforeach
