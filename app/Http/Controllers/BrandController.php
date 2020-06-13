@@ -173,13 +173,13 @@ class BrandController extends Controller
     }
 
     function brands(){
-        $this->sendMessage();
+        //$this->sendMessage();
         return view('allBrands');
 
     }
 
     function slug($slug){
-        $this->sendMessage();
+        //$this->sendMessage();
         $brand = Brand::where('slug', $slug)->first();
         return view('brandSlug', ["slug" => $slug, "brand" => $brand]);
 

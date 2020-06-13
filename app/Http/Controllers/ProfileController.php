@@ -13,7 +13,7 @@ class ProfileController extends Controller
     use CartAbandonTrait;
 
     function index(){
-        $this->sendMessage();
+        //$this->sendMessage();
         return view('profileData');
     }
 

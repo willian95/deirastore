@@ -171,7 +171,7 @@ class CategoriesController extends Controller
 
     function slug($slug){
 
-        $this->sendMessage();
+        //$this->sendMessage();
         $category = Category::where('slug', $slug)->first();
         return view('categorySlug', ["slug" => $slug, "category" => $category]);
 

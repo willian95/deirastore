@@ -15,7 +15,7 @@ class RegisterController extends Controller
     use CartAbandonTrait; 
 
     function index(){
-        $this->sendMessage();
+        //$this->sendMessage();
         return view("register");
     }
     
