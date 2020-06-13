@@ -14,7 +14,7 @@ class ProfileController extends Controller
 
     function index(){
         $this->sendMessage();
-        return view('profile');
+        return view('profileData');
     }
 
     function update(ProfileUpdate $request){

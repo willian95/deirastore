@@ -339,9 +339,10 @@
                                         @endif
                                     </div>
                                     <div class="main-slider__text">
-                                        <span>{{ $related->name }}</span>
+                                        <p class="title">{{ $related->name }}</p>
                                         @if($related->category)
-                                            <p class="title">{{ $related->category->name }}</p>
+                                            <span>{{ $related->category->name }}</span>
+                                            <br>
                                         @endif
                                         @if($related->external_price > 0)
                                             <span class="price">$ {{ number_format(intval($related->external_price * App\DolarPrice::first()->price), 0, ",", ".") }}</span>

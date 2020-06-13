@@ -13,8 +13,14 @@
                 
                 <div class="">
                     <div class="card-body">
-                        <div class="title__general fadeInUp wow animated">
-                            <p ></p><strong class="mr-5">Perfil</strong> </p>
+                        <div class="title__general2 fadeInUp wow animated pag-center">
+                            <strong class="mr-5 mr-auto"> <p>Perfil</p></strong> 
+
+                            <div class="form-group text-center">
+                                <button class="btn btn-primary btn-general2 pl-4 pr-4" @click="edit()" v-if="readonly == true">Editar</button>
+                                <button class="btn btn-primary btn-general2" @click="cancelEdit()" v-if="readonly == false">Cancelar edición</button>
+                                <button class="btn btn-primary btn-general2" @click="update()" v-if="readonly == false">Actualizar</button>
+                            </div>
                         </div>
 
                         <div class="form-group">
@@ -63,7 +69,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-grid__item">
+                        <div class="form-grid__itm col-md-12">
                             <label  for="house">Dpto. / Casa / Oficna (Opcional)</label>
                             <input  placeholder="Ingresa número" type="text" class="form-control" id="house" v-model="house" :disabled="readonly">
                         </div>
@@ -144,16 +150,16 @@
                                 </div>
                             </div>
 
-                            <div class="row">
+                            <div class="row mt-4 ">
 
-                                <div class="col-md-6">
+                                <div class="col-md-6 mb-4">
                                     <div  v-if="showBusiness == true">
                                         <label  for="businessName">* Razón social</label>
                                         <input  placeholder="Razón social" type="text" class="form-control" id="businessName" v-model="businessName" :disabled="readonly">
                                     </div>
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-md-6 mb-4">
 
                                     <div  v-if="showBusiness == true">
                                         <label  for="businessRut">* RUT de empresa</label>
@@ -166,7 +172,7 @@
 
                             <div class="row">
 
-                                <div class="col-md-6">
+                                <div class="col-md-6 mb-4">
 
                                     <div  v-if="showBusiness == true">
                                         <label  for="businessAddress">* Dirección de la razón social</label>
@@ -174,7 +180,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-md-6 mb-4">
 
                                     <div  v-if="showBusiness == true">
                                         <label  for="businessPhone">* Teléfono de contacto de razón social</label>
@@ -185,7 +191,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-6 mb-4">
                                     <div  v-if="showBusiness == true">
                                         <label  for="businessMail">* Mail de adminsitración</label>
                                         <input  placeholder="Email de adminstradción" type="text" class="form-control" id="businessMail" v-model="businessMail" :disabled="readonly">
@@ -195,11 +201,7 @@
                                 
                         
                      
-                        <div class="form-group text-center">
-                            <button class="btn btn-primary btn-general" @click="edit()" v-if="readonly == true">Editar</button>
-                            <button class="btn btn-primary btn-general" @click="cancelEdit()" v-if="readonly == false">Cancelar edición</button>
-                            <button class="btn btn-primary btn-general" @click="update()" v-if="readonly == false">Actualizar</button>
-                        </div>
+                   
 
                     </div>
                 </div>
