@@ -12,6 +12,10 @@ $(document).ready(function() {
 	});
 });
 
+$('.collapse').on('show.bs.collapse',function(){
+  $('.collapse.in').collapse('toggle');
+});
+
 
 // Menú fixed
 $(window).scroll(function () {
@@ -50,3 +54,7 @@ $('.language').click(function () {
     }
     $('.panel-group').on('hidden.bs.collapse', toggleIcon);
     $('.panel-group').on('shown.bs.collapse', toggleIcon);
+
+
+
+    

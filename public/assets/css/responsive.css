@@ -203,7 +203,7 @@
     }
 
     header {
-        height: 20vh !important;
+        height: 24vh !important;
         position: fixed;
         left: 0;
         width: 100%;
@@ -227,6 +227,10 @@
     header {
 
         height: 30vh;
+    }
+    .grid__datos__item p {
+ 
+        font-size: .8rem;
     }
 
     .main-menu__top-item ul {
@@ -272,82 +276,100 @@
 
         display: flex;
     }
+
     .imagen-detalles {
         width: 300px;
-     
+
     }
+
     .logo-detalle img {
         width: 70px;
         height: 70px;
     }
+
     .logo-detalle {
         position: absolute;
         top: 18%;
         left: -8%;
     }
+
     .div-informacion-detalles h2 {
         font-size: 25px;
-    
+
     }
+
     .div-carrito {
         height: auto;
-      
+
     }
-    .carrito-informacion{
+
+    .carrito-informacion {
         display: none;
     }
+
     .pedido {
         text-align: center;
         margin: 30px;
     }
+
     .pedido h3 {
         text-align: center;
     }
+
     .pedido h3::after {
-  
+
         left: 33%;
- 
+
     }
+
     button.finalizar-compra--go {
 
         margin-top: 40px;
     }
+
     .icono-p {
-       
+
         top: 3%;
     }
+
     .logo {
         width: 70%;
     }
+
     .main-menu__top-item ul li a {
         margin-left: 0;
-   
+
     }
-    .user_content{
-        display: none!important;
-    }
+
+ 
     .main-admin .navbar {
-      
+
         width: 170px;
-    
+
     }
+
     .navbar-expand-md .navbar-nav .nav-link {
-     
+
         font-size: 1rem;
     }
-   .content__admin .col-md-8 {
-      
+
+    .content__admin .col-md-8 {
+
         max-width: 52.666667%;
     }
+
     .grid__product .card-body {
-   
+
         grid-template-columns: 50% 10% 10%;
-    
+
+    }
+    .table_nav{
+        margin-left: 10%;
     }
 }
 
 @media (min-width: 0px) and (max-width: 767px) {
-  
+
 
     .div-informacion-detalles h2 {
         font-size: 30px;
@@ -596,7 +618,7 @@
         margin-top: 30px;
     }
 
- 
+
     .main-menu__top-item {
         text-align: start;
 
@@ -624,86 +646,130 @@
     .main-footer__item ul {
         justify-content: center !important;
     }
-    .cart__btn{
+
+    .cart__btn {
         position: absolute;
         top: 27px;
         right: 22%;
     }
+
     .main-menu__top-item ul li a {
         height: 30px;
         width: 30px;
     }
+
     .main-menu__top-item ul li img {
         width: 20px;
     }
-    .user_content{
-        display: none!important;
+
+    .user_content {
+        display: none !important;
     }
+
     .main-admin .navbar {
-    
+
         height: 10vh;
         width: 100%;
         top: 0;
     }
+
     .admin-nav .navbar-brand img {
         width: 60%;
     }
-    .fixed__content{
+
+    .fixed__content {
         display: flex;
         align-items: center;
     }
+
     .fixed__content .hamburger--elastic .hamburger-inner {
         top: 0px;
-      
+
     }
+
     .content__admin {
         margin: 0;
         margin-top: 60px;
     }
+
     .dash-grid {
         grid-template-columns: 100%;
     }
+
     .bsucador_admin {
         position: initial;
         margin: 0;
     }
+
     .buscardor-admin .form-control {
         border: 1px solid #1b2338;
     }
+
     .grid_content {
         grid-template-columns: 1fr;
         margin-bottom: 0;
     }
+
     .grid_content--item {
-      
+
         margin-bottom: 15px;
     }
+
     .mr-12 {
         margin-right: 0;
     }
+
     .grid__product .card-body {
         grid-template-columns: 69% 14% 14%;
         gap: 15px;
     }
-    .card-bod{
+
+    .card-bod {
         overflow-y: scroll;
     }
-    td img{
-        width: 100px!important;
+
+    td img {
+        width: 100px !important;
         object-fit: contain;
     }
+
     .fixed__content .offcanvas-collapse {
         top: 60px;
         background-color: #1b2338;
         padding-right: 0rem;
     }
+
     .admin-nav .navbar-nav {
         margin-left: 20px;
         list-style: none;
-        
+
     }
+
     .admin-nav .active {
-   
+
         padding-left: 12px;
+    }
+    .grid,.grid__datos{
+        grid-template-columns: 1fr ;
+    }
+    .grid__datos__item .text-justify ,.text-justify{
+        text-align: justify !important;
+        font-size: 1.2rem;
+    }
+    .info-success {
+      
+        overflow-x: scroll;
+    }
+    .colunm {
+    
+        margin-top: 50px;
+    }
+    .info__sucess {
+    
+        flex-direction: column;
+    }
+    .info__sucess .card {
+        width: -webkit-fill-available;
+        border: 0;
     }
 }

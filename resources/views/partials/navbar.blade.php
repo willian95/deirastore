@@ -12,7 +12,7 @@
                     <button class="btn btn-form" type="submit"><img src="{{ asset('assets/img/lupa.svg') }}" alt=""></button>
                 </form>
             </div>
-            <div class="main-menu__top-item">
+            <div class="main-menu__top-item table_nav">
                 <ul>
                     
                     <li class="nav-item dropdown arrow  btn__user">

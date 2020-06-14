@@ -1862,14 +1862,22 @@ img.lista-pedido {
 /*vista de compra*/
 .table__title{
     color: #000000e0;
-    font-weight: bold;
+    font-weight: bold!important;
     font-size: 15px;
 }
 .carrito td, .carrito th {
  
     border-bottom: none;
 }
-
+.info-success{
+        /* border: .5px solid #00000026; */
+        padding: 15px;
+        /* box-shadow: 0px 0px 10px #0000001c; */
+        border-radius: 10px;
+        border-radius: 5px;
+        padding-left: 50px;
+        padding-right: 50px;
+}
 /*vista de compra*/
 
 
@@ -2383,6 +2391,9 @@ padding-bottom: 110px;
 .grid__datos{
     display: grid;
     grid-template-columns: 1fr 1fr ;
+    gap: 50px;
+    padding-left: 50px;
+    padding-right: 50px;
 }
 
 .title__general_exit p::after {
@@ -2403,6 +2414,79 @@ padding-bottom: 110px;
 
 }
 .grid__datos__item{
-    border: 1px solid #0000004f;
+    border: .5px solid #00000026;
     padding: 15px;
+    box-shadow: 0px 0px 10px #0000000d;
+    border-radius: 10px;
+}
+.grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.font-size{
+    font-size: 1.5rem;
+}
+.grid__datos__item .title__general p::after {
+display: none;
+}
+
+.grid__datos__item::before{
+    border-radius: 0;
+    border-right: 1px dashed #000;
+    position: absolute;
+    width: 130px;
+    border-radius: 10px;
+    height: 5px;
+    top: 50px;
+    right: 43%;
+    bottom: 0;
+  
+    content: "";
+}
+.colunm{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding-right: 50px;
+    font-size: 17px;
+}
+.info__sucess{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.info__sucess .card{
+    width: 50%;
+    border: 0;
+}
+
+.info__sucess .card-header {
+    color: #000;
+    background: transparent;
+    border: 0;
+}
+.info__sucess .btn-link {
+    font-weight: 400;
+    color: #007bff;
+    background-color: transparent;
+    background: #f7f7f7;
+    width: 100%!important;
+    text-align: start;
+    color: #000;
+    height: 50px;
+}
+.info__sucess .collapse{
+    height: 30vh;
+    overflow-x: scroll;
+}
+.info__sucess strong{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.info__sucess .card-body {
+  
+    padding-left: 50px;
+    padding-right: 50px;
 }
