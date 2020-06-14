@@ -32,13 +32,14 @@ Route::get("/test/failed", function(){
 Route::get("/check/servertest", function(){
 
     $products = App\Product::where("picture", "like",  "%http://%")->get();
-    dd($products);
-    /*foreach($products as $product){
+    
+    foreach($products as $product){
 
         $productModel = App\Product::where("id", $product->id)->first();
-        $productModel->picture = 
+        $productModel->picture = str_replace("http://", "https://", $product->picture);
+        $productModel->update();
 
-    }*/
+    }
 
 });
 
