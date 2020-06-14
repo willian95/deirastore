@@ -31,7 +31,7 @@ Route::get("/test/failed", function(){
 
 Route::get("/check/servertest", function(){
 
-    $products = App\Product::where("picture", "http://servertest.sytes.net/deirastore/public/images/not_found.svg")->update(["picture" => "http://deirastore.cl/images/not_found.svg"]);
+    $products = App\Product::where("picture", "http://deirastore.cl/images/not_found.svg")->update(["picture" => "https://deirastore.cl/images/not_found.svg"]);
 
 
 
