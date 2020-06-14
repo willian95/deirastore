@@ -29,7 +29,15 @@ Route::get("/test/failed", function(){
 
 });
 
-Route::get("/test/mail", function(){
+Route::get("/check/servertest", function(){
+
+    $products = App\Product::where("picture", "http://servertest.sytes.net/deirastore/public/images/not_found.svg")->update(["picture" => "http://deirastore.cl/images/not_found.svg"]);
+
+
+
+});
+
+/*Route::get("/test/mail", function(){
 
     $to_name = "Willian";
     $to_email = "rodriguezwillian95@gmail.com";
@@ -41,7 +49,7 @@ Route::get("/test/mail", function(){
     });
 
 
-});
+});*/
 
 Route::get('/product/{slug}', "HomeController@show");
 Route::get('/search', "HomeController@search");
