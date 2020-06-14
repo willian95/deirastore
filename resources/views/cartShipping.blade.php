@@ -377,27 +377,24 @@
 
                         }
                         //let address = []
-                        let guestUser = JSON.parse(localStorage.getItem("guestUser"))
-                        console.log("test-guestuser", guestUser)
-                        /*address.location_id = this.location
-                        address.comnue_id = this.selectedComune
-                        address.street = this.street
-                        address.number = this.number
-                        address.house = this.house*/
+                        if(this.authCheck == false){
 
-                        newGuest.name = guestUser.name
-                        newGuest.lastname = guestUser.lastname
-                        newGuest.phoneNumber = guestUser.phoneNumber
-                        newGuest.rut = guestUser.rut
-                        newGuest.guestEmail = guestUser.guestEmail
-                        newGuest.location_id = this.location
-                        newGuest.comune_id = this.selectedComune
-                        newGuest.street = this.street
-                        newGuest.number = this.number
-                        newGuest.house = this.house
+                            let guestUser = JSON.parse(localStorage.getItem("guestUser"))
 
+                            newGuest.name = guestUser.name
+                            newGuest.lastname = guestUser.lastname
+                            newGuest.phoneNumber = guestUser.phoneNumber
+                            newGuest.rut = guestUser.rut
+                            newGuest.guestEmail = guestUser.guestEmail
+                            newGuest.location_id = this.location
+                            newGuest.comune_id = this.selectedComune
+                            newGuest.street = this.street
+                            newGuest.number = this.number
+                            newGuest.house = this.house
+                            window.localStorage.setItem("guestUser", JSON.stringify(newGuest))
+                        }
                         
-                        window.localStorage.setItem("guestUser", JSON.stringify(newGuest))
+                        
                         window.localStorage.setItem("checkoutProduct", JSON.stringify(this.guestItem))
                         window.location.href = "{{ url('/cart/ticket') }}"
                     }else{
