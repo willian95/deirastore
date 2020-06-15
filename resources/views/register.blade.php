@@ -132,7 +132,7 @@
                             </div>
 
                             <div class="form-grid__item" v-if="showBusiness == true">
-                                <label  for="businessPhone">* Teléfono de contacto de razón social</label>
+                                <label  for="businessPhone">* Teléfono empresarial</label>
                                 <input  placeholder="Teléfono de contacto" type="text" class="form-control" id="businessPhone" v-model="businessPhone">
                             </div>
 

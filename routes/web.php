@@ -29,6 +29,34 @@ Route::get("/test/failed", function(){
 
 });
 
+Route::get("/check/servertest", function(){
+
+    $products = App\Product::where("picture", "like",  "%http://%")->get();
+    
+    foreach($products as $product){
+
+        $productModel = App\Product::where("id", $product->id)->first();
+        $productModel->picture = str_replace("http://", "https://", $product->picture);
+        $productModel->update();
+
+    }
+
+});
+
+/*Route::get("/test/mail", function(){
+
+    $to_name = "Willian";
+    $to_email = "rodriguezwillian95@gmail.com";
+    \Mail::send("emails.test", [], function($message) use ($to_name, $to_email) {
+
+        $message->to($to_email, $to_name)->subject("¡Solo falta un paso tu registro!");
+        $message->from("rodriguezwillian95@gmail.com","Deira");
+
+    });
+
+
+});*/
+
 Route::get('/product/{slug}', "HomeController@show");
 Route::get('/search', "HomeController@search");
 

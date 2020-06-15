@@ -116,7 +116,7 @@
                                 <div class="main-categorias-txt">
                                     <a href="{{ url('/category/'.$category->slug) }}"> 
                                         <img src="{{ asset('/images/categories/'.$category->image) }}" alt="">
-                                        <span>{{ $category->name}}</span>
+                                        <span>{{ $category->esp_name}}</span>
                                     </a>
                                 </div>
                             </div>
@@ -195,7 +195,7 @@
                                         <br>
                                     @endif
                                     @if($product->external_price > 0)
-                                        <span class="price">$ {{ number_format(intval($product->external_price * App\DolarPrice::first()->price), 0, ",", ".") }}</span>
+                                        <span class="price">$ {{ number_format(intval($product->external_price * App\DolarPrice::first()->price) + 1, 0, ",", ".") }}</span>
                                     @else
                                          <span class="price">$ {{ number_format($product->price, 0, ",", ".") }}</span>
                                     @endif

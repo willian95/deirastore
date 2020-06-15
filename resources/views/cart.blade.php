@@ -4,7 +4,7 @@
 
     <div class="container pagina bg">
         <div class="carrito">
-            <div id="cart">
+            <div id="cart" >
               <!---  <div class="iconos-buy">
                     <div class="icono-p">
                         <div class="icono-buy__item">
@@ -29,7 +29,7 @@
                     <a class="btn btn-primary btn-general btn-general--form" style="color: #fff;" href="{{ url()->previous() }}"><i class="fa fa-arrow-left"></i></a>
                 </div>
 
-                <div class="row">
+                <div class="row" v-cloak>
                     <div class="col-sm-12 ">
 
                         <div class="div-carrito">
@@ -179,7 +179,7 @@
                                             <p class="title">{{ $related->category->name }}</p>
                                         @endif
                                         @if($related->external_price > 0 && $related->price == 0)
-                                            <span class="price">$ {{ number_format($related->external_price * App\DolarPrice::first()->price, 0, ",", ".") }}</span>
+                                            <span class="price">$ {{ number_format(intval($related->external_price * App\DolarPrice::first()->price) + 1, 0, ",", ".") }}</span>
                                         @else
                                             <span class="price">$ {{ number_format($related->price, 0, ",", ".") }}</span>
                                         @endif

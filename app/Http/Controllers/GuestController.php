@@ -45,7 +45,7 @@ class GuestController extends Controller
 
             $price = 0;
             if($products->external_price > 0 && $products->price == 0){
-                $price = ($products->external_price * DolarPrice::first()->price) * $product["amount"];
+                $price = (($products->external_price * DolarPrice::first()->price)) * $product["amount"];
             }else if($products->price > 0){
                 $price = $products->price * $product["amount"];
             }

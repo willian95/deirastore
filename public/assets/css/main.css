@@ -2490,3 +2490,7 @@ display: none;
     padding-left: 50px;
     padding-right: 50px;
 }
+
+[v-cloak] {
+    display: none;
+}
