@@ -20,7 +20,7 @@ class RutController extends Controller
             $ch = curl_init();
 
             //Le pasamos la url a curl, y formateamos el día, mes, año y el nombre del día, que siempre serán jueves y sábados
-            curl_setopt($ch,CURLOPT_URL,'https://www.nombrerutyfirma.com/rut');
+            curl_setopt($ch,CURLOPT_URL,'https://www.nombrerutyfirma.com/busca_rut');
                 //Le pasamos a curl un useragent
             curl_setopt($ch, CURLOPT_POST, TRUE);
             curl_setopt($ch,CURLOPT_USERAGENT,'Mozilla/5.0 (Windows NT 5.1; rv:31.0) Gecko/20100101 Firefox/31.0');
