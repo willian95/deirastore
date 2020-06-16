@@ -242,7 +242,17 @@ Route::prefix('admin')->group(function () {
     Route::get("/text/index", "TextController@index");
     Route::get('/text/fetch/{page}', "TextController@fetch");
     Route::post('/text/update', "TextController@update");
-    
+
+    Route::get("/best-store/index", "BestStoreController@index");
+    Route::get("/best-store/fetch", "BestStoreController@fetch");
+    Route::post("/best-store/store", "BestStoreController@store");
+    Route::post("/best-store/delete", "BestStoreController@delete");
+
+    Route::get("/best-category/index", "BestCategoryController@index");
+    Route::get("/best-category/fetch", "BestCategoryController@fetch");
+    Route::post("/best-category/store", "BestCategoryController@store");
+    Route::post("/best-category/delete", "BestCategoryController@delete");
+
 });
 
 //Route::get('/nexsys/{mark}', "NexsysController@index");

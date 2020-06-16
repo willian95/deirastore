@@ -209,7 +209,7 @@ class BrandController extends Controller
 
         try{
 
-            $brands = Brand::all();
+            $brands = Brand::orderBy("name", "asc")->get();
             return response()->json(["success" => true, "brands" => $brands]);
 
         }catch(\Exception $e){

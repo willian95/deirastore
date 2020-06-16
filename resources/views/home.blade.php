@@ -111,16 +111,22 @@
             <div class="container">
                 <div class="main-categorias__content">
                     @foreach($categories as $category)
-                        @if($category->image != null)
+                        
                             <div class="main-categorias__item">
                                 <div class="main-categorias-txt">
+                                
                                     <a href="{{ url('/category/'.$category->slug) }}"> 
-                                        <img src="{{ asset('/images/categories/'.$category->image) }}" alt="">
-                                        <span>{{ $category->esp_name}}</span>
+                                        @if($category->category->image != null)
+                                            <img src="{{ asset('/images/categories/'.$category->category->image) }}" alt="">
+                                        @else
+                                            <img src="{{ asset('/images/brands/default.png') }}" alt="">
+                                        @endif
+                                        <span>{{ $category->category->esp_name}}</span>
                                     </a>
+                                    
                                 </div>
                             </div>
-                        @endif
+                        
                     @endforeach
                 </div>
             </div>
@@ -135,15 +141,19 @@
             <div class="container">
                 <div class="main-shop__grid">
                     @foreach($brands as $brand)
-                        @if($brand->image != null)
-                        <a href="{{ url('/brand/'.$brand->slug) }}">
+                        
+                        <a href="{{ url('/brand/'.$brand->brand->slug) }}">
                             <div class="main-shop__item">
                                 
-                                <img class="style-marcas"  src="{{ asset('/images/brands/'.$brand->image) }}" alt="">
+                                @if($brand->brand->image != null)
+                                    <img class="style-marcas"  src="{{ asset('/images/brands/'.$brand->brand->image) }}" alt="">
+                                @else
+                                    <img class="style-marcas"  src="{{ asset('/images/brands/default.png') }}" alt="">
+                                @endif
                                 
-                                <p>{{ $brand->name }}</p>
+                                <p>{{ $brand->brand->name }}</p>
                                 <div class="main-shop__card">
-                                    @foreach(App\Product::where('brand_id', $brand->id)->orderBy('id', 'desc')->limit(3)->get() as $product)
+                                    @foreach(App\Product::where('brand_id', $brand->brand_id)->orderBy('id', 'desc')->limit(3)->get() as $product)
                                         <div class="main-shop__card-item">
                                         <!--    <a href="{{ url('/product/'.$product->slug) }}"> -->
                                             <span> 
@@ -160,7 +170,7 @@
                                 </div>
                               Ver tienda
                             </div><!---main-shop__item ---></a>
-                        @endif
+                        
 
                     @endforeach
 

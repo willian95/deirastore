@@ -15,4 +15,8 @@ class Brand extends Model
         return $this->hasMany('App\Product');
     }
 
+    function bestStores(){
+        return $this->belongsTo(BestStore::class);
+    }
+
 }

@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
-use App\Category;
-use App\Brand;
+use App\BestCategory;
+use App\BestStore;
 use DB;
 use App\Traits\CartAbandonTrait;
 
@@ -18,8 +18,8 @@ class HomeController extends Controller
         
         //$products = Product::all();
         $this->sendMessage();
-        $categories = Category::all();
-        $brands = Brand::all();
+        $categories = BestCategory::all();
+        $brands = BestStore::all();
         
         return view('home', ["categories" => $categories, "brands" => $brands]);
     }

@@ -82,6 +82,12 @@
                         <li class="nav-item nav-focus">
                             <a class="nav-link focus__link" href="{{ url('/admin/text/index') }}"><i class="fa fa-tags"></i> Textos</a>
                         </li>
+                        <li class="nav-item nav-focus">
+                            <a class="nav-link focus__link" href="{{ url('/admin/best-store/index') }}"><i class="fa fa-shopping-bag"></i> Mejores Tiendas</a>
+                        </li>
+                        <li class="nav-item nav-focus">
+                            <a class="nav-link focus__link" href="{{ url('/admin/best-category/index') }}"><i class="fa fa-shopping-bag"></i> Categorías principales</a>
+                        </li>
                     @endif
                   <!-----  <li class="nav-item active">
                         <a class="nav-link" href="{{ url('/logout') }}">Cerrar sesión</a>

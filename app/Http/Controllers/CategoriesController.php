@@ -202,7 +202,7 @@ class CategoriesController extends Controller
 
         try{
 
-            $categories = Category::all();
+            $categories = Category::orderBy("esp_name", "asc")->get();
             return response()->json(["success" => true, "categories" => $categories]);
 
         }catch(\Exception $e){

@@ -111,11 +111,11 @@
                                         Mejores tiendas
                                     </a>
                                     <ul class="dropdown-menu p-3">            
-                                        @foreach(App\Brand::inRandomOrder()->take(10)->get() as $brand)
-                                        <li class="mb-2">
-                                            <a href="{{ url('/brand/'.$brand->slug) }}">{{ $brand->name }}</a>
-                                        </li>
-                                    @endforeach
+                                        @foreach(App\BestStore::with("brand")->get() as $brand)
+                                            <li class="mb-2">
+                                                <a href="{{ url('/brand/'.$brand->brand->slug) }}">{{ $brand->brand->name }}</a>
+                                            </li>
+                                        @endforeach
                                        
                                     </ul>
                                 </li>
