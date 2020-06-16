@@ -43,6 +43,18 @@ class IngramImport implements ToCollection
                         $categoryName = "Printer/Plotter Supplies";
                     }
 
+                    if($categoryName == "Computer Cases &Accessories" || $categoryName == "ComputerCases & Accessories" || $categoryName == "Computer Cases& Accessories"){
+                        $categoryName = "Computer Cases & Accessories";
+                    }
+
+                    if($categoryName == "Notebooks& Tablets"){
+                        $categoryName = "Notebooks & Tablets";
+                    }
+
+                    if($categoryName == "USB & FirewireConnectivity"){
+                        $categoryName = "USB & Firewire Connectivity";
+                    }
+
                     $categorySlug = str_replace("-", "", $row[13]);
                     $categorySlug = str_replace(" ", "-", $categorySlug);
                     $mainCategory = Category::firstOrCreate(
