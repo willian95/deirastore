@@ -16,9 +16,9 @@
             <ul class="categories__grid">
                 <div v-for="category in categories">
 
-                    <li class="nav-item" v-if="category.child.length == 0">
+                    <li class="nav-item" v-if="category.child.length == 0 && category.parent_id == null">
                         <a class="nav-link" :href='"{{ url("/category/") }}"+"/"+category.slug' v-if="category.esp_name">@{{ category.esp_name  }}</a>
-                        <a class="nav-link" :href='"{{ url("/category/") }}"+"/"+category.slug' v-else="category.name">@{{ category.name  }}</a>
+                        <!--<a class="nav-link" :href='"{{ url("/category/") }}"+"/"+category.slug' v-else="category.name">@{{ category.name  }}</a>-->
                     </li>
 
                     <li class="nav-item dropdown mega-menu" v-if="category.child.length > 0">
