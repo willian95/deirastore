@@ -115,7 +115,7 @@
                             <div class="main-categorias__item">
                                 <div class="main-categorias-txt">
                                 
-                                    <a href="{{ url('/category/'.$category->slug) }}"> 
+                                    <a href="{{ url('/category/'.$category->category->slug) }}"> 
                                         @if($category->category->image != null)
                                             <img src="{{ asset('/images/categories/'.$category->category->image) }}" alt="">
                                         @else
