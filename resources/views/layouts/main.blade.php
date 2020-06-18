@@ -53,6 +53,32 @@
         <script src="{{ asset('/js/app.js') }}"></script>
 
         <script>
+
+            const search = new Vue({
+                el: '#search-area',
+                data(){
+                    return{
+                        searchText:""
+                    }
+                },
+                methods:{
+                    
+                    search(){
+                        
+                        if(this.searchText != ""){
+                            localStorage.setItem("search", this.searchText)
+                            window.location.href="{{ url('/search') }}"
+                        }
+
+                    }
+
+                }
+
+            }) 
+
+        </script>
+
+        <script>
             alertify.set('notifier','position', 'top-right');
             (function($){
                 $('.dropdown-menu a.dropdown-toggle').on('click', function(e) {

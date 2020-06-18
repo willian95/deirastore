@@ -58,7 +58,8 @@ Route::get("/check/servertest", function(){
 });*/
 
 Route::get('/product/{slug}', "HomeController@show");
-Route::get('/search', "HomeController@search");
+Route::get('/search', "HomeController@searchView");
+Route::post('/search', "HomeController@search");
 
 Route::get('/cart', 'CartController@index')->name('cart');
 Route::post('/cart', 'CartController@store')->name('cart.store');
@@ -253,6 +254,12 @@ Route::prefix('admin')->group(function () {
     Route::post("/best-category/store", "BestCategoryController@store");
     Route::post("/best-category/delete", "BestCategoryController@delete");
 
+    Route::get("/highlighted-product/index", "HighlightedProductController@index");
+    Route::get("/highlighted-product/fetch", "HighlightedProductController@fetch");
+    Route::post("/highlighted-product/search", "HighlightedProductController@search");
+    Route::post("/highlighted-product/store", "HighlightedProductController@store");
+    Route::post("/highlighted-product/delete", "HighlightedProductController@delete");
+
 });
 
-//Route::get('/nexsys/{mark}', "NexsysController@index");
+Route::get('/nexsys/{mark}', "NexsysController@index");

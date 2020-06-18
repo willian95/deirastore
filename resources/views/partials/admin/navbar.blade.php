@@ -88,6 +88,9 @@
                         <li class="nav-item nav-focus">
                             <a class="nav-link focus__link" href="{{ url('/admin/best-category/index') }}"><i class="fa fa-shopping-bag"></i> Categorías principales</a>
                         </li>
+                        <li class="nav-item nav-focus">
+                            <a class="nav-link focus__link" href="{{ url('/admin/highlighted-product/index') }}"><i class="fa fa-shopping-bag"></i>Productos destacados</a>
+                        </li>
                     @endif
                   <!-----  <li class="nav-item active">
                         <a class="nav-link" href="{{ url('/logout') }}">Cerrar sesión</a>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use App\Brand;
+use App\Category;
 use App\BestCategory;
 use App\BestStore;
 use DB;
@@ -13,6 +15,10 @@ class HomeController extends Controller
 {
 
     use CartAbandonTrait;
+
+    function searchView(){
+        return view("search");
+    }
 
     function index(){
         
@@ -105,52 +111,84 @@ class HomeController extends Controller
 
         $words = array_unique($words); //eliminamos las palabras duplicadas
         $words = array_values($words); // reordenamos el array
+        //dd($words);
 
+        $brandInSearchText = "";
+        $brandIdInSearchText = "";
+        foreach(Brand::all() as $brand){
+            foreach($words as $word){
+
+                if(strtoupper($brand->name) == strtoupper($word)){
+                    $brandInSearchText = $brand->name;
+                    $brandIdInSearchText = $brand->id;
+                }
+
+            }
+        }
         
+        $searchText = strtolower(str_replace(strtoupper($brandInSearchText), "", strtoupper($request->search)));
+        
+        $skip = ($request->page-1) * 20;
 
-        $products = Product::with('category')->select('products.name', 'products.is_external', "products.external_price", 'categories.name as category_name', "products.slug","products.picture", "products.price", "products.sub_price")->join('categories', 'products.category_id', '=', 'categories.id')->join('brands', 'products.brand_id','=', 'brands.id')
-                    ->where(function ($query) use($words) {
-                        for ($i = 0; $i < count($words); $i++){
-                            $query->orWhere('products.name', $words[$i]);
-                        }      
-                    }) //Busco todas las coincidencias en el campo
-                    ->orWhere(function ($query) use($words) {
-                        for ($i = 0; $i < count($words); $i++){
-                            $query->orWhere('categories.name', 'like',  '%' . $words[$i] .'%');
-                        }      
-                    })
-                    ->orWhere(function ($query) use($words) {
-                        for ($i = 0; $i < count($words); $i++){
-                        $query->orwhere('products.description', 'like', '%'.$words[$i].'%');
-                        }      
-                    })
-                    ->orWhere(function ($query) use($words) {
-                        for ($i = 0; $i < count($words); $i++){
-                        $query->orwhere('products.sub_title', $words[$i]);
-                        }      
-                    })
-                    ->orWhere(function ($query) use($words) {
-                        for ($i = 0; $i < count($words); $i++){
-                        $query->orwhere('brands.name', 'like',  '%' . $words[$i] .'%');
-                        }      
-                    })
-                    ->get();
+        /*
+        $products = Product::with("category")->join('categories', 'products.category_id', '=', 'categories.id')->join('brands', 'products.brand_id','=', 'brands.id')->where(function ($query) use($words) {
+            for ($i = 0; $i < count($words); $i++){
+                if($words[$i] != "")
+                    $query->orWhere('description', "like", "%".$words[$i]."%");
+            }      
+        })->skip($skip)->take(20)->get();
 
-                    
+        $productsCount = Product::with("category")->join('categories', 'products.category_id', '=', 'categories.id')->join('brands', 'products.brand_id','=', 'brands.id')->where(function ($query) use($words) {
+            for ($i = 0; $i < count($words); $i++){
+                if($words[$i] != "")
+                    $query->orWhere('description', "like", "%".$words[$i]."%");
+            }      
+        })->count();
+        */
+        //dd($searchText, $brandIdInSearchText);
+        if($brandIdInSearchText != ""){
+            $products = Product::where(function ($query) use($searchText) {
+            
+                $query->orWhere('description', "like", "%".$searchText."%");
                 
-        $brands = Brand::where(function ($query) use($words) {
-            for ($i = 0; $i < count($words); $i++){
-                $query->orWhere('brands.name', 'like',  '%' . $words[$i] .'%');
-            }      
-        })->get();
+            })->where("brand_id", $brandIdInSearchText)->skip($skip)->take(20)->get();
+    
+            $productsCount = Product::where(function ($query) use($searchText) {
+                
+                $query->orWhere('description', "like", "%".$searchText."%");
+                  
+            })->where("brand_id", $brandIdInSearchText)->count();
+        
+        }else{
 
-        $categories = Category::where(function ($query) use($words) {
-            for ($i = 0; $i < count($words); $i++){
-                $query->orWhere('categories.name', 'like',  '%' . $words[$i] .'%');
-            }      
-        })->get();
-        $this->sendMessage();
-        return view('search', ["products" => $products, "brands" => $brands, "categories" => $categories, "search" => $request->search]);
+            $products = Product::with("category")
+            ->where(function ($query) use($words) {
+                for ($i = 0; $i < count($words); $i++){
+                    if($words[$i] != ""){
+                        $query->orWhere('description', "like", "%".$words[$i]."%");
+                        $query->orWhere('name', "like", "%".$words[$i]."%");
+                    }
+                }      
+            })
+            ->skip($skip)->take(20)->get();
+    
+            $productsCount = Product::with("category")
+            ->where(function ($query) use($words) {
+                for ($i = 0; $i < count($words); $i++){
+                    if($words[$i] != ""){
+                        $query->orWhere('description', "like", "%".$words[$i]."%");
+                        $query->orWhere('name', "like", "%".$words[$i]."%");
+                    }
+                }      
+            })
+            ->count();
+
+        }
+        
+        //dd($products);
+
+        return response()->json(["products" => $products, "productsCount" => $productsCount]);
+
 
     }
 

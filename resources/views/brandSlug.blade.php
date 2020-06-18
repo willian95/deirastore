@@ -40,8 +40,9 @@
                             <img :src="product.picture" style="width: 100%;" alt="" v-if="product.data_source_id == 2">
                         </div>
                         <div class="main-slider__text">
-                            <span>@{{ product.name }}</span>
-                            <p class="title" v-if="product.category">@{{ product.category.name }}</p>
+                            <p class="title" >@{{ product.name }}</p>
+                            <p class="title-brand">@{{ product.brand.name }}</p>
+                            <span v-if="product.category">@{{ product.category.name }}</span>
                             <span class="price" v-if="product.external_price > 0">$ @{{ parseInt((product.external_price * dolarPrice) + 1).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</span>
                             <span class="price" v-else>$ @{{ product.price }}</span>
                             <!--<p v-if="product.sub_price > 0" class="price-old">Normal <span>$ @{{ product.sub_price }}</span></p>-->

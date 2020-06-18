@@ -62,4 +62,8 @@ class Product extends Model
         return $this->hasMany(Item::class);
     }
 
+    public function highlightedProduct(){
+        return $this->hasMany(HighlightedProduct::class);
+    }
+
 }

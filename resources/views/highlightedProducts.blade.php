@@ -19,28 +19,29 @@
 
         <div class="row">
             
-            @foreach(App\Product::with('category')->inRandomOrder()->where('amount', '>', 0)->take(20)->get() as $product)
+            @foreach(App\HighlightedProduct::with('product', 'product.category', 'product.brand')->get() as $product)
 
         
                 <div class="col-md-3 col-xs-12 ">
                     <div class="main-slider__item">
-                        <a href="{{ url('/product/'.$product->slug) }}">
+                        <a href="{{ url('/product/'.$product->product->slug) }}">
                             <div class="content-slider">
-                                @if($product->external == false)
-                                    <img src="{{ $product->picture }}" alt="" style="width: 100%;">
+                                @if($product->product->external == false)
+                                    <img src="{{ $product->product->picture }}" alt="" style="width: 100%;">
                                 @else
-                                    <img src="{{ url('/images/products/'.$product->picture) }}" style="width: 100%;" alt="">
+                                    <img src="{{ url('/images/products/'.$product->product->picture) }}" style="width: 100%;" alt="">
                                 @endif
                             </div>
                             <div class="main-slider__text">
-                                <span>{{ $product->name }}</span>
-                                @if($product->category)
-                                <p class="title">{{ $product->category->name }}</p>
+                                <p class="title">{{ $product->product->name }}</p>
+                                <span class="title-brand">{{ $product->product->name }}</span>
+                                @if($product->product->category)
+                                <span >{{ $product->product->category->name }}</span>
                                 @endif
-                                @if($product->external_price > 0 && $product->price == 0)
-                                    <span class="price">$ {{ number_format( intval($product->external_price * App\DolarPrice::first()->price) + 1, 0, ",", ".") }}</span>
+                                @if($product->product->external_price > 0 && $product->product->price == 0)
+                                    <span class="price">$ {{ number_format( intval($product->product->external_price * App\DolarPrice::first()->price) + 1, 0, ",", ".") }}</span>
                                 @else
-                                    <span class="price">$ {{ number_format($product->price, 0, ",", ".") }}</span>
+                                    <span class="price">$ {{ number_format($product->product->price, 0, ",", ".") }}</span>
                                 @endif
                             </div>
                         </a>

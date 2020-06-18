@@ -6,10 +6,10 @@
                     <img class="logo" src="{{ asset('assets/img/logo-cap.png') }}" alt="">
                 </a>
             </div>
-            <div class="main-menu__top-item search">
-                <form class="form-inline form-general" action="{{ url('/search') }}" method="GET">
-                    <input class="form-control " type="search" placeholder='  Buscar productos,  marcas y más' aria-label="Search" name="search">
-                    <button class="btn btn-form" type="submit"><img src="{{ asset('assets/img/lupa.svg') }}" alt=""></button>
+            <div class="main-menu__top-item search" id="search-area">
+                <form class="form-inline form-general">
+                    <input class="form-control " v-model="searchText" type="search" placeholder='  Buscar productos,  marcas y más' aria-label="Search" name="search">
+                    <button @click="search()" class="btn btn-form" type="button"><img src="{{ asset('assets/img/lupa.svg') }}" alt=""></button>
                 </form>
             </div>
             <div class="main-menu__top-item table_nav">
@@ -47,24 +47,32 @@
 
                     <!--<li><a href=""><img src="{{ asset('assets/img/telefono.svg') }}" alt=""></a></li>-->
                     
-                    <li><a class="cart__btn" href="{{ url('/cart') }}"><img src="{{ asset('assets/img/carro2.svg') }}" alt=""></a></li>
-                    @if(\Auth::check() && \Auth::user()->id)
-                        {{ App\Cart::where('user_id', \Auth::user()->id)->sum('amount') }}
-                    @else
+                    <li><a class="cart__btn" href="{{ url('/cart') }}"><img src="{{ asset('assets/img/carro2.svg') }}" alt=""><span id="total"></span></a></li>
+                    
                         <script>
-                            var total = 0;
-                            if(window.localStorage.getItem('cart') != null){
-                                cart =JSON.parse(window.localStorage.getItem('cart'))
-                            }
+                            
+                            window.setInterval(function(){
+                               
+                                var total = 0;
+                                
+                                if(window.localStorage.getItem('cart') != null){
+                                    cart =JSON.parse(window.localStorage.getItem('cart'))
+                                }
+                                //console.log(cart)
+                                cart.forEach((data, index)=>{
+                                    //console.log("i'm here", total, data.amount + total)
+                                    //total 
+                                    //total = parseInt(total) + parseInt(this.amount)
+                                    total = total + data.amount
+                                    
+                                })
+                                //console.log("i'm here2", total)
+                                $("#total").html(total)
 
-                            cart.forEach((data, index)=>{
-
-                                total = total + this.amount
-
-                            })
+                            }, 5000)
                         
                         </script>
-                    @endif
+                    
                 </ul>
             </div>
         </div>
