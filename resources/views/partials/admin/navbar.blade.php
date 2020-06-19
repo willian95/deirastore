@@ -38,7 +38,7 @@
             <span class='hamburger-inner'></span>
             </span>
           </button>
-          <div class='offcanvas-collapse fil' id='navbarNav'>
+          <div class='offcanvas-collapse fil' id='navbarNav' style="overflow-y: auto">
             <ul class="navbar-nav mr-auto">
                 @if(Auth::check() && Auth::user()->id)
                        <!-----   <li class="nav-item active">
@@ -91,6 +91,10 @@
                         <li class="nav-item nav-focus">
                             <a class="nav-link focus__link" href="{{ url('/admin/highlighted-product/index') }}"><i class="fa fa-shopping-bag"></i>Productos destacados</a>
                         </li>
+                        <li class="nav-item nav-focus">
+                            <a class="nav-link focus__link" href="{{ url('/admin/help-center/index') }}"><i class="fa fa-shopping-bag"></i>Centro de ayuda</a>
+                        </li>
+
                     @endif
                   <!-----  <li class="nav-item active">
                         <a class="nav-link" href="{{ url('/logout') }}">Cerrar sesión</a>

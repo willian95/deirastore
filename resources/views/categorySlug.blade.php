@@ -9,16 +9,19 @@
 
             <div class="row">
                 <div class="col-12">
-                    <nav aria-label="Page navigation example" style="margin-top: 10px;">
+                    <nav aria-label="Page navigation example">
                         <ul class="pagination">
-                            <li>
-                                <a class="page-link" v-if="page > 1" href="#" @click="fetch(page - 1)">Anterior</a>
+                            <li class="line-pag line-pag_r" >
+                                <a class="page-link" v-if="page > 1" href="#" @click="fetch(page - 1)"><i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+                                </a>
                             </li>
                             <li class="page-item" v-for="index in pages">
-                                <a class="page-link" href="#" v-if="index >= page &&  index < page + 6"  :key="index" @click="fetch(index)" >@{{ index }}</a>
+                                <a class="page-link" style="background-color: #d32b2b; color: #fff !important;" href="#" v-if="page == index && index >= page - 3 &&  index < page + 3"  :key="index" @click="fetch(index)" >@{{ index }}</a>
+                                <a class="page-link" href="#" v-if="page != index && index >= page - 3 &&  index < page + 3"  :key="index" @click="fetch(index)" >@{{ index }}</a> 
                             </li>
-                            <li>
-                                <a class="page-link" v-if="page < pages" href="#" @click="fetch(page + 6)">Siguiente</a>
+                            <li class="line-pag">
+                                <a class="page-link" v-if="page < pages" href="#" @click="fetch(page + 6)"><i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                                </a>
                             </li>
                         </ul>
                     </nav>

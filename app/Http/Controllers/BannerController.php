@@ -130,48 +130,93 @@ class BannerController extends Controller
         try{
 
             
-            $banner = Banner::find($request->id);
+            $banner = Banner::where("id", $request->id)->first();
         
             if($request->get('image') != null){
                 $banner->image = $fileName;
             }
-            if($request->link != "null")
+            
+            if($request->link == "null")
+            {
+                
+            }else{
                 $banner->link = $request->link;
-            else
-                $banner->link = null;
-
+            }
+            
             $banner->size = $request->size;
             $banner->position = $request->position;
-            
-            if($request->title != "null")
-                $banner->title = $request->title;
-            else
+
+            if($request->title == "null"){
+                
                 $banner->title = null;
-            
-            if($request->text != "null")
-                $banner->text = $request->text;
-            else
+
+            }else{
+                $banner->title = $request->title;
+            }
+
+            if($request->text == "null"){
+                
                 $banner->text = null;
-            
-            if($request->text_color != "null")
-                $banner->text_color = $request->textColor;
-            else
+
+            }else{
+                
+                $banner->text = $request->text;
+            }
+
+            if($request->textColor == "null"){
+
                 $banner->text_color = null;
+
+            }else{
+                $banner->text_color = $request->textColor;
+            }
             
-            if($request->title_color != "null")
+            if($request->titleColor == "null"){
+                
+                $banner->title_color = null;
+
+            }else{
                 $banner->title_color = $request->titleColor;
-            
-            if($request->button_text != null)
+            }
+
+            if($request->buttonText == "null"){
+
+                $banner->button_text = null;
+
+            }else{
+
                 $banner->button_text = $request->buttonText;
-            
-            if($request->button_color != "null")
+
+            }
+
+            if($request->buttonText == "null"){
+
+                $banner->button_color = null;
+
+            }else{
+
                 $banner->button_color = $request->buttonColor;
+
+            }
             
-            if($request->button_text_color != "null")
+            if($request->buttonTextColor == "null"){
+                $banner->button_text_color = null;
+            }else{
                 $banner->button_text_color = $request->buttonTextColor;
+            }
             
-            if($request->link != "null")
-                $banner->location = $request->location;
+            if($request->location == "null"){
+
+                $banner->location = null;
+
+            }else{
+                $banner->location = $request->location;     
+            }
+           
+
+            //dd($banner);
+                //dd($banner);
+
             $banner->update();
 
             return response()->json(["success" => true, "msg" => "Banner actualizado"]);

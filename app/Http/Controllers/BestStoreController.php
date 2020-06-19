@@ -55,7 +55,8 @@ class BestStoreController extends Controller
 
         try{
 
-            BestStore::where("id", $request->id)->delete();
+            $bestStore = BestStore::where("id", $request->id)->first();
+            $bestStore->delete();
             return response()->json(["success" => true, "msg" => "Mejores Tiendas eliminada"]);
 
         }catch(\Exception $e){

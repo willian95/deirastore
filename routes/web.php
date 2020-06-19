@@ -260,6 +260,13 @@ Route::prefix('admin')->group(function () {
     Route::post("/highlighted-product/store", "HighlightedProductController@store");
     Route::post("/highlighted-product/delete", "HighlightedProductController@delete");
 
+    Route::get("/help-center/index", "HelpCenterController@index");
+    Route::get("/help-center/fetch", "HelpCenterController@fetch");
+    Route::post("/help-center/search", "HelpCenterController@search");
+    Route::post("/help-center/update", "HelpCenterController@update");
+    Route::post("/help-center/store", "HelpCenterController@store");
+    Route::post("/help-center/delete", "HelpCenterController@delete");
+
 });
 
 Route::get('/nexsys/{mark}', "NexsysController@index");

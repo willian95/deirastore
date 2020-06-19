@@ -326,7 +326,7 @@
                 <div class="container">
                     <div class="main-slider__content">
                         
-                        @foreach(App\Product::with('category')->inRandomOrder()->where("brand_id", $product->brand_id)->where('amount', '>', 0)->take(20)->get() as $related)
+                        @foreach(App\Product::with('category', "brand")->inRandomOrder()->where("brand_id", $product->brand_id)->where('amount', '>', 0)->take(20)->get() as $related)
                             <a href="{{ url('/product/'.$related->slug) }}">
                                 <div class="main-slider__item">
                                     <div class="content-slider">
@@ -340,6 +340,7 @@
                                     </div>
                                     <div class="main-slider__text">
                                         <p class="title">{{ $related->name }}</p>
+                                        <p class="title-brand">{{ $related->brand->name }}</p>
                                         @if($related->category)
                                             <span>{{ $related->category->name }}</span>
                                             <br>

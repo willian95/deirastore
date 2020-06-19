@@ -21,8 +21,30 @@
         <div class="container demo">
 	
             <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+                @foreach(App\HelpCenter::all() as $helpCenter)
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="heading{{ $loop->index }}">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ $loop->index }}" aria-expanded="false" aria-controls="collapse{{ $loop->index }}">
+                                    <i class="more-less fa fa-plus"></i>
+                                    <h4 class="mt-1"><i class="fa fa-info fa-icon"></i>  {{ $helpCenter->title }}</h4>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse{{ $loop->index }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{ $loop->index }}">
+                            <div class="panel-body">
+                                <p>
+                                {{ $helpCenter->description }}
+                                    </p>                        </div>
+                        </div>
+                    </div>
+
+
+                @endforeach
         
-                <div class="panel panel-default">
+                <!--<div class="panel panel-default">
                     <div class="panel-heading" role="tab" id="headingOne">
                         <h4 class="panel-title">
                             <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -105,7 +127,7 @@
                         <div class="panel-body">
                             <p>Para aplicar el cambio o devolución de un producto, primero debe contactarse a pagos.web@deira.cl para definir y coordinar el envío del producto en falla. Este debe ser enviado mediante algún servicio de transporte privado, o llevado personalmente por el cliente, a Av. Salvador 1771, comuna de Ñuñoa. En caso de que el envío se haga a través de un transportista privado, el monto contemplado para dicho servicio se reembolsará luego solo en el caso de que el cambio o la devolución aplique bajo las políticas vigentes</p>                     </div>
                     </div>
-                </div>
+                </div>-->
         
             </div><!-- panel-group -->
             

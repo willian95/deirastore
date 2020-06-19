@@ -135,60 +135,45 @@
             <section>
                 <div class="title__general fadeInUp wow animated">
 
-                    <p><strong>Te puede</strong> Interesar</p>
+                    <p><strong>Productos</strong> Destacados</p>
                 </div>
 
                 <div class="container">
                     <div class="main-slider__content">
-                        @php
-                        
-                            $carts = App\Cart::with('product')->get();
-                            $products = [];
-                            
-                            foreach($carts as $cart){
-                                array_push($products, $cart->product->brand_id);
-                            }
-
-                        @endphp
-
-                        @if(count($carts) > 0)
-                            @php
-                                $randomProducts = App\Product::with("category")->whereIn('brand_id', $products)->where('amount', '>', 0)->inRandomOrder()->take(10)->get();
-                            @endphp
-                        @else
-                            @php
-                                $randomProducts = App\Product::with("category")->inRandomOrder()->where('amount', '>', 0)->take(10)->get()
-                            @endphp
-                        @endif
-
-                        @foreach($randomProducts as $related)
-                            <a href="{{ url('/product/'.$related->slug) }}">
+                        @foreach(App\HighlightedProduct::with('product', 'product.category', 'product.brand')->get() as $product)
+            
+                            <a href="{{ url('/product/'.$product->product->slug) }}">
                                 <div class="main-slider__item">
                                     <div class="content-slider">
-                                        @if($related->is_external == false)
-                                            <img src="{{ asset('/images/products/'.$related->picture) }}" alt="" style="width: 100%">
-                                        @elseif($related->is_external == true && $related->data_source_id == 1)
-                                            <img src="{{ $related->picture }}" alt="" style="width: 100%">
-                                        @elseif($related->data_source_id == 2)
-                                            <img src="{{ $related->picture }}" alt="" style="width: 100%">
+
+                                        @if($product->product->is_external == false)
+                                            <img src="{{ asset('/images/products/'.$product->product->picture) }}" alt="" style="width: 100%">
+                                        @else
+                                            <img src="{{ $product->product->picture }}" alt="" style="width: 100%">
                                         @endif
                                     </div>
                                     <div class="main-slider__text">
-                                        <span>{{ $related->name }}</span>
-                                        @if($related->category)
-                                            <p class="title">{{ $related->category->name }}</p>
+                                        <p class="title">{{ $product->product->name }}</p>
+                                        @if($product->product->brand)
+                                            <span class="title-brand">{{ $product->product->brand->name }}</span>
+                                            <br>
                                         @endif
-                                        @if($related->external_price > 0 && $related->price == 0)
-                                            <span class="price">$ {{ number_format(intval($related->external_price * App\DolarPrice::first()->price) + 1, 0, ",", ".") }}</span>
+
+                                        @if($product->product->category)
+                                            <span>{{ $product->product->category->name }}</span>
+                                            <br>
+                                        @endif
+                                        @if($product->product->external_price > 0)
+                                            <span class="price">$ {{ number_format(intval($product->product->external_price * App\DolarPrice::first()->price) + 1, 0, ",", ".") }}</span>
                                         @else
-                                            <span class="price">$ {{ number_format($related->price, 0, ",", ".") }}</span>
+                                            <span class="price">$ {{ number_format($product->product->price, 0, ",", ".") }}</span>
                                         @endif
-                                        <!--<p class="price-old">Normal <span>$999.999</span></p>-->
+                                        
+                                        <!--<p class="price-old">Normal <span>$</span></p>-->
                                     </div>
                                 </div>
                             </a>
                         @endforeach
-                    
                     </div>
                 </div>
             </section>
