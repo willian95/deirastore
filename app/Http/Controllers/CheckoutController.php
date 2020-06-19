@@ -163,8 +163,15 @@ class CheckoutController extends Controller
 			}
 
 			$type = session("type");
+			$user = null;
 
-			return view('successPayment', ["products" => $products, "type" => $type]);
+			if(\Auth::check()){
+				$user = User::where("id", \Auth::user()->id)->first();
+			}else{
+				$user = Guest::where("id", session('guestUser'))->first();
+			}
+
+			return view('successPayment', ["products" => $products, "type" => $type, "user" => $user, "payment" => $payment]);
 
 		
 		

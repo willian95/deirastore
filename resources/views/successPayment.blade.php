@@ -10,7 +10,7 @@
                     <p>¡Pago <strong>exitoso!</strong></p>
                 </div>
                 <div class="text-center datos_fecha">
-                    <p class="m-0">Fecha: 12-06-2020 - Hora: 2:00pm</p>
+                    <p class="m-0">Fecha: {{ $payment->created_at->format('d-M-Y, h:mm') }}</p>
                     <p>Medio de pago: Factura</p>
                 </div>
 
@@ -21,24 +21,28 @@
                         </div>
 
                         <div class="grid">
-                            <p> <strong>Nombre: </strong> Willian</p>
-                            <p> <strong>Apellido:</strong> Rodríguez</p>
-                            <p> <strong>RUT:</strong> 123123123</p>
-                            <p> <strong>Región:</strong> Antofagasta</p>
-                            <p> <strong>Comuna:</strong> San Juan</p>
-                            <p> <strong>Calle:</strong> Ribereña #4</p>
+                            <p> <strong>Nombre: </strong> {{ $user->name }}</p>
+                            <p> <strong>Apellido:</strong> {{ $user->lastname }}</p>
+                            <p> <strong>RUT:</strong> {{ $user->rut }}</p>
+                            <p> <strong>Región:</strong> {{ App\Region::where("id", $user->location_id)->first()->name }}</p>
+                            <p> <strong>Comuna:</strong> {{ App\Comune::where("id", $user->comune_id)->first()->name }}</p>
+                            <p> <strong>Calle:</strong> {{ $user->street }}</p>
                         </div>
                     </div>
 
-                    <div class="grid__datos__item">
-                        <div class="title__general  fadeInUp wow animated font-size ">
-                            <p class="text-justify">Datos de <strong>empresa</strong></p>
+                    @if($type == "factura")
+
+                        <div class="grid__datos__item">
+                            <div class="title__general  fadeInUp wow animated font-size ">
+                                <p class="text-justify">Datos de <strong>empresa</strong></p>
+                            </div>
+
+                            <p> <strong>Razón social:</strong> {{ $user->business_name }}</p>
+                            <p> <strong>RUT de empresa:</strong> {{ $user->business_rut }}</p>
+                            <p> <strong>Dirección:</strong> {{ $user->business_address }}</p>
                         </div>
 
-                        <p> <strong>Razón social:</strong> Tecnomarket Express</p>
-                        <p> <strong>RUT de empresa:</strong> 123123</p>
-                        <p> <strong>Dirección:</strong> Antofagasta San Pedro</p>
-                    </div>
+                    @endif
                 </div>
 
                 <div class="info-success">
@@ -51,24 +55,25 @@
                                 <th class="table__title">Cantidad</th>
                                 <th class="table__title">Precio</th>
                                 <th class="table__title">Precio de envío</th>
+                                <th class="table__title">Precio total</th>
                             </tr>
                         </thead>
                         <tbody>
-
-                            <tr>
-                                <td>1</td>
-                                <td>Impresora HP 3600</td>
-                                <td>1</td>
-                                <td>54600</td>
-                                <td>2300</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Cables USB</td>
-                                <td>4</td>
-                                <td>12000</td>
-                                <td>300</td>
-                            </tr>
+                            @php $total = 0; $totalProductos = 0;@endphp
+                            @foreach($products as $product)
+                                @php
+                                    $totalProductos = $totalProductos + ($product->price * $product->amount);
+                                    $total = $total + ($product->price * $product->amount) + $product->shipping_cost;
+                                @endphp
+                                <tr>
+                                    <td>{{ $loop->index }}</td>
+                                    <td>{{ $product->product->name }}}</td>
+                                    <td>{{ $product->amount }}</td>
+                                    <td>{{ number_format($product->price, 0, ",", ".") }}</td>
+                                    <td>{{ number_format($product->shipping_cost, 0, ",", ".") }}</td>
+                                    <td>{{ number_format(($product->price * $product->amount) + $product->shipping_cost, 0, ",", ".")   }}</td>
+                                </tr>
+                            @endforeach
 
                         </tbody>
                     </table>
@@ -77,8 +82,8 @@
 
                 <div>
                     <div class="colunm">
-                        <p class="mb-0"><strong>Total de productos:</strong> 66600</p>
-                        <p><strong>Total de productos + envío:</strong> 69200</p>
+                        <p class="mb-0"><strong>Total de productos:</strong> {{ $totalProductos }}</p>
+                        <p><strong>Total de productos + envío:</strong> {{ $total }}</p>
                     </div>
 
                 </div>

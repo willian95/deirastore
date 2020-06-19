@@ -47,7 +47,7 @@ Route::get("/check/servertest", function(){
 
     $to_name = "Willian";
     $to_email = "rodriguezwillian95@gmail.com";
-    \Mail::send("emails.test", [], function($message) use ($to_name, $to_email) {
+    \Mail::send("emails.purchaseTestMail", [], function($message) use ($to_name, $to_email) {
 
         $message->to($to_email, $to_name)->subject("¡Solo falta un paso tu registro!");
         $message->from("rodriguezwillian95@gmail.com","Deira");
