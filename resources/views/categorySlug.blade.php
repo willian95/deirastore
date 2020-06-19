@@ -39,7 +39,7 @@
                         </div>
                         <div class="main-slider__text">
                             <p class="title" >@{{ product.name }}</p>
-                            <p class="title-brand">@{{ prodict.brand.name }}</p>
+                            <p class="title-brand">@{{ product.brand.name }}</p>
                             <p v-if="product.category">@{{ product.category.name }}</p>
                             <p class="price" v-if="product.external_price > 0">$ @{{ parseInt((dolarPrice * product.external_price) + 1).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</p>
                             <p class="price" v-else>$ @{{ product.price }}</p>
@@ -109,6 +109,7 @@
                     if(res.data.success == true){
                         this.pages = Math.ceil(res.data.productsCount / 20)
                         this.products = res.data.products
+                        console.log(res)
                         this.subCategories = res.data.subCategories
                     }else{
 

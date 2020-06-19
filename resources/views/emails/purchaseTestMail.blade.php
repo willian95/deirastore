@@ -102,39 +102,33 @@ td .es-button-border-2:hover {
                       <td align="center" style="padding:0;Margin:0;"><h1 style="Margin:0;line-height:24px;mso-line-height-rule:exactly;font-family:tahoma, verdana, segoe, sans-serif;font-size:20px;font-style:normal;font-weight:bold;color:#D32B2B;">¡Ha realizado una compra!</h1></td> 
                      </tr> 
                      <tr style="border-collapse:collapse;"> 
-                      <td align="center" style="padding:0;Margin:0;padding-top:20px;"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:16px;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;line-height:24px;color:#010101;">Estimado(a) Willian<br><span style="font-size:15px;">Gracias por preferirnos, a continuación, podrás ver el resumen de tu compra. Tu compra aún no está confirmada, dentro de los próximos minutos te enviaremos un correo notificando esta confirmación, la fecha para el retiro de tus productos o el código de seguimiento para el tracking del delivery de tu compra</span><br></p></td> 
+                      <td align="center" style="padding:0;Margin:0;padding-top:20px;"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:16px;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;line-height:24px;color:#010101;">Estimado(a) <br><span style="font-size:15px;">Gracias por preferirnos, a continuación, podrás ver el resumen de tu compra. Tu compra aún no está confirmada, dentro de los próximos minutos te enviaremos un correo notificando esta confirmación, la fecha para el retiro de tus productos o el código de seguimiento para el tracking del delivery de tu compra</span><br></p></td> 
                      </tr> 
+                      
+                      <tr style="border: 1px solid black; border-collapse:collapse">
+                        <th style="border: 1px solid black;border-collapse:collapse">#</th>
+                        <th style="border: 1px solid black;border-collapse:collapse">Producto</th>
+                        <th style="border: 1px solid black;border-collapse:collapse">Cantidad</th>
+                        <th style="border: 1px solid black;border-collapse:collapse">Precio unitario</th>
+                        <th style="border: 1px solid black;border-collapse:collapse">Costo de envío</th>
+                        <th style="border: 1px solid black;border-collapse:collapse">Precio total</th>
+                      </tr>
+                    @foreach($products as $product)
+                        <tr style="border: 1px solid black; border-collapse:collapse">
+                            <td style="border: 1px solid black; border-collapse:collapse">{{ $loop->index + 1 }}</td>
+                            <td style="border: 1px solid black; border-collapse:collapse">{{ $product->product->name }}</td>
+                            <td style="border: 1px solid black; border-collapse:collapse">{{  $product->amount }}</td>
+                            <td style="border: 1px solid black; border-collapse:collapse">{{ number_format($product->price / $product->amount, 0, ",", ".") }}</td>
+                            <td style="border: 1px solid black; border-collapse:collapse">{{ number_format($product->shipping_cost, 0, ",", ".") }}</td>
+                            <td style="border: 1px solid black; border-collapse:collapse">{{ number_format($product->price, 0, ",", ".") }}</td>
+                        </tr>
 
-                   
+                    @endforeach
 
                    </table></td> 
                  </tr> 
                </table></td> 
              </tr> 
-             <tr style="border-collapse:collapse;">
-              <td align="left" style="Margin:0;padding-bottom:15px;padding-top:30px;padding-left:30px;padding-right:30px;border-radius:10px 10px 0px 0px;background-color:#FFFFFF;" bgcolor="#ffffff">
-                <table ellpadding="0" cellspacing="0" width="100%" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;">
-                <tr style="border: 1px solid black; border-collapse:collapse">
-                  <th style="border: 1px solid black;border-collapse:collapse">#</th>
-                  <th style="border: 1px solid black;border-collapse:collapse">Producto</th>
-                  <th style="border: 1px solid black;border-collapse:collapse">Cantidad</th>
-                  <th style="border: 1px solid black;border-collapse:collapse">Precio unitario</th>
-                  <th style="border: 1px solid black;border-collapse:collapse">Costo de envío</th>
-                  <th style="border: 1px solid black;border-collapse:collapse">Precio total</th>
-                </tr>
-                @foreach($products as $product)
-                  <tr style="border: 1px solid black; border-collapse:collapse">
-                      <td style="border: 1px solid black; border-collapse:collapse">{{ $loop->index }}</td>
-                      <td style="border: 1px solid black; border-collapse:collapse">{{ $product->product->name }}}</td>
-                      <td style="border: 1px solid black; border-collapse:collapse">{{ $product->amount }}</td>
-                      <td style="border: 1px solid black; border-collapse:collapse">{{ number_format($product->price, 0, ",", ".") }}</td>
-                      <td style="border: 1px solid black; border-collapse:collapse">{{ number_format($product->shipping_cost, 0, ",", ".") }}</td>
-                      <td style="border: 1px solid black; border-collapse:collapse">{{ number_format(($product->price * $product->amount) + $product->shipping_cost, 0, ",", ".")   }}</td>
-                  </tr>
-                @endforeach
-                </table>
-              </td>
-             </tr>
              <tr style="border-collapse:collapse;"> 
               <td align="left" style="Margin:0;padding-top:5px;padding-bottom:5px;padding-left:30px;padding-right:30px;border-radius:0px 0px 10px 10px;background-position:left top;background-color:#FFFFFF;"> 
                <table cellpadding="0" cellspacing="0" width="100%" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;"> 
@@ -214,3 +208,33 @@ td .es-button-border-2:hover {
   </div>  
  </body>
 </html>
+
+<h1>Ha realizado una compra</h1>
+
+<p>Estimado(a) {{ $user['name'] }}, gracias por preferirnos, a continuación, podrás ver el resumen de tu compra. Tu compra aún no está confirmada, dentro de los próximos minutos te enviaremos un correo notificando esta confirmación, la fecha para el retiro de tus productos o el código de seguimiento para el tracking del delivery de tu compra </p>
+
+<table>
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio unitario</th>
+            <th>Precio Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($products as $product)
+            <tr>
+                <td>{{ $loop->index + 1 }}</td>
+                <td>{{ $product->product->name }}</td>
+                <td>{{ $product->amount }}</td>
+                <td>{{ $product->price / $product->amount }}</td>
+                <td>{{ $product->price }}</td>
+            </tr>
+
+        @endforeach
+    </tbody>
+</table>
+
+
