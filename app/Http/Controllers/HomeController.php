@@ -165,18 +165,18 @@ class HomeController extends Controller
             ->where(function ($query) use($words) {
                 for ($i = 0; $i < count($words); $i++){
                     if($words[$i] != ""){
-                        $query->orWhere('description', "like", "%".$words[$i]."%");
+                        //$query->orWhere('description', "like", "%".$words[$i]."%");
                         $query->orWhere('name', "like", "%".$words[$i]."%");
                     }
                 }      
             })
-            ->skip($skip)->take(20)->get();
+            ->skip($skip)->take(20)->orderBy("data_source_id")->orderBy("name")->get();
     
             $productsCount = Product::with("category")
             ->where(function ($query) use($words) {
                 for ($i = 0; $i < count($words); $i++){
                     if($words[$i] != ""){
-                        $query->orWhere('description', "like", "%".$words[$i]."%");
+                        //$query->orWhere('description', "like", "%".$words[$i]."%");
                         $query->orWhere('name', "like", "%".$words[$i]."%");
                     }
                 }      

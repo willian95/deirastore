@@ -7,7 +7,7 @@
                 </a>
             </div>
             <div class="main-menu__top-item search" id="search-area">
-                <form class="form-inline form-general">
+                <form class="form-inline form-general" v-on:submit.prevent="search()">
                     <input class="form-control " v-model="searchText" type="search" placeholder='  Buscar productos,  marcas y más' aria-label="Search" name="search">
                     <button @click="search()" class="btn btn-form" type="button"><img src="{{ asset('assets/img/lupa.svg') }}" alt=""></button>
                 </form>
