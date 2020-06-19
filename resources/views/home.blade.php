@@ -27,7 +27,7 @@
                     <div class="title" style="text-align: {{ $float }}; {{ $float }} : 0;">
                         <h3 style="color: {{ $banner->title_color }}">{{ $banner->title }}</h3>
                         <p style="color: {{ $banner->text_color }}">{{ $banner->text }}</p>
-                        @if($banner->link != "" || $banner->button_text != "" || $banner->link != "null" || $banner->button_text != "null")
+                        @if($banner->link != "" && $banner->button_text != "" && $banner->link != "null" && $banner->button_text != "null")
                         <a href="{{ $banner->link }}" target="_blank" class="btn-general" style="color: {{ $banner->button_text_color }}; background-color: {{ $banner->button_color }};">{{ $banner->button_text }}</a>
                         @endif
                     </div>
