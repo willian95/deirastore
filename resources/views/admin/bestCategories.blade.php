@@ -101,7 +101,7 @@
                     <div class="form-group">
                         <label for="name">Categoría</label>
                         <select class="form-control" v-model="category">
-                            <option :value="category.id" v-for="category in categories">@{{ category.esp_name }}</option>
+                            <option :value="category.id" v-for="category in categories" v-if="category.parent_id == null">@{{ category.esp_name }}</option>
                         </select>
                     </div>
                     
