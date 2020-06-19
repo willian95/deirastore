@@ -603,7 +603,7 @@ header {
 
 .main-categorias-txt {
     background: #fff;
-    height: 150px;
+    height: 200px;
     /* width: 150px; */
     padding: 30px;
     cursor: pointer;
@@ -613,6 +613,10 @@ header {
     transition: .5s;
 
 
+}
+
+.main-categorias__content .slick-list{
+    height:200px;
 }
 
 .main-categorias-txt a {
