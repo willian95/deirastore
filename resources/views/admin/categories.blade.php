@@ -18,7 +18,7 @@
                 <div class="grid_content">
                     <div class="grid_content--item">
                      <div class="title mr-5">
-                         Productos
+                         Categorías
                      </div>
     
                      <button class="btn btn-success btn-admin" data-toggle="modal" data-target="#createCategory" @click="changeTitle()">añadir</button>
