@@ -110,6 +110,21 @@ Route::get('/brands/fetch/all', "BrandController@fetchAll");
 
 //});
 
+/*Route::get('/change/http', function(){
+
+    ini_set('max_execution_time', 0);
+    $products = App\Product::where("picture", "like", '%'."http://".'%')->get();
+
+    foreach($products as $product){
+        
+        $modelProduct = App\Product::where("id", $product->id)->first();
+        $modelProduct->picture = str_replace("http://", "https://", $product->picture);
+        $modelProduct->update();
+
+    }
+
+});*/
+
 /*Route::get('/check/slug/slash', function(){
     ini_set('max_execution_time', 0);
     $products = App\Product::where('slug','-')->get();
@@ -266,6 +281,11 @@ Route::prefix('admin')->group(function () {
     Route::post("/help-center/update", "HelpCenterController@update");
     Route::post("/help-center/store", "HelpCenterController@store");
     Route::post("/help-center/delete", "HelpCenterController@delete");
+
+    Route::get("/maintenance/index", "MaintenanceController@index");
+    Route::get("/maintenance/check", "MaintenanceController@check");
+    Route::post("/maintenance/activate", "MaintenanceController@activate");
+    Route::post("/maintenance/deactivate", "MaintenanceController@deactivate");
 
 });
 

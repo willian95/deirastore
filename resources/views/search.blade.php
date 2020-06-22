@@ -30,8 +30,10 @@
                         </div>
                         <div class="main-slider__text">
                             <span>@{{ product.name }}</span>
+                            <p class="title-brand">@{{ product.brand.name }}</p>
                             <p class="title" v-if="product.category">@{{ product.category.name }}</p>
-                        
+                            <span class="price" v-if="product.external_price > 0">$ @{{ parseInt((product.external_price * dolarPrice) + 1).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</span>
+                            <span class="price" v-else>$ @{{ product.price }}</span>
                             
                         </div>
                     </a>
@@ -80,6 +82,7 @@
                 return{
                     searchText:"",
                     products:[],
+                    dolarPrice: '{!! App\DolarPrice::first()->price !!}',
                     pages:0,
                     page:1
                 }

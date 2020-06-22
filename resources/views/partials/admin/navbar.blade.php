@@ -94,6 +94,9 @@
                         <li class="nav-item nav-focus">
                             <a class="nav-link focus__link" href="{{ url('/admin/help-center/index') }}"><i class="fa fa-shopping-bag"></i>Centro de ayuda</a>
                         </li>
+                        <li class="nav-item nav-focus">
+                            <a class="nav-link focus__link" href="{{ url('/admin/maintenance/index') }}"><i class="fa fa-shopping-bag"></i>Modo Mantenimiento</a>
+                        </li>
 
                     @endif
                   <!-----  <li class="nav-item active">
