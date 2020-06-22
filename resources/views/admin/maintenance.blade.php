@@ -37,7 +37,7 @@
                     axios.get("{{ url('/admin/maintenance/check') }}")
                     .then(res => {
 
-                        this.maintenance == res.data.success
+                        this.maintenance = res.data.success
 
                     })
 
