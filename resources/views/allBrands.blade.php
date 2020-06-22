@@ -13,6 +13,9 @@
                 <div class="col-12">
                     <nav aria-label="Page navigation example">
                         <ul class="pagination">
+                            <li class="line-pag">
+                                <a class="page-link" href="#" v-if="page > 1" @click="fetch(1)">Primero</a>
+                            </li>
                             <li class="line-pag line-pag_r" >
                                 <a class="page-link" v-if="page > 1" href="#" @click="fetch(page - 1)"><i class="fa fa-long-arrow-left" aria-hidden="true"></i>
                                 </a>
@@ -24,6 +27,9 @@
                             <li class="line-pag">
                                 <a class="page-link" v-if="page < pages" href="#" @click="fetch(page + 1)"><i class="fa fa-long-arrow-right" aria-hidden="true"></i>
                                 </a>
+                            </li>
+                            <li class="line-pag">
+                                <a class="page-link" href="#" v-if="page < pages" @click="fetch(pages)">último</a>
                             </li>
                         </ul>
                     </nav>
@@ -55,6 +61,9 @@
             <div class="col-12">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination">
+                        <li class="line-pag">
+                            <a class="page-link" href="#" v-if="page > 1" @click="fetch(1)">Primero</a>
+                        </li>
                         <li class="line-pag line-pag_r" >
                             <a class="page-link" v-if="page > 1" href="#" @click="fetch(page - 1)"><i class="fa fa-long-arrow-left" aria-hidden="true"></i>
                             </a>
@@ -66,6 +75,9 @@
                         <li class="line-pag">
                             <a class="page-link" v-if="page < pages" href="#" @click="fetch(page + 6)"><i class="fa fa-long-arrow-right" aria-hidden="true"></i>
                             </a>
+                        </li>
+                        <li class="line-pag">
+                            <a class="page-link" href="#" v-if="page < pages" @click="fetch(pages)">último</a>
                         </li>
                     </ul>
                 </nav>
@@ -94,7 +106,7 @@
         methods:{
             
             fetch(page = 1){
-
+            
                 this.page = page
 
                 axios.post("{{ route('brands.fetch') }}", {page: page})
