@@ -9,7 +9,7 @@
             <div class="col-12">
 
                 <p class="text-center">
-                    <button class="btn btn-danger" @click="activate()" v-if="maintenance">Activar mantenimiento</button>
+                    <button class="btn btn-danger" @click="activate()" v-if="maintenance == false">Activar mantenimiento</button>
                     <button class="btn btn-success" @click="deactivate()" v-else>Desactivar mantenimiento</button>
                 </p>
 
