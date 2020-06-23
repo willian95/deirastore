@@ -29,12 +29,10 @@
                                                     {{ number_format($product->price, 0, ",", ".") }}
                                                 @endif
                                 
-                                @if($product->tax_excluded == false)<small>IVA incluido.</small> @else <small>Excento de IVA.</small> @endif</h3>
-                                
                                 <h5>{{ $product->sub_title }}</h5>
                                 <ul>
-                                    <li><strong>SKU:</strong> {{ $product->sku }}</li>
-                                    <li><strong>VPN:</strong> {{ $product->vpn }}</li>
+                                    
+                                    <li><strong>VPN:</strong> {{ $product->sku }}</li>
                                     <li><strong>STOCK:</strong> {{ $product->amount }}</li>
                                 </ul>
 

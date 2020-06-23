@@ -158,8 +158,30 @@ class ProductController extends Controller
 
     function search(Request $request){
 
-        $products = Product::where('name', 'like', '%'.$request->search.'%')->get();
-        return response()->json(["products" => $products]);
+        $skip = ($request->page-1) * 20;
+
+        //$products = Product::where('name', 'like', '%'.$request->search.'%')->get();
+        $products = Product::with("category", "brand")
+        ->where(function ($query) use($request) {
+           
+            //$query->orWhere('description', "like", "%".$words[$i]."%");
+            $query->orWhere('name', "like", "%".$request->search."%");
+            $query->orWhere('sku', "like", "%".$request->search."%");
+                    
+        })
+        ->skip($skip)->take(20)->orderBy("name")->get();
+
+        $productsCount = Product::with("category", "brand")
+        ->where(function ($query) use($request) {
+           
+            //$query->orWhere('description', "like", "%".$words[$i]."%");
+            $query->orWhere('name', "like", "%".$request->search."%");
+            $query->orWhere('sku', "like", "%".$request->search."%");
+                    
+        })
+        ->count();
+
+        return response()->json(["products" => $products, "productsCount" => $productsCount]);
 
     }
 

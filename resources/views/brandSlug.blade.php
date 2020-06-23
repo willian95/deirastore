@@ -16,6 +16,9 @@
                 <div class="col-12">
                     <nav aria-label="Page navigation example">
                         <ul class="pagination">
+                            <li class="line-pag">
+                                <a class="page-link" href="#" v-if="page > 1" @click="fetch(1)">Primero</a>
+                            </li>
                             <li class="line-pag line-pag_r" >
                                 <a class="page-link" v-if="page > 1" href="#" @click="fetch(page - 1)"><i class="fa fa-long-arrow-left" aria-hidden="true"></i>
                                 </a>
@@ -25,8 +28,11 @@
                                 <a class="page-link" href="#" v-if="page != index && index >= page - 3 &&  index < page + 3"  :key="index" @click="fetch(index)" >@{{ index }}</a> 
                             </li>
                             <li class="line-pag">
-                                <a class="page-link" v-if="page < pages" href="#" @click="fetch(page + 6)"><i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                                <a class="page-link" v-if="page < pages" href="#" @click="fetch(page + 1)"><i class="fa fa-long-arrow-right" aria-hidden="true"></i>
                                 </a>
+                            </li>
+                            <li class="line-pag">
+                                <a class="page-link" href="#" v-if="page < pages" @click="fetch(pages)">último</a>
                             </li>
                         </ul>
                     </nav>
@@ -52,6 +58,33 @@
                         </div>
                     </a>
                 </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="line-pag">
+                            <a class="page-link" href="#" v-if="page > 1" @click="fetch(1)">Primero</a>
+                        </li>
+                        <li class="line-pag line-pag_r" >
+                            <a class="page-link" v-if="page > 1" href="#" @click="fetch(page - 1)"><i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li class="page-item" v-for="index in pages">
+                            <a class="page-link" style="background-color: #d32b2b; color: #fff !important;" href="#" v-if="page == index && index >= page - 3 &&  index < page + 3"  :key="index" @click="fetch(index)" >@{{ index }}</a>
+                            <a class="page-link" href="#" v-if="page != index && index >= page - 3 &&  index < page + 3"  :key="index" @click="fetch(index)" >@{{ index }}</a> 
+                        </li>
+                        <li class="line-pag">
+                            <a class="page-link" v-if="page < pages" href="#" @click="fetch(page + 6)"><i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li class="line-pag">
+                            <a class="page-link" href="#" v-if="page < pages" @click="fetch(pages)">último</a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
      

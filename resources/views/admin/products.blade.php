@@ -801,9 +801,10 @@
 
                     if(this.query.length > 0){
                         this.pages = 0;
-                        axios.post("{{ route('admin.products.search') }}", {search: this.query})
+                        axios.post("{{ route('admin.products.search') }}", {search: this.query, page: this.page})
                         .then(res => {
                             this.products = res.data.products
+                            this.pages = Math.ceil(res.data.productsCount / 20)
                         })
                         .catch(err => {
                             console.log(err.response.data)

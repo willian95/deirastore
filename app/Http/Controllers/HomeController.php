@@ -145,8 +145,9 @@ class HomeController extends Controller
             }      
         })->count();
         */
-        //dd($searchText, $brandIdInSearchText);
+        
         if($brandIdInSearchText != ""){
+            
             $products = Product::where(function ($query) use($searchText) {
             
                 $query->orWhere('description', "like", "%".$searchText."%");
@@ -167,6 +168,7 @@ class HomeController extends Controller
                     if($words[$i] != ""){
                         //$query->orWhere('description', "like", "%".$words[$i]."%");
                         $query->orWhere('name', "like", "%".$words[$i]."%");
+                        $query->orWhere('sku', "like", "%".$words[$i]."%");
                     }
                 }      
             })
@@ -178,6 +180,7 @@ class HomeController extends Controller
                     if($words[$i] != ""){
                         //$query->orWhere('description', "like", "%".$words[$i]."%");
                         $query->orWhere('name', "like", "%".$words[$i]."%");
+                        $query->orWhere('sku', "like", "%".$words[$i]."%");
                     }
                 }      
             })

@@ -20,7 +20,14 @@ class HighlightedProductController extends Controller
 
         try{
 
-            $products = Product::where("name", "like", "%".$request->search."%")->take(50)->get();
+            $products = $products = Product::with("category", "brand")
+            ->where(function ($query) use($request) {
+            
+                //$query->orWhere('description', "like", "%".$words[$i]."%");
+                $query->orWhere('name', "like", "%".$request->search."%");
+                $query->orWhere('sku', "like", "%".$request->search."%");
+                        
+            })->take(50)->get();
             return response()->json(["success" => true, "products" => $products]);
 
         }catch(\Exception $e){
