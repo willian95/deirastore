@@ -52,8 +52,8 @@
                             <p class="title" >@{{ product.name }}</p>
                             <p class="title-brand">@{{ product.brand.name }}</p>
                             <span v-if="product.category">@{{ product.category.name }}</span>
-                            <span class="price" v-if="product.external_price > 0">$ @{{ parseInt((product.external_price * dolarPrice) + 1).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</span>
-                            <span class="price" v-else>$ @{{ product.price }}</span>
+                            <p class="price" v-if="product.percentage_range_profit > 0 && product.percentage_range_profit != null">$ @{{ parseInt((dolarPrice * product.price_range_profit) + 1).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</p>
+                            <p class="price" v-else>$ @{{  parseInt((dolarPrice * product.external_price) + 1).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</p>
                             <!--<p v-if="product.sub_price > 0" class="price-old">Normal <span>$ @{{ product.sub_price }}</span></p>-->
                         </div>
                     </a>

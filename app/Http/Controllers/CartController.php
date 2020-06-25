@@ -150,13 +150,11 @@ class CartController extends Controller
             $products = Product::with('category', 'brand', "items")->where('id', $product['productId'])->first();
         
             $price = 0;
-            if($products->external_price > 0 && $products->price == 0){
+            if($products->percentage_range_profit > 0 && $products->percentage_range_profit != null){
+                $price = (($products->price_range_profit * DolarPrice::first()->price) ) * $product["amount"];
+            }else{
                 $price = (($products->external_price * DolarPrice::first()->price) ) * $product["amount"];
-            }else if($products->price > 0){
-                $price = $products->price * $product["amount"];
             }
-
-            $total += $price;
             $picture = "";
 
             if($products->data_source_id == 2){
@@ -174,11 +172,13 @@ class CartController extends Controller
             }
 
             $individualPrice =0;
-            if($products->external_price > 0 && $products->price == 0){
+            if($products->percentage_range_profit > 0 && $products->percentage_range_profit != null){
+                $individualPrice = ($products->price_range_profit * DolarPrice::first()->price) + 1;
+            }else{
                 $individualPrice = ($products->external_price * DolarPrice::first()->price) + 1;
-            }else if($products->price > 0){
-                $individualPrice = $products->price;
             }
+
+            $total += $individualPrice * $product["amount"];
 
             $cart[] = [
                 "id" => $product["productId"],
@@ -197,7 +197,7 @@ class CartController extends Controller
 
         }
 
-        return response()->json(["cart" => $cart, "total" => $total + 1]);
+        return response()->json(["cart" => $cart, "total" => $total]);
 
     }
 
@@ -209,10 +209,10 @@ class CartController extends Controller
                 $products = Product::with('category', 'brand', "items")->where('id', $product['id'])->first();
             
                 $price = 0;
-                if($products->external_price > 0 && $products->price == 0){
-                    $price = (($products->external_price * DolarPrice::first()->price) + 1) * $product["amount"];
-                }else if($products->price > 0){
-                    $price = $products->price * $product["amount"];
+                if($products->percentage_range_profit > 0 && $products->percentage_range_profit != null){
+                    $price = (($products->price_range_profit * DolarPrice::first()->price) ) * $product["amount"];
+                }else{
+                    $price = (($products->external_price * DolarPrice::first()->price) ) * $product["amount"];
                 }
     
                 $picture = "";
@@ -232,11 +232,13 @@ class CartController extends Controller
                 }
     
                 $individualPrice =0;
-                if($products->external_price > 0 && $products->price == 0){
-                    $individualPrice = ($products->external_price * DolarPrice::first()->price);
-                }else if($products->price > 0){
-                    $individualPrice = $products->price;
+                if($products->percentage_range_profit > 0 && $products->percentage_range_profit != null){
+                    $individualPrice = ($products->price_range_profit * DolarPrice::first()->price) + 1;
+                }else{
+                    $individualPrice = ($products->external_price * DolarPrice::first()->price) + 1;
                 }
+    
+                //$total += $individualPrice * $product["amount"];
 
                 $shippingMethod = "1";
 

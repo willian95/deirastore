@@ -23,11 +23,11 @@
 
                             <div class="div-informacion-detalles">
                                 <h2><strong>{{ $product->name }}</strong></h2>
-                                <h3>$  @if($product->external_price > 0)
-                                                    {{ number_format(intval($product->external_price * App\DolarPrice::first()->price) + 1, 0, ",", ".") }} 
-                                                @else
-                                                    {{ number_format($product->price, 0, ",", ".") }}
-                                                @endif
+                                <h3>$  @if($product->percentage_range_profit != 0 && $product->percentage_range_profit != null)
+                                        {{ number_format(intval($product->price_range_profit * App\DolarPrice::first()->price) + 1, 0, ",", ".") }}
+                                    @else
+                                        {{ number_format(intval($product->external_price * App\DolarPrice::first()->price) + 1, 0, ",", ".") }}
+                                    @endif
                                 
                                 <h5>{{ $product->sub_title }}</h5>
                                 <ul>

@@ -23,9 +23,13 @@
                             @if($product->category)
                                 <p class="title">{{ $product->category->name }}</p>
                             @endif
-                            @if($product->external_price > 0)
+                            @if($product->external_price > 0 && ($product->percentage_range_profit == null || $product->percentage_range_profit == ""))
                                 <span class="price">$ {{ number_format(intval($product->external_price * App\DolarPrice::first()->price), 0, ",", ".") }}</span>
                             @else
+                            @if($product->percentage_range_profit == null || $product->percentage_range_profit == "")
+                                <span class="price">$ {{ number_format(intval($product->price_range_profit * App\DolarPrice::first()->price), 0, ",", ".") }}</span>
+                            @endif
+                            
                             <span class="price">$ {{ number_format($product->price, 0, ",", ".") }}</span>
                             @endif
                         </div>

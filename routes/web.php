@@ -287,6 +287,10 @@ Route::prefix('admin')->group(function () {
     Route::post("/maintenance/activate", "MaintenanceController@activate");
     Route::post("/maintenance/deactivate", "MaintenanceController@deactivate");
 
+    Route::get("/range-profit/index", "RangeProfitController@index");
+    Route::get("/range-profit/fetch/{page}", "RangeProfitController@fetch");
+    Route::post("/range-profit/apply", "RangeProfitController@apply");
+
 });
 
 Route::get('/nexsys/{mark}', "NexsysController@index");

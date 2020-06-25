@@ -97,6 +97,9 @@
                         <li class="nav-item nav-focus">
                             <a class="nav-link focus__link" href="{{ url('/admin/maintenance/index') }}"><i class="fa fa-shopping-bag"></i>Modo Mantenimiento</a>
                         </li>
+                        <li class="nav-item nav-focus">
+                            <a class="nav-link focus__link" href="{{ url('admin/range-profit/index') }}"><i class="fa fa-shopping-bag"></i>Rango de precios</a>
+                        </li>
 
                     @endif
                   <!-----  <li class="nav-item active">

@@ -38,10 +38,11 @@
                                 @if($product->product->category)
                                 <span >{{ $product->product->category->name }}</span>
                                 @endif
-                                @if($product->product->external_price > 0 && $product->product->price == 0)
-                                    <span class="price">$ {{ number_format( intval($product->product->external_price * App\DolarPrice::first()->price) + 1, 0, ",", ".") }}</span>
+                                
+                                @if($product->product->percentage_range_profit != 0 && $product->product->percentage_range_profit != null)
+                                    <span class="price">$ {{ number_format(intval($product->product->price_range_profit * App\DolarPrice::first()->price) + 1, 0, ",", ".") }}</span>
                                 @else
-                                    <span class="price">$ {{ number_format($product->product->price, 0, ",", ".") }}</span>
+                                    <span class="price">$ {{ number_format(intval($product->product->external_price * App\DolarPrice::first()->price) + 1, 0, ",", ".") }}</span>
                                 @endif
                             </div>
                         </a>
