@@ -184,7 +184,30 @@ class CategoriesController extends Controller
             $skip = ($request->page-1) * 20;
             $category = Category::where('slug', $request->slug)->first();
 
-            $products = Product::where('category_id', $category->id)->with('category')->with("brand")->skip($skip)->take(20)->get();
+            $orderBy = "";
+            if($request->filterOrder == 1){
+                $orderBy = "name asc";
+            }
+            else if($request->filterOrder == 2){
+                $orderBy = "name desc";
+            }
+            else if($request->filterOrder == 3){
+                $orderBy = "case when percentage_range_profit >= 0 then price_range_profit else external_price end asc";
+            }
+            else if($request->filterOrder == 4){
+                $orderBy = "case when percentage_range_profit >= 0 then price_range_profit else external_price end desc";
+            }
+            else if($request->filterOrder == 5){
+                $orderBy = "amount asc";
+            }
+            else if($request->filterOrder == 6){
+                $orderBy = "amount desc";
+            }
+
+
+            $products = Product::where('category_id', $category->id)->with('category')->with("brand")->skip($skip)->take(20)
+                        ->orderByRaw($orderBy)
+                        ->get();
             $productsCount = Product::where('category_id', $category->id)->with('category')->with("brand")->count();
             $subCategories = Category::where('parent_id', $category->id)->get();
 

@@ -34,6 +34,23 @@
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-md-4 col-lg-3">
+                <div class="form-group">
+                    <label for="">Ordernar por:</label>
+                    <select class="form-control" v-model="filterOrder" @change="fetch()">
+                        <option value="1">Nombre A - Z</option>
+                        <option value="2">Nombre Z - A</option>
+                        <option value="3">Precio Menor - Mayor</option>
+                        <option value="4">Precio Mayor - Menor</option>
+                        <option value="5">Stock Menor - Mayor</option>
+                        <option value="6">Stock Mayor - Menor</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-12 col-md-6 col-lg-3" v-for="product in products">
                 <div class="main-slider__item">
@@ -126,6 +143,7 @@
                 products:[],
                 subCategories:[],
                 pages:0,
+                filterOrder:"1",
                 dolarPrice: '{!! App\DolarPrice::first()->price !!}',
                 page:1
             }
@@ -136,7 +154,7 @@
 
                 this.page = page
 
-                axios.post("{{ route('category.products') }}", {page: page, slug: this.slug})
+                axios.post("{{ route('category.products') }}", {page: page, slug: this.slug, filterOrder: this.filterOrder})
                 .then(res => {
 
                     if(res.data.success == true){
