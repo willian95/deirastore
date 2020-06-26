@@ -533,11 +533,6 @@
                         error = true
                     }
 
-                    if(this.price == ""){
-                        alert("Campo precio es requerido")
-                        error = true
-                    }
-
                     return error;
 
                 },
