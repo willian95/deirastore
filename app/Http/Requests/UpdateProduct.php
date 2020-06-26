@@ -25,8 +25,8 @@ class UpdateProduct extends FormRequest
     {
         return [
             "name" => "required",
-            "price" => "required|numeric",
-            "subPrice" => "required|numeric",
+            //"price" => "required|numeric",
+            //"subPrice" => "required|numeric",
             "categoryId" => "required",
             "description" => "required",
             "brandId" => "required|integer" 
@@ -37,10 +37,10 @@ class UpdateProduct extends FormRequest
         return[
 
             "name.required" => "Nombre es requerido",
-            "price.required" => "Precio es requerido",
-            "price.numeric" => "Precio debe ser un número",
-            "subPrice.required" => "Sub-precio es requerido",
-            "subPrice.numeric" => "Sub-precio debe ser un número",
+            //"price.required" => "Precio es requerido",
+            //"price.numeric" => "Precio debe ser un número",
+            //"subPrice.required" => "Sub-precio es requerido",
+            //"subPrice.numeric" => "Sub-precio debe ser un número",
             "categoryId.required" => "Debe elegir una categoría",
             "description.required" => "Descripción es requerida",
             "brandId.required" => "Marca es requerida",
