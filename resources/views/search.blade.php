@@ -65,9 +65,7 @@
                     <a :href="'{{ url('/product/') }}'+'/'+product.slug">
                         <div class="content-slider">
                             
-                            <img style="width: 100%;" :src="product.picture" alt="" v-if="product.is_external == true">
-                        
-                            <img style="width: 100%;" :src="'{{ asset('/images/products/') }}'+'/'+product.image" alt="" v-else>
+                            <img style="width: 100%;" :src="product.picture" alt="" >
                            
                         </div>
                         <div class="main-slider__text">

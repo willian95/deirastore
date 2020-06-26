@@ -99,7 +99,7 @@ class ProductController extends Controller
 
     function update(UpdateProduct $request){
 
-        if($request->has('image')){
+        if($request->has('picture')){
             try{
 
                 $imageData = $request->get('picture');
@@ -138,8 +138,8 @@ class ProductController extends Controller
 
             //$product->percentage_range_profit = $request->percentage_range_profit;
             $product->sub_price = $request->subPrice;
-            if($request->has('image')){
-                $product->picture = $fileName;
+            if($request->has('picture')){
+                $product->picture = url('/').'/images/products/'.$fileName;
             }
             $product->description = $request->description;
             $product->slug = $slug;

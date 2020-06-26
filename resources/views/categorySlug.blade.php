@@ -56,9 +56,7 @@
                 <div class="main-slider__item">
                     <a :href=" '{{ url('/') }}' + '/product/' + product.slug">
                         <div class="content-slider">
-                            <img :src="'{{ url('/') }}' + '/images/products/' +product.picture" alt="" v-if="product.is_external == false">
-                            <img :src="product.picture" style="width: 100%;" alt="" v-if="product.is_external == true && product.data_source_id == 1">
-                            <img :src="product.picture" style="width: 100%;" alt="" v-if="product.data_source_id == 2">
+                            <img :src="product.picture" style="width: 100%;" alt="">
                         </div>
                         <div class="main-slider__text">
                             <p class="title" >@{{ product.name }}</p>

@@ -75,13 +75,7 @@
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            @if($product->is_external == false)
-                                <img class="imagen-detalles" src="{{ asset('/images/products/'.$product->picture) }}" alt="">
-                            @elseif($product->is_external == true && $product->data_source_id == 1)
                                 <img class="imagen-detalles" src="{{ $product->picture }}" alt="">
-                            @elseif($product->data_source_id == 2)
-                                <img class="imagen-detalles" src="{{ $product->picture }}" alt="">
-                            @endif
                             <div class="logo-detalle">
                                 @if($product->brand->image != null)
                                     <img class="style-marcas" src="{{ asset('/images/brands/'.$product->brand->image) }}" alt="">
