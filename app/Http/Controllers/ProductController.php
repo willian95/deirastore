@@ -124,7 +124,12 @@ class ProductController extends Controller
             $product = Product::find($request->productId);
             $product->name = $request->name;
             $product->sub_title = $request->subTitle;
-            $product->price = $request->price;
+            if($request->price > 0 && $product->price_range_profit != $request->price){
+                $product->percentage_range_profit = 1;
+            }
+            $product->price_range_profit = $request->price;
+
+            //$product->percentage_range_profit = $request->percentage_range_profit;
             $product->sub_price = $request->subPrice;
             if($request->has('image')){
                 $product->picture = $fileName;
@@ -133,17 +138,68 @@ class ProductController extends Controller
             $product->slug = $slug;
             $product->category_id = $request->categoryId;
             $product->brand_id = $request->brandId;
-            $product->sku = $request->sku;
-            $product->vpn = $request->vpn;
-            $product->min_description = $request->min_description;
-            $product->product_type = $request->product_type;
-            $product->product_material = $request->product_material;
-            $product->dimenssions = $request->dimenssions;
-            $product->weight = $request->weight;
-            $product->features = $request->features;
-            $product->location = $request->location;
-            $product->warranty = $request->warranty;
-            $product->color = $request->color;
+            $product->sku = $request->vpn;
+            //$product->vpn = $request->vpn;
+            if($request->min_description == "null"){
+                $product->min_description = null;
+            }else{
+                $product->min_description = $request->min_description;
+            }
+
+            if($request->product_type == "null"){
+                $product->product_type = null;
+            }else{
+                $product->product_type = $request->product_type;
+            }
+
+            if($request->product_material == "null"){
+                $product->product_material = null;
+            }else{
+                $product->product_material = $request->product_material;
+            }
+
+            if($request->dimenssions == "null"){
+                $product->dimenssions = null;
+            }else{
+                $product->dimenssions = $request->dimenssions;
+            }
+
+            if($request->dimenssions == "null"){
+                $product->dimenssions = null;
+            }else{
+                $product->dimenssions = $request->dimenssions;
+            }
+            
+            if($request->weight == "null"){
+                $product->weight = null;
+            }else{
+                $product->weight = $request->weight;
+            }
+
+            if($request->features == "null"){
+                $product->features = null;
+            }else{
+                $product->features = $request->features;
+            }
+
+            if($request->location == "null"){
+                $product->location = null;
+            }else{
+                $product->location = $request->location;
+            }
+
+            if($request->warranty == "null"){
+                $product->warranty = null;
+            }else{
+                $product->warranty = $request->warranty;
+            }
+
+            if($request->color == "null"){
+                $product->color = null;
+            }else{
+                $product->color = $request->color;
+            }
+
             $product->update();
 
             return response()->json(["success" => true, "msg" => "Producto actualizado"]);

@@ -160,7 +160,6 @@
                     if(res.data.success == true){
                         this.pages = Math.ceil(res.data.productsCount / 20)
                         this.products = res.data.products
-                        console.log(res)
                         this.subCategories = res.data.subCategories
                     }else{
 

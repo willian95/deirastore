@@ -145,6 +145,26 @@ class HomeController extends Controller
             }      
         })->count();
         */
+
+        $orderBy = "";
+        if($request->filterOrder == 1){
+            $orderBy = "name asc";
+        }
+        else if($request->filterOrder == 2){
+            $orderBy = "name desc";
+        }
+        else if($request->filterOrder == 3){
+            $orderBy = "case when percentage_range_profit >= 0 then price_range_profit else external_price end asc";
+        }
+        else if($request->filterOrder == 4){
+            $orderBy = "case when percentage_range_profit >= 0 then price_range_profit else external_price end desc";
+        }
+        else if($request->filterOrder == 5){
+            $orderBy = "amount asc";
+        }
+        else if($request->filterOrder == 6){
+            $orderBy = "amount desc";
+        }
         
         if($brandIdInSearchText != ""){
             
@@ -152,7 +172,7 @@ class HomeController extends Controller
             
                 $query->orWhere('description', "like", "%".$searchText."%");
                 
-            })->with("brand", "category")->where("brand_id", $brandIdInSearchText)->skip($skip)->take(20)->get();
+            })->with("brand", "category")->where("brand_id", $brandIdInSearchText)->skip($skip)->take(20)->orderByRaw($orderBy)->get();
     
             $productsCount = Product::where(function ($query) use($searchText) {
                 
@@ -172,7 +192,7 @@ class HomeController extends Controller
                     }
                 }      
             })
-            ->skip($skip)->take(20)->orderBy("data_source_id")->orderBy("name")->get();
+            ->skip($skip)->take(20)->orderBy("data_source_id")->orderByRaw($orderBy)->get();
     
             $productsCount = Product::with("category", "brand")
             ->where(function ($query) use($words) {

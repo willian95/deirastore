@@ -4,13 +4,8 @@
 
     <div class="container bg">
 
-
-
-
-
         <div class="title__general title__general-start fadeInUp wow animated pag-center">
             <p><strong>{{ $brand->name }}</strong></p>
-
             
             <div class="row">
                 <div class="col-12">
@@ -39,6 +34,23 @@
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-md-4 col-lg-3">
+                <div class="form-group">
+                    <label for="">Ordernar por:</label>
+                    <select class="form-control" v-model="filterOrder" @change="fetch()">
+                        <option value="1">Nombre A - Z</option>
+                        <option value="2">Nombre Z - A</option>
+                        <option value="3">Precio Menor - Mayor</option>
+                        <option value="4">Precio Mayor - Menor</option>
+                        <option value="5">Stock Menor - Mayor</option>
+                        <option value="6">Stock Mayor - Menor</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-md-3 col-xs-12 " v-for="product in products">
                 <div class="main-slider__item">
@@ -52,8 +64,8 @@
                             <p class="title" >@{{ product.name }}</p>
                             <p class="title-brand">@{{ product.brand.name }}</p>
                             <span v-if="product.category">@{{ product.category.name }}</span>
-                            <p class="price" v-if="product.percentage_range_profit > 0 && product.percentage_range_profit != null">$ @{{ parseInt((dolarPrice * product.price_range_profit) + 1).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</p>
-                            <p class="price" v-else>$ @{{  parseInt((dolarPrice * product.external_price) + 1).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</p>
+                            <span class="price" v-if="product.percentage_range_profit > 0 && product.percentage_range_profit != null">$ @{{ parseInt((dolarPrice * product.price_range_profit) + 1).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</span>
+                            <span class="price" v-else>$ @{{  parseInt((dolarPrice * product.external_price) + 1).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</span>
                             <!--<p v-if="product.sub_price > 0" class="price-old">Normal <span>$ @{{ product.sub_price }}</span></p>-->
                         </div>
                     </a>
@@ -203,7 +215,8 @@
                 products:[],
                 pages:0,
                 dolarPrice: '{!! App\DolarPrice::first()->price !!}',
-                page:1
+                page:1,
+                filterOrder:"1"
             }
         },
         methods:{
@@ -212,7 +225,7 @@
 
                 this.page = page
 
-                axios.post("{{ route('brands.products') }}", {page: page, slug: this.slug})
+                axios.post("{{ route('brands.products') }}", {page: page, slug: this.slug, filterOrder: this.filterOrder})
                 .then(res => {
                     console.log(res.data)
                     if(res.data.success == true){

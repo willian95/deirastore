@@ -43,6 +43,22 @@
         </div>
 
         <div class="row">
+            <div class="col-md-4 col-lg-3">
+                <div class="form-group">
+                    <label for="">Ordernar por:</label>
+                    <select class="form-control" v-model="filterOrder" @change="search()">
+                        <option value="1">Nombre A - Z</option>
+                        <option value="2">Nombre Z - A</option>
+                        <option value="3">Precio Menor - Mayor</option>
+                        <option value="4">Precio Mayor - Menor</option>
+                        <option value="5">Stock Menor - Mayor</option>
+                        <option value="6">Stock Mayor - Menor</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
 
             <div class="col-3" v-for="product in products">
                 <div class="main-slider__item">
@@ -117,6 +133,7 @@
                     searchText:"",
                     products:[],
                     dolarPrice: '{!! App\DolarPrice::first()->price !!}',
+                    filterOrder:"1",
                     pages:0,
                     page:1
                 }
@@ -127,7 +144,7 @@
 
                     this.page = page
 
-                    axios.post("{{ url('/search') }}", {search: this.searchText, page: this.page}).then(res => {
+                    axios.post("{{ url('/search') }}", {search: this.searchText, page: this.page, filterOrder: this.filterOrder}).then(res => {
 
                         //console.log("test-products", res)
                         this.products = res.data.products

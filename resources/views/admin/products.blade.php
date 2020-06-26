@@ -106,10 +106,10 @@
                         <label for="description">Descripción</label>
                         <textarea class="form-control" v-model="description"></textarea>
                     </div>
-                    <div class="form-group">
+                    <!--<div class="form-group">
                         <label for="sku">SKU</label>
                         <input type="text" class="form-control" id="sku" v-model="sku">
-                    </div>
+                    </div>-->
                     <div class="form-group">
                         <label for="vpn">VPN</label>
                         <input type="text" class="form-control" id="vpn" v-model="vpn">
@@ -388,7 +388,7 @@
                     imageBrandPreview:"",
                     showBrandForm:false,
                     brands:[],
-                    sku:"",
+                    //sku:"",
                     vpn:"",
                     min_description:"",
                     product_type:"",
@@ -690,7 +690,7 @@
                     this.modalTitle = "Editar Producto"
                     this.productId = product.id
                     this.isEdit = true
-                    this.price = product.price
+                    this.price = product.price_range_profit
                     this.subPrice = product.sub_price
                     this.picture = null
                     this.subTitle = product.sub_title
@@ -698,9 +698,14 @@
                     this.productId = product.id 
                     this.categoryId = product.category_id
                     this.brandId = product.brand_id
-                    this.imagePreview = "{{ url('/') }}"+"/images/products/"+product.picture
-                    this.sku=product.sku
-                    this.vpn=product.vpn
+                    if(product.picture.indexOf("http") > -1){
+                        this.imagePreview = product.picture
+                    }else{
+                        this.imagePreview = "{{ url('/') }}"+"/images/products/"+product.picture
+                    }
+                    
+                    this.vpn=product.sku
+                    //this.vpn=product.vpn
                     this.min_description=product.min_description
                     this.product_type=product.product_type
                     this.product_material=product.product_material

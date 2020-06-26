@@ -204,7 +204,6 @@ class CategoriesController extends Controller
                 $orderBy = "amount desc";
             }
 
-
             $products = Product::where('category_id', $category->id)->with('category')->with("brand")->skip($skip)->take(20)
                         ->orderByRaw($orderBy)
                         ->get();

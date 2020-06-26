@@ -189,10 +189,30 @@ class BrandController extends Controller
 
         try{
 
+            $orderBy = "";
+            if($request->filterOrder == 1){
+                $orderBy = "name asc";
+            }
+            else if($request->filterOrder == 2){
+                $orderBy = "name desc";
+            }
+            else if($request->filterOrder == 3){
+                $orderBy = "case when percentage_range_profit >= 0 then price_range_profit else external_price end asc";
+            }
+            else if($request->filterOrder == 4){
+                $orderBy = "case when percentage_range_profit >= 0 then price_range_profit else external_price end desc";
+            }
+            else if($request->filterOrder == 5){
+                $orderBy = "amount asc";
+            }
+            else if($request->filterOrder == 6){
+                $orderBy = "amount desc";
+            }
+
             $skip = ($request->page-1) * 20;
             $brand = Brand::where('slug', $request->slug)->first();
 
-            $products = Product::where('brand_id', $brand->id)->with('category')->with("brand")->skip($skip)->take(20)->get();
+            $products = Product::where('brand_id', $brand->id)->with('category')->with("brand")->skip($skip)->take(20)->orderByRaw($orderBy)->get();
             $productsCount = Product::where('brand_id', $brand->id)->with('category')->with("brand")->count();
 
             return response()->json(["success" => true, "products" => $products, "productsCount" => $productsCount]);

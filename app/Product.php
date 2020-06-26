@@ -31,6 +31,8 @@ class Product extends Model
         "product_material",
         "dimenssions",
         "weight",
+        "price_range_profit",
+        "percentage_range_profit",
         "features",
         "location",
         "warranty",
