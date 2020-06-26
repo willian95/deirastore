@@ -126,6 +126,8 @@ class ProductController extends Controller
             $product->sub_title = $request->subTitle;
             if($request->price > 0 && $product->price_range_profit != $request->price){
                 $product->percentage_range_profit = 1;
+            }else{
+                $product->percentage_range_profit = null;
             }
             $product->price_range_profit = $request->price;
 
@@ -139,7 +141,7 @@ class ProductController extends Controller
             $product->category_id = $request->categoryId;
             $product->brand_id = $request->brandId;
             $product->sku = $request->vpn;
-            //$product->vpn = $request->vpn;
+         
             if($request->min_description == "null"){
                 $product->min_description = null;
             }else{
