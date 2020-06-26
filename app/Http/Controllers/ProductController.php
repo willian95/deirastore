@@ -129,7 +129,12 @@ class ProductController extends Controller
             }else{
                 $product->percentage_range_profit = null;
             }
-            $product->price_range_profit = $request->price;
+
+            if($request->price == "null"){
+                $product->price = null;
+            }else{
+                $product->price = $request->price;
+            }
 
             //$product->percentage_range_profit = $request->percentage_range_profit;
             $product->sub_price = $request->subPrice;
