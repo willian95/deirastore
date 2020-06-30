@@ -136,10 +136,10 @@ class CheckoutController extends Controller
 				$productPurchase->product_id = $cart["id"];
 				$productPurchase->amount = $cart["amount"];
 				
-				if($product->product->percentage_range_profit != 0 && $product->product->percentage_range_profit != null){
-					$productPurchase->price = intval($product->product->price_range_profit * DolarPrice::first()->price) + 1;
+				if($product->percentage_range_profit != 0 && $product->percentage_range_profit != null){
+					$productPurchase->price = intval($product->price_range_profit * DolarPrice::first()->price) + 1;
 				}else{
-					$productPurchase->price = intval($product->product->external_price * App\DolarPrice::first()->price) + 1;
+					$productPurchase->price = intval($product->external_price * App\DolarPrice::first()->price) + 1;
 				}
 
 				/*if($product->external_price > 0 && $product->price_range_profit == 0){ //si el producto cuenta con precio externo mayor a 0 y precio = 0
