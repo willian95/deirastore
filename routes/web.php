@@ -110,7 +110,7 @@ Route::get('/brands/fetch/all', "BrandController@fetchAll");
 
 //});
 
-Route::get('/change/http', function(){
+/*Route::get('/change/http', function(){
 
     ini_set('max_execution_time', 0);
     $products = App\Product::where("picture", "like", '%'."http://".'%')->get();
@@ -123,7 +123,9 @@ Route::get('/change/http', function(){
 
     }
 
-});
+});*/
+
+Route::get("file_update", "FileController@update");
 
 /*Route::get('/check/slug/slash', function(){
     ini_set('max_execution_time', 0);
