@@ -5,7 +5,7 @@
     <div class="container bg">
        
         <div class="title__general title__general-start fadeInUp wow animated pag-center">
-            <p><strong>{{ $category->name }}</strong></p>
+            <p><strong>{{ $category->esp_name }}</strong></p>
 
             <div class="row">
                 <div class="col-12">
