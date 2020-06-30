@@ -16,6 +16,9 @@
                         <p class="text-center" v-if="sale.user">
                             email: @{{ sale.user.email }}
                         </p>
+                        <p class="text-center" v-if="sale.user">
+                            dirección: @{{ sale.user.address }}
+                        </p>
 
                         <p class="text-center" v-if="sale.guest">
                             user: @{{ sale.guest.name }}
@@ -24,11 +27,14 @@
                             email: @{{ sale.guest.email }}
                         </p>
                         <p class="text-center" v-if="sale.guest">
+                            dirección: @{{ sale.guest.address }}
+                        </p>
+                        <p class="text-center" v-if="sale.guest">
                             status: <span v-if="sale.status == 'aprovado'">Aprobado</span><span v-else>Rechazado</span>
                         </p>
                         <p class="text-center">
                             <button class="btn btn-success" @click="getProductDetails(sale.product_purchase)" data-toggle="modal" data-target="#details">
-                                view details
+                                Detalles
                             </button>
                         </p>
                     </div>
@@ -61,7 +67,7 @@
     <!-- Details Modal -->
 
     <div class="modal fade" id="details" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">@{{ modalTitle }}</h5>
