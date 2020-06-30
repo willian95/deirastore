@@ -130,6 +130,7 @@
                     modalTitle:"Detalles",
                     productDetails:[],
                     pages:0,
+                    page:1,
                     sales:[]
                 }
             },
