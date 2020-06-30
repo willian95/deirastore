@@ -9,12 +9,11 @@ class FileController extends Controller
 {
     function update(){
 
+        ini_set('max_execution_time', 0);
         $connection = ssh2_connect('200.27.164.195', 22);
         ssh2_auth_password($connection, 'root', 'Terminal*1');
 
-        dd($connection);
         ssh2_scp_recv($connection, '/home/ftpingram/CLPriceFileDeira.csv.zip', '/CLPriceFileDeira.csv.zip');
-
 
     }
 }
