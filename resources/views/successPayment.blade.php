@@ -66,7 +66,7 @@
                                     $total = $total + ($product->price * $product->amount) + $product->shipping_cost;
                                 @endphp
                                 <tr>
-                                    <td>{{ $loop->index }}</td>
+                                    <td>{{ $loop->index + 1 }}</td>
                                     <td>{{ $product->product->name }}}</td>
                                     <td>{{ $product->amount }}</td>
                                     <td>{{ number_format($product->price, 0, ",", ".") }}</td>
