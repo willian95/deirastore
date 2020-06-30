@@ -171,7 +171,7 @@ Route::get("/cart/ticket", function(){
 Route::post("/cart/bill/type", "CartController@billType");
 
 Route::get("products/destacados", "ProductController@highlighted");
-Route::post("products/destacados/fetch", "HighLightedProductController@userFetch");
+Route::post("products/destacados/fetch", "HighlightedProductController@userFetch");
 
 Route::get('/validate/rut/{rut}', "RutController@validateRut");
 Route::get('/confirm/email/{hash}', "RegisterController@confirmEmail");
