@@ -33,11 +33,11 @@ class IngramImport implements ToCollection
                     $brandSlug = str_replace("-", "", $row[3]);
                     $brandSlug = str_replace(" ", "-", $brandSlug);
                     $brand = Brand::firstOrCreate(
-                        ['name' => $row[3]],
+                        ['name' => $row[7]],
                         ["slug" =>  $brandSlug]
                     );
 
-                    $categoryName = $row[13];
+                    $categoryName = $row[87];
 
                     if($categoryName == "Printer/PlotterSupplies"){
                         $categoryName = "Printer/Plotter Supplies";
@@ -55,17 +55,19 @@ class IngramImport implements ToCollection
                         $categoryName = "USB & Firewire Connectivity";
                     }
 
-                    $categorySlug = str_replace("-", "", $row[13]);
+                    $categorySlug = str_replace("-", "", $row[87]);
                     $categorySlug = str_replace(" ", "-", $categorySlug);
+                    $categorySlug = str_replace("/", "-", $categorySlug);
                     $mainCategory = Category::firstOrCreate(
-                        ['name' => $row[13]],
+                        ['name' => $row[87]],
                         ["slug" =>  $categorySlug]
                     );
 
-                    $categorySlug = str_replace("-", "", $row[14]);
+                    $categorySlug = str_replace("-", "", $row[88]);
                     $categorySlug = str_replace(" ", "-", $categorySlug);
+                    $categorySlug = str_replace("/", "-", $categorySlug);
                     $subCategory = Category::firstOrCreate(
-                        ['name' => $row[14]],
+                        ['name' => $row[88]],
                         ["slug" =>  $categorySlug, "parent_id" => $mainCategory->id]
                     );
 
@@ -76,12 +78,12 @@ class IngramImport implements ToCollection
                         $slug = $slug."-".uniqid();
                     }
 
-                    if(Product::where("ingram_part_number", $row[0])->count() <= 0){
+                    if(Product::where("sku", $row[3])->count() <= 0){
 
                         $product = new Product;
                         $product->name = $row[1];
                         $product->sub_title = $row[1]; 
-                        $product->sku = $row[2]; 
+                        $product->sku = $row[3]; 
                         $product->brand_id = $brand->id;
                         $product->category_id = $subCategory->id;
                         $product->slug = $slug;
@@ -89,10 +91,10 @@ class IngramImport implements ToCollection
                         $product->description = "";
                         $product->data_source_id = 2;
                         $product->price = 0;
-                        $product->weight = $row[4]."-".$row[10];
-                        $product->dimenssions = $row[7]." * ".$row[8]." * ".$row[6]."-".$row[9];
-                        $product->external_price = $row[11];
-                        $product->currency = $row[12];
+                        $product->weight = "0";
+                        $product->dimenssions = "0";
+                        $product->external_price = $row[56];
+                        $product->currency = $row[68];
                         $product->ingram_part_number = $row[0];
                         $product->save(); 
 
