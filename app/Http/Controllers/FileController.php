@@ -13,7 +13,7 @@ class FileController extends Controller
         $connection = ssh2_connect('200.27.164.195', 22);
         ssh2_auth_password($connection, 'root', 'Terminal*1');
 
-        ssh2_scp_recv($connection, '/home/ftpingram/CLPriceFileDeira.csv.zip', '/CLPriceFileDeira.csv.zip');
+        ssh2_scp_recv($connection, '/home/ftpingram/test.txt', "/test.txt");
 
     }
 }
