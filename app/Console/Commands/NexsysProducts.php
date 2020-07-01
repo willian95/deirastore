@@ -49,7 +49,7 @@ class NexsysProducts extends Command
         ini_set("memory_limit","500M");
         ini_set('max_execution_time', 0);
         //$params = ["encoding" => "UTF-8", "verifypeer" => false, "verifyhost" => false];
-
+        Log::info("monster alive");
         try{
 
             $connection = ssh2_connect('200.27.164.195', 22);
