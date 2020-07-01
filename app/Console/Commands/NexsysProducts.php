@@ -9,6 +9,10 @@ use Carbon\Carbon;
 use App\Brand;
 use App\Product;
 
+use ssh2_connect;
+use App\Imports\IngramImport;
+use Maatwebsite\Excel\Facades\Excel;
+
 class NexsysProducts extends Command
 {
     /**
@@ -42,8 +46,24 @@ class NexsysProducts extends Command
      */
     public function handle()
     {
-        /*ini_set('max_execution_time', 0);
+        ini_set("memory_limit","500M");
+        ini_set('max_execution_time', 0);
         //$params = ["encoding" => "UTF-8", "verifypeer" => false, "verifyhost" => false];
+
+        try{
+
+            $connection = ssh2_connect('200.27.164.195', 22);
+            ssh2_auth_password($connection, 'root', 'Terminal*1');
+
+            ssh2_scp_recv($connection, '/home/ftpingram/CLPriceFileDeira.csv.zip', public_path('/')."/CLPriceFileDeira.csv.zip");
+            ob_end_clean();
+            system('unzip CLPriceFileDeira.csv.zip');
+
+            Excel::import(new IngramImport, 'CLPriceFileDeira.csv');
+
+        }catch(\Exception $e){
+            Log::info($e->getMessage().", ln: ".$e->getLine());
+        }
 
         $url = "https://app.nexsysla.com/nexsysServiceSoap/NexsysServiceSoap?wsdl";
         $marks = [
@@ -100,52 +120,9 @@ class NexsysProducts extends Command
                 foreach($products as $product){
                     foreach($product as $value){
                         
-                        if(is_string($value->category)){
-
-                            $fullCategory = substr($value->category, 3);
-
-                            $categories = explode('>', $fullCategory);
-
                             $index = 0;
                             $model = null;
 
-                            if(count($categories) > 2){
-                                array_pop($categories);
-                            }
-
-                            foreach($categories as $category){
-                            
-                                $string = trim($category);
-                                $slug = str_replace(" ", "-", $string);
-                                $slug = str_replace("/", "-", $slug);
-
-                                if($index == 1){
-
-                                    $previousSlug = str_replace(" ", "-", trim($categories[$index - 1]));
-                                    $previousSlug = str_replace("/", "-", $previousSlug);
-                                    
-                                    
-                                    $previousCategory = Category::where('slug', $previousSlug)->first();
-                                    if(Category::where('slug', $slug)->where('parent_id', $previousCategory->id)->count() == 0){
-                                        $model = new Category;
-                                        $model->name = $string;
-                                        $model->slug = $slug;
-                                        $model->parent_id = $previousCategory->id;
-                                        $model->save();
-                                    }
-
-                                }else{
-
-                                    $model = Category::firstOrCreate(
-                                        ['name' => $string],
-                                        ['slug' => $slug]
-                                    );
-
-                                }
-                                
-                                $index++;
-
-                            }
 
                             $productSlug = str_replace(" ", "-", $value->short_description);
                             $productSlug = str_replace("/", "-", $productSlug);
@@ -158,29 +135,38 @@ class NexsysProducts extends Command
                             if($value->inventory != "null")
                                 $amount = $value->inventory;
 
-                            $testProduct = Product::updateOrCreate(
-                                ["sku" => $value->sku],
-                                [
-                                    "category_id" => $model->id,
-                                    "brand_id" => $brand->id,
-                                    "currency" => $value->currency,
-                                    "picture" => $value->image,
-                                    "is_external" => true,
-                                    "parent_nexsys" => $value->parent,
-                                    "amount" => $amount,
-                                    "description" => $value->long_description,
-                                    "min_description" => $value->short_description,
-                                    "sub_title" => $value->short_description,
-                                    "price" => 0,
-                                    "data_source_id" => 1,
-                                    "tax_excluded" => $excluded_tax,
-                                    "name" => $value->short_description,
-                                    "slug" => $productSlug,
-                                    "external_price" => floatval($value->price)
-                                ]
-                            );
+                            if(Product::where("sku", $value->sku)->count() <= 0){
 
-                        }
+                                Product::create(
+                                    [
+                                        "sku" => $value->sku,
+                                        "category_id" => 0,
+                                        "brand_id" => $brand->id,
+                                        "currency" => $value->currency,
+                                        "picture" => $value->image,
+                                        "is_external" => true,
+                                        "parent_nexsys" => $value->parent,
+                                        "amount" => $amount,
+                                        "description" => $value->long_description,
+                                        "min_description" => $value->short_description,
+                                        "sub_title" => $value->short_description,
+                                        "price" => 0,
+                                        "data_source_id" => 1,
+                                        "tax_excluded" => $excluded_tax,
+                                        "name" => $value->short_description,
+                                        "slug" => $productSlug,
+                                        "external_price" => floatval($value->price)
+                                    ]
+                                );
+
+                            }else{
+
+                                $product = Product::where("sku", $value->sku)->first();
+                                $product->amount = $amount;
+                                $product->external_price = floatval($value->price);
+                                $product->update();
+
+                            }
 
                     }
                 }
@@ -191,8 +177,6 @@ class NexsysProducts extends Command
                 Log::info($fault);
             }
         }
-
-        Category::doesntHave('products')->delete();*/
     
     }
 }
