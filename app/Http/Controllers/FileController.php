@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use ssh2_connect;
 use App\Imports\IngramImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class FileController extends Controller
 {
