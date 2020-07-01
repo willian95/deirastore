@@ -29,80 +29,90 @@ class IngramImport implements ToCollection
                 
                 if($index > 0 && $row[0] != ""){
                     
-                    //dd(substr($row[0], 11, strlen($row[0])));
-                    $brandSlug = str_replace("-", "", $row[3]);
-                    $brandSlug = str_replace(" ", "-", $brandSlug);
-                    $brand = Brand::firstOrCreate(
-                        ['name' => $row[7]],
-                        ["slug" =>  $brandSlug]
-                    );
+                    if($row[16] > 0){
 
-                    $categoryName = $row[87];
+                        //dd(substr($row[0], 11, strlen($row[0])));
+                        $brandSlug = str_replace("-", "", $row[3]);
+                        $brandSlug = str_replace(" ", "-", $brandSlug);
+                        $brand = Brand::firstOrCreate(
+                            ['name' => $row[7]],
+                            ["slug" =>  $brandSlug]
+                        );
 
-                    if($categoryName == "Printer/PlotterSupplies"){
-                        $categoryName = "Printer/Plotter Supplies";
+                        $categoryName = $row[87];
+
+                        if($categoryName == "Printer/PlotterSupplies"){
+                            $categoryName = "Printer/Plotter Supplies";
+                        }
+
+                        if($categoryName == "Computer Cases &Accessories" || $categoryName == "ComputerCases & Accessories" || $categoryName == "Computer Cases& Accessories"){
+                            $categoryName = "Computer Cases & Accessories";
+                        }
+
+                        if($categoryName == "Notebooks& Tablets"){
+                            $categoryName = "Notebooks & Tablets";
+                        }
+
+                        if($categoryName == "USB & FirewireConnectivity"){
+                            $categoryName = "USB & Firewire Connectivity";
+                        }
+
+                        $categorySlug = str_replace("-", "", $row[87]);
+                        $categorySlug = str_replace(" ", "-", $categorySlug);
+                        $categorySlug = str_replace("/", "-", $categorySlug);
+                        $mainCategory = Category::firstOrCreate(
+                            ['name' => $row[87]],
+                            ["slug" =>  $categorySlug]
+                        );
+
+                        $categorySlug = str_replace("-", "", $row[88]);
+                        $categorySlug = str_replace(" ", "-", $categorySlug);
+                        $categorySlug = str_replace("/", "-", $categorySlug);
+                        $subCategory = Category::firstOrCreate(
+                            ['name' => $row[88]],
+                            ["slug" =>  $categorySlug, "parent_id" => $mainCategory->id]
+                        );
+
+
+                        $slug = str_replace(" ", "-", $row[1]);
+                        $slug = str_replace("/", "-", $slug); 
+                        if(Product::where('slug', $slug)->count() > 0){
+                            $slug = $slug."-".uniqid();
+                        }
+
+                        if(Product::where("sku", $row[3])->count() <= 0){
+
+                            $product = new Product;
+                            $product->name = $row[1];
+                            $product->sub_title = $row[1]; 
+                            $product->sku = $row[3]; 
+                            $product->brand_id = $brand->id;
+                            $product->category_id = $subCategory->id;
+                            $product->slug = $slug;
+                            $product->picture = "";
+                            $product->description = "";
+                            $product->data_source_id = 2;
+                            $product->price = 0;
+                            $product->amount = $row[16];
+                            $product->weight = "0";
+                            $product->dimenssions = "0";
+                            $product->external_price = $row[56];
+                            $product->currency = $row[68];
+                            $product->ingram_part_number = $row[0];
+                            $product->save(); 
+
+                        }else{
+
+                            $product = Product::where("sku", $row[3])->first();
+                            $product->amount = $row[16];
+                            $product->external_price = $row[56];
+                            $product->update();
+
+                        }
+
                     }
 
-                    if($categoryName == "Computer Cases &Accessories" || $categoryName == "ComputerCases & Accessories" || $categoryName == "Computer Cases& Accessories"){
-                        $categoryName = "Computer Cases & Accessories";
-                    }
-
-                    if($categoryName == "Notebooks& Tablets"){
-                        $categoryName = "Notebooks & Tablets";
-                    }
-
-                    if($categoryName == "USB & FirewireConnectivity"){
-                        $categoryName = "USB & Firewire Connectivity";
-                    }
-
-                    $categorySlug = str_replace("-", "", $row[87]);
-                    $categorySlug = str_replace(" ", "-", $categorySlug);
-                    $categorySlug = str_replace("/", "-", $categorySlug);
-                    $mainCategory = Category::firstOrCreate(
-                        ['name' => $row[87]],
-                        ["slug" =>  $categorySlug]
-                    );
-
-                    $categorySlug = str_replace("-", "", $row[88]);
-                    $categorySlug = str_replace(" ", "-", $categorySlug);
-                    $categorySlug = str_replace("/", "-", $categorySlug);
-                    $subCategory = Category::firstOrCreate(
-                        ['name' => $row[88]],
-                        ["slug" =>  $categorySlug, "parent_id" => $mainCategory->id]
-                    );
-
-
-                    $slug = str_replace(" ", "-", $row[1]);
-                    $slug = str_replace("/", "-", $slug); 
-                    if(Product::where('slug', $slug)->count() > 0){
-                        $slug = $slug."-".uniqid();
-                    }
-
-                    if(Product::where("sku", $row[3])->count() <= 0){
-
-                        $product = new Product;
-                        $product->name = $row[1];
-                        $product->sub_title = $row[1]; 
-                        $product->sku = $row[3]; 
-                        $product->brand_id = $brand->id;
-                        $product->category_id = $subCategory->id;
-                        $product->slug = $slug;
-                        $product->picture = "";
-                        $product->description = "";
-                        $product->data_source_id = 2;
-                        $product->price = 0;
-                        $product->weight = "0";
-                        $product->dimenssions = "0";
-                        $product->external_price = $row[56];
-                        $product->currency = $row[68];
-                        $product->ingram_part_number = $row[0];
-                        $product->save(); 
-
-                    }
-
-                       
-
-                        //dd($product);
+                    //dd($product);
                     
                 }
                 $index++;
