@@ -14,6 +14,15 @@ class FileController extends Controller
         ssh2_auth_password($connection, 'root', 'Terminal*1');
 
         ssh2_scp_recv($connection, '/home/ftpingram/CLPriceFileDeira.csv.zip', public_path('/')."/CLPriceFileDeira.csv.zip");
+        $unzip = new ZipArchive;
+        $out = $unzip->open(public_path('/')."/CLPriceFileDeira.csv.zip");
+        if ($out === TRUE) {
+            $unzip->extractTo(getcwd());
+            $unzip->close();
+            echo 'File unzipped';
+        } else {
+            echo 'Error';
+        }
 
     }
 }
