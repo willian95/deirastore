@@ -90,6 +90,13 @@ Route::get('brand/{slug}', "BrandController@slug")->name('brands.slug');
 Route::post('/brand/products', "BrandController@products")->name('brands.products');
 Route::get('/brands/fetch/all', "BrandController@fetchAll");
 
+Route::get("/delete/duplicates", function(){
+
+    $duplicates = DB::table('users') ->select('sku', DB::raw('COUNT(*) as `count`')) ->groupBy('sku') ->havingRaw('COUNT(*) > 1') ->get();
+    dd($duplicates);
+
+});
+
 /*Route::get('/check/slug', function(){
     ini_set('max_execution_time', 0);*/
     /*$products = App\Product::where('slug', 'like', '%/%')->get();
