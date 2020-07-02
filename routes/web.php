@@ -93,9 +93,10 @@ Route::get('/brands/fetch/all', "BrandController@fetchAll");
 Route::get("/delete/duplicates", function(){
 
     $duplicates = DB::table('products') ->select('sku', DB::raw('COUNT(*) as `count`')) ->groupBy('sku') ->havingRaw('COUNT(*) > 1') ->get();
-    dd($duplicates);
+    //dd($duplicates);
     foreach($duplicates as $duplicate){
         $product = App\Product::where("sku", $duplicate->sku)->first();
+        dd($product);
         if($product)
         $product->delete();
     }
