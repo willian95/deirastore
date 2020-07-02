@@ -29,7 +29,7 @@ class IngramImport implements ToCollection
                 
                 if($index > 0 && $row[0] != ""){
                     
-                    if($row[16] > 0){
+                    //if($row[16] > 0){
 
                         //dd(substr($row[0], 11, strlen($row[0])));
                         $brandSlug = str_replace("-", "", $row[3]);
@@ -110,7 +110,7 @@ class IngramImport implements ToCollection
 
                         }
 
-                    }
+                    //}
 
                     //dd($product);
                     

@@ -161,10 +161,12 @@ class NexsysProducts extends Command
 
                             }else{
 
-                                $product = Product::where("sku", $value->sku)->first();
-                                $product->amount = $amount;
-                                $product->external_price = floatval($value->price);
-                                $product->update();
+                                $product = Product::where("sku", $value->sku)->where("data_source_id", 1)->first();
+                                if($product){
+                                    $product->amount = $amount;
+                                    $product->external_price = floatval($value->price);
+                                    $product->update();
+                                }
 
                             }
 
