@@ -94,7 +94,8 @@ Route::get("/delete/duplicates", function(){
 
     $duplicates = DB::table('products') ->select('sku', DB::raw('COUNT(*) as `count`')) ->groupBy('sku') ->havingRaw('COUNT(*) > 1') ->get();
     foreach($duplicates as $duplicate){
-        App\Product::where("sku", $duplicate->sku)->first()->delete();
+        $product = App\Product::where("sku", $duplicate->sku)->first();
+        $product->delete();
     }
 
 });
