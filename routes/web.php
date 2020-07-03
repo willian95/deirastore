@@ -17,19 +17,19 @@
 
 Route::get('/', "HomeController@index");
 
-Route::get("/test/success", function(){
+/*Route::get("/test/success", function(){
 
     return view("testSuccessPayment");
 
-});
+});*/
 
-Route::get("/test/failed", function(){
+/*Route::get("/test/failed", function(){
 
     return view("failedPayment");
 
-});
+});*/
 
-Route::get("/check/servertest", function(){
+/*Route::get("/check/servertest", function(){
 
     $products = App\Product::where("picture", "like",  "%http://%")->get();
     
@@ -41,7 +41,7 @@ Route::get("/check/servertest", function(){
 
     }
 
-});
+});*/
 
 /*Route::get("/test/mail", function(){
 
@@ -63,17 +63,17 @@ Route::post('/search', "HomeController@search");
 
 Route::get('/cart', 'CartController@index')->name('cart');
 Route::post('/cart', 'CartController@store')->name('cart.store');
-Route::post('/cart/update', 'CartController@update')->name('cart.update');
-Route::get('/cart/products', 'CartController@getItems')->name('cart.items');
-Route::post('/cart/delete', 'CartController@delete')->name('cart.delete');
+Route::post('/cart/update', 'CartController@update')->name('cart.update')->name('profile')->middleware("auth");
+Route::get('/cart/products', 'CartController@getItems')->name('cart.items')->name('profile')->middleware("auth");
+Route::post('/cart/delete', 'CartController@delete')->name('cart.delete')->name('profile')->middleware("auth");
 
-Route::get('/profile', 'ProfileController@index')->name('profile');
-Route::post('/profile', 'ProfileController@update')->name('profile.update');
+Route::get('/profile', 'ProfileController@index')->name('profile')->middleware("auth");
+Route::post('/profile', 'ProfileController@update')->name('profile.update')->middleware("auth");
 
 Route::get('/register', "RegisterController@index");
 Route::post('/register', "RegisterController@register");
 
-Route::get('/login', "LoginController@index");
+Route::get('/login', "LoginController@index")->name("login");
 Route::post('/login', "LoginController@logIn");
 Route::get('/logout', "LoginController@logout");
 
@@ -90,7 +90,7 @@ Route::get('brand/{slug}', "BrandController@slug")->name('brands.slug');
 Route::post('/brand/products', "BrandController@products")->name('brands.products');
 Route::get('/brands/fetch/all', "BrandController@fetchAll");
 
-Route::get("/delete/duplicates", function(){
+/*Route::get("/delete/duplicates", function(){
     ini_set('max_execution_time', 0);
     $duplicates = DB::table('products') ->select('sku', DB::raw('COUNT(*) as `count`')) ->groupBy('sku') ->havingRaw('COUNT(*) > 1') ->get();
 
@@ -99,11 +99,10 @@ Route::get("/delete/duplicates", function(){
         $product = DB::table('products')->where("sku", $duplicate->sku)->delete();
         //$product = App\Product::where("id", $duplicate->id)->first();
         //dd($product);
-        /*if($product)
-        $product->delete();*/
+        
     }
 
-});
+});*/
 
 /*Route::get('/check/slug', function(){
     ini_set('max_execution_time', 0);*/
@@ -140,7 +139,7 @@ Route::get("/delete/duplicates", function(){
 
 });*/
 
-Route::get("file_update", "FileController@update");
+//Route::get("file_update", "FileController@update");
 
 /*Route::get('/check/slug/slash', function(){
     ini_set('max_execution_time', 0);
@@ -228,7 +227,7 @@ Route::get('/categories', function(){
     return view('categories');
 });
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware('admin')->group(function () {
     
     Route::get('/dashboard', function(){
         return view('admin.dashboard');
