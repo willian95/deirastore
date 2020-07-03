@@ -140,7 +140,7 @@ Route::get("/delete/duplicates", function(){
 
 });*/
 
-//Route::get("file_update", "FileController@update");
+Route::get("file_update", "FileController@update");
 
 /*Route::get('/check/slug/slash', function(){
     ini_set('max_execution_time', 0);
