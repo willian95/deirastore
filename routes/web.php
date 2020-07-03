@@ -63,9 +63,9 @@ Route::post('/search', "HomeController@search");
 
 Route::get('/cart', 'CartController@index')->name('cart');
 Route::post('/cart', 'CartController@store')->name('cart.store');
-Route::post('/cart/update', 'CartController@update')->name('cart.update')->name('profile')->middleware("auth");
-Route::get('/cart/products', 'CartController@getItems')->name('cart.items')->name('profile')->middleware("auth");
-Route::post('/cart/delete', 'CartController@delete')->name('cart.delete')->name('profile')->middleware("auth");
+Route::post('/cart/update', 'CartController@update')->name('cart.update');
+Route::get('/cart/products', 'CartController@getItems')->name('cart.items');
+Route::post('/cart/delete', 'CartController@delete')->name('cart.delete');
 
 Route::get('/profile', 'ProfileController@index')->name('profile')->middleware("auth");
 Route::post('/profile', 'ProfileController@update')->name('profile.update')->middleware("auth");

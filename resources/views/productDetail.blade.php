@@ -4,7 +4,7 @@
 
     <div class="container bg">
         <div id="product-detail">
-            <section class="informacion-detalles container">
+            <section class="informacion-detalles container" v-cloak>
                 <div class="">
 
                     <div class="col-sm-12 banner-productos">
@@ -93,7 +93,7 @@
             </div>
             </section>
 
-            <div>
+            <div v-cloak>
                 <div class="beneficios">
                     <div class="row">
                         <div class="col-sm-4">
@@ -141,7 +141,7 @@
             </div>
 
 
-            <div class="presentacion">
+            <div class="presentacion" v-cloak>
                 <div class="row">
                     <div class="col-sm-12 ">
                         <div id="accordion">

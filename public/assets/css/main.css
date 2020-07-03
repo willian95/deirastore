@@ -47,6 +47,10 @@ body {
     background: #e6e6e6;
 }
 
+[v-cloak] {
+    display: none;
+}
+
 html {
     overflow-x: hidden;
 }

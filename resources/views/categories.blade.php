@@ -4,7 +4,7 @@
 
     <div class="container bg" id="dev-categories">
 
-        <div class="row">
+        <div class="row" v-cloak>
            <!--- <div class="col-12">
                 <a class="btn btn-primary btn-general btn-general--form" style="color: #fff;" href="{{ url()->previous() }}"><i class="fa fa-arrow-left"></i></a>
             </div>--->
@@ -12,7 +12,7 @@
         <div class="title__general fadeInUp wow animated">
             <p><strong>Todas las </strong>Categorias</p>
         </div>
-        <div class="">
+        <div class="" v-cloak>
             <ul class="categories__grid">
                 <div v-for="category in categories">
 

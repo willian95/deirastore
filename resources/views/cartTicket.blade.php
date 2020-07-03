@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="container pagina bg">
+    <div class="container pagina bg" v-cloak>
 
         <div class="row">
             

@@ -29,7 +29,7 @@
                     <a class="btn btn-primary btn-general btn-general--form" style="color: #fff;" href="{{ url()->previous() }}"><i class="fa fa-arrow-left"></i></a>
                 </div>-->
 
-                <div class="row">
+                <div class="row" v-cloak>
                     <div class="col-sm-12 ">
 
                         <div class="div-carrito">
@@ -101,15 +101,15 @@
 
                 </div>
 
-                <div class="text_shipping">
+                <div class="text_shipping" v-cloak>
                     <p>Hay productos que solo pueden ser retirados en nuestras dependencias. En ese caso solo se deplegará la opción "Retiro en tienda"</p>
                 </div>
 
 
-                <div class="title__general fadeInUp wow animated mt-5">
+                <div class="title__general fadeInUp wow animated mt-5" v-cloak>
                     <p><strong>Completa tus datos </strong>  para recibir tu compra</p>
                 </div>
-                <div class="row container">
+                <div class="row container" v-cloak>
                    
                    
                     <div class="col-lg-8 col-md-12">

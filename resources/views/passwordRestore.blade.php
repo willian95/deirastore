@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="container bg card-form">
+    <div class="container bg card-form" v-cloak>
         <div class="row center-form">
             <div class="col-lg-4  col-md-6  col-12">
                 <div class="card">

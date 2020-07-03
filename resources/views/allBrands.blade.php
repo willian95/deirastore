@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="container bg">
+    <div class="container bg" v-cloak>
        <!-- <div class="col-12">
             <a class="btn btn-primary btn-general btn-general--form" style="color: #fff;" href="{{ url()->previous() }}"><i class="fa fa-arrow-left"></i></a>
         </div>-->

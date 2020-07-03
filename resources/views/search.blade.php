@@ -8,7 +8,7 @@
                 <a class="btn btn-primary btn-general btn-general--form" style="color: #fff;" href="{{ url()->previous() }}"><i class="fa fa-arrow-left"></i></a>
             </div>
         </div>--->
-        <div class="row">
+        <div class="row" v-cloak>
             <div class="col-12">
                 <div class="title__general title__general-start fadeInUp wow animated pag-center">
                     <p><strong>Resultado de:</strong> @{{ searchText }}</p>
@@ -42,7 +42,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row" v-cloak>
             <div class="col-md-4 col-lg-3">
                 <div class="form-group">
                     <label for="">Ordernar por:</label>
@@ -58,7 +58,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row" v-cloak>
 
             <div class="col-3" v-for="product in products">
                 <div class="main-slider__item">
@@ -85,7 +85,7 @@
       
         </div>
 
-        <div class="row">
+        <div class="row" v-cloak>
             <div class="col-12">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination">

@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="container bg">
+    <div class="container bg" v-cloak>
     <div class="title__general title__general-start fadeInUp wow animated pag-center">
             <p><strong>Productos destacados</strong></p>
 
