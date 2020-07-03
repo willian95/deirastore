@@ -65,7 +65,7 @@ class NexsysProducts extends Command
             //ob_end_clean();
             //system('unzip CLPriceFileDeira.csv.zip');
             sleep(10);
-            Excel::import(new IngramImport, 'CLPriceFileDeira.csv');
+            Excel::import(new IngramImport, public_path('/').'CLPriceFileDeira.csv');
 
             Log::info("reading done");
 
