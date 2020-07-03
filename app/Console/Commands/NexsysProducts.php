@@ -68,7 +68,7 @@ class NexsysProducts extends Command
             Log::info($e->getMessage().", ln: ".$e->getLine());
         }
 
-        $url = "https://app.nexsysla.com/nexsysServiceSoap/NexsysServiceSoap?wsdl";
+        /*$url = "https://app.nexsysla.com/nexsysServiceSoap/NexsysServiceSoap?wsdl";
         $marks = [
             "3nStar",
             "Adata",
@@ -181,7 +181,7 @@ class NexsysProducts extends Command
             }catch(\SoapFault $fault){
                 Log::info($fault);
             }
-        }
+        }*/
     
     }
 }
