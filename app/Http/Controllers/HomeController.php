@@ -49,23 +49,26 @@ class HomeController extends Controller
 
         $synonymous =[
             [
+                "Pantalla",
+                "pantallas",
                 "monitor",
                 "monitores",
-                "pantalla",
-                "pantallas",
                 "screen",
                 "screens",
-            ],
-            [
-                "televisores",
+                "TV",
                 "televisor",
-                "tele",
-                "tv"
+                "televisores"
             ],
             [
-                "pc",
+                "Computadores",
                 "computador",
-                "computadores",
+                "pc",
+                "tablet",
+                "tablets",
+                "desktop",
+                "desktops",
+                "notebook",
+                "notebooks",
                 "computadora",
                 "computadoras",
                 "ordenador",
@@ -86,6 +89,44 @@ class HomeController extends Controller
             [
                 "lector",
                 "lectores"
+            ],
+            [
+                "Mouse",
+                "mouses",
+                "puntero",
+                "punteros",
+                "teclado",
+                "teclados",
+                "keypads",
+                "keypad"
+            ],
+            [
+                "Suministros",
+                "suministro",
+                "tinta",
+                "tintas",
+                "cartucho",
+                "cartuchos",
+                "toner",
+                "toner",
+                "cyan",
+                "magenta",
+                "yellow",
+                "black"
+            ],
+            [
+                "Scanner",
+                "scanners",
+                "escaner",
+                "escanner"
+            ],
+            [
+                "Impresoras",
+                "impresora",
+                "multifuncional",
+                "laser",
+                "pos",
+                "punto de venta"
             ]
         ];
 

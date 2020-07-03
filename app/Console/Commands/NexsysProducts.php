@@ -61,6 +61,8 @@ class NexsysProducts extends Command
 
             Excel::import(new IngramImport, 'CLPriceFileDeira.csv');
 
+            Log::info("reading done");
+
         }catch(\Exception $e){
             Log::info($e->getMessage().", ln: ".$e->getLine());
         }
