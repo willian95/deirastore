@@ -44,6 +44,11 @@ class NexsysProducts extends Command
      *
      * @return mixed
      */
+
+    function excelAction(){
+        
+    }
+
     public function handle()
     {
         ini_set("memory_limit","500M");
@@ -59,7 +64,7 @@ class NexsysProducts extends Command
             //ssh2_scp_recv($connection, '/home/ftpingram/CLPriceFileDeira.csv.zip', public_path('/')."CLPriceFileDeira.csv.zip");
             //ob_end_clean();
             //system('unzip CLPriceFileDeira.csv.zip');
-
+            sleep(10);
             Excel::import(new IngramImport, 'CLPriceFileDeira.csv');
 
             Log::info("reading done");
