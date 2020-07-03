@@ -9,8 +9,10 @@
                 <a class="btn btn-primary btn-general btn-general--form" style="color: #fff;" href="{{ url()->previous() }}"><i class="fa fa-arrow-left"></i></a>
             </div>
         </div>--->
-            
-        <h2>Términos y Condiciones sitio web Deira Store</h2>
+        <div class="title__general fadeInUp wow animated">
+            <p><strong>Términos y Condiciones </strong>sitio web Deira Store</p>
+        </div>
+       
 
         <strong>Tiempos de entrega y despachos:</strong>
         <ul>
