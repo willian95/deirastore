@@ -51,9 +51,23 @@ class NexsysProducts extends Command
 
     public function handle()
     {
-        ini_set("memory_limit","500M");
+        //ini_set("memory_limit","500M");
         ini_set('max_execution_time', 0);
+
+        try{
+
+            $filename='database_backup_'.date('G_a_m_d_y').'.sql';
+
+            $result=exec('mysqldump deira --password=cmarketing*2020Cl --user=root --single-transaction >/var/backups/'.$filename);
+
+        }catch(\Exception $e){
+            
+            Log::info($e->getMessage());
+            
+        }
+
         //$params = ["encoding" => "UTF-8", "verifypeer" => false, "verifyhost" => false];
+
         Log::info("monster alive");
         try{
 
@@ -73,7 +87,7 @@ class NexsysProducts extends Command
             Log::info($e->getMessage().", ln: ".$e->getLine());
         }
 
-        /*$url = "https://app.nexsysla.com/nexsysServiceSoap/NexsysServiceSoap?wsdl";
+        $url = "https://app.nexsysla.com/nexsysServiceSoap/NexsysServiceSoap?wsdl";
         $marks = [
             "3nStar",
             "Adata",
@@ -186,7 +200,7 @@ class NexsysProducts extends Command
             }catch(\SoapFault $fault){
                 Log::info($fault);
             }
-        }*/
+        }
     
     }
 }
