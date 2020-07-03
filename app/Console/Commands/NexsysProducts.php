@@ -44,6 +44,11 @@ class NexsysProducts extends Command
      *
      * @return mixed
      */
+
+    function excelAction(){
+        
+    }
+
     public function handle()
     {
         ini_set("memory_limit","500M");
@@ -55,17 +60,20 @@ class NexsysProducts extends Command
             $connection = ssh2_connect('200.27.164.195', 22);
             ssh2_auth_password($connection, 'root', 'Terminal*1');
 
-            ssh2_scp_recv($connection, '/home/ftpingram/CLPriceFileDeira.csv.zip', public_path('/')."/CLPriceFileDeira.csv.zip");
-            ob_end_clean();
-            system('unzip CLPriceFileDeira.csv.zip');
+            ssh2_scp_recv($connection, '/home/ftpingram/CLPriceFileDeira.csv', public_path('/')."CLPriceFileDeira.csv");
+            //ssh2_scp_recv($connection, '/home/ftpingram/CLPriceFileDeira.csv.zip', public_path('/')."CLPriceFileDeira.csv.zip");
+            //ob_end_clean();
+            //system('unzip CLPriceFileDeira.csv.zip');
+            sleep(10);
+            Excel::import(new IngramImport, public_path('/').'CLPriceFileDeira.csv');
 
-            Excel::import(new IngramImport, 'CLPriceFileDeira.csv');
+            Log::info("reading done");
 
         }catch(\Exception $e){
             Log::info($e->getMessage().", ln: ".$e->getLine());
         }
 
-        $url = "https://app.nexsysla.com/nexsysServiceSoap/NexsysServiceSoap?wsdl";
+        /*$url = "https://app.nexsysla.com/nexsysServiceSoap/NexsysServiceSoap?wsdl";
         $marks = [
             "3nStar",
             "Adata",
@@ -161,10 +169,12 @@ class NexsysProducts extends Command
 
                             }else{
 
-                                $product = Product::where("sku", $value->sku)->first();
-                                $product->amount = $amount;
-                                $product->external_price = floatval($value->price);
-                                $product->update();
+                                $product = Product::where("sku", $value->sku)->where("data_source_id", 1)->first();
+                                if($product){
+                                    $product->amount = $amount;
+                                    $product->external_price = floatval($value->price);
+                                    $product->update();
+                                }
 
                             }
 
@@ -176,7 +186,7 @@ class NexsysProducts extends Command
             }catch(\SoapFault $fault){
                 Log::info($fault);
             }
-        }
+        }*/
     
     }
 }

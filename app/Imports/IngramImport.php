@@ -24,13 +24,20 @@ class IngramImport implements ToCollection
 
             $index = 0;
             $counter = 0;
+            $counterRow = 0;
+            $nuevos = 0;
+            $actualizados= 0;
             foreach ($rows as $row) 
             {
                 
+
                 if($index > 0 && $row[0] != ""){
                     
-                    if($row[16] > 0){
-
+                    //if($row[16] > 0){
+                        /*echo $row[87]." - ".$row[3]."<br>";
+                        if($row[87] == ""){
+                            dd($row);
+                        }*/
                         //dd(substr($row[0], 11, strlen($row[0])));
                         $brandSlug = str_replace("-", "", $row[3]);
                         $brandSlug = str_replace(" ", "-", $brandSlug);
@@ -40,7 +47,7 @@ class IngramImport implements ToCollection
                         );
 
                         $categoryName = $row[87];
-
+                        
                         if($categoryName == "Printer/PlotterSupplies"){
                             $categoryName = "Printer/Plotter Supplies";
                         }
@@ -56,6 +63,8 @@ class IngramImport implements ToCollection
                         if($categoryName == "USB & FirewireConnectivity"){
                             $categoryName = "USB & Firewire Connectivity";
                         }
+
+                        
 
                         $categorySlug = str_replace("-", "", $row[87]);
                         $categorySlug = str_replace(" ", "-", $categorySlug);
@@ -79,7 +88,7 @@ class IngramImport implements ToCollection
                         if(Product::where('slug', $slug)->count() > 0){
                             $slug = $slug."-".uniqid();
                         }
-
+                        
                         if(Product::where("sku", $row[3])->count() <= 0){
 
                             $product = new Product;
@@ -100,6 +109,7 @@ class IngramImport implements ToCollection
                             $product->currency = $row[68];
                             $product->ingram_part_number = $row[0];
                             $product->save(); 
+                            $nuevos++;
 
                         }else{
 
@@ -107,11 +117,12 @@ class IngramImport implements ToCollection
                             $product->amount = $row[16];
                             $product->external_price = $row[56];
                             $product->update();
+                            $actualizados++;
 
                         }
 
-                    }
-
+                    //}
+                    $counter++;
                     //dd($product);
                     
                 }
