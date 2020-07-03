@@ -19,7 +19,7 @@ class FileController extends Controller
         ob_end_clean();
         system('unzip CLPriceFileDeira.csv.zip');
 
-        Excel::import(new IngramImport, 'CLPriceFileDeira.csv');
+        //Excel::import(new IngramImport, 'CLPriceFileDeira.csv');
 
     }
 }
