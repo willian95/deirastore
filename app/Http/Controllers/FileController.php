@@ -14,13 +14,13 @@ class FileController extends Controller
         ini_set('max_execution_time', 0);
         $connection = ssh2_connect('200.27.164.195', 22);
         ssh2_auth_password($connection, 'root', 'Terminal*1');
-        $stream = ssh2_exec($connection, 'unzip /home/ftpingram/CLPriceFileDeira.csv.zip');
-        //ssh2_scp_recv($connection, '/home/ftpingram/CLPriceFileDeira.csv.zip', public_path('/')."CLPriceFileDeira.csv.zip");
-        dd($stream);
+        //$stream = ssh2_exec($connection, 'unzip /home/ftpingram/CLPriceFileDeira.csv.zip');
+        ssh2_scp_recv($connection, '/home/ftpingram/CLPriceFileDeira.csv', public_path('/')."CLPriceFileDeira.csv");
+        //dd($stream);
         ob_end_clean();
-        system('unzip CLPriceFileDeira.csv.zip');
+        //system('unzip CLPriceFileDeira.csv.zip');
 
-        //Excel::import(new IngramImport, 'CLPriceFileDeira.csv');
+        Excel::import(new IngramImport, 'CLPriceFileDeira.csv');
 
     }
 }
