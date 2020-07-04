@@ -68,6 +68,33 @@ class CheckoutController extends Controller
 
 		if($response == null){
 
+			$payment = new Payment; // creamos un nuevo pago
+			$payment->order_id = session('order');
+			$payment->status = "rechazado";
+			
+			if(\Auth::check()){ //si el usuario está logueado
+				$payment->user_id = \Auth::user()->id; // añadimos el id de usuario
+			}
+			
+			else{//si no está loguestado
+				$payment->guest_id = session('guestUser'); // añadimos el id de invitado
+			
+			}
+
+			if(session("type") == "factura"){
+				$payment->ticket_type = "factura";
+			}else if(session("type") == "boleta"){
+				$payment->ticket_type = "boleta";
+			}
+
+			if(\Auth::guest()){
+				$payment->location_id = Guest::where("id", session('guestUser'))->first()->location_id;
+			}else{
+				$payment->location_id = \Auth::user()->location_id;
+			}
+
+			$payment->save();
+
 			return view('failedPayment');
 
 		}else{
