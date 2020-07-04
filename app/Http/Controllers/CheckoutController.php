@@ -47,7 +47,8 @@ class CheckoutController extends Controller
     
     public function response(WebpayPatPass $webpayPatPass)  
 	{  
-	  	$result = $webpayPatPass->getTransactionResult();    
+		$result = $webpayPatPass->getTransactionResult();  
+		dd($result);    
 		session(['response' => $result]);  
 
 		$webpayPatPass->acknowledgeTransaction();
@@ -62,7 +63,7 @@ class CheckoutController extends Controller
 		//dd($_POST, session('response')); 
 		
 		$response = session('response'); // obtenemos la respuesta de webpay
-		dd($response);
+		
 
 		//$this->checkout($response->detailOutput->responseCode);
 		//dd(session("cart"));
