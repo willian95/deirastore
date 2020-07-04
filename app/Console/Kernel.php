@@ -26,7 +26,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
-        $schedule->command('products:nexsys')->dailyAt('00:33');
+        $schedule->command('products:nexsys')->dailyAt('06:00');
     }
 
     /**
