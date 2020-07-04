@@ -70,7 +70,7 @@ class NexsysProducts extends Command
 
         //$params = ["encoding" => "UTF-8", "verifypeer" => false, "verifyhost" => false];
 
-        /*Log::info("monster alive");
+        Log::info("monster alive");
         try{
 
             $connection = ssh2_connect('200.27.164.195', 22);
@@ -202,7 +202,7 @@ class NexsysProducts extends Command
             }catch(\SoapFault $fault){
                 Log::info($fault);
             }
-        }*/
+        }
     
     }
 }
