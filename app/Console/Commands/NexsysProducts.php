@@ -55,10 +55,12 @@ class NexsysProducts extends Command
         ini_set('max_execution_time', 0);
 
         try{
-
+            Log::info("backup");
             $filename='database_backup_'.date('G_a_m_d_y').'.sql';
 
             $result=exec('mysqldump deira --password=cmarketing*2020Cl --user=admin --single-transaction >/var/backups/'.$filename);
+
+            Log::info("backup done");
 
         }catch(\Exception $e){
             
