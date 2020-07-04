@@ -58,7 +58,7 @@ class NexsysProducts extends Command
 
             $filename='database_backup_'.date('G_a_m_d_y').'.sql';
 
-            $result=exec('mysqldump deira --password=cmarketing*2020Cl --user=root --single-transaction >/var/backups/'.$filename);
+            $result=exec('mysqldump deira --password=cmarketing*2020Cl --user=admin --single-transaction >/var/backups/'.$filename);
 
         }catch(\Exception $e){
             
