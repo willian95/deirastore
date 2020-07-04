@@ -63,127 +63,136 @@ class CheckoutController extends Controller
 		
 		$response = session('response'); // obtenemos la respuesta de webpay
 		
-
 		//$this->checkout($response->detailOutput->responseCode);
 		//dd(session("cart"));
 
-		$payment = new Payment; // creamos un nuevo pago
-		$payment->order_id = session('order');
+		if($response == null){
 
-		if($response->detailOutput->responseCode == 0){ // si la respuesta de webpay es 0
-			$payment->status = "aprovado";
-		}
-		else{
-			$payment->status = "rechazado";
-		}
-		
-		if(\Auth::check()){ //si el usuario está logueado
-			$payment->user_id = \Auth::user()->id; // añadimos el id de usuario
-		}
-		
-		else{//si no está loguestado
-			$payment->guest_id = session('guestUser'); // añadimos el id de invitado
-		
-		}
+			return view('failedPayment');
 
-		if(session("type") == "factura"){
-			$payment->ticket_type = "factura";
-		}else if(session("type") == "boleta"){
-			$payment->ticket_type = "boleta";
-		}
-
-		if(\Auth::guest()){
-			$payment->location_id = Guest::where("id", session('guestUser'))->first()->location_id;
 		}else{
-			$payment->location_id = \Auth::user()->location_id;
-		}
+			
+			$payment = new Payment; // creamos un nuevo pago
+			$payment->order_id = session('order');
 
-		$payment->save();
+			if($response->detailOutput->responseCode == 0){ // si la respuesta de webpay es 0
+				$payment->status = "aprovado";
+			}
+			else{
+				$payment->status = "rechazado";
+			}
+			
+			if(\Auth::check()){ //si el usuario está logueado
+				$payment->user_id = \Auth::user()->id; // añadimos el id de usuario
+			}
+			
+			else{//si no está loguestado
+				$payment->guest_id = session('guestUser'); // añadimos el id de invitado
+			
+			}
 
-		if($response->detailOutput->responseCode == 0){
+			if(session("type") == "factura"){
+				$payment->ticket_type = "factura";
+			}else if(session("type") == "boleta"){
+				$payment->ticket_type = "boleta";
+			}
 
-			$carts = session("cart"); //obtenemos los productos de la sesión
-		
-			foreach($carts as $cart){
-				$product = Product::find($cart["id"]);
-				
-				$productPurchase = new ProductPurchase;
-				
-				if(\Auth::check()){
-					$productPurchase->user_id = \Auth::user()->id;
-				}else{
-					$productPurchase->guest_id = session('guestUser');
-				}
-				
-				if(isset($cart["shipping_method"])){
-					if($cart["shipping_method"] == 2){
-						$productPurchase->shipping_method = "despacho";
+			if(\Auth::guest()){
+				$payment->location_id = Guest::where("id", session('guestUser'))->first()->location_id;
+			}else{
+				$payment->location_id = \Auth::user()->location_id;
+			}
+
+			$payment->save();
+
+			if($response->detailOutput->responseCode == 0){
+
+				$carts = session("cart"); //obtenemos los productos de la sesión
+			
+				foreach($carts as $cart){
+					$product = Product::find($cart["id"]);
+					
+					$productPurchase = new ProductPurchase;
+					
+					if(\Auth::check()){
+						$productPurchase->user_id = \Auth::user()->id;
+					}else{
+						$productPurchase->guest_id = session('guestUser');
+					}
+					
+					if(isset($cart["shipping_method"])){
+						if($cart["shipping_method"] == 2){
+							$productPurchase->shipping_method = "despacho";
+						}else{
+							$productPurchase->shipping_method = "retiro";
+						}
 					}else{
 						$productPurchase->shipping_method = "retiro";
 					}
-				}else{
-					$productPurchase->shipping_method = "retiro";
+
+					if(isset($cart["shipping_cost"])){
+						$productPurchase->shipping_cost = $cart["shipping_cost"];
+					}else{
+						$productPurchase->shipping_cost = 0;
+					}
+					
+					
+					$productPurchase->payment_id = $payment->id;
+					$productPurchase->product_id = $cart["id"];
+					$productPurchase->amount = $cart["amount"];
+					
+					if($product->percentage_range_profit != 0 && $product->percentage_range_profit != null){
+						$productPurchase->price = intval($product->price_range_profit * DolarPrice::first()->price) + 1;
+					}else{
+						$productPurchase->price = intval($product->external_price * App\DolarPrice::first()->price) + 1;
+					}
+
+					/*if($product->external_price > 0 && $product->price_range_profit == 0){ //si el producto cuenta con precio externo mayor a 0 y precio = 0
+						$productPurchase->price = intval(($product->external_price * DolarPrice::first()->price) + 1); //multiplica el precio en USD por el valor en CLP
+					}else if($product->external_price > 0 && $product->price_range_profit == 0){	
+						$productPurchase->price = intval(($product->price_range_profit * DolarPrice::first()->price) + 1);
+					}*/
+
+					$productPurchase->save();
+
+					$product->amount = $product->amount - $cart["amount"]; // descontamos del inventario
+					$product->update();
+
 				}
 
-				if(isset($cart["shipping_cost"])){
-					$productPurchase->shipping_cost = $cart["shipping_cost"];
-				}else{
-					$productPurchase->shipping_cost = 0;
-				}
-				
-				
-				$productPurchase->payment_id = $payment->id;
-				$productPurchase->product_id = $cart["id"];
-				$productPurchase->amount = $cart["amount"];
-				
-				if($product->percentage_range_profit != 0 && $product->percentage_range_profit != null){
-					$productPurchase->price = intval($product->price_range_profit * DolarPrice::first()->price) + 1;
-				}else{
-					$productPurchase->price = intval($product->external_price * App\DolarPrice::first()->price) + 1;
+				$payment = Payment::where('order_id', session('order'))->first(); //obtenemos el pago registrado en la funcion checkout
+				$products = ProductPurchase::with('product')->where('payment_id', $payment->id)->get();
+				$this->sendMessage($products);
+				$name = "";
+				if(\Auth::guest()){
+
+					$name = session('name');
+					session()->forget(["cart", "email", "name", "response"]);
+					session()->flush();
+					session()->save();
+
 				}
 
-				/*if($product->external_price > 0 && $product->price_range_profit == 0){ //si el producto cuenta con precio externo mayor a 0 y precio = 0
-					$productPurchase->price = intval(($product->external_price * DolarPrice::first()->price) + 1); //multiplica el precio en USD por el valor en CLP
-				}else if($product->external_price > 0 && $product->price_range_profit == 0){	
-					$productPurchase->price = intval(($product->price_range_profit * DolarPrice::first()->price) + 1);
-				}*/
+				$type = session("type");
+				$user = null;
 
-				$productPurchase->save();
+				if(\Auth::check()){
+					$user = User::where("id", \Auth::user()->id)->first();
+				}else{
+					$user = Guest::where("id", session('guestUser'))->first();
+				}
 
-				$product->amount = $product->amount - $cart["amount"]; // descontamos del inventario
-				$product->update();
+				return view('successPayment', ["products" => $products, "type" => $type, "user" => $user, "payment" => $payment]);
 
-			}
-
-			$payment = Payment::where('order_id', session('order'))->first(); //obtenemos el pago registrado en la funcion checkout
-			$products = ProductPurchase::with('product')->where('payment_id', $payment->id)->get();
-			$this->sendMessage($products);
-			$name = "";
-			if(\Auth::guest()){
-
-				$name = session('name');
-				session()->forget(["cart", "email", "name", "response"]);
-				session()->flush();
-				session()->save();
-
-			}
-
-			$type = session("type");
-			$user = null;
-
-			if(\Auth::check()){
-				$user = User::where("id", \Auth::user()->id)->first();
+			
+			
 			}else{
-				$user = Guest::where("id", session('guestUser'))->first();
+				return view('failedPayment');
 			}
 
-			return view('successPayment', ["products" => $products, "type" => $type, "user" => $user, "payment" => $payment]);
+		}
 
 		
-		
-		}else{
-			return view('failedPayment');
-		}
 
 	  // Acá buscar la transacción en tu base de datos y ver si fue exitosa o fallida, para mostrar el mensaje de gracias o de error según corresponda
 	}
