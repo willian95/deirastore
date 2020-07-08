@@ -157,11 +157,9 @@
                                         <div class="main-shop__card-item">
                                         <!--    <a href="{{ url('/product/'.$product->slug) }}"> -->
                                             <span> 
-                                                @if($product->is_external == false)
-                                                    <img style="width: 100%;" src="{{ asset('/images/products/'.$product->picture) }}" alt="">
-                                                @else
+                                            
                                                     <img style="width: 100%;" src="{{ $product->picture }}" alt="">
-                                                @endif
+                                               
                                             </span>
                                         </div>
 
