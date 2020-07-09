@@ -1,7 +1,7 @@
 @media (max-width: 767px) {
     .offcanvas-collapse {
         position: fixed;
-        top: 50px;
+        top: 39px!important;
         bottom: 0;
         left: 100%;
         width: 100%;
@@ -537,11 +537,18 @@
     }
 
     .main-menu__top-item .btn__user a {
-        height: 30px;
-        width: 30px;
+        height: 39px;
+        width: 39px!important;
         box-shadow: 0px 0px 12px #0000002b;
     }
-
+    .active_user {
+      
+        margin-left: -55px;
+    }
+    .main-menu__top-item ul {
+ 
+        margin-left: -50px;
+    }
     .main-menu__top-item {
         text-align: center;
         display: flex;
@@ -555,7 +562,8 @@
     }
 
     .logo {
-        width: 75%;
+        width: 85%;
+
     }
     .tiendas_content{
         display: block!important;
@@ -623,8 +631,14 @@
     }
 
     .table-bordered {
+        width: 1000px;
+    }
+    .table-bordered .form-control {
 
-        width: 550px;
+        width: 96%;
+       
+        font-size: .9rem;
+  
     }
 
     .div-carrito .col-md-8 {
@@ -706,7 +720,7 @@
     }
 
     .user_content {
-        display: none !important;
+     
     }
 
     .main-admin .navbar {
