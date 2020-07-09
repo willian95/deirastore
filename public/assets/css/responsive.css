@@ -520,7 +520,7 @@
     }
 
     header {
-        height: 18vh;
+        height: 15vh;
     }
 
     .btn__user a {
@@ -550,7 +550,7 @@
 
     .fixed-top {
         position: absolute;
-        top: 4%;
+        top: 3%;
         left: 83%;
     }
 
