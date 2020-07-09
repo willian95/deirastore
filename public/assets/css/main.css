@@ -112,6 +112,7 @@ section {
 
 .top-cero {}
 
+
 .navbar-nav .nav-link {
     padding-right: 1.5rem !important;
     /*color: #171717;*/
@@ -2299,6 +2300,12 @@ img.lista-pedido {
 .nav-item:nth-child(6) {
     list-style: unset !important;
     color: #3e3e3e;
+    margin-left: 0;
+}
+
+.navbar-custom{
+    list-style: unset !important;
+    color: #fff !important;
     margin-left: 0;
 }
 
