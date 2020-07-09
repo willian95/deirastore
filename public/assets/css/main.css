@@ -609,12 +609,15 @@ header {
     background: #fff;
     height: 200px;
     /* width: 150px; */
-    padding: 30px;
+    padding: 0;
     cursor: pointer;
     text-align: center;
     text-decoration: none;
     margin-left: -1px;
     transition: .5s;
+    justify-content: center;
+    align-items: center;
+    display: flex;
 
 
 }
