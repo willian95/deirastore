@@ -42,7 +42,7 @@
 
 
         <div class="row">
-            <div class="col-md-3 col-xs-12 " v-for="brand in brands">
+            <div class="col-md-3 col-xs-6 " v-for="brand in brands">
                 <div class="main-slider__item">
                     <a :href="'{{ url('/') }}' + '/brand/' + brand.slug">
                         <div class="content-slider brands-center">
