@@ -228,8 +228,9 @@
 
         height: 30vh;
     }
+
     .grid__datos__item p {
- 
+
         font-size: .8rem;
     }
 
@@ -341,7 +342,7 @@
 
     }
 
- 
+
     .main-admin .navbar {
 
         width: 170px;
@@ -363,7 +364,8 @@
         grid-template-columns: 50% 10% 10%;
 
     }
-    .table_nav{
+
+    .table_nav {
         margin-left: 10%;
     }
 }
@@ -518,21 +520,26 @@
     header {
         height: 18vh;
     }
-    .btn__user   a {
-      
-        margin: 0!important;
+
+    .btn__user a {
+
+        margin: 0 !important;
     }
+
     .btn__user img {
         width: 16px;
     }
+
     button:focus {
         outline: 0px auto transparent;
     }
-    .main-menu__top-item .btn__user   a {
+
+    .main-menu__top-item .btn__user a {
         height: 30px;
         width: 30px;
         box-shadow: 0px 0px 12px #0000002b;
     }
+
     .main-menu__top-item {
         text-align: center;
         display: flex;
@@ -673,7 +680,8 @@
         width: 40px;
         box-shadow: 0px 0px 12px #0000002b;
     }
-    #total{
+
+    #total {
         display: none;
     }
 
@@ -768,64 +776,95 @@
 
         padding-left: 12px;
     }
-    .grid,.grid__datos{
-        grid-template-columns: 1fr ;
+
+    .grid,
+    .grid__datos {
+        grid-template-columns: 1fr;
     }
-    .grid__datos__item .text-justify ,.text-justify{
+
+    .grid__datos__item .text-justify,
+    .text-justify {
         text-align: justify !important;
         font-size: 1.2rem;
     }
+
     .info-success {
-      
+
         overflow-x: scroll;
     }
+
     .colunm {
-    
+
         margin-top: 50px;
     }
+
     .info__sucess {
-    
+
         flex-direction: column;
     }
+
     .info__sucess .card {
         width: -webkit-fill-available;
         border: 0;
     }
+
     .main-banner__img {
         height: 400px;
         width: 100%;
     }
-    body, html{
+
+    body,
+    html {
         overflow-x: hidden;
     }
+
     .pag-center {
         display: block;
-   
-    }
-    .page-link {
-     
-        font-size: .9rem!important;
 
     }
+
+    .page-link {
+
+        font-size: .9rem !important;
+
+    }
+
     .compra-protegida img {
         width: 20%;
         text-align: center;
     }
-    .compra-protegida .col-sm-8{
+
+    .compra-protegida .col-sm-8 {
         text-align: center;
     }
-    .compra-protegida .col-sm-4{
+
+    .compra-protegida .col-sm-4 {
         text-align: center;
     }
-    .h2, h2 {
+
+    .h2,
+    h2 {
         font-size: 1.5rem;
     }
+
     .table-bordered {
-      
+
         margin-left: 7%;
-       
+
     }
-    .div-carrito .col-md-12 ,.div-carrito .col-lg-8{
+
+    .div-carrito .col-md-12,
+    .div-carrito .col-lg-8 {
         overflow: scroll;
+    }
+
+    .main-banner__card-img img {
+        height: auto;
+        object-fit: contain;
+    }
+    .main-banner__card-img {
+     
+        height: auto;
+    
     }
 }
