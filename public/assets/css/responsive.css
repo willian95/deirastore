@@ -449,6 +449,7 @@
 
     .main-categorias-txt {
         height: auto;
+        overflow: hidden;
     }
 
     .title__general p::after {
@@ -465,12 +466,12 @@
     }
 
     .main-categorias__content .slick-next {
-        right: 50px;
+        right: 10px;
     }
 
     .main-categorias__content {
-        padding-left: 50px;
-        padding-right: 50px;
+        padding-left: 25px;
+        padding-right: 25px;
     }
 
     .main-banner__card-img:nth-child(2) .title strong {
@@ -866,5 +867,9 @@
      
         height: auto;
     
+    }
+    .main-categorias-txt {
+        height: auto;
+        padding: 20px;
     }
 }
