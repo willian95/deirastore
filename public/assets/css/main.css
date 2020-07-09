@@ -604,7 +604,9 @@ header {
 .main-categorias__item {
     width: 100px;
 }
-
+.tiendas_content{
+    display: none!important;
+}
 .main-categorias-txt {
     background: #fff;
     height: 200px;
