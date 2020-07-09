@@ -109,6 +109,10 @@
                         <a class="nav-link" href="{{ url('/somos') }}">Quiénes somos</a>
                     </li>
 
+                    <li class="nav-item show-on-mobile">
+                        <a class="nav-link" href="{{ url('/best/stores') }}">Mejores Tiendas</a>
+                    </li>
+
                     <li class="navbar-expand-md  navbar-hover ">
                         <div class="collapse navbar-collapse m-0" id="navbarHover">
                             <ul class="navbar-nav">      

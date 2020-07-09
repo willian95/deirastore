@@ -1,4 +1,9 @@
 @media (max-width: 767px) {
+
+    .show-on-mobile{
+        display: block;
+    }
+
     .offcanvas-collapse {
         position: fixed;
         top: 50px;

@@ -19,6 +19,7 @@
                         <p class="title">DEIRA STORE</p>
                         <li><a href="{{ url('/brands/all') }}">Marcas</a></li>
                         <li><a href="{{ url('/categories') }}">Categorías</a></li>
+                        <li><a href="{{ url('/best/stores') }}">Mejores Tiendas</a></li>
                         <li><a href="{{ url('/products/destacados') }}">Productos Destacados</a></li>
                         <li><a href="{{ url('/somos') }}">Quienes somos</a></li>
                     </ul>

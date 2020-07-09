@@ -2589,3 +2589,7 @@ img.lista-pedido {
     justify-content: center;
     align-items: center;
 }
+
+.show-on-mobile{
+    display: none;
+}
