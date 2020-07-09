@@ -2302,7 +2302,7 @@ img.lista-pedido {
     margin-left: 0;
 }
 
-.navbar-custom:nth-child(4), .navbar-custom:nth-child(5){
+.navbar-custom{
     list-style: unset !important;
     color: #fff !important;
     margin-left: 0;
