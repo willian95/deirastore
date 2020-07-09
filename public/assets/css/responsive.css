@@ -450,6 +450,7 @@
     .main-categorias-txt {
         height: auto;
         overflow: hidden;
+        height: 30vh;
     }
 
     .title__general p::after {
@@ -669,12 +670,7 @@
         justify-content: center !important;
     }
 
-    .cart__btn {
-        position: fixed;
-        bottom: 30px;
-        z-index: 999;
-        right: 9px;
-    }
+
 
     .main-menu__top-item ul li a {
         height: 40px;
@@ -870,6 +866,20 @@
     }
     .main-categorias-txt {
         height: auto;
-        padding: 20px;
+        padding: 0;
+        height: 30vh;
+    }
+    .main-categorias__content .slick-slide img {
+ 
+        padding: 15px;
+    }
+    .main-slider__text .title {
+        font-size: 1rem;
+
+        line-height: 1.2;
+      
+    }
+    .main-slider__content .slick-slide {
+        margin-left: 0px !important;
     }
 }
