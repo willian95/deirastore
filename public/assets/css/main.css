@@ -114,7 +114,8 @@ section {
 
 .navbar-nav .nav-link {
     padding-right: 1.5rem !important;
-    color: #171717;
+    /*color: #171717;*/
+    color: #fff;
     font-size: 1.2rem;
 }
 
