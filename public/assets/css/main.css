@@ -604,21 +604,30 @@ header {
 .main-categorias__item {
     width: 100px;
 }
-
+.tiendas_content{
+    display: none!important;
+}
 .main-categorias-txt {
     background: #fff;
     height: 200px;
     /* width: 150px; */
-    padding: 30px;
+    padding: 0;
     cursor: pointer;
     text-align: center;
     text-decoration: none;
     margin-left: -1px;
     transition: .5s;
+    justify-content: center;
+    align-items: center;
+    display: flex;
 
 
 }
 
+.grid-marcas{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
 .main-categorias__content .slick-list{
     height:200px;
 }

@@ -174,6 +174,46 @@
 
                 </div>
             </div>
+
+
+
+            <!---xs-->
+            <div class="container">
+                <div class="main-shop__grid tiendas_content">
+                    @foreach($brands as $brand)
+                        
+                        <a href="{{ url('/brand/'.$brand->brand->slug) }}">
+                            <div class="main-shop__item">
+                                
+                                @if($brand->brand->image != null)
+                                    <img class="style-marcas"  src="{{ asset('/images/brands/'.$brand->brand->image) }}" alt="">
+                                @else
+                                    <img class="style-marcas"  src="{{ asset('/images/brands/default.png') }}" alt="">
+                                @endif
+                                
+                                <p>{{ $brand->brand->name }}</p>
+                                <div class="main-shop__card">
+                                    @foreach(App\Product::where('brand_id', $brand->brand_id)->whereNotNull("picture")->where("picture", "<>", "")->orderBy('id', 'desc')->limit(3)->get() as $product)
+                                        <div class="main-shop__card-item">
+                                        <!--    <a href="{{ url('/product/'.$product->slug) }}"> -->
+                                            <span> 
+                                            
+                                                    <img style="width: 100%;" src="{{ $product->picture }}" alt="">
+                                               
+                                            </span>
+                                        </div>
+
+                                    @endforeach
+
+                                </div>
+                              Ver tienda
+                            </div><!---main-shop__item ---></a>
+                        
+
+                    @endforeach
+
+                </div>
+            </div>
         </section>
         <!-- producto destacado -->
         <section>
