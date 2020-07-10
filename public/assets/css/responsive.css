@@ -124,7 +124,18 @@
         transform: translate3d(0, -20px, 0) rotate(-270deg);
         transition-delay: 0.075s;
     }
+    .nav-item:nth-child(4){
+        color: #fff;
+    }
 
+    .tiendas_content .slick-next {
+        right: 10px;
+    }
+    .tiendas_content .slick-prev {
+        right: auto;
+        z-index: 1;
+        left: -19px;
+    }
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {

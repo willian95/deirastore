@@ -38,6 +38,7 @@ $('.tiendas_content').slick({
   infinite: true,
   autoplay: false,
   slidesToShow: 1,
+
   slidesToScroll: 1,
   dots: true,
   fade: true,
@@ -64,7 +65,7 @@ $('.tiendas_content').slick({
       slidesToScroll: 1,
       dots: false,
       autoplay: false,
-      arrows: false,
+      arrows: true,
       autoplaySpeed: 1000
     }
   }
