@@ -203,6 +203,26 @@ class NexsysProducts extends Command
                 Log::info($fault);
             }
         }
+
+        $products = Product::where("picture", "like", '%'."http://".'%')->get();
+
+        foreach($products as $product){
+            
+            $modelProduct = Product::where("id", $product->id)->first();
+            $modelProduct->picture = str_replace("http://", "https://", $product->picture);
+            $modelProduct->update();
+
+        }
+
+        $products = Product::whereIsNull("picture")->get();
+
+        foreach($products as $product){
+            
+            $modelProduct = Product::where("id", $product->id)->first();
+            $modelProduct->picture = "https://servertest.sytes.net/deirastore/public/images/not_found.svg";
+            $modelProduct->update();
+
+        }
     
     }
 }
