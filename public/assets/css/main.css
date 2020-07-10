@@ -112,9 +112,11 @@ section {
 
 .top-cero {}
 
+
 .navbar-nav .nav-link {
     padding-right: 1.5rem !important;
-    color: #171717;
+    /*color: #171717;*/
+    color: #fff;
     font-size: 1.2rem;
 }
 
@@ -2294,10 +2296,15 @@ img.lista-pedido {
 
 .categories__grid .nav-item:nth-child(3),
 .nav-item:nth-child(4),
-.nav-item:nth-child(5),
-.nav-item:nth-child(6) {
+.nav-item:nth-child(7) {
     list-style: unset !important;
     color: #3e3e3e;
+    margin-left: 0;
+}
+
+.navbar-custom{
+    list-style: unset !important;
+    color: #fff !important;
     margin-left: 0;
 }
 
@@ -2597,4 +2604,8 @@ img.lista-pedido {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.show-on-mobile{
+    display: none;
 }

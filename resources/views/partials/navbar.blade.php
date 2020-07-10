@@ -91,22 +91,26 @@
             <div class="navbar-collapse offcanvas-collapse">
                 <ul class="navbar-nav m-auto">
 
-                    <li class="nav-item">
+                    <li class="nav-item navbar-custom">
                         <a class="nav-link" href="{{ route('brands.all') }}">Marcas </a>
                     </li>
 
                       
-                    <li class="nav-item">
+                    <li class="nav-item navbar-custom">
                         <a class="nav-link" href="{{ url('/categories') }}">
                             Categorías
                         </a>
                     </li>
                             
-                    <li class="nav-item">
+                    <li class="nav-item navbar-custom">
                         <a class="nav-link" href="{{ url('/products/destacados') }}">Productos Destacados</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item navbar-custom">
                         <a class="nav-link" href="{{ url('/somos') }}">Quiénes somos</a>
+                    </li>
+
+                    <li class="nav-item show-on-mobile navbar-custom">
+                        <a class="nav-link" href="{{ url('/best/stores') }}">Mejores Tiendas</a>
                     </li>
 
                     <li class="navbar-expand-md  navbar-hover ">
