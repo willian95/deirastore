@@ -2294,7 +2294,12 @@ img.lista-pedido {
     align-items: center;
 }
 
-.categories__grid .nav-item:nth-child(3),
+.nav-item{
+    list-style: none;
+    color: #3e3e3e;
+}
+
+/*.categories__grid .nav-item:nth-child(3),
 .nav-item:nth-child(4),
 .nav-item:nth-child(7) {
     list-style: unset !important;
@@ -2306,7 +2311,7 @@ img.lista-pedido {
     list-style: unset !important;
     color: #fff !important;
     margin-left: 0;
-}
+}*/
 
 .brands-center {
     display: flex;

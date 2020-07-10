@@ -113,7 +113,7 @@
                         <a class="nav-link" href="{{ url('/best/stores') }}">Mejores Tiendas</a>
                     </li>
 
-                    <li class="navbar-expand-md  navbar-hover ">
+                    <li class="navbar-expand-md  navbar-hover nav-item">
                         <div class="collapse navbar-collapse m-0" id="navbarHover">
                             <ul class="navbar-nav">      
                                
