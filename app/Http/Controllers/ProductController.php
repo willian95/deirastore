@@ -83,6 +83,7 @@ class ProductController extends Controller
             $product->location = $request->location;
             $product->warranty = $request->warranty;
             $product->color = $request->color;
+            $product->data_source_id = 0;
             $product->is_external = false;
             $product->save();
 
