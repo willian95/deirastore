@@ -210,6 +210,8 @@ class CheckoutController extends Controller
 					$user = Guest::where("id", session('guestUser'))->first();
 				}
 
+				dd($user);
+
 				return view('successPayment', ["products" => $products, "type" => $type, "user" => $user, "payment" => $payment]);
 
 			
