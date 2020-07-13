@@ -192,14 +192,7 @@ class CheckoutController extends Controller
 				$products = ProductPurchase::with('product')->where('payment_id', $payment->id)->get();
 				$this->sendMessage($products);
 				$name = "";
-				if(\Auth::guest()){
-
-					$name = session('name');
-					session()->forget(["cart", "email", "name", "response"]);
-					session()->flush();
-					session()->save();
-
-				}
+				
 
 				$type = session("type");
 				$user = null;
@@ -208,6 +201,15 @@ class CheckoutController extends Controller
 					$user = User::where("id", \Auth::user()->id)->first();
 				}else{
 					$user = Guest::where("id", session('guestUser'))->first();
+				}
+
+				if(\Auth::guest()){
+
+					$name = session('name');
+					session()->forget(["cart", "email", "name", "response"]);
+					session()->flush();
+					session()->save();
+
 				}
 
 				dd($user);
