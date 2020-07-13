@@ -212,8 +212,6 @@ class CheckoutController extends Controller
 
 				}
 
-				dd($user);
-
 				return view('successPayment', ["products" => $products, "type" => $type, "user" => $user, "payment" => $payment]);
 
 			
