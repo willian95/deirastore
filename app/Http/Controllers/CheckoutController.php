@@ -62,7 +62,7 @@ class CheckoutController extends Controller
 		//dd($_POST, session('response')); 
 		
 		$response = session('response'); // obtenemos la respuesta de webpay
-		
+		dd(session('guestUser'));
 		//$this->checkout($response->detailOutput->responseCode);
 		//dd(session("cart"));
 
@@ -126,7 +126,7 @@ class CheckoutController extends Controller
 			}
 
 			if(\Auth::guest()){
-				dd(session("guestUser"));
+				
 				$payment->location_id = Guest::where("id", session('guestUser'))->first()->location_id;
 			}else{
 				$payment->location_id = \Auth::user()->location_id;
