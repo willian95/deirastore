@@ -88,6 +88,7 @@ class CheckoutController extends Controller
 			}
 
 			if(\Auth::guest()){
+				dd(session("guestUser"));
 				$payment->location_id = Guest::where("id", session('guestUser'))->first()->location_id;
 			}else{
 				$payment->location_id = \Auth::user()->location_id;
