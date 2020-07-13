@@ -54,7 +54,6 @@ class ProductController extends Controller
 
         }
 
-
         try{
             
             $slug = str_replace(" ", "-", $request->name);
@@ -73,8 +72,8 @@ class ProductController extends Controller
             $product->description = $request->description;
             $product->category_id = $request->categoryId;
             $product->brand_id = $request->brandId;
-            $product->sku = $request->sku;
-            $product->vpn = $request->vpn;
+            $product->sku = $request->vpn;
+            //$product->vpn = $request->vpn;
             $product->min_description = $request->min_description;
             $product->product_type = $request->product_type;
             $product->product_material = $request->product_material;
@@ -91,7 +90,7 @@ class ProductController extends Controller
 
         }catch(\Exception $e){
 
-            return response()->json(["success" => false, "msg" => "Error en el servidor"]);
+            return response()->json(["success" => false, "msg" => "Error en el servidor", "err" => $e->getMessage(), "ln" => $e->getLine()]);
 
         }
 
