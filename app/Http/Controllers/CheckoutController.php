@@ -61,8 +61,7 @@ class CheckoutController extends Controller
 	{
 		//dd($_POST, session('response')); 
 		
-		$response = session('response'); // obtenemos la respuesta de webpay
-		dd(session('guestUser'));
+		$response = session('response'); // obtenemos la respuesta de webpa
 		//$this->checkout($response->detailOutput->responseCode);
 		//dd(session("cart"));
 
@@ -355,6 +354,7 @@ class CheckoutController extends Controller
 					$guest->save();
 
 					$guestUserId = $guest->id;
+					session(["guestUser" => $guest->id]);
 
 				}else{
 					session(["guestUser" => Guest::where("rut", $request->guestUser["rut"])->first()->id]);
