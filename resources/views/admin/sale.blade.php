@@ -86,15 +86,15 @@
                             </div>
                             <div class="col-4">
                                 <p><strong>Tipo de facturación</strong></p>
-                                <p>@{{ saleDetails.ticket_type }}/p>
+                                <p>@{{ saleDetails.ticket_type }}</p>
                             </div>
                             <div class="col-4" v-if="saleDetails.user">
                                 <p><strong>Nombre</strong></p>
-                                <p>@{{ saleDetails.user.name }}/p>
+                                <p>@{{ saleDetails.user.name }}</p>
                             </div>
                             <div class="col-4" v-if="saleDetails.user">
                                 <p><strong>Rut</strong></p>
-                                <p>@{{ saleDetails.user.rut }}/p>
+                                <p>@{{ saleDetails.user.rut }}</p>
                             </div>
                             <div class="col-4" v-if="saleDetails.user">
                                 <p><strong>Celular</strong></p>
@@ -102,23 +102,23 @@
                             </div>
                             <div class="col-4" v-if="saleDetails.user">
                                 <p><strong>Email</strong></p>
-                                <p>@{{ saleDetails.user.email }}/p>
+                                <p>@{{ saleDetails.user.email }}</p>
                             </div>
                             <div class="col-4" v-if="saleDetails.guest">
                                 <p><strong>Nombre</strong></p>
-                                <p>@{{ saleDetails.guest.name }}/p>
+                                <p>@{{ saleDetails.guest.name }}</p>
                             </div>
                             <div class="col-4" v-if="saleDetails.guest">
                                 <p><strong>Rut</strong></p>
-                                <p>@{{ saleDetails.guest.rut }}/p>
+                                <p>@{{ saleDetails.guest.rut }}</p>
                             </div>
                             <div class="col-4" v-if="saleDetails.guest">
                                 <p><strong>Celular</strong></p>
-                                <p>@{{ saleDetails.guest.phone }}/p>
+                                <p>@{{ saleDetails.guest.phone }}</p>
                             </div>
                             <div class="col-4" v-if="saleDetails.guest">
                                 <p><strong>Email</strong></p>
-                                <p>@{{ saleDetails.guest.email }}/p>
+                                <p>@{{ saleDetails.guest.email }}</p>
                             </div>
                         </div>
                     </div>
