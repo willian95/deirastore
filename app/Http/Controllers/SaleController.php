@@ -19,7 +19,7 @@ class SaleController extends Controller
 
             $skip = ($request->page-1) * 10;
 
-            $sales = Payment::with('user', 'guest', 'productPurchase', 'productPurchase.product', "user.location")->skip($skip)->take(10)->get();
+            $sales = Payment::with('user', 'guest', 'productPurchase', 'productPurchase.product', "user.location", "user.commune", "guest.location", "guest.commune")->skip($skip)->take(10)->get();
             $salesCount = Payment::with('productPurchase')->with('productPurchase.product')->count();
 
             return response()->json(["success" => true, "sales" => $sales, "salesCount" => $salesCount]);
