@@ -42,6 +42,6 @@ class User extends Authenticatable
     }
 
     public function location(){
-        return $this->belongsTo(Region::class, "id");
+        return $this->belongsTo(Region::class, "location_id");
     }
 }
