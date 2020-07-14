@@ -13,4 +13,12 @@ class Guest extends Model
         return $this->hasMany(Payment::class);
     }
 
+    public function location(){
+        return $this->belongsTo(Region::class, "location_id");
+    }
+
+    public function commune(){
+        return $this->belongsTo(Commune::class, "comune_id");
+    }
+
 }

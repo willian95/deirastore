@@ -11,4 +11,8 @@ class Region extends Model
     public function users(){
         return $this->hasMany(User::class, "location_id");
     }
+
+    public function guests(){
+        return $this->hasMany(Guest::class, "location_id");
+    }
 }

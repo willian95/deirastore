@@ -44,4 +44,9 @@ class User extends Authenticatable
     public function location(){
         return $this->belongsTo(Region::class, "location_id");
     }
+
+    public function commune(){
+        return $this->belongsTo(Commune::class, "comune_id");
+    }
+
 }
