@@ -18,7 +18,7 @@ class Guest extends Model
     }
 
     public function commune(){
-        return $this->belongsTo(Commune::class, "comune_id");
+        return $this->belongsTo(Comune::class, "comune_id");
     }
 
 }
