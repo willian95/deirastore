@@ -29,7 +29,7 @@
                         <p class="text-center" v-if="sale.guest">
                             dirección: @{{ sale.guest.address }}
                         </p>
-                        <p class="text-center" v-if="sale.guest">
+                        <p class="text-center">
                             status: <span v-if="sale.status == 'aprovado'">Aprobado</span><span v-else>Rechazado</span>
                         </p>
                         <p class="text-center">
@@ -120,6 +120,7 @@
                                 <p><strong>Email</strong></p>
                                 <p>@{{ saleDetails.guest.email }}</p>
                             </div>
+                            
                         </div>
                     </div>
 

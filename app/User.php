@@ -41,4 +41,7 @@ class User extends Authenticatable
         return $this->hasMany(Payment::class);
     }
 
+    public function location(){
+        return $this->belongsTo(Region::class, "id");
+    }
 }
