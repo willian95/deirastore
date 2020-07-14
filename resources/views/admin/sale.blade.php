@@ -98,7 +98,7 @@
                             </div>
                             <div class="col-4" v-if="saleDetails.user">
                                 <p><strong>Celular</strong></p>
-                                <p>@{{ saleDetails.user.phone }}/p>
+                                <p>@{{ saleDetails.user.phone }}</p>
                             </div>
                             <div class="col-4" v-if="saleDetails.user">
                                 <p><strong>Email</strong></p>
