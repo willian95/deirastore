@@ -120,23 +120,23 @@
                                 <p><strong>Dept / Casa /oficina</strong></p>
                                 <p>@{{ saleDetails.user.house }}</p>
                             </div>
-                            <div class="col-4" v-if="saleDetails.user && saleDetails.tickt_type == 'factura'">
+                            <div class="col-4" v-if="saleDetails.user && saleDetails.ticket_type == 'factura'">
                                 <p><strong>Razón social empresa</strong></p>
                                 <p>@{{ saleDetails.user.business_name }}</p>
                             </div>
-                            <div class="col-4" v-if="saleDetails.user && saleDetails.tickt_type == 'factura'">
+                            <div class="col-4" v-if="saleDetails.user && saleDetails.ticket_type == 'factura'">
                                 <p><strong>RUT empresa</strong></p>
                                 <p>@{{ saleDetails.user.business_rut }}</p>
                             </div>
-                            <div class="col-4" v-if="saleDetails.user && saleDetails.tickt_type == 'factura'">
+                            <div class="col-4" v-if="saleDetails.user && saleDetails.ticket_type == 'factura'">
                                 <p><strong>Dirección empresa</strong></p>
                                 <p>@{{ saleDetails.user.business_address }}</p>
                             </div>
-                            <div class="col-4" v-if="saleDetails.user && saleDetails.tickt_type == 'factura'">
+                            <div class="col-4" v-if="saleDetails.user && saleDetails.ticket_type == 'factura'">
                                 <p><strong>Teléfono empresa</strong></p>
                                 <p>@{{ saleDetails.user.business_phone }}</p>
                             </div>
-                            <div class="col-4" v-if="saleDetails.user && saleDetails.tickt_type == 'factura'">
+                            <div class="col-4" v-if="saleDetails.user && saleDetails.ticket_type == 'factura'">
                                 <p><strong>Correo empresa</strong></p>
                                 <p>@{{ saleDetails.user.business_mail }}</p>
                             </div>
