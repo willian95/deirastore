@@ -33,7 +33,7 @@
                             status: <span v-if="sale.status == 'aprovado'">Aprobado</span><span v-else>Rechazado</span>
                         </p>
                         <p class="text-center">
-                            <button class="btn btn-success" @click="getProductDetails(sale.product_purchase)" data-toggle="modal" data-target="#details">
+                            <button class="btn btn-success" @click="getProductDetails(sale.product_purchase, sale)" data-toggle="modal" data-target="#details">
                                 Detalles
                             </button>
                         </p>
@@ -76,6 +76,52 @@
                     </button>
                 </div>
                 <div class="modal-body">
+
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-4">
+                                <p><strong>Tipo de usuario</strong></p>
+                                <p v-if="saleDetails.user">Registrado</p>
+                                <p v-if="saleDetails.guest">Invitado</p>
+                            </div>
+                            <div class="col-4">
+                                <p><strong>Tipo de facturación</strong></p>
+                                <p>@{{ saleDetails.ticket_type }}/p>
+                            </div>
+                            <div class="col-4" v-if="saleDetails.user">
+                                <p><strong>Nombre</strong></p>
+                                <p>@{{ saleDetails.user.name }}/p>
+                            </div>
+                            <div class="col-4" v-if="saleDetails.user">
+                                <p><strong>Rut</strong></p>
+                                <p>@{{ saleDetails.user.rut }}/p>
+                            </div>
+                            <div class="col-4" v-if="saleDetails.user">
+                                <p><strong>Celular</strong></p>
+                                <p>@{{ saleDetails.user.phone }}/p>
+                            </div>
+                            <div class="col-4" v-if="saleDetails.user">
+                                <p><strong>Email</strong></p>
+                                <p>@{{ saleDetails.user.email }}/p>
+                            </div>
+                            <div class="col-4" v-if="saleDetails.guest">
+                                <p><strong>Nombre</strong></p>
+                                <p>@{{ saleDetails.guest.name }}/p>
+                            </div>
+                            <div class="col-4" v-if="saleDetails.guest">
+                                <p><strong>Rut</strong></p>
+                                <p>@{{ saleDetails.guest.rut }}/p>
+                            </div>
+                            <div class="col-4" v-if="saleDetails.guest">
+                                <p><strong>Celular</strong></p>
+                                <p>@{{ saleDetails.guest.phone }}/p>
+                            </div>
+                            <div class="col-4" v-if="saleDetails.guest">
+                                <p><strong>Email</strong></p>
+                                <p>@{{ saleDetails.guest.email }}/p>
+                            </div>
+                        </div>
+                    </div>
 
                     <table class="table">
                         <thead>
@@ -135,6 +181,7 @@
                 return{
                     modalTitle:"Detalles",
                     productDetails:[],
+                    saleDetails:[],
                     pages:0,
                     page:1,
                     sales:[]
@@ -142,8 +189,9 @@
             },
             methods:{
             
-                getProductDetails(details){
+                getProductDetails(details, sale){
                     this.productDetails = details
+                    this.saleDetails = sale
                 },
                 fetch(page = 1){
 
