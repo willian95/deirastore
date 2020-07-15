@@ -388,6 +388,13 @@
 
 @media (min-width: 0px) and (max-width: 767px) {
 
+    .main-banner__img {
+        height: 300px;
+    }
+    
+    .main-banner__img img {
+        object-fit: contain;
+    }
 
     .div-informacion-detalles h2 {
         font-size: 30px;
