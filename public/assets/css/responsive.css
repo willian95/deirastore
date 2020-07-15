@@ -389,7 +389,7 @@
 @media (min-width: 0px) and (max-width: 767px) {
 
     .main-banner__img {
-        height: unset;
+        height: unset !important;
     }
     
     .main-banner__img img {
