@@ -47,7 +47,7 @@ class RangeProfitController extends Controller
                     $brand = Brand::where("id", $request->brand_id)->first();
                     $log = "Se ha realizado un aumento del ".$request->percentage."% a la marca ".$brand->name;
                     foreach(Product::where("brand_id", $request->brand_id)->get() as $product){
-
+                        
                         $external_price = $product->external_price;
                         $product->price_range_profit = $external_price + ($external_price * ($request->percentage / 100));
                         $product->percentage_range_profit = $request->percentage;

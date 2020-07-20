@@ -19,16 +19,20 @@ class NexsysController extends Controller
         try{
         
             $client = new \SoapClient($url);
-            
-            $marks = [ 
+
+            $products = $client->StoreProductByMarks(["Marks" => $mark, "WSClient"=> ["country" => "Chile", "username" => "78198200"]]);
+            dd($products);
+            /*$marks = [ 
                 "Wacom",
                 "Xerox"
-            ];
+            ];*/
 
             foreach($marks as $mark){
 
-                $products = $client->StoreProductByMarks(["Marks" => $mark, "WSClient"=> ["country" => "Chile", "username" => "78198200"]]);
+                
                 //dd($products);
+
+                
                 if($mark == "Epson-Escaner" || $mark == "Epson-GranFormato" || $mark == "Epson-Impresion" || $mark == "Epson-POS" || $mark == "Epson-Proyectores"){
                     $mark = "Epson";
                 }

@@ -179,7 +179,7 @@ class NexsysProducts extends Command
                                         "tax_excluded" => $excluded_tax,
                                         "name" => $value->short_description,
                                         "slug" => $productSlug,
-                                        "external_price" => floatval($value->price)
+                                        "external_price" => floatval($value->price + ($value->price * 0.19))
                                     ]
                                 );
 
@@ -188,7 +188,7 @@ class NexsysProducts extends Command
                                 $product = Product::where("sku", $value->sku)->where("data_source_id", 1)->first();
                                 if($product){
                                     $product->amount = $amount;
-                                    $product->external_price = floatval($value->price);
+                                    $product->external_price = floatval($value->price + ($value->price * 0.19));
                                     $product->update();
                                 }
 
