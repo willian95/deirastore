@@ -193,7 +193,7 @@
                                 
                                 <p>{{ $brand->brand->name }}</p>
                                 <div class="main-shop__card">
-                                    @foreach(App\Product::where('brand_id', $brand->brand_id)->where("data_source_id", 2)->whereNotNull("picture"->take(3)->get() as $product)
+                                    @foreach(App\Product::where('brand_id', $brand->brand_id)->where("data_source_id", 2)->whereNotNull("picture")->take(3)->get() as $product)
                                         <div class="main-shop__card-item">
                                             <span> 
 
