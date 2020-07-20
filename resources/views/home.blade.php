@@ -193,7 +193,7 @@
                                 
                                 <p>{{ $brand->brand->name }}</p>
                                 <div class="main-shop__card">
-                                    @foreach(App\Product::where('brand_id', $brand->brand_id)->where("picture", "like", "%http%")->orderBy('id', 'desc')->limit(3)->get() as $product)
+                                    @foreach(App\Product::where('brand_id', $brand->brand_id)->where("picture", "like", "%http%")->orderBy('id', 'desc')->take(3)->get() as $product)
                                         <div class="main-shop__card-item">
                                         <!--    <a href="{{ url('/product/'.$product->slug) }}"> -->
                                             <span> 
