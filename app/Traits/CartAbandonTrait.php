@@ -16,7 +16,7 @@ trait CartAbandonTrait
                 \Mail::send("emails.cartAbandon", $data, function($message) use ($to_name, $to_email) {// se envía el email
 
                     $message->to($to_email, $to_name)->subject("¡Tienes productos en tu carro de compras!");
-                    $message->from("rodriguezwillian95@gmail.com","Deira");
+                    $message->from(env("MAIL_FROM_ADDRESS"),"Deira");
     
                 });
             }

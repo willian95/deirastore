@@ -320,7 +320,7 @@ class CheckoutController extends Controller
 			\Mail::send("emails.purchaseMail", $data, function($message) use ($to_name, $to_email) {// se envía el email
 
 				$message->to($to_email, $to_name)->subject("¡Tu compra se ha realizado con éxito!");
-				$message->from("rodriguezwillian95@gmail.com","Deira");
+				$message->from(env("MAIL_FROM_ADDRESS"),"Deira");
 
 			});
 
