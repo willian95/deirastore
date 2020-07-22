@@ -6,7 +6,7 @@
                     Productos Informáticos, dando respuesta a requerimientos
                     de integración de hardware y software.</p>
                     <a class="contact mr-4"  href="mailto:contacto@deira-it.com"> <i class="fa fa-envelope"></i>contacto@deirastore.cl</a>
-                <a class="contact" href=tel:+56226748000><img src="{{ asset('assets/img/telefono.svg') }}" alt="">+569 9779 4803</a>
+                <a class="contact" href=tel:+56226748000><img src="{{ asset('assets/img/telefono.svg') }}" alt="">+562 2674 8059</a>
 
                 <ul class="social">
                     <li><a href=""><img src="{{ asset('assets/img/deira-74.png') }}" alt=""></a></li>
