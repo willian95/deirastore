@@ -2564,6 +2564,10 @@ img.lista-pedido {
     padding-right: 50px;
 }
 
+#search-area-mobile{
+    display: none;
+}
+
 [v-cloak] {
     display: none;
 }

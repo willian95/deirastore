@@ -406,6 +406,10 @@
 
     }
 
+    #search-area-mobile{
+        display: block;
+    }
+
     .medios-pago {
         margin-bottom: 50px;
     }
