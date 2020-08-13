@@ -138,40 +138,7 @@
                             <option value="#0984e3">Azul Oscuro</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="">Texto del botón</label>
-                        <input type="text" class="form-control" v-model="buttonText">
-                    </div>
-                    <div class="form-group">
-                        <label for="">Color del botón <div class="color-box" id="button-color"></div></label>
-                        <select class="form-control" v-model="buttonColor" @change="changeButtonColor()">
-                            <option value="#ffffff">Blanco</option>
-                            <option value="#2d3436">Negro</option>
-                            <option value="#55efc4">Verde Claro</option>
-                            <option value="#00b894">Verde Oscuro</option>
-                            <option value="#fab1a0">Rojo Claro</option>
-                            <option value="#d63031">Rojo Oscuro</option>
-                            <option value="#ffeaa7">Amarillo Claro</option>
-                            <option value="#fdcb6e">Amarillo Oscuro</option>
-                            <option value="#74b9ff">Azul Claro</option>
-                            <option value="#0984e3">Azul Oscuro</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="">Color del texto del botón <div class="color-box" id="button-text-color"></div></label>
-                        <select class="form-control" v-model="buttonTextColor" @change="changeButtonTextColor()">
-                            <option value="#ffffff">Blanco</option>
-                            <option value="#2d3436">Negro</option>
-                            <option value="#55efc4">Verde Claro</option>
-                            <option value="#00b894">Verde Oscuro</option>
-                            <option value="#fab1a0">Rojo Claro</option>
-                            <option value="#d63031">Rojo Oscuro</option>
-                            <option value="#ffeaa7">Amarillo Claro</option>
-                            <option value="#fdcb6e">Amarillo Oscuro</option>
-                            <option value="#74b9ff">Azul Claro</option>
-                            <option value="#0984e3">Azul Oscuro</option>
-                        </select>
-                    </div>
+                    
                     <div class="form-group">
                         <label for="picture">Imagen</label>
                         <input type="file" id="image" class="form-control" id="picture" ref="file" @change="onImageChange" accept="image/*">

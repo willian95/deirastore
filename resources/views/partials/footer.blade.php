@@ -9,8 +9,8 @@
                 <a class="contact" href=tel:+56226748000><img src="{{ asset('assets/img/telefono.svg') }}" alt="">+562 2674 8059</a>
 
                 <ul class="social">
-                    <li><a href=""><img src="{{ asset('assets/img/deira-74.png') }}" alt=""></a></li>
-                    <li><a href=""><img src="{{ asset('assets/img/deira-76.png') }}" alt=""></a></li>
+                    <li><a href="https://www.instagram.com/deirastore.cl/" target="_blank"><img src="{{ asset('assets/img/deira-74.png') }}" alt=""></a></li>
+                    <li><a href="https://www.facebook.com/deirastore.cl/" target="_blank"><img src="{{ asset('assets/img/deira-76.png') }}" alt=""></a></li>
                 </ul>
             </div>
             <div class="main-footer__item">

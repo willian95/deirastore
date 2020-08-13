@@ -132,8 +132,8 @@ class CategoriesController extends Controller
 
             $skip = ($request->page-1) * 10;
 
-            $categories = Category::with("parent")->skip($skip)->take(10)->orderBy("esp_name", "asc")->get();
-            $categoriesCount = Category::count();
+            $categories = Category::with("parent")->withTrashed()->skip($skip)->take(10)->orderBy("esp_name", "asc")->get();
+            $categoriesCount = Category::withTrashed()->count();
 
             return response()->json(["success" => true, "categories" => $categories, "categoriesCount" => $categoriesCount]);
 
@@ -156,10 +156,27 @@ class CategoriesController extends Controller
 
         try{
 
-            $category = Category::find($request->id);
+            $category = Category::where("id", $request->id)->first();
             $category->delete();
 
             return response()->json(["success" => true, "msg" => "Categoría eliminada"]);
+
+        }catch(\Exception $e){
+
+            return response()->json(["success" => false, "msg" => "Error en el servidor"]);
+
+        }
+
+    }
+
+    function restore(Request $request){
+
+        try{
+
+            $category = Category::where("id", $request->id)->onlyTrashed()->first();
+            $category->restore();
+
+            return response()->json(["success" => true, "msg" => "Categoría restaurada"]);
 
         }catch(\Exception $e){
 

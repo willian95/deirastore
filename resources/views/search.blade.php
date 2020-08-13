@@ -60,7 +60,7 @@
 
         <div class="row" v-cloak>
 
-            <div class="col-3" v-for="product in products">
+            <div class="col-md-3" v-for="product in products">
                 <div class="main-slider__item">
                     <a :href="'{{ url('/product/') }}'+'/'+product.slug">
                         <div class="content-slider">

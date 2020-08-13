@@ -86,6 +86,28 @@
 
             }) 
 
+            const searchMobile = new Vue({
+                el: '#search-area-mobile',
+                data(){
+                    return{
+                        searchText:""
+                    }
+                },
+                methods:{
+                    
+                    search(){
+                        
+                        if(this.searchText != ""){
+                            localStorage.setItem("search", this.searchText)
+                            window.location.href="{{ url('/search') }}"
+                        }
+
+                    }
+
+                }
+
+            }) 
+
         </script>
 
         <script>

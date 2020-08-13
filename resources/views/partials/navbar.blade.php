@@ -91,6 +91,10 @@
             <div class="navbar-collapse offcanvas-collapse">
                 <ul class="navbar-nav m-auto">
 
+                    <li class="nav-item navbar-custom" id="search-area-mobile">
+                        <input type="text" id="search" class="form-control" v-model="searchText" placeholder="Buscar" v-on:keyup.enter="search()">
+                    </li>
+
                     <li class="nav-item navbar-custom">
                         <a class="nav-link" href="{{ route('brands.all') }}">Marcas </a>
                     </li>

@@ -76,8 +76,8 @@
                                         </td>
                                         <td>
                                             <button class="btn btn-success" @click="edit(category)" data-toggle="modal" data-target="#createCategory"><i class="fa fa-edit"></i></button>
-                                            <!-----------PORQUE SE REPITE DOS VECES EL ICONO DE TRASH? Faltaba cerrar la etiqueta i------------------>
-                                            <button class="btn btn-danger" @click="erase(category.id)"><i class="fa fa-trash"></i></button>
+                                            <button class="btn btn-danger" v-if="category.deleted_at == null" title="ocultar" @click="erase(category.id)"><i class="fa fa-ban"></i></button>
+                                            <button class="btn btn-info" v-else @click="restore(category.id)" title="restaurar"><i class="fa fa-clone"></i></button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -339,10 +339,15 @@
                 },
                 erase(id){
 
+                    this.loading = true
+
                     if(confirm('¿Estás seguro?')){
 
                         axios.post("{{ route('admin.categories.delete') }}", {id: id})
                         .then(res => {
+
+                            this.loading = false
+
                             if(res.data.success == true){
                                 alert(res.data.msg)
                                 this.fetch()
@@ -351,6 +356,35 @@
                             }
                         })
                         .catch(err => {
+
+                            this.loading = false
+
+                            console.log(err.response.data)
+                        })
+
+                    }
+
+                },
+                restore(id){
+
+                    this.loading = true
+
+                    if(confirm('¿Estás seguro?')){
+
+                        axios.post("{{ route('admin.categories.restore') }}", {id: id})
+                        .then(res => {
+
+                            this.loading = false
+
+                            if(res.data.success == true){
+                                alertify.success(res.data.msg)
+                                this.fetch()
+                            }else{
+                                alertify.error(res.data.msg)
+                            }
+                        })
+                        .catch(err => {
+                            this.loading = false
                             console.log(err.response.data)
                         })
 

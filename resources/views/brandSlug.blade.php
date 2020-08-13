@@ -114,20 +114,22 @@
 
                 <div class="col-12">
                     <!--<div class="main-banner">-->
+                    @if($banner->link != "")
+                        <a href="{{ $banner->link }}" target="_blank">
+                    @endif
                         <div class="main-banner__card-img">
                             <img src="{{ asset('/images/banners/'.$banner->image) }}" alt="" style="width: 100%;">
                             <!--<div class="main-banner__content">-->
                                 <div class="title" style="text-align: {{ $float }};">
                                     <h3 style="color: {{ $banner->title_color }}">{{ $banner->title }}</h3>
                                     <p style="color: {{ $banner->text_color }}">{{ $banner->text }}</p>
-                                    @if($banner->link != "" || $banner->button_text != "")
-                                    <a href="{{ $banner->link }}" target="_blank" class="btn-general" style="color: {{ $banner->button_text_color }}; background-color: {{ $banner->button_color }};">{{ $banner->button_text }}</a>
-                                    @endif
                                 </div>
                             <!--</div>-->
                         </div>
 
-
+                    @if($banner->link != "")
+                        </a>
+                    @endif
                     <!--</div>-->
                 </div>
             @endforeach
@@ -149,6 +151,9 @@
             @endphp
 
             <div class="col-md-6">
+                @if($banner->link != "")
+                    <a href="{{ $banner->link }}" target="_blank">
+                @endif
                 <div class="main-banner__card-img">
                     <img src="{{ asset('/images/banners/'.$banner->image) }}" alt="" style="width: 100%;">
                     <div class="title" style="text-align: {{ $float }};">
@@ -159,6 +164,9 @@
                         @endif
                     </div>
                 </div>
+                @if($banner->link != "")
+                    </a>
+                @endif
             </div>
 
         @endforeach
@@ -179,6 +187,9 @@
             @endphp
 
             <div class="col-md-3">
+                @if($banner->link != "")
+                    <a href="{{ $banner->link }}" target="_blank">
+                @endif
                 <div class="main-banner__card-img">
                     <img src="{{ asset('/images/banners/'.$banner->image) }}" alt="" style="width: 100%;">
                     <div class="title" style="text-align: {{ $float }} !important">
@@ -189,6 +200,9 @@
                         @endif
                     </div>
                 </div>
+                @if($banner->link != "")
+                    </a>
+                @endif
             </div>
 
         @endforeach
@@ -214,7 +228,7 @@
                 pages:0,
                 dolarPrice: '{!! App\DolarPrice::first()->price !!}',
                 page:1,
-                filterOrder:"1"
+                filterOrder:"6"
             }
         },
         methods:{

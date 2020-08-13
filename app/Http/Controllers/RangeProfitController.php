@@ -86,11 +86,13 @@ class RangeProfitController extends Controller
                     return response()->json(["success" => false, "msg" => "Debe seleccionar una categoría"]);
                 }
 
-            }else if($request->type == "product"){
+            }else if($request->type == "products"){
+
 
                 if(isset($request->product_id)){
+                    
                     $product = Product::where("id", $request->product_id)->first();
-                    $log = "Se ha realizado un aumento del ".$request->percentage."% al producto ".$producto->name;
+                    $log = "Se ha realizado un aumento del ".$request->percentage."% al producto ".$product->name;
                     foreach(Product::where("id", $request->product_id)->get() as $product){
 
                         $external_price = $product->external_price;
@@ -99,13 +101,33 @@ class RangeProfitController extends Controller
                         $product->update();
 
                     }
-
+                    
                     $historyRangeProfit = new HistoryRangeProfit;
                     $historyRangeProfit->log = $log;
                     $historyRangeProfit->save();
                 }else{
                     return response()->json(["success" => false, "msg" => "Debe seleccionar un producto"]);
                 }
+
+            }else if($request->type == "all"){
+
+                ini_set('max_execution_time', 0);
+
+                $products = Product::where("amount",">", 0)->get();
+                $log = "Se ha realizado un aumento del ".$request->percentage."% a todos los productos";
+                foreach($products as $product){
+
+                    $external_price = $product->external_price;
+                    $product->price_range_profit = $external_price + ($external_price * ($request->percentage / 100));
+                    $product->percentage_range_profit = $request->percentage;
+                    $product->update();
+
+                }
+
+                $historyRangeProfit = new HistoryRangeProfit;
+                $historyRangeProfit->log = $log;
+                $historyRangeProfit->save();
+                
 
             }
 

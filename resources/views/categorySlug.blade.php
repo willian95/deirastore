@@ -60,7 +60,7 @@
                         </div>
                         <div class="main-slider__text">
                             <p class="title" >@{{ product.name }}</p>
-                            <p class="title-brand">@{{ product.brand.name }}</p>
+                            <p class="title-brand">@{{ product.brand.name }} - @{{ product.amount }}</p>
                             <p v-if="product.category">@{{ product.category.name }}</p>
                             <p class="price" v-if="product.percentage_range_profit > 0 && product.percentage_range_profit != null">$ @{{ parseInt((dolarPrice * product.price_range_profit) + 1).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</p>
                             <p class="price" v-else>$ @{{  parseInt((dolarPrice * product.external_price) + 1).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</p>
@@ -141,7 +141,7 @@
                 products:[],
                 subCategories:[],
                 pages:0,
-                filterOrder:"1",
+                filterOrder:"6",
                 dolarPrice: '{!! App\DolarPrice::first()->price !!}',
                 page:1
             }

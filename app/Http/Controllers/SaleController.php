@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Exports\SalesExport;
 use App\Payment;
+use Excel;
 
 class SaleController extends Controller
 {
@@ -29,6 +31,18 @@ class SaleController extends Controller
             return response()->json(["success" => false, "msg" => "Error en el servidor", "err" => $e->getMessage()]);
 
         }
+    }
+
+    function export($fromDate, $toDate){
+
+        try{
+
+            return Excel::download((new SalesExport)->forFromDate($fromDate)->forToDate($toDate), 'ventas'.$fromDate.'-'.$toDate.'.xlsx');
+
+        }catch(\Exception $e){
+            return response()->json(["success" => false, "msg" => "Error en el servidor", "err" => $e->getMessage()]);
+        }
+
     }
 
 }

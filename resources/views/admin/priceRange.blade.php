@@ -6,12 +6,17 @@
 
     <div class="container content__admin">
 
+        <div class="loader-cover-custom" v-if="loading == true">
+            <div class="loader-custom"></div>
+        </div>
+
         <div class="row">
             <div class="col-12">
                 <p class="text-center">
                     <button class="btn btn-success" @click="change('brands')">Marca</button>
-                    <button class="btn btn-success" @click="change('categories')">Categorías</button>
-                    <button class="btn btn-success" @click="change('products')">Producto</button>
+                    <button class="btn btn-info" @click="change('categories')">Categorías</button>
+                    <button class="btn btn-primary" @click="change('products')">Producto</button>
+                    <button class="btn btn-warning" @click="change('all')">Todos</button>
                 </p>
             </div>
             <div class="col-12">
@@ -30,7 +35,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="">Porcentaje</label>
-                                <input type="text" class="form-control" v-model="percentage">
+                                <input type="text" class="form-control" v-model="percentage" @keypress="isNumber($event)">
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -49,14 +54,15 @@
                             <div class="form-group">
                                 <label for="">Categoría</label>
                                 <select class="form-control" v-model="category">
-                                    <option v-for="category in categories" :value="category.id">@{{ category.esp_name }}</option>
+                                    <option v-for="category in categories" :value="category.id" v-if="category.esp_name != null" >@{{ category.esp_name }}</option>
+                                    <option v-for="category in categories" :value="category.id" v-else >@{{ category.name }}</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="">Porcentaje</label>
-                                <input type="text" class="form-control" v-model="percentage">
+                                <input type="text" class="form-control" v-model="percentage" @keypress="isNumber($event)">
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -87,7 +93,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="">Porcentaje</label>
-                                <input type="text" class="form-control" v-model="percentage">
+                                <input type="text" class="form-control" v-model="percentage"@keypress="isNumber($event)">
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -95,6 +101,27 @@
                                 <button class="btn btn-success" @click="apply()" style="margin-top: 32px;">Aplicar</button>
                             </div>
                         </div>
+                    </div>
+
+                </div>
+
+                <div v-if="type == 'all'">
+
+                    <div class="row" style="padding-top: 1rem; padding-bottom: 1rem;">
+                        <div class="col-md-6 offset-md-2">
+                            <div class="form-group">
+                                <label for="">Porcentaje</label>
+                                <input type="text" class="form-control" v-model="percentage" @keypress="isNumber($event)">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+
+                            <p class="text-center">
+                                <button class="btn btn-success" style="margin-top: 32px;" @click="apply()">Aplicar</button>
+                            </p>                    
+
+                        </div>
+                        
                     </div>
 
                 </div>
@@ -108,9 +135,9 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Log</th>
-                            <th>Fecha</th>
+                            <th><strong>#</strong></th>
+                            <th><strong>Log</strong> </th>
+                            <th><strong>Fecha</strong></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -175,6 +202,7 @@
                     percentage:"",
                     type:"",
                     historyRangeProfits:"",
+                    loading:false,
                     pages:0,
                     page:1
                 }
@@ -232,7 +260,7 @@
 
                     this.product = product.id
                     this.searchString = product.name
-                    alert("product seleccionado")
+                    alertify.success("producto seleccionado")
                     this.products = ""
 
                 },
@@ -244,36 +272,51 @@
                         if(res.data.success == true){
                             this.products = res.data.products
                         }else{
-                            alert(res.data.msg)
+                            alertify.error(res.data.msg)
                         }
 
                     })
 
                 },
                 apply(){
-
+                    this.loading = true
                     axios.post("{{ url('admin/range-profit/apply') }}", {brand_id: this.brand, category_id: this.category, type: this.type, percentage: this.percentage, product_id: this.product})
                     .then(res => {
 
+                        this.loading = false
+
                         if(res.data.success == true){
-                            alert(res.data.msg)
+                            alertify.success(res.data.msg)
                             this.type = ""
                             this.brand = ""
                             this.product = ""
                             this.percentage = ""
+                            this.searchString=""
                             this.fetch()
                         }else{
-                            alert(res.data.msg)
+                            alertify.error(res.data.msg)
                         }
 
                     })
                     .catch(err => {
+
+                        this.loading = false
+
                         $.each(err.response.data.errors, function(key, value) {
-                            alertify.error(value);
+                            alertify.error(value[0]);
                             //alertify.alert('Basic: true').set('basic', true); 
                         });
                     })
 
+                },
+                isNumber(evt) {
+                    evt = (evt) ? evt : window.event;
+                    var charCode = (evt.which) ? evt.which : evt.keyCode;
+                    if ((charCode > 31 && (charCode < 48 || charCode > 57))) {
+                        evt.preventDefault();;
+                    } else {
+                        return true;
+                    }
                 }
 
             },

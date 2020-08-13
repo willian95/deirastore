@@ -27,8 +27,8 @@ class ProductController extends Controller
 
             $categories = Category::all();
             $brands = Brand::all();
-            $products = Product::skip($skip)->take(10)->get();
-            $productsCount = Product::count();
+            $products = Product::skip($skip)->take(10)->withTrashed()->get();
+            $productsCount = Product::withTrashed()->count();
 
             return response()->json(["success" => true, "products" => $products, "productsCount" => $productsCount, "categories" => $categories, "brands" => $brands]);
 
@@ -224,7 +224,7 @@ class ProductController extends Controller
         $skip = ($request->page-1) * 20;
 
         //$products = Product::where('name', 'like', '%'.$request->search.'%')->get();
-        $products = Product::with("category", "brand")
+        $products = Product::with("category", "brand")->withTrashed()
         ->where(function ($query) use($request) {
            
             //$query->orWhere('description', "like", "%".$words[$i]."%");
@@ -234,7 +234,7 @@ class ProductController extends Controller
         })
         ->skip($skip)->take(20)->orderBy("name")->get();
 
-        $productsCount = Product::with("category", "brand")
+        $productsCount = Product::with("category", "brand")->withTrashed()
         ->where(function ($query) use($request) {
            
             //$query->orWhere('description', "like", "%".$words[$i]."%");
@@ -252,10 +252,27 @@ class ProductController extends Controller
 
         try{
 
-            $product = Product::find($request->id);
+            $product = Product::where("id", $request->id)->first();
             $product->delete();
 
             return response()->json(["success" => true, "msg" => "Producto eliminado"]);
+
+        }catch(\Exception $e){
+
+            return response()->json(["success" => false, "msg" => "Error en el servidor"]);
+
+        }
+
+    }
+
+    function restore(Request $request){
+
+        try{
+
+            $product = Product::where("id", $request->id)->onlyTrashed()->first();
+            $product->restore();
+
+            return response()->json(["success" => true, "msg" => "Producto restaurado"]);
 
         }catch(\Exception $e){
 

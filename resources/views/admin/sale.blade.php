@@ -5,6 +5,17 @@
     @include('partials.admin.navbar')
 
     <div class="container content__admin">
+
+        <div class="row">
+            <div class="col-12">
+                <p class="text-center">
+                    <button class="btn btn-info" data-toggle="modal" data-target="#export">
+                        <i class="fa fa-download"></i>
+                    </button>
+                </p>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-12">
 
@@ -27,6 +38,7 @@
                         
                         <p class="text-center">
                             status: <span v-if="sale.status == 'aprovado'">Aprobado</span><span v-else>Rechazado</span>
+                            Fecha: @{{ sale.created_at.toString().substring(0, 10) }}
                         </p>
                         <p class="text-center">
                             <button class="btn btn-success" @click="getProductDetails(sale.product_purchase, sale)" data-toggle="modal" data-target="#details">
@@ -181,6 +193,10 @@
                         </div>
                     </div>
 
+                    <div class="text-center" v-if="saleDetails.created_at">
+                        Fecha: @{{ saleDetails.created_at.toString().substring(0, 10) }}
+                    </div>
+
                     <table class="table">
                         <thead>
                             <tr>
@@ -218,7 +234,7 @@
                     
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
@@ -226,6 +242,52 @@
 
 
     <!-- Details Modal -->
+
+    <!-- export Modal -->
+
+    <div class="modal fade" id="export" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Exportar</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="fromDate">Desde</label>
+                                    <input type="date" class="form-control" v-model="fromDate">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="toDate">Hasta</label>
+                                    <input type="date" class="form-control" v-model="toDate">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <p class="text-center">
+                                    <button class="btn btn-success" @click="exportExcel()">Exportar</button>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- export Modal -->
 
 @endsection
 
@@ -242,7 +304,9 @@
                     saleDetails:[],
                     pages:0,
                     page:1,
-                    sales:[]
+                    sales:[],
+                    fromDate:"",
+                    toDate:""
                 }
             },
             methods:{
@@ -265,6 +329,11 @@
                             alert(value)
                         });
                     })
+
+                },
+                exportExcel(){
+
+                    window.open("{{ url('/admin/sales/export/') }}"+"/"+this.fromDate+"/to/"+this.toDate)
 
                 }
 

@@ -100,6 +100,12 @@
                         <li class="nav-item nav-focus">
                             <a class="nav-link focus__link" href="{{ url('admin/range-profit/index') }}"><i class="fa fa-shopping-bag"></i>Rango de precios</a>
                         </li>
+                        <li class="nav-item nav-focus">
+                            <a class="nav-link focus__link" href="{{ url('admin/users/registered') }}"><i class="fa fa-users"></i>Usuarios Registrados</a>
+                        </li>
+                        <li class="nav-item nav-focus">
+                            <a class="nav-link focus__link" href="{{ url('admin/users/guest') }}"><i class="fa fa-users"></i>Usuarios Invitados</a>
+                        </li>
 
                     @endif
                   <!-----  <li class="nav-item active">

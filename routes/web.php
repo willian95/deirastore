@@ -252,6 +252,7 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::post('/categories/update', "CategoriesController@update")->name('admin.categories.update');
     Route::post('/categories/seach', "CategoriesController@search")->name('admin.categories.search');
     Route::post('/categories/delete', "CategoriesController@delete")->name('admin.categories.delete');
+    Route::post('/categories/restore', "CategoriesController@restore")->name('admin.categories.restore');
 
     Route::get('/products', "ProductController@index")->name('admin.products');
     Route::post('/products', "ProductController@store")->name('admin.products.store');
@@ -259,6 +260,7 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::post('/products/update', "ProductController@update")->name('admin.products.update');
     Route::post('/products/seach', "ProductController@search")->name('admin.products.search');
     Route::post('/products/delete', "ProductController@delete")->name('admin.products.delete');
+    Route::post('/products/restore', "ProductController@restore")->name('admin.products.restore');
     Route::get('/products/show/{id}', "ProductController@show")->name('admin.products.show');
 
     Route::get('/purchase', "PurchaseController@index")->name('admin.purchase');
@@ -313,6 +315,13 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get("/range-profit/index", "RangeProfitController@index");
     Route::get("/range-profit/fetch/{page}", "RangeProfitController@fetch");
     Route::post("/range-profit/apply", "RangeProfitController@apply");
+
+    Route::get("sales/export/{fromDate}/to/{toDate}", "SaleController@export");
+
+    Route::get("users/registered", "UserController@index");
+    Route::get("users/guest", "UserController@guest");
+    Route::get("users/registered/fetch/{page}", "UserController@fetchRegisterd");
+    Route::get("users/guest/fetch/{page}", "UserController@fetchGuest");
 
 });
 

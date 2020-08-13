@@ -5,6 +5,11 @@
     @include('partials.admin.navbar')
 
     <div class="container content__admin">
+
+        <div class="loader-cover-custom" v-if="loading == true">
+            <div class="loader-custom"></div>
+        </div>
+
         <div class="bsucador_admin col-md-8">
             <div class="card-body">
                 <div class="form-group buscardor-admin">
@@ -61,7 +66,8 @@
                         @{{ product.name }}
                         </p>
                         <button class="btn btn-success" @click="edit(product)" data-toggle="modal" data-target="#createProduct"><i class="fa fa-edit"></i></button>
-                        <button class="btn btn-danger" @click="erase(product.id)"><i class="fa fa-trash"></i></button>
+                        <button v-if="product.deleted_at == null" class="btn btn-danger" @click="erase(product.id)" title="ocultar"><i class="fa fa-ban"></i></button>
+                        <button v-else class="btn btn-info" @click="restore(product.id)" title="restaurar"><i class="fa fa-clone"></i></button>
                     </div>
                 </div>
             </div>
@@ -388,6 +394,7 @@
                     imageBrandPreview:"",
                     showBrandForm:false,
                     brands:[],
+                    loading:false,
                     //sku:"",
                     vpn:"",
                     min_description:"",
@@ -714,6 +721,8 @@
                 },
                 update(){
 
+                    this.loading = true
+
                     let formData = new FormData()
                     formData.append("name", this.name)
                     formData.append("price", this.price)
@@ -744,6 +753,8 @@
                     })
                     .then(res => {
                         
+                        this.loading = false
+
                         if(res.data.success == true){
                             alert(res.data.msg)
                             this.name = ""
@@ -772,6 +783,7 @@
                         }
                     })
                     .catch(err => {
+                        this.loading = false
                         $.each(err.response.data.errors, function(key, value){
                             alert(value)
                         });
@@ -817,14 +829,38 @@
                 },
                 erase(id){
 
+                    this.loading = true
+
                     if(confirm('¿Estás seguro?')){
 
                         axios.post("{{ route('admin.products.delete') }}", {id: id})
                         .then(res => {
-                            alert(res.data.msg)
+                            this.loading = false
+                            alertify.success(res.data.msg)
                             this.fetch()
                         })
                         .catch(err => {
+                            this.loading = false
+                            console.log(err.response.data)
+                        })
+
+                    }
+
+                },
+                restore(id){
+
+                    this.loading = true
+
+                    if(confirm('¿Estás seguro?')){
+
+                        axios.post("{{ route('admin.products.restore') }}", {id: id})
+                        .then(res => {
+                            this.loading = false
+                            alertify.success(res.data.msg)
+                            this.fetch()
+                        })
+                        .catch(err => {
+                            this.loading = false
                             console.log(err.response.data)
                         })
 

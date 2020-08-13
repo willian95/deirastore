@@ -11,34 +11,34 @@
                 <div class="dash-grid">
                     <div class="dash-grid__item">
                         <i class="fa fa-info-circle info"></i>
-                        <span>Orders</span>
+                        <span>Productos Ingram con Stock</span>
                         <div class="dash-grdi__content">
                             <i class="fa fa-user"></i>
-                            <p>192</p>
+                            <p>{{ App\Product::where("data_source_id", 2)->where("amount", ">", 0)->count() }}</p>
                         </div>
                     </div>
                     <div class="dash-grid__item">
                         <i class="fa fa-info-circle info"></i>
-                        <span>Orders <small>on-hold</small></span>
+                        <span>Productos Ingram sin Stock <!--<small>on-hold</small>--></span>
                         <div class="dash-grdi__content">
                             <i class="fa fa-info-circle"></i>
-                            <p>192</p>
+                            <p>{{ App\Product::where("data_source_id", 2)->where("amount", 0)->count() }}</p>
                         </div>
                     </div>
                     <div class="dash-grid__item">
                         <i class="fa fa-info-circle info"></i>
-                        <span>Stock <small>Productos</small></span>
+                        <span>Productos Nexsys con Stock</span>
                         <div class="dash-grdi__content">
                             <i class="fa fa-user"></i>
-                            <p>192</p>
+                            <p>{{ App\Product::where("data_source_id", 1)->where("amount", ">", 0)->count() }}</p>
                         </div>
                     </div>
                     <div class="dash-grid__item">
                         <i class="fa fa-info-circle info"></i>
-                        <span>Out of tock <small>Productos</small></span>
+                        <span>Productos Nexsys sin Stock</span>
                         <div class="dash-grdi__content">
                             <i class="fa fa-user"></i>
-                            <p>192</p>
+                            <p>{{ App\Product::where("data_source_id", 1)->where("amount", 0)->count() }}</p>
                         </div>
                     </div>
                 </div>

@@ -178,32 +178,6 @@ class BannerController extends Controller
             }else{
                 $banner->title_color = $request->titleColor;
             }
-
-            if($request->buttonText == "null"){
-
-                $banner->button_text = null;
-
-            }else{
-
-                $banner->button_text = $request->buttonText;
-
-            }
-
-            if($request->buttonText == "null"){
-
-                $banner->button_color = null;
-
-            }else{
-
-                $banner->button_color = $request->buttonColor;
-
-            }
-            
-            if($request->buttonTextColor == "null"){
-                $banner->button_text_color = null;
-            }else{
-                $banner->button_text_color = $request->buttonTextColor;
-            }
             
             if($request->location == "null"){
 
