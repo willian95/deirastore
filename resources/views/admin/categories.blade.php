@@ -218,7 +218,7 @@
                     let error = false
 
                     if(this.name == ""){
-                        alert("Campo nombre es requerido")
+                        alertify.error("Campo nombre es requerido")
                         error = true
                     }
 
@@ -279,20 +279,20 @@
                     .then(res => {
                         
                         if(res.data.success == true){
-                            alert(res.data.msg)
+                            alertify.success(res.data.msg)
                             this.name=""
                             this.imagePreview = ""
                             this.parentId = ""
                             $("#image").val(null)
                             this.fetch()
                         }else{
-                            alert(res.data.msg)
+                            alertify.error(res.data.msg)
                         }
 
                     })
                     .catch(err => {
                         $.each(err.response.data.errors, function(key, value){
-                            alert(value)
+                            alertify.error(value[0])
                         });
                     })
 
@@ -349,10 +349,10 @@
                             this.loading = false
 
                             if(res.data.success == true){
-                                alert(res.data.msg)
+                                alertify.success(res.data.msg)
                                 this.fetch()
                             }else{
-                                alert(res.data.msg)
+                                alertify.error(res.data.msg)
                             }
                         })
                         .catch(err => {
