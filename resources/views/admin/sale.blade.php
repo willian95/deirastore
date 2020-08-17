@@ -193,12 +193,12 @@
                         </div>
                     </div>
 
-                    <div class="tex-center">
-                        <p><strong>Total: </strong>@{{ total }}</p>
+                    <div>
+                        <p class="text-center"><strong>Total: </strong>@{{ parseInt(total).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</p>
                     </div>
 
                     <div class="text-center" v-if="saleDetails.created_at">
-                        Fecha: @{{ saleDetails.created_at.toString().substring(0, 10) }}
+                        <strong>Fecha:</strong> @{{ saleDetails.created_at.toString().substring(0, 10) }}
                     </div>
 
                     <table class="table">
