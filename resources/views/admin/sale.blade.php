@@ -193,6 +193,10 @@
                         </div>
                     </div>
 
+                    <div class="tex-center">
+                        <p><strong>Total: </strong>@{{ total }}</p>
+                    </div>
+
                     <div class="text-center" v-if="saleDetails.created_at">
                         Fecha: @{{ saleDetails.created_at.toString().substring(0, 10) }}
                     </div>
@@ -220,18 +224,19 @@
                                     @{{ productDetail.amount }}
                                 </td>
                                 <td>
-                                    @{{ productDetail.price }}
+                                    @{{ parseInt(productDetail.price).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}
                                 </td>
                                 <td>
                                     @{{ productDetail.shipping_method }}
                                 </td>
                                 <td>
-                                    @{{ productDetail.shipping_cost }}
+                                    @{{ parseInt(productDetail.shipping_cost).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}
                                 </td>
                             </tr>
                         </tbody>
                     </table>                
-                    
+                
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -306,7 +311,8 @@
                     page:1,
                     sales:[],
                     fromDate:"",
-                    toDate:""
+                    toDate:"",
+                    total:0
                 }
             },
             methods:{
@@ -314,6 +320,13 @@
                 getProductDetails(details, sale){
                     this.productDetails = details
                     this.saleDetails = sale
+
+                    this.productDetails.forEach((data, index) => {
+
+                        this.total = data.price + data.shipping_cost
+
+                    })
+
                 },
                 fetch(page = 1){
 
