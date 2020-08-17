@@ -239,6 +239,19 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         return view('admin.dashboard');
     })->name('admin.dashboard');
 
+    Route::get("/categories/searchPosition", function(){
+
+        $categories = App\Category::orderBy("esp_name", "asc")->get();
+        $index = 1;
+        foreach($categories as $category){
+
+            $category->search_position = $index;
+            $category->update();
+            $index++;
+        }
+
+    });
+
     Route::get('/brands', "BrandController@index")->name('admin.brands');
     Route::post('/brands/store', "BrandController@store")->name('admin.brands.store');
     Route::post('/brands/fetch', "BrandController@fetch")->name('admin.brands.fetch');
@@ -322,6 +335,9 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get("users/guest", "UserController@guest");
     Route::get("users/registered/fetch/{page}", "UserController@fetchRegisterd");
     Route::get("users/guest/fetch/{page}", "UserController@fetchGuest");
+
+    Route::get("search/options", "AdminSearchController@index");
+    Route::post("search/options/update", "AdminSearchController@update");
 
 });
 

@@ -131,7 +131,7 @@
                     searchText:"",
                     products:[],
                     dolarPrice: '{!! App\DolarPrice::first()->price !!}',
-                    filterOrder:"1",
+                    filterOrder:"6",
                     pages:0,
                     page:1
                 }

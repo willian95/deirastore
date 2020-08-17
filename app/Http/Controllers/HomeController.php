@@ -101,6 +101,16 @@ class HomeController extends Controller
                 "keypad"
             ],
             [
+                "Mouse",
+                "teclados",
+                "teclado",
+                "Router",
+                "headphone",
+                "headphones",
+                "audifono",
+                "audifonos"
+            ],
+            [
                 "Suministros",
                 "suministro",
                 "tinta",
@@ -213,17 +223,19 @@ class HomeController extends Controller
             
                 $query->orWhere('description', "like", "%".$searchText."%");
                 
-            })->with("brand", "category")->where("brand_id", $brandIdInSearchText)->skip($skip)->take(20)->orderByRaw($orderBy)->get();
+            })->with("brand")->with(["category" => function($q){
+                $q->orderBy('search_position', 'asc');
+            }])->where("brand_id", $brandIdInSearchText)->skip($skip)->take(20)->orderByRaw($orderBy)->get();
     
             $productsCount = Product::where(function ($query) use($searchText) {
                 
                 $query->orWhere('description', "like", "%".$searchText."%");
                   
-            })->with("brand", "category")->where("brand_id", $brandIdInSearchText)->count();
+            })->with("brand", "category")->where("brand_id", $brandIdInSearchText)->sortBy('category.search_position',SORT_REGULAR,false)->count();
         
         }else{
 
-            $products = Product::with("category", "brand")
+            $products = Product::with("brand")
             ->where(function ($query) use($words) {
                 for ($i = 0; $i < count($words); $i++){
                     if($words[$i] != ""){
@@ -233,7 +245,9 @@ class HomeController extends Controller
                     }
                 }      
             })
-            ->skip($skip)->take(20)->orderBy("data_source_id")->orderByRaw($orderBy)->get();
+            ->skip($skip)->take(20)->with(["category" => function($q){
+                $q->orderBy('search_position', 'asc');
+            }])->orderByRaw($orderBy)->get();
     
             $productsCount = Product::with("category", "brand")
             ->where(function ($query) use($words) {

@@ -80,7 +80,7 @@
                             <a class="nav-link    focus__link" href="{{ route('admin.sale') }}"><i class="fa fa-dollar"></i> Ventas</a>
                         </li>
                         <li class="nav-item nav-focus">
-                            <a class="nav-link focus__link" href="{{ url('/admin/text/index') }}"><i class="fa fa-tags"></i> Textos</a>
+                            <a class="nav-link focus__link" href="{{ url('/admin/text/index') }}"><i class="fa fa-align-center"></i> Textos</a>
                         </li>
                         <li class="nav-item nav-focus">
                             <a class="nav-link focus__link" href="{{ url('/admin/best-store/index') }}"><i class="fa fa-shopping-bag"></i> Mejores Tiendas</a>
@@ -89,22 +89,25 @@
                             <a class="nav-link focus__link" href="{{ url('/admin/best-category/index') }}"><i class="fa fa-shopping-bag"></i> Categorías principales</a>
                         </li>
                         <li class="nav-item nav-focus">
-                            <a class="nav-link focus__link" href="{{ url('/admin/highlighted-product/index') }}"><i class="fa fa-shopping-bag"></i>Productos destacados</a>
+                            <a class="nav-link focus__link" href="{{ url('/admin/highlighted-product/index') }}"><i class="fa fa-bookmark-o"></i>Productos destacados</a>
                         </li>
                         <li class="nav-item nav-focus">
-                            <a class="nav-link focus__link" href="{{ url('/admin/help-center/index') }}"><i class="fa fa-shopping-bag"></i>Centro de ayuda</a>
+                            <a class="nav-link focus__link" href="{{ url('/admin/help-center/index') }}"><i class="fa fa-question-circle"></i>Centro de ayuda</a>
                         </li>
                         <li class="nav-item nav-focus">
-                            <a class="nav-link focus__link" href="{{ url('/admin/maintenance/index') }}"><i class="fa fa-shopping-bag"></i>Modo Mantenimiento</a>
+                            <a class="nav-link focus__link" href="{{ url('/admin/maintenance/index') }}"><i class="fa fa-wrench"></i>Modo Mantenimiento</a>
                         </li>
                         <li class="nav-item nav-focus">
-                            <a class="nav-link focus__link" href="{{ url('admin/range-profit/index') }}"><i class="fa fa-shopping-bag"></i>Rango de precios</a>
+                            <a class="nav-link focus__link" href="{{ url('admin/range-profit/index') }}"><i class="fa fa-bar-chart"></i>Rango de precios</a>
                         </li>
                         <li class="nav-item nav-focus">
                             <a class="nav-link focus__link" href="{{ url('admin/users/registered') }}"><i class="fa fa-users"></i>Usuarios Registrados</a>
                         </li>
                         <li class="nav-item nav-focus">
-                            <a class="nav-link focus__link" href="{{ url('admin/users/guest') }}"><i class="fa fa-users"></i>Usuarios Invitados</a>
+                            <a class="nav-link focus__link" href="{{ url('admin/users/guest') }}"><i class="fa fa-user"></i>Usuarios Invitados</a>
+                        </li>
+                        <li class="nav-item nav-focus">
+                            <a class="nav-link focus__link" href="{{ url('admin/search/options') }}"><i class="fa fa-user"></i>Opciones de búsqueda</a>
                         </li>
 
                     @endif
