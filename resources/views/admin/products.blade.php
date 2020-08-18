@@ -860,10 +860,10 @@
                 },
                 erase(id){
 
-                    this.loading = true
+                    
 
                     if(confirm('¿Estás seguro?')){
-
+                        this.loading = true
                         axios.post("{{ route('admin.products.delete') }}", {id: id})
                         .then(res => {
                             this.loading = false
