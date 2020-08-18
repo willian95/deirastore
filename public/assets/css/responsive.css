@@ -37,7 +37,8 @@
     .navbar-nav {
         list-style: inherit;
         color: #fff;
-        margin-top: 90px !important;
+        margin-top: 30px !important;
+        align-items: center;
     }
 
     /** Hamburger */
@@ -347,6 +348,9 @@
 }
 
 @media (min-width: 0px) and (max-width: 767px) {
+    .categories__grid .nav-item {
+        margin-top: 30px;
+    }
     .main-banner__img {
         height: unset !important;
     }
@@ -592,6 +596,7 @@
 
     .bg {
         padding: 0 5px;
+        padding-top: 100px;
     }
 
     .div-carrito {
