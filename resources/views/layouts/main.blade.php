@@ -64,6 +64,7 @@
     <script src="{{ asset('assets/js/main.js') }}"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="{{ asset('alertify/alertify.min.js') }}"></script>
+    <scritp src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="{{ asset('/js/app.js') }}"></script>
 
     <script>
