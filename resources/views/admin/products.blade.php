@@ -3,8 +3,9 @@
 @section('content')
 
     @include('partials.admin.navbar')
-
+    
     <div class="container content__admin">
+
 
         <div class="loader-cover-custom" v-if="loading == true">
             <div class="loader-custom"></div>
@@ -87,144 +88,163 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                 
-                    <div class="form-group">
-                        <label for="name">Titulo</label>
-                        <input type="text" class="form-control" id="name" v-model="name">
-                    </div>
-                    <div class="form-group">
-                        <label for="subTitle">Sub-titulo</label>
-                        <input type="text" class="form-control" id="subTitle" v-model="subTitle">
-                    </div>
 
-                    <div class="form-group">
-                        <label for="picture">Imagen</label>
-                        <input type="file" class="form-control" id="picture" ref="file" @change="onImageChange" accept="image/*">
-                    </div>
-                    <div class="form-group">
-                        <img id="blah" :src="imagePreview" class="full-image" style="margin-top: 10px; width: 40%">
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label for="min_description">Descripción minima</label>
-                        <input type="text" class="form-control" id="min_description" v-model="min_description">
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label for="description">Descripción</label>
-                        <textarea class="form-control" v-model="description"></textarea>
-                    </div>
-                    <!--<div class="form-group">
-                        <label for="sku">SKU</label>
-                        <input type="text" class="form-control" id="sku" v-model="sku">
-                    </div>-->
-                    <div class="form-group">
-                        <label for="vpn">VPN</label>
-                        <input type="text" class="form-control" id="vpn" v-model="vpn">
-                    </div>
-                  
-                    <div class="form-group">
-                        <label for="product_type">Tipo de producto</label>
-                        <input type="text" class="form-control" id="product_type" v-model="product_type">
-                    </div>
-                    <div class="form-group">
-                        <label for="product_material">Tipo de material</label>
-                        <input type="text" class="form-control" id="product_material" v-model="product_material">
-                    </div>
-                    <div class="form-group">
-                        <label for="dimenssions">Dimensiones</label>
-                        <input type="text" class="form-control" id="dimenssions" v-model="dimenssions">
-                    </div>
-                    <div class="form-group">
-                        <label for="weight">Peso</label>
-                        <input type="text" class="form-control" id="weight" v-model="weight">
-                    </div>
-                    <div class="form-group">
-                        <label for="features">Características</label>
-                        <input type="text" class="form-control" id="features" v-model="features">
-                    </div>
-                    <div class="form-group">
-                        <label for="location">Localización</label>
-                        <input type="text" class="form-control" id="location" v-model="location">
-                    </div>
-                    <div class="form-group">
-                        <label for="warranty">Garantía</label>
-                        <input type="text" class="form-control" id="warranty" v-model="warranty">
-                    </div>
-                    <div class="form-group">
-                        <label for="color">Color</label>
-                        <input type="text" class="form-control" id="color" v-model="color">
-                    </div>
+                    <div class="row">
 
-                        <!----categoria ---->
-                    <div class="form-group">
-                        <div class="">
-                            <label style="visibility:hidden;">c</label>
-                            <button class="btn btn-success" @click="openCategoryForm()">
-                                +
-                            </button>
-
-                            <label for="category">categoría</label>
-                            <select class="form-control" v-model="categoryId">
-                                <option :value="category.id" v-for="category in categories">@{{ category.name }}</option>
-                            </select>
+                        <div class="form-group col-md-6">
+                            <label for="name">Titulo</label>
+                            <input type="text" class="form-control" id="name" v-model="name">
+                        </div>
+                    
+                        <div class="form-group col-md-6">
+                            <label for="subTitle">Sub-titulo</label>
+                            <input type="text" class="form-control" id="subTitle" v-model="subTitle">
+                        </div>
+                
+                        <div class="form-group col-md-6">
+                            <label for="picture">Imagen</label>
+                            <input type="file" class="form-control" id="picture" ref="file" @change="onImageChange" accept="image/*">
+                        </div>
+                        <div class="form-group">
+                            <img id="blah" :src="imagePreview" class="full-image" style="margin-top: 10px; width: 40%">
                         </div>
 
-                        
-                        <div class="row" v-if="showCategoryForm == true">
-                            <div class="col-12">
-                                <h3 class="text-center">Nueva categoría</h3>
-                                <div class="form-group">
-                                    <label for="name">nombre</label>
-                                    <input type="text" class="form-control" id="categoryName" v-model="categoryName">
-                                    <label for="name">Imagen</label>
-                                    <input type="file" class="form-control"  id="categoryImage" @change="onImageCategoryChange" accept="image/*">
-                                    <div class="form-group">
-                                        <img :src="imageCategoryPreview" class="full-image" style="margin-top: 10px; width: 40%">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <button type="button" class="btn btn-secondary" @click="closeCategoryForm()">Close</button>
-                                <button type="button" class="btn btn-primary" @click="storeCategory()">Save changes</button>
-                            </div>
+
+                        <div class="form-group col-md-12">
+                            <label for="min_description">Descripción minima</label>
+                            <input type="text" class="form-control" id="min_description" v-model="min_description">
                         </div>
-                    </div>
-                    <!-------Brand---->
-                    <div class="form-group">
-                        <div class="">
+                        <div class="form-group col-md-12">
+                            <label for="description">Descripción</label>
+                            <textarea class="form-control" v-model="description"></textarea>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="stock">Stock</label>
+                            <input type="text" class="form-control" id="stock" v-model="stock" @keypress="isNumber($event)">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="vpn">VPN</label>
+                            <input type="text" class="form-control" id="vpn" v-model="vpn">
+                        </div>
+
+
+                    
+                        <div class="form-group col-md-6">
+                            <label for="product_type">Tipo de producto</label>
+                            <input type="text" class="form-control" id="product_type" v-model="product_type">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="product_material">Tipo de material</label>
+                            <input type="text" class="form-control" id="product_material" v-model="product_material">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="dimenssions">Dimensiones</label>
+                            <input type="text" class="form-control" id="dimenssions" v-model="dimenssions">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="weight">Peso</label>
+                            <input type="text" class="form-control" id="weight" v-model="weight">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="features">Características</label>
+                            <input type="text" class="form-control" id="features" v-model="features">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="location">Localización</label>
+                            <input type="text" class="form-control" id="location" v-model="location">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="warranty">Garantía</label>
+                            <input type="text" class="form-control" id="warranty" v-model="warranty">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="color">Color</label>
+                            <input type="text" class="form-control" id="color" v-model="color">
+                        </div>
+
+                            <!----categoria ---->
+                        <div class="form-group col-md-6">
                             <div class="">
                                 <label style="visibility:hidden;">c</label>
-                                <button class="btn btn-success" @click="openBrandForm()">
+                                <button class="btn btn-success" @click="openCategoryForm()">
                                     +
                                 </button>
-                            
-                         
-                                
-                                    <label for="brand">Tienda</label>
-                                    <select class="form-control" v-model="brandId">
-                                        <option :value="brand.id" v-for="brand in brands">@{{ brand.name }}</option>
-                                    </select>
-                         
-                                </div>
-                        </div>
 
-                        <div class="row" v-if="showBrandForm == true">
-                            <div class="col-12">
-                                <h3 class="text-center">Nueva tienda</h3>
-                                <div class="form-group">
-                                    <label for="name">nombre</label>
-                                    <input type="text" class="form-control" id="brandName" v-model="brandName">
-                                    <label for="name">Imagen</label>
-                                    <input type="file" class="form-control"  id="brandImage" @change="onImageBrandChange" accept="image/*">
+                                <label for="category">categoría</label>
+                                <select class="form-control" v-model="categoryId">
+                                    <option :value="category.id" v-for="category in categories">@{{ category.name }}</option>
+                                </select>
+                            </div>
+
+                            
+                            <div class="row" v-if="showCategoryForm == true">
+                                <div class="col-12">
+                                    <h3 class="text-center">Nueva categoría</h3>
                                     <div class="form-group">
-                                        <img :src="imageBrandPreview" class="full-image" style="margin-top: 10px; width: 40%">
+                                        <label for="name">nombre</label>
+                                        <input type="text" class="form-control" id="categoryName" v-model="categoryName">
+                                        <label for="name">Imagen</label>
+                                        <input type="file" class="form-control"  id="categoryImage" @change="onImageCategoryChange" accept="image/*">
+                                        <div class="form-group">
+                                            <img :src="imageCategoryPreview" class="full-image" style="margin-top: 10px; width: 40%">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-12">
-                                <button type="button" class="btn btn-secondary" @click="closeBrandForm()">Close</button>
-                                <button type="button" class="btn btn-primary" @click="storeBrand()">Save changes</button>
+                                <div class="col-12">
+                                    <button type="button" class="btn btn-secondary" @click="closeCategoryForm()">Close</button>
+                                    <button type="button" class="btn btn-primary" @click="storeCategory()">Save changes</button>
+                                </div>
                             </div>
                         </div>
+                        <!-------Brand---->
+                        <div class="form-group col-md-6">
+                            <div class="">
+                                <div class="">
+                                    <label style="visibility:hidden;">c</label>
+                                    <button class="btn btn-success" @click="openBrandForm()">
+                                        +
+                                    </button>
+                                
+                            
+                                    
+                                        <label for="brand">Tienda</label>
+                                        <select class="form-control" v-model="brandId">
+                                            <option :value="brand.id" v-for="brand in brands">@{{ brand.name }}</option>
+                                        </select>
+                            
+                                    </div>
+                            </div>
+
+                            <div class="row" v-if="showBrandForm == true">
+                                <div class="col-12">
+                                    <h3 class="text-center">Nueva tienda</h3>
+                                    <div class="form-group">
+                                        <label for="name">nombre</label>
+                                        <input type="text" class="form-control" id="brandName" v-model="brandName">
+                                        <label for="name">Imagen</label>
+                                        <input type="file" class="form-control"  id="brandImage" @change="onImageBrandChange" accept="image/*">
+                                        <div class="form-group">
+                                            <img :src="imageBrandPreview" class="full-image" style="margin-top: 10px; width: 40%">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <button type="button" class="btn btn-secondary" @click="closeBrandForm()">Close</button>
+                                    <button type="button" class="btn btn-primary" @click="storeBrand()">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="price">precio (en Dólares)</label>
+                            <input type="text" class="form-control" id="price" v-model="price" @keypress="isNumberDot($event)">
+                        </div>
+                        <!--<div class="form-group">
+                            <label for="subPrice">precio alternativo</label>
+                            <input type="text" class="form-control" id="price" v-model="subPrice" @keypress="isNumber()">
+                        </div>-->
+
                     </div>
 
 
@@ -305,18 +325,6 @@
 
                     </div>
 -->
-
-
-
-
-                    <div class="form-group">
-                        <label for="price">precio</label>
-                        <input type="text" class="form-control" id="price" v-model="price" @keypress="isNumber()">
-                    </div>
-                    <div class="form-group">
-                        <label for="subPrice">precio alternativo</label>
-                        <input type="text" class="form-control" id="price" v-model="subPrice" @keypress="isNumber()">
-                    </div>
                   
                     
                 </div>
@@ -396,6 +404,7 @@
                     brands:[],
                     loading:false,
                     //sku:"",
+                    stock:"",
                     vpn:"",
                     min_description:"",
                     product_type:"",
@@ -447,6 +456,8 @@
                 },
                 store(){
 
+                    this.loading = true
+
                     if(!this.formHasError()){
 
                         if(this.isEdit == true){
@@ -464,6 +475,7 @@
                             formData.append("brandId", this.brandId)
                             formData.append("sku", this.sku)
                             formData.append("vpn", this.vpn)
+                            formData.append("stock",this.stock)
                             formData.append("min_description", this.min_description)
                             formData.append("product_type", this.product_type)
                             formData.append("product_material", this.product_material)
@@ -480,9 +492,9 @@
                                 }
                             })
                             .then(res => {
-                                
+                                this.loading = false
                                 if(res.data.success == true){
-                                    alert(res.data.msg)
+                                    alertify.success(res.data.msg)
                                     this.name = ""
                                     this.price = ""
                                     this.subPrice = ""
@@ -504,13 +516,14 @@
                                     this.color =""
                                     this.fetch()
                                 }else{
-                                    alert(res.data.msg)
+                                    alertify.error(res.data.msg)
                                 }
 
                             })
                             .catch(err => {
+                                this.loading = false
                                 $.each(err.response.data.errors, function(key, value){
-                                    alert(value)
+                                    alertify.error(value[0])
                                 });
                             })
 
@@ -518,6 +531,24 @@
 
                     }
 
+                },
+                isNumberDot(evt) {
+                    evt = (evt) ? evt : window.event;
+                    var charCode = (evt.which) ? evt.which : evt.keyCode;
+                    if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+                        evt.preventDefault();;
+                    } else {
+                        return true;
+                    }
+                },
+                isNumber(evt) {
+                    evt = (evt) ? evt : window.event;
+                    var charCode = (evt.which) ? evt.which : evt.keyCode;
+                    if ((charCode > 31 && (charCode < 48 || charCode > 57))) {
+                        evt.preventDefault();;
+                    } else {
+                        return true;
+                    }
                 },
                 formHasError(){
 
@@ -756,7 +787,7 @@
                         this.loading = false
 
                         if(res.data.success == true){
-                            alert(res.data.msg)
+                            alertify.success(res.data.msg)
                             this.name = ""
                             this.price = ""
                             this.subPrice = ""
@@ -779,13 +810,13 @@
                             this.color=""
                             this.fetch()
                         }else{
-                            alert(res.data.msg)
+                            alertify.error(res.data.msg)
                         }
                     })
                     .catch(err => {
                         this.loading = false
                         $.each(err.response.data.errors, function(key, value){
-                            alert(value)
+                            alertify.error(value[0])
                         });
                     })
 

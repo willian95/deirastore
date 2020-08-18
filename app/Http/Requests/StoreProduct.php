@@ -26,11 +26,12 @@ class StoreProduct extends FormRequest
         return [
             "name" => "required",
             "price" => "required|numeric",
-            "subPrice" => "required|numeric",
+            //"subPrice" => "required|numeric",
             "categoryId" => "required",
             "description" => "required",
             "picture" => "required",
-            "brandId" => "required|integer"
+            "brandId" => "required|integer",
+            "stock" => "required|integer"
         ];
     }
 
@@ -40,13 +41,15 @@ class StoreProduct extends FormRequest
             "name.required" => "Nombre es requerido",
             "price.required" => "Precio es requerido",
             "price.numeric" => "Precio debe ser un número",
-            "subPrice.required" => "Sub-precio es requerido",
-            "subPrice.numeric" => "Sub-precio debe ser un número",
+            //"subPrice.required" => "Sub-precio es requerido",
+            //"subPrice.numeric" => "Sub-precio debe ser un número",
             "categoryId.required" => "Debe elegir una categoría",
             "description.required" => "Descripción es requerida",
             "picture.required" => "Imagen es requerida",
             "brandId.required" => "Marca es requerida",
-            "brandId.integer" => "Debe elegir una marca válida"
+            "brandId.integer" => "Debe elegir una marca válida",
+            "stock.required" => "Cantidad es requerida",
+            "stock.integer" => "Cantidad debe ser un número",
 
         ];
     }
