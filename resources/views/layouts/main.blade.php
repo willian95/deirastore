@@ -56,6 +56,7 @@
     </div>
 
     <script src="{{ asset('assets/js/jquery.min.js ') }}"></script>
+    <scritp src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/blazy/1.8.2/blazy.min.js"></script>
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
@@ -64,7 +65,6 @@
     <script src="{{ asset('assets/js/main.js') }}"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="{{ asset('alertify/alertify.min.js') }}"></script>
-    <scritp src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="{{ asset('/js/app.js') }}"></script>
 
     <script>
