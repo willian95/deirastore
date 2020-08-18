@@ -60,13 +60,16 @@
                                     cart =JSON.parse(window.localStorage.getItem('cart'))
                                 }
                                 //console.log(cart)
-                                cart.forEach((data, index)=>{
-                                    //console.log("i'm here", total, data.amount + total)
-                                    //total 
-                                    //total = parseInt(total) + parseInt(this.amount)
-                                    total = total + data.amount
-                                    
-                                })
+                                if(cart != null && cart.length > 0){
+                                    cart.forEach((data, index)=>{
+                                        //console.log("i'm here", total, data.amount + total)
+                                        //total 
+                                        //total = parseInt(total) + parseInt(this.amount)
+                                        total = total + data.amount
+                                        
+                                    })
+                                }
+                                
                                 //console.log("i'm here2", total)
                                 $("#total").html(total)
 
