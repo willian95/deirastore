@@ -723,7 +723,7 @@
                     this.modalTitle = "Editar Producto"
                     this.productId = product.id
                     this.isEdit = true
-                    this.price = product.price_range_profit
+                    this.price = product.external_price
                     this.subPrice = product.sub_price
                     this.picture = null
                     this.subTitle = product.sub_title
