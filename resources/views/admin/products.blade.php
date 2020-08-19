@@ -698,7 +698,7 @@
                     this.name = ""
                     this.price = ""
                     this.subPrice = ""
-                    this.picture = null
+                    this.picture = ""
                     this.subTitle = ""
                     this.description = ""
                     this.productId = ""
@@ -725,7 +725,7 @@
                     this.isEdit = true
                     this.price = product.external_price
                     this.subPrice = product.sub_price
-                    this.picture = null
+                    this.picture = ""
                     this.subTitle = product.sub_title
                     this.description = product.description
                     this.productId = product.id 
