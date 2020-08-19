@@ -382,7 +382,7 @@
                     name:'',
                     price:'',
                     subPrice:"",
-                    picture:null,
+                    picture:"",
                     subTitle:"",
                     description:"",
                     categoryId:"",
