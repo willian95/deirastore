@@ -31,7 +31,8 @@ class StoreProduct extends FormRequest
             "description" => "required",
             "picture" => "required",
             "brandId" => "required|integer",
-            "stock" => "required|integer"
+            "stock" => "required|integer",
+            "dataSourceId" =>"required|integer"
         ];
     }
 
@@ -50,6 +51,8 @@ class StoreProduct extends FormRequest
             "brandId.integer" => "Debe elegir una marca válida",
             "stock.required" => "Cantidad es requerida",
             "stock.integer" => "Cantidad debe ser un número",
+            "dataSourceId.required" => "Proveedor es requerida",
+            "dataSourceId.integer" => "Proveedor no es válido",
 
         ];
     }

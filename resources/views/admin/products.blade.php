@@ -163,6 +163,14 @@
                             <input type="text" class="form-control" id="color" v-model="color">
                         </div>
 
+                        <div class="form-group col-md-6">
+                            <label for="category">Proveedor</label>
+                            <select class="form-control" v-model="dataSourceId">
+                                <option value="1">Nexsys</option>
+                                <option value="2">Ingram</option>
+                            </select>
+                        </div>
+
                             <!----categoria ---->
                         <div class="form-group col-md-6">
                             <div class="">
@@ -403,6 +411,7 @@
                     showBrandForm:false,
                     brands:[],
                     loading:false,
+                    dataSourceId:"",
                     //sku:"",
                     stock:"",
                     vpn:"",
@@ -476,6 +485,7 @@
                             formData.append("sku", this.sku)
                             formData.append("vpn", this.vpn)
                             formData.append("stock",this.stock)
+                            formData.append("dataSourceId", this.dataSourceId)
                             formData.append("min_description", this.min_description)
                             formData.append("product_type", this.product_type)
                             formData.append("product_material", this.product_material)
@@ -505,6 +515,7 @@
                                     this.imagePreview = ""
                                     this.sku=""
                                     this.vpn=""
+                                    this.dataSourceId = ""
                                     this.min_description=""
                                     this.product_type=""
                                     this.product_material=""
@@ -587,7 +598,7 @@
                             
                             if(res.data.success == true){
 
-                                alert(res.data.msg)
+                                alertify.success(res.data.msg)
                                 this.categoryName = ""
                                 this.cateogoryImage = ""
                                 this.imageCategoryPreview = ""
@@ -596,7 +607,7 @@
 
                             } else{
 
-                                alert(res.data.msg)
+                                alertify.error(res.data.msg)
 
                             }
 
@@ -635,7 +646,7 @@
                             
                             if(res.data.success == true){
 
-                                alert(res.data.msg)
+                                alertify.success(res.data.msg)
                                 this.brandName = ""
                                 this.brandImage = ""
                                 this.imageBrandPreview = ""
@@ -644,7 +655,7 @@
 
                             } else{
 
-                                alert(res.data.msg)
+                                alertify.error(res.data.msg)
 
                             }
 
@@ -696,6 +707,7 @@
                     this.modalTitle = "Crear producto"
                     this.isEdit = false
                     this.name = ""
+                    this.dataSourceId = ""
                     this.price = ""
                     this.subPrice = ""
                     this.picture = ""
@@ -726,6 +738,7 @@
                     this.price = product.external_price
                     this.subPrice = product.sub_price
                     this.picture = ""
+                    this.dataSourceId = product.data_source_id
                     this.subTitle = product.sub_title
                     this.description = product.description
                     this.productId = product.id 
@@ -767,6 +780,7 @@
                     formData.append("brandId", this.brandId)
                     formData.append("sku", this.sku)
                     formData.append("vpn", this.vpn)
+                    formData.append("dataSourceId", this.dataSourceId)
                     formData.append("min_description", this.min_description)
                     formData.append("product_type", this.product_type)
                     formData.append("product_material", this.product_material)
@@ -802,6 +816,7 @@
                             this.min_description=""
                             this.product_type=""
                             this.product_material=""
+                            this.dataSourceId = ""
                             this.dimenssions=""
                             this.weight=""
                             this.features=""
@@ -859,8 +874,6 @@
 
                 },
                 erase(id){
-
-                    
 
                     if(confirm('¿Estás seguro?')){
                         this.loading = true

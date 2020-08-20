@@ -208,6 +208,12 @@ class ProductController extends Controller
                 $product->color = $request->color;
             }
 
+            if($request->dataSourceId == "null"){
+                $product->data_source_id = null;
+            }else{
+                $product->data_source_id = $request->dataSourceId;
+            }
+
             $product->update();
 
             return response()->json(["success" => true, "msg" => "Producto actualizado"]);
