@@ -82,8 +82,8 @@
 
                 <div>
                     <div class="colunm">
-                        <p class="mb-0"><strong>Total de productos:</strong> {{ number_format($totalProductos, 0, ",", ".") }}</p>
-                        <p><strong>Total de productos + envío:</strong> {{ number_format($total, 0, ",", ".") }}</p>
+                        <p class="mb-0"><strong>Total de productos:</strong> $ {{ number_format($totalProductos, 0, ",", ".") }}</p>
+                        <p><strong>Total de productos + envío:</strong> $ {{ number_format($total, 0, ",", ".") }}</p>
                     </div>
 
                 </div>
