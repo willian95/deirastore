@@ -162,15 +162,6 @@
                             <label for="color">Color</label>
                             <input type="text" class="form-control" id="color" v-model="color">
                         </div>
-
-                        <div class="form-group col-md-6">
-                            <label for="category">Proveedor</label>
-                            <select class="form-control" v-model="dataSourceId">
-                                <option value="1">Nexsys</option>
-                                <option value="2">Ingram</option>
-                            </select>
-                        </div>
-
                             <!----categoria ---->
                         <div class="form-group col-md-6">
                             <div class="">
@@ -247,6 +238,14 @@
                         <div class="form-group">
                             <label for="price">precio (en Dólares)</label>
                             <input type="text" class="form-control" id="price" v-model="price" @keypress="isNumberDot($event)">
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="category">Proveedor</label>
+                            <select class="form-control" v-model="dataSourceId">
+                                <option value="1">Nexsys</option>
+                                <option value="2">Ingram</option>
+                            </select>
                         </div>
                         <!--<div class="form-group">
                             <label for="subPrice">precio alternativo</label>
