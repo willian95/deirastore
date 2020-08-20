@@ -67,11 +67,11 @@
                                 @endphp
                                 <tr>
                                     <td>{{ $loop->index + 1 }}</td>
-                                    <td>{{ $product->product->name }}}</td>
+                                    <td>{{ $product->product->name }}</td>
                                     <td>{{ $product->amount }}</td>
-                                    <td>{{ number_format($product->price, 0, ",", ".") }}</td>
-                                    <td>{{ number_format($product->shipping_cost, 0, ",", ".") }}</td>
-                                    <td>{{ number_format(($product->price * $product->amount) + $product->shipping_cost, 0, ",", ".")   }}</td>
+                                    <td>{{ $ number_format($product->price, 0, ",", ".") }}</td>
+                                    <td>{{ $ number_format($product->shipping_cost, 0, ",", ".") }}</td>
+                                    <td>{{ $ number_format(($product->price * $product->amount) + $product->shipping_cost, 0, ",", ".")   }}</td>
                                 </tr>
                             @endforeach
 
