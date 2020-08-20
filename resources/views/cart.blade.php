@@ -69,9 +69,9 @@
                                                     <span>@{{ item.name }} </span>
                                                     <p>@{{ item.sub_title }}</p>
                                                 </td>
-                                                <td class="p-0">$ @{{ item.price }}</td>
-                                                <td class="p-0">@{{ item.amount }}</td>
-                                                <td class="p-0">$ @{{ parseInt(item.price * item.amount).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</td>
+                                                <td class="p-0 text-center">$ @{{ parseInt(item.price).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</td>
+                                                <td class="p-0 text-center">@{{ item.amount }}</td>
+                                                <td class="p-0 text-center">$ @{{ parseInt(item.price * item.amount).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</td>
                                                 <td><button class="btn btn-danger fa fa-trash trash " @click="eraseGuestProduct(index)"></button></td>
                                             </tr>
 
