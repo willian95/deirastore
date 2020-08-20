@@ -51,7 +51,7 @@
                                                 <td class="table__title" >Producto</td>
                                                 <td class="table__title" >Marca</td>
                                                 <td class="table__title" >Nombre</td>
-                                                <td class="table__title" >Precio</td>
+                                                <td class="table__title" style="width: 190px">Precio</td>
                                                 <td class="table__title">Cantidad</td>
                                                 <td class="table__title">Total</td>
                                                 <td class="table__title"></td>
