@@ -68,7 +68,7 @@
                                                     <span>@{{ item.name }} </span>
                                                     <p>@{{ item.sub_title }}</p>
                                                 </td>
-                                                <td>$ @{{ item.price }}</td>
+                                                <td>$ @{{ parseInt(item.price).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</td>
                                                 <td>@{{ item.amount }}</td>
                                                 <td>$ @{{ parseInt(item.price * item.amount).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</td>
                                                 <td>
