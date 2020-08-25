@@ -126,6 +126,7 @@ class ProductController extends Controller
             $product = Product::find($request->productId);
             $product->name = $request->name;
             $product->amount = $request->stock;
+            $product->external_price = $request->price;
             $product->sub_title = $request->subTitle;
             if($request->price > 0 && $product->price_range_profit != $request->price){
                 $product->percentage_range_profit = 1;
