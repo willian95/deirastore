@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\BrandStoreRequest;
 use App\Http\Requests\BrandUpdateRequest;
 use Intervention\Image\Facades\Image;
+use App\Category;
 use App\Brand;
 use Carbon\Carbon;
 use App\Product;
@@ -190,6 +191,7 @@ class BrandController extends Controller
         try{
 
             $orderBy = "";
+            $where = "";
             if($request->filterOrder == 1){
                 $orderBy = "name asc";
             }
@@ -209,11 +211,17 @@ class BrandController extends Controller
                 $orderBy = "amount desc";
             }
 
+            if($request->category > 0){
+                $where = "category_id = ".$request->category;
+            }else{
+                $where = "1 = 1";
+            }
+
             $skip = ($request->page-1) * 20;
             $brand = Brand::where('slug', $request->slug)->first();
 
-            $products = Product::where('brand_id', $brand->id)->with('category')->with("brand")->skip($skip)->take(20)->orderByRaw($orderBy)->get();
-            $productsCount = Product::where('brand_id', $brand->id)->with('category')->with("brand")->count();
+            $products = Product::where('brand_id', $brand->id)->with('category')->with("brand")->skip($skip)->take(20)->whereRaw($where)->orderByRaw($orderBy)->get();
+            $productsCount = Product::where('brand_id', $brand->id)->with('category')->with("brand")->whereRaw($where)->count();
 
             return response()->json(["success" => true, "products" => $products, "productsCount" => $productsCount]);
 
@@ -231,6 +239,30 @@ class BrandController extends Controller
 
             $brands = Brand::orderBy("name", "asc")->get();
             return response()->json(["success" => true, "brands" => $brands]);
+
+        }catch(\Exception $e){
+
+            return response()->json(["success" => false, "msg" => "Error en el servidor"]);
+
+        }
+
+    }
+
+    function fetchBrandCategories(Request $request){
+
+        try{
+
+            $categoriesArray = [];
+            $brandId = Brand::where("slug", $request->slug)->first();
+            $categories = Product::where("brand_id", $brandId->id)->where("category_id", ">", 0)->has("category")->groupBy("category_id")->get();
+
+            foreach($categories as $category){
+                array_push($categoriesArray, $category->category_id);
+            }
+
+            $categories = Category::whereIn("id", $categoriesArray)->get();
+
+            return response()->json(["categories" => $categories]);
 
         }catch(\Exception $e){
 

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Category;
 use App\Product;
+use App\Brand;
 use App\Traits\CartAbandonTrait;
 use App\Imports\CategoriesWeightImport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -202,6 +203,7 @@ class CategoriesController extends Controller
             $category = Category::where('slug', $request->slug)->first();
 
             $orderBy = "";
+            $where = "";
             if($request->filterOrder == 1){
                 $orderBy = "name asc";
             }
@@ -221,10 +223,18 @@ class CategoriesController extends Controller
                 $orderBy = "amount desc";
             }
 
+            if($request->brand_id > 0){
+                $where = "brand_id = ".$request->brand_id;
+            }else{
+                $where = "1 = 1";
+            }
+
+
             $products = Product::where('category_id', $category->id)->with('category')->with("brand")->skip($skip)->take(20)
+                        ->whereRaw($where)
                         ->orderByRaw($orderBy)
                         ->get();
-            $productsCount = Product::where('category_id', $category->id)->with('category')->with("brand")->count();
+            $productsCount = Product::where('category_id', $category->id)->with('category')->with("brand")->whereRaw($where)->count();
             $subCategories = Category::where('parent_id', $category->id)->get();
 
             return response()->json(["success" => true, "products" => $products, "productsCount" => $productsCount, "subCategories" => $subCategories]);
@@ -287,6 +297,30 @@ class CategoriesController extends Controller
             dd($e->getMessage(), $e->getLine());
         }
         //return redirect('/')->with('success', 'All good!');
+    }
+
+    public function fetchCategoriesBrands(Request $request){
+
+        try{
+
+            $brandsArray = [];
+            $category = Category::where("slug", $request->slug)->first();
+            $brands = Product::where("category_id", $category->id)->has("brand")->groupBy("brand_id")->get();
+
+            foreach($brands as $brand){
+                array_push($brandsArray, $brand->brand_id);
+            }
+
+            $brands = Brand::whereIn("id", $brandsArray)->get();
+
+            return response()->json(["brands" => $brands]);
+
+        }catch(\Exception $e){
+
+            return response()->json(["success" => false, "msg" => "error en el servidor", "err" => $e->getMessage(), "ln" => $e->getLine()]);
+
+        }
+
     }
 
 

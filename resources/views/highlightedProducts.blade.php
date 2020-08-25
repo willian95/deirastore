@@ -53,7 +53,8 @@
 
         <div class="row">
             <div class="col-md-3 col-xs-12 " v-for="product in products">
-                <div class="main-slider__item">
+                <div class="main-slider__item position-relative" style="overflow: hidden;">
+                    <span style="" class="stock" v-if="product.amount == 0">Sin stock</span>
                     <a :href=" '{{ url('/') }}' + '/product/' + product.slug">
                         <div class="content-slider">
                             <img :src="'{{ url('/') }}' + '/images/products/' +product.picture" alt="" v-if="product.is_external == false">

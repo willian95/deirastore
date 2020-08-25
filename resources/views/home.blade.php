@@ -240,15 +240,16 @@
                     @foreach(App\HighlightedProduct::with('product', 'product.category', 'product.brand')->get() as $product)
            
                         <a href="{{ url('/product/'.$product->product->slug) }}">
-                            <div class="main-slider__item">
+                            <div class="main-slider__item position-relative">
+                            @if($product->amount == 0)
+                                <span style="" class="stock">Sin stock</span>
+                            @endif
                                 <div class="content-slider">
 
-                                    @if($product->product->is_external == false)
-                                        <img src="{{ asset('/images/products/'.$product->product->picture) }}" alt="" style="width: 100%">
-                                    @else
-                                        <img src="{{ $product->product->picture }}" alt="" style="width: 100%">
-                                    @endif
+                                    <img src="{{ $product->product->picture }}" alt="" style="width: 100%">
+                                    
                                 </div>
+                               
                                 <div class="main-slider__text">
                                     <p class="title">{{ $product->product->name }}</p>
                                     @if($product->product->brand)

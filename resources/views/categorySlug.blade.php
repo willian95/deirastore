@@ -49,18 +49,30 @@
                     </select>
                 </div>
             </div>
+            <div class="col-md-4 col-lg-3">
+                <div class="form-group">
+                    <label for="">Marcas:</label>
+                    <select class="form-control" v-model="brand" @change="fetch()">
+                        <option value="0">Todos</option>
+                        <option :value="brand.id" v-for="brand in brands" >@{{ brand.name }}</option>
+                    </select>
+                </div>
+            </div>
         </div>
 
         <div class="row">
             <div class="col-12 col-md-6 col-lg-3" v-for="product in products">
-                <div class="main-slider__item">
+                <div class="main-slider__item position-relative" style="overflow: hidden;">
+                    
+                    <span style="" class="stock" v-if="product.amount == 0">Sin stock</span>
+                    
                     <a :href=" '{{ url('/') }}' + '/product/' + product.slug">
                         <div class="content-slider">
                             <img :src="product.picture" style="width: 100%;" alt="">
                         </div>
                         <div class="main-slider__text">
                             <p class="title" >@{{ product.name }}</p>
-                            <p class="title-brand">@{{ product.brand.name }} - @{{ product.amount }}</p>
+                            <p class="title-brand">@{{ product.brand.name }}</p>
                             <p v-if="product.category">@{{ product.category.name }}</p>
                             <p class="price" v-if="product.percentage_range_profit > 0 && product.percentage_range_profit != null">$ @{{ parseInt((dolarPrice * product.price_range_profit) + 1).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</p>
                             <p class="price" v-else>$ @{{  parseInt((dolarPrice * product.external_price) + 1).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</p>
@@ -140,6 +152,8 @@
                 slug:'{!! $slug !!}',
                 products:[],
                 subCategories:[],
+                brands:[],
+                brand:0,
                 pages:0,
                 filterOrder:"6",
                 dolarPrice: '{!! App\DolarPrice::first()->price !!}',
@@ -152,7 +166,7 @@
 
                 this.page = page
 
-                axios.post("{{ route('category.products') }}", {page: page, slug: this.slug, filterOrder: this.filterOrder})
+                axios.post("{{ route('category.products') }}", {page: page, slug: this.slug, filterOrder: this.filterOrder, brand_id: this.brand})
                 .then(res => {
 
                     if(res.data.success == true){
@@ -171,12 +185,23 @@
                     //console.log(err.response.data)
                 })
 
+            },
+            fetchBrands(){
+
+                axios.post("{{ url('/category/brands') }}", {slug: this.slug}).then(res => {
+
+                    this.brands = res.data.brands
+                    console.log(this.brands)
+
+                })
+
             }
 
 
         },
         mounted(){
             this.fetch()
+            this.fetchBrands()
         }
 
     })

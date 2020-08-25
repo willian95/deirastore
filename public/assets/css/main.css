@@ -2618,3 +2618,14 @@ img.lista-pedido {
 .show-on-mobile{
     display: none;
 }
+
+.stock{
+    background: #d32b2b;
+    color: #fff;
+    text-align: center;
+    position: absolute;
+    width: 150%;
+    font-size: 16px;
+    transform: rotateZ(45deg);
+    padding-left: 80px;
+}

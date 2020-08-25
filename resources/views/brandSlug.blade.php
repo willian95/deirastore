@@ -49,12 +49,23 @@
                     </select>
                 </div>
             </div>
+            <div class="col-md-4 col-lg-3">
+                <div class="form-group">
+                    <label for="">Categorías:</label>
+                    <select class="form-control" v-model="category" @change="fetch()">
+                        <option value="0" >Todos</option>
+                        <option :value="category.id" v-for="category in categories" v-if="category.esp_name" >@{{ category.esp_name }}</option>
+                        <option :value="category.id" v-for="category in categories" v-else >@{{ category.name }}</option>
+                    </select>
+                </div>
+            </div>
         </div>
 
         <div class="row">
             <div class="col-md-3 col-xs-12 " v-for="product in products">
-                <div class="main-slider__item">
+                <div class="main-slider__item position-relative" style="overflow: hidden;">
                     <a :href=" '{{ url('/') }}' + '/product/' + product.slug">
+                        <span style="" class="stock" v-if="product.amount == 0">Sin stock</span>
                         <div class="content-slider">
                             <img :src="product.picture" style="width: 100%;" alt="">
                         </div>
@@ -228,7 +239,9 @@
                 pages:0,
                 dolarPrice: '{!! App\DolarPrice::first()->price !!}',
                 page:1,
-                filterOrder:"6"
+                filterOrder:"6",
+                categories:[],
+                category:"0"
             }
         },
         methods:{
@@ -237,9 +250,9 @@
 
                 this.page = page
 
-                axios.post("{{ route('brands.products') }}", {page: page, slug: this.slug, filterOrder: this.filterOrder})
+                axios.post("{{ route('brands.products') }}", {page: page, slug: this.slug, filterOrder: this.filterOrder, category: this.category})
                 .then(res => {
-                    console.log(res.data)
+                  
                     if(res.data.success == true){
                         this.pages = Math.ceil(res.data.productsCount / 20)
                         this.products = res.data.products
@@ -256,10 +269,20 @@
                 })
 
             },
+            fetchCategories(){
+
+                axios.post("{{ url('/brands/categories') }}", {slug: this.slug}).then(res => {
+
+                    this.categories = res.data.categories
+
+                })
+
+            }
 
         },
         mounted(){
             this.fetch()
+            this.fetchCategories()
         }
 
     })

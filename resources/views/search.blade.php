@@ -61,7 +61,8 @@
         <div class="row" v-cloak>
 
             <div class="col-md-3" v-for="product in products">
-                <div class="main-slider__item">
+                <div class="main-slider__item position-relative" style="overflow: hidden;">
+                    <span style="" class="stock" v-if="product.amount == 0">Sin stock</span>
                     <a :href="'{{ url('/product/') }}'+'/'+product.slug">
                         <div class="content-slider">
                             

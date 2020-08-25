@@ -253,12 +253,10 @@
 
                         </div>
 
-                        <!--<div class="card">
+                        <div class="card">
                             <a class="collapsed card-link" data-toggle="collapse" href="#collapseTres">
                                 <div class="card-header acordeon-2">
                                     <h2><strong>Calificación </strong>y Comentarios</h2>
-
-
                                 </div>
                         </div>
                         </a>
@@ -266,47 +264,65 @@
                             <div class="card-body">
                                 <div class="container comentarios">
                                     <div class="row">
-                                        <div class="col-sm-6 comentarios-calificacion">
-                                            <h3><strong>Calificación</strong> General</h3>
-                                            <h5><strong>Seleccione </strong>una nota para ver sus comentarios</h5>
-
-                                        
-
-                                        </div>
                                         <div class="col-sm-6">
-                                            <div class="comentario">
-                                                <h3><strong>Roberto</strong></h3>
-                                                <h5>12 Febrero 2020</h5>
-                                                <p>“Muy buena calidad de resolución y sonido muy flexibles y de buena
-                                                    calidad ”
+                                            
+                                            <div class="comentario" v-for="comment in comments ">
+                                                <h3><strong>@{{ comment.comment.user.name }}</strong></h3>
+                                                <h5>@{{ comment.date }}</h5>
+                                                <p>@{{ comment.comment.comment }}
                                                 </p>
                                             </div>
-                                            <div class="comentario">
-                                                <h3><strong>María</strong></h3>
-                                                <h5>12 Febrero 2020</h5>
-                                                <p>“Muy buena calidad de resolución y sonido muy flexibles y de buena
-                                                    calidad ”
-                                                </p>
-                                            </div>
-                                            <div class="comentario">
-                                                <h3><strong>Camilo</strong></h3>
-                                                <h5>12 Febrero 2020</h5>
-                                                <p>“Muy buena calidad de resolución y sonido muy flexibles y de buena
-                                                    calidad ”
-                                                </p>
-                                            </div>
-                                        
+                                            
+                                         
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                        <ul class="pagination">
+                                            <li class="line-pag">
+                                                <a class="page-link" v-if="page > 1" @click="fetch(1)">Primero</a>
+                                            </li>
+                                            <li class="line-pag line-pag_r" >
+                                                <a class="page-link" v-if="page > 1" @click="fetch(page - 1)"><i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+                                                </a>
+                                            </li>
+                                            <li class="page-item" v-for="index in pages">
+                                                <a class="page-link" style="background-color: #d32b2b; color: #fff !important;" v-if="page == index && index >= page - 3 &&  index < page + 3"  :key="index" @click="fetch(index)" >@{{ index }}</a>
+                                                <a class="page-link" v-if="page != index && index >= page - 3 &&  index < page + 3"  :key="index" @click="fetch(index)" >@{{ index }}</a> 
+                                            </li>
+                                            <li class="line-pag">
+                                                <a class="page-link" v-if="page < pages" @click="fetch(page + 1)"><i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                                                </a>
+                                            </li>
+                                            <li class="line-pag">
+                                                <a class="page-link" v-if="page < pages" @click="fetch(pages)">último</a>
+                                            </li>
+                                        </ul>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="line">
-                                    <a href="" class="agregar-comentario">Agregar Comentario</a>
+                                    @if(\Auth::check() && \Auth::user()->id)
+                                        
+                                        <div class="col-lg-8 offset-lg-2" style="margin-bottom: 10px;">
+                                            <textarea class="form-control" row="3" v-model="comment"></textarea>
+                                        </div>
+
+                                        <button type="button" class="agregar-comentario" @click="storeComment()">Agregar Comentario</button>
+                                    @else
+                                        <p class="text-center">Debes iniciar sesión para dejar un comentario</p>
+                                    @endif
                                 </div>
+
+                                
+                                </div>
+
                             </div>
-                        </div>-->
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
             <!-- productos relacionados -->
 
@@ -351,6 +367,10 @@
             </section>
 
         </div>
+
+
+        
+
     </div>
 
     @include('partials.footer')
@@ -368,12 +388,33 @@
                     productId:"{!! $product->id !!}",
                     modalTitle: "Añadir al carrito",
                     amount:1,
+                    pages:1,
+                    page:1,
+                    comments:[],
+                    comment:"",
                     maxAmount:"{!! $product->amount !!}",
                     auth: '{!! \Auth::check() !!}'
                 }
             },
             methods:{
 
+                fetch(page = 1){
+
+                    this.page = page
+
+                    axios.post("{{ url('/comment/fetch') }}", {page: this.page, product_id: this.productId})
+                    .then(res => {
+                        
+                        if(res.data.success == true){
+
+                            this.comments = res.data.comments
+                            this.pages = Math.ceil(res.data.commentsCount / res.data.dataAmount)
+
+                        }
+
+                    })
+
+                },
                 store(){
 
                     //if(this.auth == ""){
@@ -410,6 +451,29 @@
                         })
 
                     }*/
+
+                },
+                storeComment(){
+
+                    axios.post("{{ url('/comment') }}", {"product_id": this.productId, "comment": this.comment}).then(res => {
+
+                        if(res.data.success == true){
+                            this.comment = ""
+                            alertify.success(res.data.msg)
+                            this.fetch()
+
+                        }else{
+
+                            alertify.error(res.data.msg)
+
+                        }
+
+                    }).catch(err => {
+                        
+                        $.each(err.response.data.errors, function(key, value) {
+                            alertify.error(value[0])
+                        });
+                    })
 
                 },
                 add(){
@@ -457,6 +521,7 @@
 
             },
             mounted(){
+                this.fetch()
                 //this.test()
 
             }

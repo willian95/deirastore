@@ -89,6 +89,7 @@ Route::post('/brands/fetch', "BrandController@fetch")->name('brands.fetch');
 Route::get('brand/{slug}', "BrandController@slug")->name('brands.slug');
 Route::post('/brand/products', "BrandController@products")->name('brands.products');
 Route::get('/brands/fetch/all', "BrandController@fetchAll");
+Route::post("/brands/categories", "BrandController@fetchBrandCategories");
 
 Route::get("best/stores", function(){
 
@@ -166,6 +167,7 @@ Route::get('/categories/menu/{page}', "CategoriesController@megaMenu");
 
 Route::get('/category/{slug}', "CategoriesController@slug");
 Route::post('/category/products', "CategoriesController@products")->name('category.products');
+Route::post("/category/brands", "CategoriesController@fetchCategoriesBrands");
 
 Route::get('/checkout', 'CheckoutController@initTransaction')->name('checkout'); 
 Route::post('/checkout/webpay/response', 'CheckoutController@response')->name('checkout.webpay.response');  
@@ -183,6 +185,9 @@ Route::post("/guest/carts/prices", "GuestController@cartPrices");
 Route::get("/cart/shipping", "CartController@cartShippingView");
 Route::post("/cart/shipping-price", "CartController@updateShippingPrice");
 Route::post("/cart/shipping-price/location", "CartController@updateCartLocation");
+
+Route::post("/comment", "CommentController@store")->middleware('auth');
+Route::post("/comment/fetch", "CommentController@fetch");
 
 Route::post("/checkout/store-session", "CheckoutController@storeSession");
 
