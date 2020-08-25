@@ -125,6 +125,7 @@ class ProductController extends Controller
 
             $product = Product::find($request->productId);
             $product->name = $request->name;
+            $product->amount = $request->stock;
             $product->sub_title = $request->subTitle;
             if($request->price > 0 && $product->price_range_profit != $request->price){
                 $product->percentage_range_profit = 1;
@@ -221,7 +222,7 @@ class ProductController extends Controller
 
         }catch(\Exception $e){
 
-            return response()->json(["success" => false, "msg" => "Error en el servidor", "error" => $e->getMessage()]);
+            return response()->json(["success" => false, "msg" => "Error en el servidor", "error" => $e->getMessage(), "ln" => $e->getLine()]);
 
         }
 

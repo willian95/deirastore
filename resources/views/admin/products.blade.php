@@ -777,6 +777,7 @@
                     formData.append("brandId", this.brandId)
                     formData.append("productId", this.productId)
                     formData.append("brandId", this.brandId)
+                    formData.append("stock",this.stock)
                     formData.append("sku", this.sku)
                     formData.append("vpn", this.vpn)
                     formData.append("dataSourceId", this.dataSourceId)
