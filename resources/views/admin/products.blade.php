@@ -737,6 +737,8 @@
                     this.price = product.external_price
                     this.subPrice = product.sub_price
                     this.picture = ""
+                    this.price = product.external_price
+                    this.stock = product.amount
                     this.dataSourceId = product.data_source_id
                     this.subTitle = product.sub_title
                     this.description = product.description
