@@ -241,7 +241,7 @@
            
                         <a href="{{ url('/product/'.$product->product->slug) }}">
                             <div class="main-slider__item position-relative">
-                            @if($product->amount == 0)
+                            @if($product->product->amount == 0)
                                 <span style="" class="stock">Sin stock</span>
                             @endif
                                 <div class="content-slider">
