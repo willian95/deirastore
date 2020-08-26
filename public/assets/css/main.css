@@ -2275,9 +2275,9 @@ img.lista-pedido {
 
 .hover--grid {
     display: grid !important;
-    grid-template-columns: repeat(5, 250px) !important;
-    overflow-y: scroll !important;
-    overflow-x: hidden !important;
+    grid-template-columns: repeat(4, 250px) !important;
+ /*   overflow-y: scroll !important;
+    overflow-x: hidden !important;*/
     height: 77vh !important;
 
 
@@ -2629,3 +2629,14 @@ img.lista-pedido {
     transform: rotateZ(45deg);
     padding-left: 80px;
 }
+
+.dropdown-custom{
+    background-color: red;
+}
+
+
+
+/*.navbar-hover2 .collapse ul ul ul {
+    top: 0;
+    left: -40%;
+}*/
