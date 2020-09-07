@@ -231,7 +231,7 @@ class HomeController extends Controller
                 
                 $query->orWhere('description', "like", "%".$searchText."%");
                   
-            })->with("brand", "category")->where("brand_id", $brandIdInSearchText)->sortBy('category.search_position')->count();
+            })->with("brand", "category")->where("brand_id", $brandIdInSearchText)->count();
         
         }else{
 
