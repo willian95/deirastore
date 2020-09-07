@@ -223,7 +223,7 @@ class HomeController extends Controller
         
         if($brandIdInSearchText != ""){
 
-            $products = Product::where(function ($query) use($searchText) {
+            $products = Product::where(function ($query) use($searchText, $words){
 
                 for ($i = 0; $i < count($words); $i++){
                     if($words[$i] != ""){
