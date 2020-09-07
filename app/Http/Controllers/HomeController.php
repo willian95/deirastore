@@ -181,9 +181,14 @@ class HomeController extends Controller
             }
         }
         if($brandIdInSearchText != 0){
+            $words = [];
             $searchText = strtolower(str_replace(strtoupper($brandInSearchText), "", strtoupper($request->search)));
             $brandSplit = explode(" ", $searchText);
-            dd($brandSplit);
+            
+            foreach($brandSplit as $split){
+                array_push($words, $aplit);
+            }
+
         }
         
         
@@ -231,14 +236,14 @@ class HomeController extends Controller
 
                 for ($i = 0; $i < count($words); $i++){
                     if($words[$i] != ""){
-                        //$query->orWhere('description', "like", "%".$words[$i]."%");
+                        $query->orWhere('description', "like", "%".$words[$i]."%");
                         $query->orWhere('name', "like", "%".$words[$i]."%");
                         //$query->orWhere('sku', "like", "%".$words[$i]."%");
                         
                     }
                 }   
 
-                $query->orWhere('description', "like", "%".$searchText."%");
+                //$query->orWhere('description', "like", "%".$searchText."%");
         
                 
             })->with("brand")->with(["category" => function($q){
