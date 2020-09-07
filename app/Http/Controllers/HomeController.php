@@ -230,7 +230,7 @@ class HomeController extends Controller
                         //$query->orWhere('description', "like", "%".$words[$i]."%");
                         $query->orWhere('name', "like", "%".$words[$i]."%");
                         $query->orWhere('sku', "like", "%".$words[$i]."%");
-                        $query->orWhere('description', "like", "%".$searchText."%");
+                        //$query->orWhere('description', "like", "%".$searchText."%");
                     }
                 }   
         
