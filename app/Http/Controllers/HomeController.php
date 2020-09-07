@@ -228,9 +228,9 @@ class HomeController extends Controller
                 for ($i = 0; $i < count($words); $i++){
                     if($words[$i] != ""){
                         //$query->orWhere('description', "like", "%".$words[$i]."%");
-                        $query->orWhere('name', "like", "%".$words[$i]."%");
-                        $query->orWhere('sku', "like", "%".$words[$i]."%");
-                        //$query->orWhere('description', "like", "%".$searchText."%");
+                        //$query->orWhere('name', "like", "%".$words[$i]."%");
+                        //$query->orWhere('sku', "like", "%".$words[$i]."%");
+                        $query->orWhere('description', "like", "%".$searchText."%");
                     }
                 }   
         
