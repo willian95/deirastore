@@ -2624,10 +2624,10 @@ img.lista-pedido {
     color: #fff;
     text-align: center;
     position: absolute;
-    width: 150%;
+    width: 135%;
     font-size: 16px;
     transform: rotateZ(45deg);
-    padding-left: 80px;
+    padding-left: 67px;
 }
 
 .dropdown-custom{

@@ -344,6 +344,10 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get("search/options", "AdminSearchController@index");
     Route::post("search/options/update", "AdminSearchController@update");
 
+    Route::get("pop-up", "ModalController@index");
+    Route::get("pop-up/fetch", "ModalController@fetch");
+    Route::post("pop-up/update", "ModalController@update");
+
 });
 
 Route::get('/nexsys/{mark}', "NexsysController@index");

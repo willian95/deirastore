@@ -71,6 +71,9 @@
                             <a class="nav-link   focus__link" href="{{ route('admin.banner.index') }}"><i class="fa fa-photo"></i> Banners</a>
                         </li>
                         <li class="nav-item nav-focus">
+                            <a class="nav-link   focus__link" href="{{ url('/admin/pop-up') }}"><i class="fa fa-photo"></i> Pop-up</a>
+                        </li>
+                        <li class="nav-item nav-focus">
                             <a class="nav-link focus__link" href="{{ route('admin.categories') }}"><i class="fa fa-tags"></i> Categorías</a>
                         </li>
                         <!--<li class="nav-item nav-focus">
