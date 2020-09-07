@@ -180,8 +180,12 @@ class HomeController extends Controller
 
             }
         }
+        if($brandIdInSearchText != 0){
+            $searchText = strtolower(str_replace(strtoupper($brandInSearchText), "", strtoupper($request->search)));
+            $brandSplit = explode(" ", $searchText);
+            dd($brandSplit);
+        }
         
-        $searchText = strtolower(str_replace(strtoupper($brandInSearchText), "", strtoupper($request->search)));
         
         $skip = ($request->page-1) * 20;
 
