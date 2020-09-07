@@ -111,6 +111,23 @@ class HomeController extends Controller
                 "audifonos"
             ],
             [
+                "epson",
+                "Scanner",
+                "scanners",
+                "escaner",
+                "escanner"
+            ],
+            [
+                "epson",
+                "Impresoras",
+                "impresora",
+                "multifuncional",
+                "laser",
+                "pos",
+                "punto de venta"
+            ],
+            [
+                "epson",
                 "Suministros",
                 "suministro",
                 "tinta",
@@ -123,21 +140,8 @@ class HomeController extends Controller
                 "magenta",
                 "yellow",
                 "black"
-            ],
-            [
-                "Scanner",
-                "scanners",
-                "escaner",
-                "escanner"
-            ],
-            [
-                "Impresoras",
-                "impresora",
-                "multifuncional",
-                "laser",
-                "pos",
-                "punto de venta"
             ]
+            
         ];
 
         $index = 0;
@@ -218,7 +222,7 @@ class HomeController extends Controller
         }
         
         if($brandIdInSearchText != ""){
-            
+
             $products = Product::where(function ($query) use($searchText) {
             
                 $query->orWhere('description', "like", "%".$searchText."%");
