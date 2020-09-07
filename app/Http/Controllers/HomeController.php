@@ -186,7 +186,7 @@ class HomeController extends Controller
             $brandSplit = explode(" ", $searchText);
             
             foreach($brandSplit as $split){
-                array_push($words, $aplit);
+                array_push($words, $split);
             }
 
         }
