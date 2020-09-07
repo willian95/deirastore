@@ -224,8 +224,16 @@ class HomeController extends Controller
         if($brandIdInSearchText != ""){
 
             $products = Product::where(function ($query) use($searchText) {
-            
-                $query->orWhere('description', "like", "%".$searchText."%");
+
+                for ($i = 0; $i < count($words); $i++){
+                    if($words[$i] != ""){
+                        //$query->orWhere('description', "like", "%".$words[$i]."%");
+                        $query->orWhere('name', "like", "%".$words[$i]."%");
+                        $query->orWhere('sku', "like", "%".$words[$i]."%");
+                        $query->orWhere('description', "like", "%".$searchText."%");
+                    }
+                }   
+        
                 
             })->with("brand")->with(["category" => function($q){
                 $q->orderBy('search_position', 'asc');
