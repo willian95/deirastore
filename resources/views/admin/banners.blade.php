@@ -27,6 +27,9 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Imagen</th>
+                                    <th>Tamaño</th>
+                                    <th>Lugar</th>
+                                    <th>Orden</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -34,6 +37,9 @@
                                 <tr v-for="(banner, index) in banners">
                                     <td>@{{ index + 1 }}</td>
                                     <td><img :src="'{{ url('/') }}'+'/images/banners/'+banner.image" alt="" style="width: 300px"></td>
+                                    <td>@{{ banner.size }}</td>
+                                    <td>@{{ banner.location }}</td>
+                                    <td>@{{ banner.order }}</td>
                                     <td>
                                         <button class="btn btn-success" @click="edit(banner)" data-toggle="modal" data-target="#createBanner"><i class="fa fa-edit"></i></button>
                                         <button class="btn btn-danger" @click="erase(banner.id)"><i class="fa fa-trash"></i></button>
@@ -85,6 +91,10 @@
                         <label for="">Link</label>
                         <input type="text" class="form-control" v-model="link">
                     </div>
+                    <div class="form-group" v-if="isEdit == true">
+                        <label for="">Orden</label>
+                        <input type="text" class="form-control" v-model="order">
+                    </div>
                     <div class="form-group">
                         <label for="">Tamaño del banner</label>
                         <select class="form-control" v-model="size">
@@ -104,6 +114,7 @@
                         <label for="">Titulo</label>
                         <input type="text" class="form-control" v-model="title">
                     </div>
+                    
                     <div class="form-group">
                         <label for="">Color del titulo <div class="color-box" id="title-color"></div></label>
                         <select class="form-control" v-model="titleColor" @change="changeTitleColor()">
@@ -184,6 +195,7 @@
                     banners:[],
                     pages:0,
                     page:1,
+                    order:"",
                     query:"",
                     text:"",
                     position:"izquierda",
@@ -281,6 +293,7 @@
                     this.link = banner.link
                     this.modalTitle = "Editar banner"
                     this.size = banner.size
+                    this.order = banner.order
                     this.isEdit = true
                     this.bannerId = banner.id
                     this.title = banner.title
@@ -304,6 +317,7 @@
                     formData.append("size", this.size)
                     formData.append("link", this.link)
                     formData.append("position", this.position)
+                    formData.append("order", this.order)
                     formData.append("title", this.title)
                     formData.append("text", this.text)
                     formData.append("buttonText", this.buttonText)

@@ -111,6 +111,23 @@ class HomeController extends Controller
                 "audifonos"
             ],
             [
+                "epson",
+                "Scanner",
+                "scanners",
+                "escaner",
+                "escanner"
+            ],
+            [
+                "epson",
+                "Impresoras",
+                "impresora",
+                "multifuncional",
+                "laser",
+                "pos",
+                "punto de venta"
+            ],
+            [
+                "epson",
                 "Suministros",
                 "suministro",
                 "tinta",
@@ -123,21 +140,8 @@ class HomeController extends Controller
                 "magenta",
                 "yellow",
                 "black"
-            ],
-            [
-                "Scanner",
-                "scanners",
-                "escaner",
-                "escanner"
-            ],
-            [
-                "Impresoras",
-                "impresora",
-                "multifuncional",
-                "laser",
-                "pos",
-                "punto de venta"
             ]
+            
         ];
 
         $index = 0;
@@ -176,8 +180,17 @@ class HomeController extends Controller
 
             }
         }
+        if($brandIdInSearchText != 0){
+            $words = [];
+            $searchText = strtolower(str_replace(strtoupper($brandInSearchText), "", strtoupper($request->search)));
+            $brandSplit = explode(" ", $searchText);
+            
+            foreach($brandSplit as $split){
+                array_push($words, $split);
+            }
+
+        }
         
-        $searchText = strtolower(str_replace(strtoupper($brandInSearchText), "", strtoupper($request->search)));
         
         $skip = ($request->page-1) * 20;
 
@@ -218,10 +231,20 @@ class HomeController extends Controller
         }
         
         if($brandIdInSearchText != ""){
-            
-            $products = Product::where(function ($query) use($searchText) {
-            
-                $query->orWhere('description', "like", "%".$searchText."%");
+
+            $products = Product::where(function ($query) use($searchText, $words){
+
+                for ($i = 0; $i < count($words); $i++){
+                    if($words[$i] != ""){
+                        $query->orWhere('description', "like", "%".$words[$i]."%");
+                        $query->orWhere('name', "like", "%".$words[$i]."%");
+                        //$query->orWhere('sku', "like", "%".$words[$i]."%");
+                        
+                    }
+                }   
+
+                //$query->orWhere('description', "like", "%".$searchText."%");
+        
                 
             })->with("brand")->with(["category" => function($q){
                 $q->orderBy('search_position', 'asc');
@@ -231,7 +254,7 @@ class HomeController extends Controller
                 
                 $query->orWhere('description', "like", "%".$searchText."%");
                   
-            })->with("brand", "category")->where("brand_id", $brandIdInSearchText)->sortBy('category.search_position',SORT_REGULAR,false)->count();
+            })->with("brand", "category")->where("brand_id", $brandIdInSearchText)->count();
         
         }else{
 

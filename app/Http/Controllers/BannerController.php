@@ -60,6 +60,10 @@ class BannerController extends Controller
                 $banner->button_color = $request->buttonColor;
                 $banner->button_text_color = $request->buttonTextColor;
                 $banner->location = $request->location;
+
+                $count = Banner::where("location", $request->location)->where("size", $request->size)->count();
+                $banner->order = $count + 1;
+
                 $banner->save();
     
                 return response()->json(["success" => true, "msg" => "Banner registrado"]);
@@ -131,6 +135,14 @@ class BannerController extends Controller
 
             
             $banner = Banner::where("id", $request->id)->first();
+
+            $bannerChange = Banner::where("order", $request->order)->where("location", $request->location)->where("size", $request->size)->first();
+            if($bannerChange){
+                $bannerChange->order = $banner->order;
+                $bannerChange->update();
+            }
+
+            $banner->order = $request->order;
         
             if($request->get('image') != null){
                 $banner->image = $fileName;

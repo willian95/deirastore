@@ -28,7 +28,7 @@
         <!-- banner -->
         <div class="row">
             <div class="main-banner__content container">
-            @foreach(App\Banner::where('size', 'large')->where('location', 'landing')->get() as $banner)
+            @foreach(App\Banner::where('size', 'large')->where('location', 'landing')->orderBy("order")->get() as $banner)
 
                 @php
                     $float = "";
@@ -66,7 +66,7 @@
 
 
         <div class="row">
-        @foreach(App\Banner::where('size', 'medium')->where('location', 'landing')->get() as $banner)
+        @foreach(App\Banner::where('size', 'medium')->where('location', 'landing')->orderBy("order")->get() as $banner)
 
             @php
                 $float = "";
@@ -104,7 +104,7 @@
         
 
         <div class="row">
-        @foreach(App\Banner::where('size', 'small')->where('location', 'landing')->get() as $banner)
+        @foreach(App\Banner::where('size', 'small')->where('location', 'landing')->orderBy("order")->get() as $banner)
             
             @php
                 $float = "";
