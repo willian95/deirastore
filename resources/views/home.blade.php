@@ -2,6 +2,28 @@
 
 @section('content')
 
+<!-- Modal -->
+<div class="modal fade" id="modal-home" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+    
+        <div class="modal-body">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+          <div class="row">
+              <div class="col-md-6">
+                  <p class="ml-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, totam corporis quisquam harum quam magnam doloribus, possimus in adipisci non aspernatur accusantium nulla. Totam quae eligendi, perspiciatis nisi debitis iste!</p>
+              </div>
+              <div class="col-md-6">
+                <img src="https://images.unsplash.com/photo-1556742111-a301076d9d18?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="" style="width: 100%;">
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
     <div class="container bg">
         <!-- banner -->
         <div class="row">

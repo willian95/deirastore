@@ -348,6 +348,20 @@
 }
 
 @media (min-width: 0px) and (max-width: 767px) {
+    #modal-home .col-md-6 {
+      
+        margin: 10px;
+    }
+    #modal-home .close {
+        right: 13px;
+        color: #000000;
+        top: -5px;
+    }
+    #modal-home img {
+
+        height: 200px;
+      
+    }
     .categories__grid .nav-item {
         margin-top: 30px;
     }
