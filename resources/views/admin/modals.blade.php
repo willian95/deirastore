@@ -31,6 +31,12 @@
                     <label for="">Imagen</label>
                     <input class="form-control" type="file" @change="onImageChange" accept="image/*">
                     <img alt="" :src="imagePreview" style="width: 50%">
+                    <div class="form-check" v-if="imagePreview">
+                        <input class="form-check-input" type="checkbox" v-model="deleteImage" id="defaultCheck1">
+                        <label class="form-check-label" for="defaultCheck1">
+                            Eliminar imágen
+                        </label>
+                    </div>
                 </div>
                 <div class="col-md-4">
                     <label for="">Texto</label>
@@ -73,6 +79,7 @@
                     picture:"",
                     status:"desactivado",
                     imagePreview:"",
+                    deleteImage:false,
                     loading:false
 
                 }
@@ -103,6 +110,7 @@
                     let formData = new FormData()
                     formData.append("text", this.text)
                     formData.append("image", this.picture)
+                    formData.append("deleteImage", this.deleteImage)
                     formData.append("status", this.status)
 
                     axios.post("{{ url('admin/pop-up/update') }}", formData)
@@ -116,6 +124,11 @@
                                 icon: "success",
                                 title: res.data.msg,
                             })
+
+                            if(this.deleteImage == true){
+                                this.imagePreview = null
+                                this.deleteImage = false
+                            }
 
                         }else{
                             swal({
