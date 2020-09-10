@@ -1,8 +1,3 @@
-$(document).ready(function()
-{
-   $("#modal-home").modal("show");
-});
-
 $(function() {
     "use strict";
 
