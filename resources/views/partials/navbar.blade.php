@@ -144,7 +144,7 @@
                             <ul class="navbar-nav">      
                                
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="showStores()">
                                      
                                         Mejores tiendas
                                     </a>
@@ -161,6 +161,23 @@
                             </ul>
                         </div>
                     </li>
+                    
+                    <script>
+                        var storesShow = false 
+
+                        showStores(){
+
+                            if(storesShow == false){
+                                $("#storeShow").css("display", "block")
+                                storesShow = true
+                            }else{
+                                $("#storeShow").css("display", "none")
+                                storesShow = false
+                            }
+
+                        }
+
+                    </script>
 
 
                   <!---  <li class="nav-item dropdown mega-menu">
