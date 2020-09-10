@@ -54,6 +54,7 @@
                                
                                 var total = 0;
                                 cart = null
+
                                 if(window.localStorage.getItem('cart') != null){
                                     cart =JSON.parse(window.localStorage.getItem('cart'))
                                 }
@@ -70,6 +71,7 @@
                                 
                                 //console.log("i'm here2", total)
                                 $("#total").html(total)
+
                             }, 5000)
                         
                         </script>
@@ -106,10 +108,10 @@
                             Categorías
                         </a>
                     </li>
-
+   
                     <li class="dropdown" id="categorias-dropdown">
                         <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span class="nav-label">Categorías</span> <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu" style="width: 240px; padding-left: 10px; padding-right: 10px;">
 
                             @foreach(App\Category::where('parent_id', null)->whereNotNull("esp_name")->get() as $category)
 
@@ -128,6 +130,7 @@
                         </ul>
                     </li>
                             
+                            
                     <li class="nav-item navbar-custom">
                         <a class="nav-link" href="{{ url('/products/destacados') }}">Productos Destacados</a>
                     </li>
@@ -139,66 +142,24 @@
                         <a class="nav-link" href="{{ url('/best/stores') }}">Mejores Tiendas</a>
                     </li>
 
-                    <li class="navbar-expand-md  navbar-hover nav-item">
-                        <div class="collapse navbar-collapse m-0" id="navbarHover">
-                            <ul class="navbar-nav">      
-                               
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="showStores()">
-                                     
-                                        Mejores tiendas
-                                    </a>
-                                    <ul class="dropdown-menu p-3">            
-                                        @foreach(App\BestStore::with("brand")->get() as $brand)
-                                            <li class="mb-2">
-                                                <a href="{{ url('/brand/'.$brand->brand->slug) }}">{{ $brand->brand->name }}</a>
-                                            </li>
-                                        @endforeach
-                                       
-                                    </ul>
-                                </li>
-                          
-                            </ul>
-                        </div>
+                    <li class="dropdown" id="categorias-dropdown">
+                        <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span class="nav-label">MejoresTiendas</span> <span class="caret"></span></a>
+                        <ul class="dropdown-menu" style="padding-left: 10px; padding-right: 10px;">
+
+                            @foreach(App\BestStore::with("brand")->get() as $brand)
+
+                                <li class="dropdown-item">
+                                    <a href="{{ url('/brand/'.$brand->brand->slug) }}" > 
+                                    {{ $brand->brand->name }}</a>  
+                                </li>    
+
+                            @endforeach
+
+                            
+                        </ul>
                     </li>
                     
-                    <script>
-                        var storesShow = false 
 
-                        showStores(){
-
-                            if(storesShow == false){
-                                $("#storeShow").css("display", "block")
-                                storesShow = true
-                            }else{
-                                $("#storeShow").css("display", "none")
-                                storesShow = false
-                            }
-
-                        }
-
-                    </script>
-
-
-                  <!---  <li class="nav-item dropdown mega-menu">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" id="menu-brands">Mejores tiendas</a>
-                        <div class="dropdown-menu" style="opacity: 1;" id="menu-brands-dropdown">
-                            <div class="grid-menu">
-                                <div class="grid-menu__item">
-                                    <ul>
-                                        @foreach(App\Brand::inRandomOrder()->take(10)->get() as $brand)
-                                            <li>
-                                                <a href="{{ url('/brand/'.$brand->slug) }}">{{ $brand->name }}</a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </li>--->
-                    <!--<li class="nav-item">
-                        <a class="nav-link" href="#">Software</a>
-                    </li>-->
                 </ul>
             </div>
         </div>
