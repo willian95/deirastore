@@ -107,71 +107,26 @@
                         </a>
                     </li>
 
-                    <div class="navbar navbar-expand-md  navbar-hover">
-                        <div class="collapse navbar-collapse" id="navbarHover">
-                            <ul class="navbar-nav">      
-                                <li class="nav-item dropdown ">
-                                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-top: -20px;">
-                                        Categorías
-                                    </a>
-                                    <ul class="dropdown-menu dropdown-left  ">
-                                     <div>
-                                        <div class="hover--grid">
+                    <li class="dropdown" id="categorias-dropdown">
+                        <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span class="nav-label">Categorías</span> <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
 
-                                            @foreach(App\Category::where('parent_id', null)->whereNotNull("esp_name")->get() as $category)
+                            @foreach(App\Category::where('parent_id', null)->whereNotNull("esp_name")->get() as $category)
 
-                                                @if(App\Category::where('parent_id', $category->id)->count() == 0)
-                                                    <li  >
-                                                        <a class="dropdown-item" href="{{ url('/category/'.$category->slug) }}">{{ $category->esp_name }}</a>
-                                                    </li>
+                                <li class="dropdown-submenu">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="nav-label">{{ $category->esp_name }}</span><span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        @foreach(App\Category::where('parent_id', $category->id)->get() as $category)
+                                            <li><a class="dropdown-item" href="{{ url('/category/'.$category->slug) }}">{{ $category->esp_name }}</a></li>
+                                        @endforeach
+                                    </ul>   
+                                </li>    
 
-                                                    
-                                                @else
+                            @endforeach
 
-                                                    <li>
-                                                        <a class="dropdown-item dropdown-toggle" href="{{ url('/category/'.$category->slug) }}">{{ $category->esp_name }}</a>
-                                                        <ul class="dropdown-menu">
-                                                        @foreach(App\Category::where('parent_id', $category->id)->get() as $category)
-                                                            <li><a class="dropdown-item" href="{{ url('/category/'.$category->slug) }}">{{ $category->esp_name }}</a></li>
-                                                        @endforeach
-                                                        </ul>   
-                                                    </li>    
-
-                                                @endif
-
-                                                
-                                                
-                                            @endforeach
-                                        </div>
-                                     </div>
-                               
-
-                                        <!--<li><a class="dropdown-item" href="#">Link</a></li>
-                                        <li><a class="dropdown-item" href="#">Link</a></li>
-                                        <li><a class="dropdown-item dropdown-toggle" href="#">Submenu</a>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="#">Submenu link</a></li>
-                                                <li><a class="dropdown-item" href="#">Submenu link 2</a></li>
-                                                <li><a class="dropdown-item dropdown-toggle" href="#">Subsubmenu</a>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a class="dropdown-item" href="#">Subsubmenu 1</a></li>
-                                                        <li><a class="dropdown-item" href="#">Subsubmenu 2</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a class="dropdown-item dropdown-toggle" href="#">Subsubmenu 2</a>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a class="dropdown-item" href="#">Subsubmenu 2.1</a></li>
-                                                        <li><a class="dropdown-item" href="#">Subsubmenu 2.2</a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>-->
-                                     
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                            
+                        </ul>
+                    </li>
                             
                     <li class="nav-item navbar-custom">
                         <a class="nav-link" href="{{ url('/products/destacados') }}">Productos Destacados</a>
