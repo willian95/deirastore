@@ -2215,7 +2215,7 @@ img.lista-pedido {
 
 @media only screen and (min-width: 992px) {
     .navbar-hover .collapse ul li {
-        position: relative;
+          position: static;
     }
 
     .navbar-hover .collapse ul li:hover>ul {

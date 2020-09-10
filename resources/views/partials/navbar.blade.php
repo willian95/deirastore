@@ -13,8 +13,7 @@
                 </form>
             </div>
             <div class="main-menu__top-item table_nav">
-                <ul>
-                    
+                <ul>                  
                     <li class="nav-item dropdown arrow  btn__user">
                         @if(\Auth::check() && \Auth::user()->id)
                             <a class="nav-link dropdown-toggle user_content"  href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -118,6 +117,7 @@
                                         Categorías
                                     </a>
                                     <ul class="dropdown-menu dropdown-left  ">
+                                     <div>
                                         <div class="hover--grid">
 
                                             @foreach(App\Category::where('parent_id', null)->whereNotNull("esp_name")->get() as $category)
@@ -145,6 +145,7 @@
                                                 
                                             @endforeach
                                         </div>
+                                     </div>
                                
 
                                         <!--<li><a class="dropdown-item" href="#">Link</a></li>
