@@ -54,7 +54,6 @@
                                
                                 var total = 0;
                                 cart = null
-
                                 if(window.localStorage.getItem('cart') != null){
                                     cart =JSON.parse(window.localStorage.getItem('cart'))
                                 }
@@ -71,7 +70,6 @@
                                 
                                 //console.log("i'm here2", total)
                                 $("#total").html(total)
-
                             }, 5000)
                         
                         </script>
@@ -223,7 +221,6 @@
                                         @endforeach
                                     </ul>
                                 </div>
-
                             </div>
                         </div>
                     </li>--->
