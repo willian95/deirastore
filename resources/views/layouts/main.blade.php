@@ -159,6 +159,11 @@
         });
     </script>
 
+
+        <div class="ws">
+        <a target="_blank" href="https://api.whatsapp.com/send?phone=56226748059"><img class="logo" src="{{ asset('assets/img/whatsapp.png') }}" alt=""></a>
+        </div>
+
     @stack('scripts')
 </body>
 

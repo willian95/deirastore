@@ -2688,3 +2688,12 @@ img.lista-pedido {
     font-size: 50px;
     opacity: 1;
 }
+
+
+.ws{
+    position: fixed;
+    bottom: 15px;
+    right: 0px;
+    width: 65px;
+    cursor: pointer;
+}
