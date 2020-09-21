@@ -36,7 +36,7 @@ class RegisterController extends Controller
                 $to_email = $user->email;
                 //return response()->json(env("MAIL_FROM_ADDRESS"));
                 $data = ["user" => $user];
-                \Mail::send("emails.recoveryMail", $data, function($message) use ($to_name, $to_email) {
+                \Mail::send("emails.registerEmail", $data, function($message) use ($to_name, $to_email) {
 
                     $message->to($to_email, $to_name)->subject("¡Solo falta un paso tu registro!");
                     $message->from(env("MAIL_FROM_ADDRESS"),"Deira");
