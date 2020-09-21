@@ -17,6 +17,8 @@
 
 Route::get('/', "HomeController@index");
 
+Route::get('/recover-password/{email}', "RegisterController@resendEmail");
+
 /*Route::get("/test/success", function(){
 
     return view("testSuccessPayment");

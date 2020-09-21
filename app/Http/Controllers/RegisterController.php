@@ -18,6 +18,44 @@ class RegisterController extends Controller
         //$this->sendMessage();
         return view("register");
     }
+
+    function resendEmail($email){
+
+        try{
+
+            $user = User::where("email", $email)->first();
+
+            if($user){
+
+                $hash = Str::random(40)."-".uniqid();
+                $user->register_hash = $hash;
+                $user->update();
+                
+                $data = ["user" => $user, "hash" => $user->register_hash];
+                $to_name = $user->name;
+                $to_email = $user->email;
+                //return response()->json(env("MAIL_FROM_ADDRESS"));
+                $data = ["user" => $user];
+                \Mail::send("emails.recoveryMail", $data, function($message) use ($to_name, $to_email) {
+
+                    $message->to($to_email, $to_name)->subject("¡Solo falta un paso tu registro!");
+                    $message->from(env("MAIL_FROM_ADDRESS"),"Deira");
+
+                });
+
+                return response()->json(["success" => true, "msg" => "Hemos enviado un correo a tu email"]);
+
+            }else{
+                return response()->json(["success" => false, "msg" => "Email no encontrado"]);
+            }
+
+        }catch(\Exception $e){
+
+            return response()->json(["success" => false, "msg" => "Error en el servidor", "err" => $e->getMessage(), "ln" => $e->getLine()]);
+
+        }
+
+    }
     
     function register(RegisterUser $request){
 
