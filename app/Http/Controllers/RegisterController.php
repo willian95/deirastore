@@ -22,7 +22,7 @@ class RegisterController extends Controller
     function resendEmail($email){
 
         try{
-            return reponse()->json(env("APP_ENV"));
+            return response()->json(env("APP_ENV"));
             $user = User::where("email", $email)->first();
 
             if($user){
