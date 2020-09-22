@@ -166,7 +166,7 @@
                                 </a>
                             </div>
                             
-                            @if($product->items)
+                            @if(count($product->items) > 0)
                             <div id="collapseDos" class="collapse" data-parent="#accordion" >
                                 <div class="card-body">
                                     <div class="container">
