@@ -73,7 +73,7 @@ class NexsysProducts extends Command
         Log::info("monster alive");
         try{
 
-            $connection = ssh2_connect('200.27.164.195', 22);
+            $connection = ssh2_connect('200.27.164.195', 3390);
             ssh2_auth_password($connection, 'root', 'Terminal*1');
 
             ssh2_scp_recv($connection, '/home/ftpingram/CLPriceFileDeira.csv', public_path('/')."CLPriceFileDeira.csv");
