@@ -46,6 +46,8 @@
         gtag('config', 'UA-173437279-1');
     </script>
 
+    <script src="https://scontent.webcollage.net/api/v2/product-content"></script>
+
 </head>
 
 <body>

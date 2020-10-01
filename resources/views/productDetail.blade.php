@@ -326,6 +326,10 @@
         </div>
             <!-- productos relacionados -->
 
+            @if($product->brand_id == 10)
+                <div id="wc-power-page"></div>
+            @endif
+
             <section>
                 <div class="title__general fadeInUp wow animated">
                     <p><strong>Productos </strong>relacionados</p>
@@ -379,6 +383,14 @@
 
 @push('scripts')
     
+    @if($product->brand_id == 10)
+
+        <script>
+            Webcollage.loadProductContent('deirastore-cl-es', "{{ $product->id }}", {"power-page":{autoPlayAndStop: true}})
+        </script>
+
+    @endif
+
     <script>
             
         const app = new Vue({
