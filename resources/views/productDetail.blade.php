@@ -143,6 +143,14 @@
 
             <div class="presentacion" v-cloak>
                 <div class="row">
+                    <div class="col-12">
+                        @if($product->brand_id == 10)
+                            <div id="wc-power-page"></div>
+                        @endif
+
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-sm-12 ">
                         <div id="accordion">
                             <div class="card">
@@ -325,11 +333,6 @@
 
         </div>
             <!-- productos relacionados -->
-
-            @if($product->brand_id == 10)
-                <div id="wc-power-page"></div>
-            @endif
-
             <section>
                 <div class="title__general fadeInUp wow animated">
                     <p><strong>Productos </strong>relacionados</p>
