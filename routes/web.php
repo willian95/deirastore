@@ -113,25 +113,16 @@ Route::get("best/stores", function(){
 
 });*/
 
-/*Route::get('/check/slug', function(){
-    ini_set('max_execution_time', 0);*/
-    /*$products = App\Product::where('slug', 'like', '%/%')->get();
+Route::get('/check/slug', function(){
+    ini_set('max_execution_time', 0);
+    $products = App\Product::where('slug', 'like', '%/%')->get();
     foreach($products as $product){
 
         $obj = App\Product::find($product->id);
         $obj->slug = str_replace("/", "-", $obj->slug);
         $obj->update();
-    }*/
-
-    /*$categories = App\Category::where('slug', 'like', '%/%')->get();
-    foreach($categories as $category){
-
-        $obj = App\Category::find($category->id);
-        $obj->slug = str_replace("/", "-", $obj->slug);
-        $obj->update();
-    }*/
-
-//});
+    }
+});
 
 /*Route::get('/change/http', function(){
 
