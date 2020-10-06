@@ -223,6 +223,14 @@ class NexsysProducts extends Command
             $modelProduct->update();
 
         }
+
+        $products = App\Product::where('slug', 'like', '%/%')->get();
+        foreach($products as $product){
+
+            $obj = App\Product::find($product->id);
+            $obj->slug = str_replace("/", "-", $obj->slug);
+            $obj->update();
+        }
     
     }
 }
