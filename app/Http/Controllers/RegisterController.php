@@ -68,14 +68,14 @@ class RegisterController extends Controller
             $user->lastname = $request->lastname;
             $user->email = $request->email;
             $user->password = bcrypt($request->password);
+            $user->register_hash = $hash;
             $user->rut = $request->rut;
             $user->save();
             
             /*$user->genre = $request->genre;
             $user->birth_date = $request->birthDate;
-            $user->phone_number = $request->phoneNumber;*/
-            $user->register_hash = $hash;
-            /*$user->location_id = $request->location;
+            $user->phone_number = $request->phoneNumber;
+            $user->location_id = $request->location;
             $user->street = $request->street;
             $user->comune_id = $request->comune_id;
             $user->house = $request->house;
