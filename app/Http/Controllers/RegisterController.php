@@ -73,9 +73,9 @@ class RegisterController extends Controller
             
             /*$user->genre = $request->genre;
             $user->birth_date = $request->birthDate;
-            $user->phone_number = $request->phoneNumber;
+            $user->phone_number = $request->phoneNumber;*/
             $user->register_hash = $hash;
-            $user->location_id = $request->location;
+            /*$user->location_id = $request->location;
             $user->street = $request->street;
             $user->comune_id = $request->comune_id;
             $user->house = $request->house;
