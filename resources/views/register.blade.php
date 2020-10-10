@@ -233,79 +233,86 @@
                 this.captchaResponse = $("#g-recaptcha-response").val()
                 //if (!this.formHasErrors()) {
                     
-                axios.post("{{ url('/register') }}", {
-                    name: this.name,
-                    rut: this.rut,
-                    email: this.email,
-                    password: this.password,
-                    password_confirmation: this.passwordRepeat,
-                    lastname: this.lastname,
-                    /*street: this.street,*/
-                    recaptcha: this.captchaResponse,
-                    /*location: this.location,
-                    comune_id: this.selectedComune,
-                    house: this.house,
-                    genre: this.genre,
-                    phoneNumber: this.phoneNumber,
-                    birthDate: this.birthDate,
-                    number: this.number,
-                    showBusiness: this.showBusiness,
-                    businessName: this.businessName,
-                    businessRut:this.businessRut,
-                    businessAddress:this.businessAddress,
-                    businessPhone:this.businessPhone,
-                    businessMail:this.businessMail,*/
-                })
-                .then(res => {
-                    this.loading = false
-                    if(res.data.success == true){
+                if(this.isRutValid){
+                    axios.post("{{ url('/register') }}", {
+                        name: this.name,
+                        rut: this.rut,
+                        email: this.email,
+                        password: this.password,
+                        password_confirmation: this.passwordRepeat,
+                        lastname: this.lastname,
+                        /*street: this.street,*/
+                        recaptcha: this.captchaResponse,
+                        /*location: this.location,
+                        comune_id: this.selectedComune,
+                        house: this.house,
+                        genre: this.genre,
+                        phoneNumber: this.phoneNumber,
+                        birthDate: this.birthDate,
+                        number: this.number,
+                        showBusiness: this.showBusiness,
+                        businessName: this.businessName,
+                        businessRut:this.businessRut,
+                        businessAddress:this.businessAddress,
+                        businessPhone:this.businessPhone,
+                        businessMail:this.businessMail,*/
+                    })
+                    .then(res => {
+                        this.loading = false
+                        if(res.data.success == true){
 
-                        swal({
-                            icon: "success",
-                            title: res.data.msg,
-                            text:"Revise su correo"
-                        })
+                            swal({
+                                icon: "success",
+                                title: res.data.msg,
+                                text:"Revise su correo"
+                            })
 
-                        this.name = ""
-                        this.genre = "masculino"
-                        this.birthDate = ""
-                        this.rut = ""
-                        this.phoneNumber = ""
-                        this.email = ""
-                        this.password = ""
-                        this.passwordRepeat = ""
-                        this.lastname = ""
-                        this.terms = "",
-                        this.stree = ""
-                        this.location = ""
-                        this.comune_id = ""
-                        this.house = ""
-                        this.number = ""
+                            this.name = ""
+                            this.genre = "masculino"
+                            this.birthDate = ""
+                            this.rut = ""
+                            this.phoneNumber = ""
+                            this.email = ""
+                            this.password = ""
+                            this.passwordRepeat = ""
+                            this.lastname = ""
+                            this.terms = "",
+                            this.stree = ""
+                            this.location = ""
+                            this.comune_id = ""
+                            this.house = ""
+                            this.number = ""
 
-                        window.setTimeout(() => {
-                            window.location.href="{{ url('/') }}"
-                        }, 5000);
-                        
-                    }else{
-
-                        swal({
-                            icon: "error",
-                            title: "Error",
-                            text: res.data.msg
+                            window.setTimeout(() => {
+                                window.location.href="{{ url('/') }}"
+                            }, 5000);
                             
-                        })
+                        }else{
 
-                        grecaptcha.reset();
+                            swal({
+                                icon: "error",
+                                title: "Error",
+                                text: res.data.msg
+                                
+                            })
 
-                    }
+                            grecaptcha.reset();
 
-                })
-                .catch(err => {
-                    this.loading = false
-                    $.each(err.response.data.errors, function(key, value) {
-                        alertify.error(value[0])
-                    });
-                })
+                        }
+
+                    })
+                    .catch(err => {
+                        this.loading = false
+                        $.each(err.response.data.errors, function(key, value) {
+                            alertify.error(value[0])
+                        });
+                    })
+                
+                }else{
+
+                    alertify.error("RUT no es válido")
+
+                }
                     
                 //}
 
