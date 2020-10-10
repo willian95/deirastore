@@ -28,7 +28,7 @@ class RegisterUser extends FormRequest
             'rut' => 'required|unique:users',
             'lastname' => "required",
             "name" => 'required',
-            "password" => 'required|confirmed',
+            "password" => 'required|confirmed|min:6',
             /*'phoneNumber' => 'required',
             'genre' => 'required',*/
             "recaptcha" => "recaptcha",
@@ -51,10 +51,11 @@ class RegisterUser extends FormRequest
             "name.required" => "Nombre es requerido",
             "password.required" => "Contraseña es requerida",
             "password.confirmed" => "Contraseñas no coinciden",
+            "password.min" => "Contraseña debe tener al menos 6 carácteres"
             /*"phoneNumber.required" => "Teléfono es requerido",
             "genre.required" => "Género es requerido",
             "address.required" => "Dirección es requerida",*/
-            "recaptcha.recaptcha" => "Captcha no válido",
+            //"recaptcha.recaptcha" => "Captcha no válido",
             /*"location.required" => "Región es requerida",
             "comune_id.required" => "Comuna es requerida",
             "street.required" => "Calle es requerida",
