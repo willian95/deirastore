@@ -57,7 +57,7 @@
                                 <div class="form-grid__item inputcontainer">
                                     <label  for="rut">* Rut</label>
                                     <input placeholder="Ej: 121456789" type="text" class="form-control" id="rut" aria-describedby="emailHelp" v-model="rut" @keypress="isAlphaNumeric($event)" @blur="validateRut()">
-                                    <div class="icon-container" v-if="loading == true">
+                                    <div class="icon-container" v-if="rutLoading == true">
                                         <i class="loader"></i>
                                     </div>
                                     <div class="icon-container" v-if="loading == false && isRutValid == true">
@@ -201,6 +201,7 @@
                 /*genre: "masculino",
                 birthDate: "",*/
                 rut: "",
+                rutLoading:false,
                 /*street:"",
                 house:"",
                 phoneNumber: "",*/
@@ -490,9 +491,9 @@
             validateRut(){
                
                 if(this.rut != ""){
-                    this.loading = true
+                    this.rutLoading = true
                     axios.get("{{ url('/validate/rut/') }}"+"/"+this.rut).then(res => {
-                        this.loading = false
+                        this.rutLoading = false
                         if(res.data.success == true){
 
                             this.isRutValid = res.data.data
