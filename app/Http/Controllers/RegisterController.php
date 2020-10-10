@@ -65,12 +65,14 @@ class RegisterController extends Controller
 
             $user = new User;
             $user->name = $request->name;
+            $user->lastname = $request->lastname;
             $user->email = $request->email;
             $user->password = bcrypt($request->password);
-            $user->genre = $request->genre;
-            $user->birth_date = $request->birthDate;
             $user->rut = $request->rut;
-            $user->lastname = $request->lastname;
+            $user->save();
+            
+            /*$user->genre = $request->genre;
+            $user->birth_date = $request->birthDate;
             $user->phone_number = $request->phoneNumber;
             $user->register_hash = $hash;
             $user->location_id = $request->location;
@@ -85,9 +87,9 @@ class RegisterController extends Controller
                 $user->business_address = $request->businessAddress;
                 $user->business_phone = $request->businessPhone;
                 $user->business_mail = $request->businessMail;
-            }
+            }*/
 
-            $user->save();
+            
             
             $data = ["user" => $user, "hash" => $hash];
             $to_name = $user->name;

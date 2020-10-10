@@ -28,14 +28,14 @@ class RegisterUser extends FormRequest
             'rut' => 'required|unique:users',
             'lastname' => "required",
             "name" => 'required',
-            "password" => 'required',
-            'phoneNumber' => 'required',
-            'genre' => 'required',
+            "password" => 'required|confirmed',
+            /*'phoneNumber' => 'required',
+            'genre' => 'required',*/
             "recaptcha" => "recaptcha",
-            "location" => "required",
+            /*"location" => "required",
             "comune_id" => "required",
             "street" => "required",
-            "number" => "required"
+            "number" => "required"*/
         ];
     }
 
@@ -49,15 +49,16 @@ class RegisterUser extends FormRequest
             "rut.required" => "RUT es requerido",
             "rut.unique" => "RUT ya está  registrado",
             "name.required" => "Nombre es requerido",
-            "password.required" => "Clave es requerida",
-            "phoneNumber.required" => "Teléfono es requerido",
+            "password.required" => "Contraseña es requerida",
+            "password.confirmed" => "Contraseñas no coinciden",
+            /*"phoneNumber.required" => "Teléfono es requerido",
             "genre.required" => "Género es requerido",
-            "address.required" => "Dirección es requerida",
+            "address.required" => "Dirección es requerida",*/
             "recaptcha.recaptcha" => "Captcha no válido",
-            "location.required" => "Región es requerida",
+            /*"location.required" => "Región es requerida",
             "comune_id.required" => "Comuna es requerida",
             "street.required" => "Calle es requerida",
-            "number.required" => "Númeroes requerido"
+            "number.required" => "Númeroes requerido"*/
         ];
     }
 }

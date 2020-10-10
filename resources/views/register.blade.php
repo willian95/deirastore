@@ -3,6 +3,11 @@
 @section('content')
 
     <div class="container bg card-form" v-cloak>
+
+        <div class="loader-cover-custom" v-if="loading == true">
+            <div class="loader-custom"></div>
+        </div>
+
       <!---  <div class="row">
             <div class="col-12">
                 <a class="btn btn-primary btn-general btn-general--form" style="color: #fff;" href="{{ url()->previous() }}"><i class="fa fa-arrow-left"></i></a>
@@ -28,7 +33,13 @@
                                 <input  placeholder="Ej: Perez " type="text" class="form-control" aria-describedby="emailHelp" v-model="lastname">
                             </div>
                             <!-- input -->
+
                             <div class="form-grid__item">
+                                <label  for="email">* Correo</label>
+                                <input  placeholder="Ej: email@gmail.com " type="email" class="form-control" id="email" aria-describedby="emailHelp" v-model="email">
+                            </div>
+
+                            {{--<div class="form-grid__item">
                                 <label  for="genre">* Género</label>
                                 <select class="form-control" id="genre" v-model="genre">
                                     <option>Género</option>
@@ -36,12 +47,12 @@
                                     <option value="femenino">Femenino</option>
                                     <option value="prefiero mantenerlo en privado">Prefiero mantenerlo en privado</option>
                                 </select>
-                            </div>
+                            </div>--}}
                             <!-- input -->
-                            <div class="form-grid__item">
+                            {{--<div class="form-grid__item">
                                 <label  for="birthDate">* Fec. Nacimiento</label>
                                 <input  placeholder="Fec. Nacimiento " type="date" class="form-control" id="birthDate" aria-describedby="emailHelp" v-model="birthDate">
-                            </div>
+                            </div>--}}
                                 <!-- input -->
                                 <div class="form-grid__item inputcontainer">
                                     <label  for="rut">* Rut</label>
@@ -59,25 +70,22 @@
                                     <!-- input -->
                         
                                 <!-- input -->
-                                <div class="form-grid__item">
+                                {{--<div class="form-grid__item">
                                     <label  for="phoneNumber">* Celular</label>
                                     <input  placeholder="Ej: +56933123123" type="text" class="form-control" id="phoneNumber" aria-describedby="emailHelp" v-model="phoneNumber" @keypress="isTelephoneNumber($event)" @focus="setNumber()">
-                                </div>
+                                </div>--}}
                                     <!-- input -->
-                            <div class="form-grid__item">
-                                <label  for="email">* Email</label>
-                                <input  placeholder="Ej: email@gmail.com " type="email" class="form-control" id="email" aria-describedby="emailHelp" v-model="email">
-                            </div>
+                            
                             <div class="form-grid__item">
                                 <label  for="password">* Contraseña</label>
                                 <input  placeholder="Contraseña " type="password" class="form-control" id="password" v-model="password">
                             </div>
 
                             <div class="form-grid__item">
-                                <label  for="passwordRepeat">* Repetir Contraseña</label>
+                                <label  for="passwordRepeat">* Confirmar Contraseña</label>
                                 <input  placeholder="Repetir Contraseña " type="password" class="form-control" id="passwordRepeat" v-model="passwordRepeat">
                             </div>
-                            <div class="form-grid__item">
+                            {{--<div class="form-grid__item">
                                 <label >* Región</label>
                                 <select class="form-control" v-model="location" @change="regionChange()">
                                     @foreach(App\Region::all() as $region)
@@ -139,7 +147,7 @@
                             <div class="form-grid__item" v-if="showBusiness == true">
                                 <label  for="businessMail">* Mail de adminsitración</label>
                                 <input  placeholder="Email de adminstradción" type="text" class="form-control" id="businessMail" v-model="businessMail">
-                            </div>
+                            </div>--}}
 
                             <div class="form-grid__item form-check" style="visibility: hidden" v-if="showBusiness == true">
                                 <input  type="checkbox" class="form-check-input mt-2" >
@@ -208,6 +216,7 @@
                 selectedComune:"",
                 house:"",
                 number:"",
+                loading:true,
                 businessName:"",
                 businessRut:"",
                 businessAddress:"",
@@ -220,85 +229,88 @@
         methods: {
 
             register() {
+                this.loading = true
                 this.captchaResponse = $("#g-recaptcha-response").val()
-                if (!this.formHasErrors()) {
+                //if (!this.formHasErrors()) {
                     
-                    axios.post("{{ url('/register') }}", {
-                            name: this.name,
-                            genre: this.genre,
-                            birthDate: this.birthDate,
-                            rut: this.rut,
-                            phoneNumber: this.phoneNumber,
-                            email: this.email,
-                            password: this.password,
-                            lastname: this.lastname,
-                            street: this.street,
-                            recaptcha: this.captchaResponse,
-                            location: this.location,
-                            comune_id: this.selectedComune,
-                            house: this.house,
-                            number: this.number,
-                            showBusiness: this.showBusiness,
-                            businessName: this.businessName,
-                            businessRut:this.businessRut,
-                            businessAddress:this.businessAddress,
-                            businessPhone:this.businessPhone,
-                            businessMail:this.businessMail,
+                axios.post("{{ url('/register') }}", {
+                    name: this.name,
+                    rut: this.rut,
+                    email: this.email,
+                    password: this.password,
+                    password_confirmation: this.passwordRepeat,
+                    lastname: this.lastname,
+                    /*street: this.street,*/
+                    recaptcha: this.captchaResponse,
+                    /*location: this.location,
+                    comune_id: this.selectedComune,
+                    house: this.house,
+                    genre: this.genre,
+                    phoneNumber: this.phoneNumber,
+                    birthDate: this.birthDate,
+                    number: this.number,
+                    showBusiness: this.showBusiness,
+                    businessName: this.businessName,
+                    businessRut:this.businessRut,
+                    businessAddress:this.businessAddress,
+                    businessPhone:this.businessPhone,
+                    businessMail:this.businessMail,*/
+                })
+                .then(res => {
+                    this.loading = false
+                    if(res.data.success == true){
+
+                        swal({
+                            icon: "success",
+                            title: res.data.msg,
+                            text:"Revise su correo"
                         })
-                        .then(res => {
-                            
-                            if(res.data.success == true){
- 
-                                swal({
-                                    icon: "success",
-                                    title: res.data.msg,
-                                    text:"Revise su correo"
-                                })
 
-                                this.name = ""
-                                this.genre = "masculino"
-                                this.birthDate = ""
-                                this.rut = ""
-                                this.phoneNumber = ""
-                                this.email = ""
-                                this.password = ""
-                                this.passwordRepeat = ""
-                                this.lastname = ""
-                                this.terms = "",
-                                this.stree = ""
-                                this.location = ""
-                                this.comune_id = ""
-                                this.house = ""
-                                this.number = ""
+                        this.name = ""
+                        this.genre = "masculino"
+                        this.birthDate = ""
+                        this.rut = ""
+                        this.phoneNumber = ""
+                        this.email = ""
+                        this.password = ""
+                        this.passwordRepeat = ""
+                        this.lastname = ""
+                        this.terms = "",
+                        this.stree = ""
+                        this.location = ""
+                        this.comune_id = ""
+                        this.house = ""
+                        this.number = ""
 
-                                window.setTimeout(() => {
-                                    window.location.href="{{ url('/') }}"
-                                }, 5000);
-                                
-                            }else{
-
-                                swal({
-                                    icon: "error",
-                                    title: "Error",
-                                    text: res.data.msg
-                                    
-                                })
-
-                                grecaptcha.reset();
-
-                            }
-
-                        })
-                        .catch(err => {
-                            $.each(err.response.data.errors, function(key, value) {
-                                alertify.error(value[0])
-                            });
-                        })
+                        window.setTimeout(() => {
+                            window.location.href="{{ url('/') }}"
+                        }, 5000);
                         
-                }
+                    }else{
+
+                        swal({
+                            icon: "error",
+                            title: "Error",
+                            text: res.data.msg
+                            
+                        })
+
+                        grecaptcha.reset();
+
+                    }
+
+                })
+                .catch(err => {
+                    this.loading = false
+                    $.each(err.response.data.errors, function(key, value) {
+                        alertify.error(value[0])
+                    });
+                })
+                    
+                //}
 
             },
-            formHasErrors() {
+            /*formHasErrors() {
 
                 let error = false
 
@@ -415,7 +427,7 @@
 
                 return error
 
-            },
+            },*/
             isNumber: function(evt) {
                 evt = (evt) ? evt : window.event;
                 var charCode = (evt.which) ? evt.which : evt.keyCode;
