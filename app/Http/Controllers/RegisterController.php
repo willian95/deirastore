@@ -116,7 +116,7 @@ class RegisterController extends Controller
 
     }
 
-    function confirmEmail($hash){
+    function confirmEmail($hash, Request $request){
 
         try{
 
@@ -125,7 +125,7 @@ class RegisterController extends Controller
                 $path = substr($hash, strpos("?path"));
             }
 
-            dd($path, $hash);
+            dd($request->all(), $hash);
 
             $user = User::where('register_hash', $hash)->first();
             $user->register_hash = null;
