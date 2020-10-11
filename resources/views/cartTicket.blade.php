@@ -162,7 +162,10 @@
                     email:"",
                     password:"",
                     phoneNumber:"",
-                    rut:""
+                    rut:"",
+                    name:"",
+                    lastname:""
+                    rutLoading:""
                 }
             },
             methods:{
@@ -284,7 +287,7 @@
                 this.authCheck = "{{ \Auth::check() }}"
 
                 if(window.localStorage.getItem("deira_store_go_to_payment") == "true"){
-                    windo.localStorage.removeItem("deira_store_go_to_payment")
+                    window.localStorage.removeItem("deira_store_go_to_payment")
                     this.boleta()
                 }
 
