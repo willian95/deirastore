@@ -127,7 +127,7 @@
                             <div class="col-md-12">
                                 <div class="inputcontainer">
                                     <label  for="rut">* Rut</label>
-                                    <input placeholder="Ej: 121456789" type="text" class="form-control" id="rut" aria-describedby="emailHelp" v-model="rut" @keypress="isAlphaNumeric($event)" @blur="validateRut()">
+                                    <input placeholder="Ej: 121456789" type="text" class="form-control" id="rut" aria-describedby="emailHelp" v-model="rut" @blur="validateRut()">
                                     <div class="icon-container" v-if="rutLoading == true">
                                         <i class="loader"></i>
                                     </div>
