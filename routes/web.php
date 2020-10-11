@@ -191,6 +191,7 @@ Route::post("/comment", "CommentController@store")->middleware('auth');
 Route::post("/comment/fetch", "CommentController@fetch");
 
 Route::post("/checkout/store-session", "CheckoutController@storeSession");
+Route::get("/checkout/factura", "CheckoutController@factura");
 
 Route::get("/cart/ticket", function(){
     return view("cartTicket");

@@ -248,6 +248,14 @@
                         goToPayment = true
                     }
 
+                    let path = ""
+
+                    if(window.localStorage.getItem("bill_type") == "boleta"){
+                        path = "/cart/ticket"
+                    }else if(window.localStorage.getItem("bill_type") == "factura"){
+                        
+                    }
+
                     axios.post("{{ url('/register') }}", {
                         name: this.name,
                         rut: this.rut,
@@ -256,6 +264,7 @@
                         password_confirmation: this.passwordRepeat,
                         lastname: this.lastname,
                         goToPayment:goToPayment,
+                        path:path,
                         /*street: this.street,*/
                         recaptcha: this.captchaResponse,
                         /*location: this.location,

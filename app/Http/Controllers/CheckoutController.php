@@ -19,6 +19,15 @@ use DB;
 
 class CheckoutController extends Controller
 {
+
+	function factura(){
+
+		$user = User::find(\Auth::user()->id);
+
+		return view("facturaCheckout", ["user" => $user]);
+
+	}
+
     public function initTransaction(WebpayNormal $webpayNormal)
 	{
 		//dd($request->all());

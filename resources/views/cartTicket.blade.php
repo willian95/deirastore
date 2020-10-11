@@ -255,19 +255,19 @@
                 },
                 factura(){
 
-                    axios.post("{{ url('/checkout/store-session') }}", {items: JSON.parse(localStorage.getItem("checkoutProduct")), type: "factura"})
-                    .then(res => {
-                        if(res.data.success == true){
-                            window.location.href = "{{ route('checkout') }}"
-                        }
-
-                    })
+                    window.location.href="{{ url('/checkout/factura') }}"
 
                 },
                 redirectGoogle(){
 
                     window.localStorage.setItem("deira_store_go_to_payment", true)
-                    window.location.href="{{ url('auth/google?path=/cart/ticket') }}"
+
+                    if(window.localStorage.getItem("bill_type") == "boleta"){
+                        window.location.href="{{ url('auth/google?path=/cart/ticket') }}"
+                    }else if(window.localStorage.getItem("bill_type") == "factura"){
+                        
+                    }
+                    
 
                 },
                 register(){
@@ -278,10 +278,18 @@
                 },
                 login(){
                     window.localStorage.setItem("deira_store_go_to_payment", true)
+
+                    let path =""
+                    if(window.localStorage.getItem("bill_type") == "boleta"){
+                        path = "/cart/ticket"
+                    }else if(window.localStorage.getItem("bill_type") == "factura"){
+                        
+                    }
+
                     axios.post("{{ url('/login') }}", {
                         email: this.email,
                         password: this.password,
-                        path:"/cart/ticket"
+                        path:path
                     })
                     .then(res => {
 

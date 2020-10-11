@@ -92,7 +92,7 @@ class RegisterController extends Controller
 
             $goToPayment = "";
             if($request->goToPayment == true){
-                $goToPayment = "/cart/ticket";
+                $goToPayment = $request->path;
             }
             
             $data = ["user" => $user, "hash" => $hash, "goToPayment" => $goToPayment];

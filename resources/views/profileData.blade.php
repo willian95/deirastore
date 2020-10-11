@@ -193,7 +193,7 @@
                             <div class="row">
                                 <div class="col-md-6 mb-4">
                                     <div  v-if="showBusiness == true">
-                                        <label  for="businessMail">* Mail de adminsitración</label>
+                                        <label  for="businessMail">* Mail de administración</label>
                                         <input  placeholder="Email de adminstradción" type="text" class="form-control" id="businessMail" v-model="businessMail" :disabled="readonly">
                                     </div>
                                 </div>
