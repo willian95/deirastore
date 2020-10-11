@@ -39,7 +39,7 @@
 
             <!-- Modal -->
             <div class="modal fade" id="boletaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -65,10 +65,14 @@
                         <div class="form-group text-center mb-5 mt-3">
                             <button class="btn btn-primary btn-general btn-general--form" @click="logIn()">Login</button>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+
+                        <h5 class="text-center">¿Aún no tienes cuenta?</h5>
+                        <div class="form-group text-center mb-5 mt-3">
+                            <button class="btn btn-primary btn-general btn-general--form">Registrate</button>
+                        </div>
+
+                        
+
                     </div>
                 </div>
             </div>

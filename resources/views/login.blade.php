@@ -33,6 +33,13 @@
                             <button class="btn btn-primary btn-general btn-general--form" @click="logIn()">Acceder</button>
                         </div>
 
+                        <div class="col-12">
+                            <div style="display:flex;">
+                                <a href="{{ url('auth/google') }}" class="btn btn-success">Google</a>
+                                <button class="btn btn-success">Facebook</button>
+                            </div>
+                        </div>
+
 <br><br>
                         <div class="form-group pass text-center" style="font-size: 1rem;
                         font-weight: 600;">
