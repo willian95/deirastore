@@ -353,7 +353,7 @@
                             lastname: this.lastname,
                             phoneNumber: this.phoneNumber,
                             rut: this.rut,
-                            email: this.email,
+                            guestEmail: this.email,
                             location_id: "",
                             commune_id: "",
                             street: "",
