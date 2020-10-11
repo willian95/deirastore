@@ -112,9 +112,9 @@
                 <div class="row container" v-cloak >
                    
                    
-                    <div class="col-lg-8 col-md-12" v-if="shippingAmount > 0">
+                    <div class="col-lg-8 col-md-12">
 
-                        <div class="form-group">
+                        <div class="form-group" v-if="shippingAmount > 0">
                             <div class="row">
                                 <div class="col-md-6">
                                     <label >* Región</label>
@@ -135,7 +135,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group" v-if="shippingAmount > 0">
                             <div class="row">
                                 <div class="col-md-12">
                                     <label  for="street">* Calle</label>
@@ -144,7 +144,7 @@
                                 
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" v-if="shippingAmount > 0">
                             <div class="row">
                                 <div class="col-md-6">
                                     <label  for="number">* Número</label>
@@ -158,7 +158,7 @@
                             
                         </div>
 
-                        <p class="text text-center mt-5">
+                        <p class="text text-center mt-5" v-if="shippingAmount > 0">
                             <button class="btn btn-success btn-general2" @click="updateCartLocation()">Confirmar ubicación</button>
                         </p>
 
