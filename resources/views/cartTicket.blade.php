@@ -27,9 +27,9 @@
                 <p class="text-center">
                     <button class="btn btn-success btn-general2 pl-4 pr-4 btn-general2_bg" @click="factura()">Factura</button>
                 </p>
-                <p class="text-center">
+                {{--<p class="text-center">
                     {{ App\Text::where("site_location", "Tipo de facturación")->where("type", "texto")->first()->text }}
-                </p>
+                </p>--}}
             </div>
         
         </div>
