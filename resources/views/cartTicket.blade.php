@@ -261,9 +261,9 @@
                 validateRut(){
                
                     if(this.rut != ""){
-                        this.loading = true
+                        this.rutLoading = true
                         axios.get("{{ url('/validate/rut/') }}"+"/"+this.rut).then(res => {
-                            this.loading = false
+                            this.rutLoading = false
                             if(res.data.success == true){
 
                                 this.isRutValid = res.data.data
