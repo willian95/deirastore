@@ -73,30 +73,30 @@
                 if (!this.formHasErrors()) {
 
                     axios.post("{{ url('/login') }}", {
-                            email: this.email,
-                            password: this.password
-                        })
-                        .then(res => {
+                        email: this.email,
+                        password: this.password
+                    })
+                    .then(res => {
 
-                            if (res.data.success == false) {
-                                alertify.error(res.data.msg)
-                            } else {
+                        if (res.data.success == false) {
+                            alertify.error(res.data.msg)
+                        } else {
 
-                                if (res.data.user.rol_id == 1) {
-                                    window.location.replace("{{ url('/') }}")
-                                } else if (res.data.user.rol_id == 3) {
-                                    window.location.replace("{{ route('admin.dashboard') }}")
-                                }
-
+                            if (res.data.user.rol_id == 1) {
+                                window.location.replace("{{ url('/') }}")
+                            } else if (res.data.user.rol_id == 3) {
+                                window.location.replace("{{ route('admin.dashboard') }}")
                             }
 
-                        })
-                        .catch(err => {
-                            $.each(err.response.data.errors, function(key, value) {
-                                alertify.error(value);
-                                //alertify.alert('Basic: true').set('basic', true); 
-                            });
-                        })
+                        }
+
+                    })
+                    .catch(err => {
+                        $.each(err.response.data.errors, function(key, value) {
+                            alertify.error(value);
+                            //alertify.alert('Basic: true').set('basic', true); 
+                        });
+                    })
 
                 }
 

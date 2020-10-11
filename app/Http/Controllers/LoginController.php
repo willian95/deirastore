@@ -23,13 +23,18 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
         
         if(User::where('email', $request->email)->first()){
-            if(User::where('email', $request->email)->first()->email_verified_at == null)
+            if(User::where('email', $request->email)->first()->email_verified_at == null){
                 return response()->json(["success" => false, "msg" => "Aún no has verificado tu correo"]);
+            }
+                
         }
 
         if (Auth::attempt($credentials, true)){
             
             $user = User::where('email', $request->email)->first();
+            if($request->has("path")){
+                return response()->json(["success" => true, "msg" => "Has iniciado sesión", "user" => $user, "path" => url($request->path)]);
+            }
             return response()->json(["success" => true, "msg" => "Has iniciado sesión", "user" => $user]);
         
         }
