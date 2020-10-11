@@ -177,6 +177,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         //Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
         Biscolab\ReCaptcha\ReCaptchaServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
 
     ],
 
@@ -229,6 +230,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'ReCaptcha' => Biscolab\ReCaptcha\Facades\ReCaptcha::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         //'NoCaptcha' => Anhskohbo\NoCaptcha\Facades\NoCaptcha::class,
         //'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
