@@ -17,6 +17,8 @@
 
 Route::get('auth/google', 'SocialAuthController@redirectToGoogle');
 Route::get('auth/google/callback', 'SocialAuthController@handleGoogleCallback');
+/*Route::get('auth/google/checkout', 'SocialAuthController@redirectToGoogle');
+Route::get('auth/google/checkout/callback', 'SocialAuthController@handleGoogleCallback');*/
 
 Route::get('auth/facebook', 'SocialAuthController@redirectToFacebook');
 Route::get('auth/facebook/callback', 'SocialAuthController@handleFacebookCallback');
