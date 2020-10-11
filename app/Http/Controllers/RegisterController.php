@@ -61,14 +61,14 @@ class RegisterController extends Controller
 
         try{
             
-            $hash = Str::random(40)."-".uniqid();
+            $random = Str::random(40)."-".uniqid();
 
             $user = new User;
             $user->name = $request->name;
             $user->lastname = $request->lastname;
             $user->email = $request->email;
             $user->password = bcrypt($request->password);
-            $user->register_hash = $hash;
+            $user->register_hash = $random;
             $user->rut = $request->rut;
             $user->save();
 
@@ -95,7 +95,7 @@ class RegisterController extends Controller
                 $goToPayment = $request->path;
             }
             
-            $data = ["user" => $user, "hash" => $hash, "goToPayment" => $goToPayment];
+            $data = ["user" => $user, "hash" => $random, "goToPayment" => $goToPayment];
             $to_name = $user->name;
 			$to_email = $user->email;
 			\Mail::send("emails.registerEmail", $data, function($message) use ($to_name, $to_email) {
