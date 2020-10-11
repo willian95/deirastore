@@ -23,7 +23,7 @@ Route::get('auth/google/checkout/callback', 'SocialAuthController@handleGoogleCa
 Route::get('auth/facebook', 'SocialAuthController@redirectToFacebook');
 Route::get('auth/facebook/callback', 'SocialAuthController@handleFacebookCallback');
 
-Route::get('/', "HomeController@index")->name("home");
+Route::get('/', "HomeController@index");
 
 Route::get('/recover-password/{email}', "RegisterController@resendEmail");
 
