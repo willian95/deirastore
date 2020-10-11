@@ -19,7 +19,8 @@
         <div class="row">
             <div class="col-6">
                 <p class="text-center">
-                    <button class="btn btn-success btn-general2 pl-4 pr-4" v-if="!authCheck" @click="boleta()" data-toggle="modal" data-target="#boletaModal">Boleta</button>
+                    <button class="btn btn-success btn-general2 pl-4 pr-4" v-if="!authCheck" data-toggle="modal" data-target="#boletaModal">Boleta</button>
+                    <button class="btn btn-success btn-general2 pl-4 pr-4" v-else @click="boleta()">Boleta</button>
                 </p>
             </div>
             
