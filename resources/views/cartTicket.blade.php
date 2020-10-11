@@ -360,6 +360,7 @@
                             number: "",
                             house: ""
                         }
+                        alert("entre")
 
                         if(location != null){
                             guestUser.location_id = location.location_id
