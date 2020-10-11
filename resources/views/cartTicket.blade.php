@@ -71,7 +71,14 @@
                             <button class="btn btn-primary btn-general btn-general--form">Registrate</button>
                         </div>
 
-                        
+
+                        <div class="col-12">
+                            <div style="display:flex;">
+                                <a href="{{ url('auth/google') }}" class="btn btn-success">Google</a>
+                                <button class="btn btn-success">Facebook</button>
+                            </div>
+                        </div>
+
 
                     </div>
                 </div>
