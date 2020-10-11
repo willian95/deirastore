@@ -353,11 +353,19 @@
                             phoneNumber: this.phoneNumber,
                             rut: this.rut,
                             email: this.email,
-                            location_id: location.location_id,
-                            commune_id: location.selectedCommune,
-                            street: location.street,
-                            number: location.number,
-                            house: location.house
+                            location_id: "",
+                            commune_id: "",
+                            street: "",
+                            number: "",
+                            house: ""
+                        }
+
+                        if(location != null){
+                            guestUser.location_id = location.location_id
+                            guestUser.commune_id = location.commune_id
+                            guestUser.street = location.street
+                            guestUser.number = location.number
+                            guestUser.house = location.house
                         }
 
                         /*newGuest.location_id = this.location
