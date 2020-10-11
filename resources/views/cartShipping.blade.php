@@ -379,12 +379,6 @@
 
                 nextStep(){
                     var newGuest ={
-                        name : "",
-                        name : "",
-                        lastname : "",
-                        phoneNumber : "",
-                        rut : "",
-                        guestEmail : "",
                         location_id : "",
                         comnue_id : "",
                         street : "",
@@ -395,19 +389,13 @@
                     //let address = []
                     if(this.shippingAmount > 0){
 
-                        let guestUser = JSON.parse(localStorage.getItem("guestUser"))
-
-                        newGuest.name = guestUser.name
-                        newGuest.lastname = guestUser.lastname
-                        newGuest.phoneNumber = guestUser.phoneNumber
-                        newGuest.rut = guestUser.rut
-                        newGuest.guestEmail = guestUser.guestEmail
                         newGuest.location_id = this.location
                         newGuest.comune_id = this.selectedComune
                         newGuest.street = this.street
                         newGuest.number = this.number
                         newGuest.house = this.house
-                        window.localStorage.setItem("guestUser", JSON.stringify(newGuest))
+
+                        window.localStorage.setItem("guestUserLocation", JSON.stringify(newGuest))
                         
                     }
                     
