@@ -393,7 +393,7 @@
 
                     }
                     //let address = []
-                    if(this.authCheck == false){
+                    if(this.shippingAmount > 0){
 
                         let guestUser = JSON.parse(localStorage.getItem("guestUser"))
 
@@ -408,6 +408,7 @@
                         newGuest.number = this.number
                         newGuest.house = this.house
                         window.localStorage.setItem("guestUser", JSON.stringify(newGuest))
+                        
                     }
                     
                     

@@ -358,10 +358,9 @@
                 },
                 checkout(){
                     if(this.terms == true){
-                        if(this.authCheck == 1)
-                            window.location.href="{{ url('/cart/shipping') }}"
-                        else
-                            window.location.href="{{ url('/guest/checkout/') }}"
+                        
+                        window.location.href="{{ url('/cart/shipping') }}"
+                        
                     }else{
                         alertify.error("Debe aceptar los términos y condiciones")
                     }
