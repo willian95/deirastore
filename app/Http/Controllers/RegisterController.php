@@ -125,6 +125,8 @@ class RegisterController extends Controller
                 $path = substr($hash, strpos("?path"));
             }
 
+            dd($path, $hash);
+
             $user = User::where('register_hash', $hash)->first();
             $user->register_hash = null;
             $user->email_verified_at = Carbon::now();
