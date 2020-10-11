@@ -41,7 +41,7 @@
                                             <div class="icono-carrito"></div>
                                         </div> -->
                             <div class="title__general fadeInUp wow animated">
-                                <p><strong>Carrito </strong>de compras</p>
+                                <p><strong>Bolsa </strong>de compras</p>
                             </div>
                             <div class="row">
                                 <div class="col-md-12 col-lg-8 p-0">
@@ -112,7 +112,7 @@
                                                     <input  type="checkbox" class="form-check-input mt-2" id="terms" v-model="terms">
                                                     <label  class="form-check-label mt-3" for="terms"><a href="{{ url('/terms') }}" target="_blank">Acepto términos y condiciones</a></label>
                                                 </div>
-                                            <button @click="checkout()" class="finalizar-compra" v-if="guestItem.length > 0">Ir a pagar</button>
+                                            <button @click="checkout()" class="finalizar-compra" v-if="guestItem.length > 0">Continuar</button>
                                             <button @click="keepShopping()"  class="finalizar-compra finalizar-compra--go">Seguir Comprando</button>
                                             
                                     

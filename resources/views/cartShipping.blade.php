@@ -41,7 +41,7 @@
                                             <div class="icono-carrito"></div>
                                         </div> -->
                             <div class="title__general fadeInUp wow animated">
-                                <p><strong>Carrito </strong>de compras</p>
+                                <p><strong>Tipo </strong>de entrega</p>
                             </div>
                             <div class="row">
                                 <div class="col-md-12 col-lg-12">
@@ -106,10 +106,10 @@
                 </div>
 
 
-                <div class="title__general fadeInUp wow animated mt-5" v-cloak>
+                <div class="title__general fadeInUp wow animated mt-5" v-cloak v-if="shippingAmount > 0">
                     <p><strong>Completa tus datos </strong>  para recibir tu compra</p>
                 </div>
-                <div class="row container" v-cloak>
+                <div class="row container" v-cloak v-if="shippingAmount > 0">
                    
                    
                     <div class="col-lg-8 col-md-12">
@@ -191,7 +191,7 @@
                           <div class="text-cente" style="    line-height: 1.2;">
                             <p>Todos los valores incluyen iva</p>
 
-                            <p>Recuerda que @{{ shippingAmount }} de @{{ guestItem.length }} productos estará siendo despachado.</p>
+                            <p v-if="shippingAmount > 0">Recuerda que @{{ shippingAmount }} de @{{ guestItem.length }} productos estará siendo despachado.</p>
                             <p>En caso de tener que retirar un producto deberás hacerlo en nuestras dependencias.</p>
                             <p>Más información al final del presente sitio</p>
 
