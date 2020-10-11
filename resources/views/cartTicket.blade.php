@@ -123,12 +123,7 @@
                                     <input placeholder="Email" type="text" autocomplete="off" class="form-control" id="email" aria-describedby="emailHelp" v-model="email">
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <div class="">
-                                    <label  for="phoneNumber">* Celular</label>
-                                    <input  placeholder="Ej: +56933123123" type="text" class="form-control" @focus="setNumber()" id="phoneNumber" aria-describedby="emailHelp" v-model="phoneNumber" @keypress="isTelephoneNumber($event)">
-                                </div>
-                            </div>
+                            
                             <div class="col-md-12">
                                 <div class="inputcontainer">
                                     <label  for="rut">* Rut</label>
@@ -145,6 +140,12 @@
                                 </div>
                             </div>
                             <div class="col-md-12">
+                                <div class="">
+                                    <label  for="phoneNumber">* Celular</label>
+                                    <input  placeholder="Ej: +56933123123" type="text" class="form-control" @focus="setNumber()" id="phoneNumber" aria-describedby="emailHelp" v-model="phoneNumber" @keypress="isTelephoneNumber($event)">
+                                </div>
+                            </div>
+                            <div class="col-md-12" style="margin-top: 10px;">
                                 <div class="form-group text-center">
                                     <button :disabled="!isRutValid" class="btn btn-primary btn-general btn-general--form" @click="storeGuestUser()">Confirmar compra</button>
                                 </div>
