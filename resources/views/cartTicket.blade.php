@@ -90,19 +90,47 @@
         </div>
 
         <div class="modal fade" id="guestModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Datos de invitado</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="modalCloseBoleta">
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input placeholder="Email" type="text" autocomplete="off" class="form-control" id="email" aria-describedby="emailHelp" v-model="email">
+                                    <label for="email">Nombre</label>
+                                    <input placeholder="Email" type="text" autocomplete="off" class="form-control" id="email" aria-describedby="emailHelp" v-model="name">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="lastname">Apellido</label>
+                                    <input placeholder="Apellido" type="text" autocomplete="off" class="form-control" id="lastname" aria-describedby="emailHelp" v-model="lastname">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="">
+                                    <label  for="phoneNumber">* Celular</label>
+                                    <input  placeholder="Ej: +56933123123" type="text" class="form-control" @focus="setNumber()" id="phoneNumber" aria-describedby="emailHelp" v-model="phoneNumber" @keypress="isTelephoneNumber($event)">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="inputcontainer">
+                                    <label  for="rut">* Rut</label>
+                                    <input placeholder="Ej: 121456789" type="text" class="form-control" id="rut" aria-describedby="emailHelp" v-model="rut" @keypress="isAlphaNumeric($event)" @blur="validateRut()">
+                                    <div class="icon-container" v-if="rutLoading == true">
+                                        <i class="loader"></i>
+                                    </div>
+                                    <div class="icon-container" v-if="rutLoading == false && isRutValid == true">
+                                        <i class="fa fa-check-square"></i>
+                                    </div>
+                                    <div class="icon-container" v-if="rutLoading == false && isRutValid == false">
+                                        <i class="fa fa-times"></i>
+                                    </div>
                                 </div>
                             </div>
                             
@@ -130,8 +158,11 @@
             data(){
                 return{
                     authCheck:false,
+                    isRutValid:false,
                     email:"",
-                    password:""
+                    password:"",
+                    phoneNumber:"",
+                    rut:""
                 }
             },
             methods:{
@@ -192,12 +223,53 @@
                 },
                 showGuestModal(){
 
+                    this.email =""
+                    this.password = ""
+
                     $("#modalCloseBoleta").click();
                     $('body').removeClass('modal-open');
                     $('body').css('padding-right', '0px');
                     $('.modal-backdrop').remove();
+                },
+                validateRut(){
+               
+                    if(this.rut != ""){
+                        this.loading = true
+                        axios.get("{{ url('/validate/rut/') }}"+"/"+this.rut).then(res => {
+                            this.loading = false
+                            if(res.data.success == true){
 
+                                this.isRutValid = res.data.data
+                                
+                            }else{
+                                this.isRutValid = res.data.data
+                                alertify.error(res.data.msg)
 
+                            }
+
+                        })
+                        .catch(err => {
+
+                        })
+                    }
+                    
+                },
+                setNumber(){
+
+                    if(this.phoneNumber == ""){
+                        this.phoneNumber = "+569"
+                    }
+
+                },
+                isTelephoneNumber: function(evt) {
+                    evt = (evt) ? evt : window.event;
+                    var charCode = (evt.which) ? evt.which : evt.keyCode;
+
+                    if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 43) {
+                        evt.preventDefault();;
+                    } else {
+                        return true;
+                    }
                 }
 
             },
