@@ -116,9 +116,14 @@ class RegisterController extends Controller
 
     }
 
-    function confirmEmail(Request $request, $hash){
+    function confirmEmail($hash){
 
         try{
+
+            $path = "";
+            if(strpos($hash, "?path") > -1){
+                $path = substr($hash, strpos("?path"));
+            }
 
             $user = User::where('register_hash', $hash)->first();
             $user->register_hash = null;
@@ -127,8 +132,8 @@ class RegisterController extends Controller
 
             \Auth::loginUsingId($user->id);
 
-            if($request->has("path")){
-                return redirect()->to($request->path);
+            if(strlen($path) > 0){
+                return redirect()->to($path);
             }else{
                 return redirect()->to('/');
             }
