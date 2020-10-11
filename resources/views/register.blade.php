@@ -14,6 +14,12 @@
             </div>
         </div>--->
         <div class="row center-form">
+            <div class="col-12">
+                <div style="display:flex;">
+                    <a href="{{ url('auth/google') }}" class="btn btn-success">Google</a>
+                    <button class="btn btn-success">Facebook</button>
+                </div>
+            </div>
             <div class="col-lg-6  col-md-6  col-12">
                 <div class="card">
                     <div class="card-body">
