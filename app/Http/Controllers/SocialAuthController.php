@@ -38,7 +38,7 @@ class SocialAuthController extends Controller
             }
             //return redirect()->to('/');
             
-            return redirect()->intended()->getTargetUrl();
+            return redirect()->intended('home');
 
         } catch (Exception $e) {
             dd($e->getMessage());

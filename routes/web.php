@@ -23,7 +23,7 @@ Route::get('auth/google/checkout/callback', 'SocialAuthController@handleGoogleCa
 Route::get('auth/facebook', 'SocialAuthController@redirectToFacebook');
 Route::get('auth/facebook/callback', 'SocialAuthController@handleFacebookCallback');
 
-Route::get('/', "HomeController@index");
+Route::get('/', "HomeController@index")->name("home");
 
 Route::get('/recover-password/{email}', "RegisterController@resendEmail");
 
@@ -80,10 +80,10 @@ Route::post('/cart/delete', 'CartController@delete')->name('cart.delete');
 Route::get('/profile', 'ProfileController@index')->name('profile')->middleware("auth");
 Route::post('/profile', 'ProfileController@update')->name('profile.update')->middleware("auth");
 
-Route::get('/register', "RegisterController@index");
+Route::get('/register', "RegisterController@index")->middleware("guest");
 Route::post('/register', "RegisterController@register");
 
-Route::get('/login', "LoginController@index")->name("login");
+Route::get('/login', "LoginController@index")->name("login")->middleware("guest");
 Route::post('/login', "LoginController@logIn");
 Route::get('/logout', "LoginController@logout");
 
