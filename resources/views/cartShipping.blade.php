@@ -106,13 +106,13 @@
                 </div>
 
 
-                <div class="title__general fadeInUp wow animated mt-5" v-cloak v-if="shippingAmount > 0">
+                <div class="title__general fadeInUp wow animated mt-5" v-cloak>
                     <p><strong>Completa tus datos </strong>  para recibir tu compra</p>
                 </div>
-                <div class="row container" v-cloak v-if="shippingAmount > 0">
+                <div class="row container" v-cloak >
                    
                    
-                    <div class="col-lg-8 col-md-12">
+                    <div class="col-lg-8 col-md-12" v-if="shippingAmount > 0">
 
                         <div class="form-group">
                             <div class="row">
