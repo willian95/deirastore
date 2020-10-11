@@ -74,7 +74,7 @@
 
                         <div class="col-12">
                             <div style="display:flex;">
-                                <a href="{{ url('auth/google?path='.url('/').'cart/ticket') }}" class="btn btn-success">Google</a>
+                                <a href="{{ url('auth/google?path=/cart/ticket') }}" class="btn btn-success">Google</a>
                                 <button class="btn btn-success">Facebook</button>
                             </div>
                         </div>
