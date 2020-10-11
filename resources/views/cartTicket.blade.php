@@ -355,7 +355,7 @@
                             rut: this.rut,
                             guestEmail: this.email,
                             location_id: "",
-                            commune_id: "",
+                            comune_id: "",
                             street: "",
                             number: "",
                             house: ""
@@ -364,7 +364,7 @@
 
                         if(location != null){
                             guestUser.location_id = location.location_id
-                            guestUser.commune_id = location.commune_id
+                            guestUser.comune_id = location.commune_id
                             guestUser.street = location.street
                             guestUser.number = location.number
                             guestUser.house = location.house
