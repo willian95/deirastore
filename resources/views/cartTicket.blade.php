@@ -74,7 +74,7 @@
 
                         <div class="col-12">
                             <div style="display:flex;">
-                                <button type="button" class="btn btn-success">Google</button>
+                                <button @click="redirectGoogle()" type="button" class="btn btn-success">Google</button>
                                 <button class="btn btn-success">Facebook</button>
                             </div>
                         </div>
@@ -196,14 +196,15 @@
                 redirectGoogle(){
 
                     window.localStorage.setItem("deira_store_go_to_payment", true)
-                    window.location.href="{{ url('auth/google?path=/checkout') }}"
+                    window.location.href="{{ url('auth/google?path=/cart/ticket') }}"
 
                 },
                 login(){
+                    window.localStorage.setItem("deira_store_go_to_payment", true)
                     axios.post("{{ url('/login') }}", {
                         email: this.email,
                         password: this.password,
-                        path:"/checkout"
+                        path:"/cart/ticket"
                     })
                     .then(res => {
 
