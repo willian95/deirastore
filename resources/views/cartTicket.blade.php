@@ -107,14 +107,20 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="email">Nombre</label>
-                                    <input placeholder="Email" type="text" autocomplete="off" class="form-control" id="email" aria-describedby="emailHelp" v-model="name">
+                                    <label for="name">Nombre</label>
+                                    <input placeholder="Nombre" type="text" autocomplete="off" class="form-control" id="name" aria-describedby="emailHelp" v-model="name">
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="lastname">Apellido</label>
                                     <input placeholder="Apellido" type="text" autocomplete="off" class="form-control" id="lastname" aria-describedby="emailHelp" v-model="lastname">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input placeholder="Email" type="text" autocomplete="off" class="form-control" id="email" aria-describedby="emailHelp" v-model="email">
                                 </div>
                             </div>
                             <div class="col-md-12">
