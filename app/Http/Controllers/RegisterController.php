@@ -71,6 +71,7 @@ class RegisterController extends Controller
             $user->register_hash = $hash;
             $user->rut = $request->rut;
             $user->save();
+
             
             /*$user->genre = $request->genre;
             $user->birth_date = $request->birthDate;
@@ -89,9 +90,12 @@ class RegisterController extends Controller
                 $user->business_mail = $request->businessMail;
             }*/
 
+            $goToPayment = "";
+            if($request->goToPayment == true){
+                $goToPayment = "/cart/ticket";
+            }
             
-            
-            $data = ["user" => $user, "hash" => $hash];
+            $data = ["user" => $user, "hash" => $hash, "goToPayment" => $goToPayment];
             $to_name = $user->name;
 			$to_email = $user->email;
 			\Mail::send("emails.registerEmail", $data, function($message) use ($to_name, $to_email) {
@@ -112,7 +116,7 @@ class RegisterController extends Controller
 
     }
 
-    function confirmEmail($hash){
+    function confirmEmail(Request $request, $hash){
 
         try{
 
@@ -123,7 +127,12 @@ class RegisterController extends Controller
 
             \Auth::loginUsingId($user->id);
 
-            return redirect()->to('/');
+            if($request->has("path")){
+                return redirect()->to($request->path);
+            }else{
+                return redirect()->to('/');
+            }
+            
 
         }catch(\Exception $e){
 

@@ -69,7 +69,7 @@
 
                         <h5 class="text-center">¿Aún no tienes cuenta?</h5>
                         <div class="form-group text-center mb-5 mt-3">
-                            <button class="btn btn-primary btn-general btn-general--form">Registrate</button>
+                            <button class="btn btn-primary btn-general btn-general--form" @click="register()">Registrate</button>
                         </div>
 
 
@@ -201,6 +201,12 @@
 
                     window.localStorage.setItem("deira_store_go_to_payment", true)
                     window.location.href="{{ url('auth/google?path=/cart/ticket') }}"
+
+                },
+                register(){
+
+                    window.localStorage.setItem("deira_store_go_to_payment", true)
+                    window.location.href="{{ url('register') }}"
 
                 },
                 login(){

@@ -241,6 +241,13 @@
                 //if (!this.formHasErrors()) {
                     
                 if(this.isRutValid){
+
+                    let goToPayment = false
+
+                    if(window.localStorage.getItem("deira_store_go_to_payment") == "true"){
+                        goToPayment = true
+                    }
+
                     axios.post("{{ url('/register') }}", {
                         name: this.name,
                         rut: this.rut,
@@ -248,6 +255,7 @@
                         password: this.password,
                         password_confirmation: this.passwordRepeat,
                         lastname: this.lastname,
+                        goToPayment:goToPayment,
                         /*street: this.street,*/
                         recaptcha: this.captchaResponse,
                         /*location: this.location,
