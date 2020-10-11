@@ -376,6 +376,7 @@
                         newGuest.house = this.house*/
                         
                         localStorage.setItem("guestUser", JSON.stringify(guestUser))
+                        this.boleta()
                         //window.location.href="{{ url('/cart/shipping') }}"
                     }
 
