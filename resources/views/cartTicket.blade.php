@@ -19,7 +19,7 @@
         <div class="row">
             <div class="col-6">
                 <p class="text-center">
-                    <button class="btn btn-success btn-general2 pl-4 pr-4" v-if="!authcheck" @click="boleta()" data-toggle="modal" data-target="#boletaModal">Boleta</button>
+                    <button class="btn btn-success btn-general2 pl-4 pr-4" v-if="!authCheck" @click="boleta()" data-toggle="modal" data-target="#boletaModal">Boleta</button>
                 </p>
             </div>
             
@@ -35,7 +35,7 @@
         </div>
 
         <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="boletaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                 <div class="modal-header">
