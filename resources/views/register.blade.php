@@ -253,7 +253,7 @@
                     if(window.localStorage.getItem("bill_type") == "boleta"){
                         path = "/cart/ticket"
                     }else if(window.localStorage.getItem("bill_type") == "factura"){
-                        
+                        path = "/checkout/factura"
                     }
 
                     axios.post("{{ url('/register') }}", {

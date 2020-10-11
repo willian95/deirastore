@@ -265,7 +265,7 @@
                     if(window.localStorage.getItem("bill_type") == "boleta"){
                         window.location.href="{{ url('auth/google?path=/cart/ticket') }}"
                     }else if(window.localStorage.getItem("bill_type") == "factura"){
-                        
+                        window.location.href="{{ url('auth/google?path=/checkout/factura') }}"
                     }
                     
 
@@ -283,7 +283,7 @@
                     if(window.localStorage.getItem("bill_type") == "boleta"){
                         path = "/cart/ticket"
                     }else if(window.localStorage.getItem("bill_type") == "factura"){
-                        
+                        path = "/checkout/factura"
                     }
 
                     axios.post("{{ url('/login') }}", {
