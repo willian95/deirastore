@@ -164,7 +164,7 @@
                     phoneNumber:"",
                     rut:"",
                     name:"",
-                    lastname:""
+                    lastname:"",
                     rutLoading:""
                 }
             },
