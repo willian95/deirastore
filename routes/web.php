@@ -15,6 +15,9 @@
     return view('welcome');
 });*/
 
+Route::get('auth/google', 'SocialAuthController@redirectToGoogle');
+Route::get('auth/google/callback', 'SocialAuthController@handleGoogleCallback');
+
 Route::get('/', "HomeController@index");
 
 Route::get('/recover-password/{email}', "RegisterController@resendEmail");
