@@ -18,6 +18,9 @@
 Route::get('auth/google', 'SocialAuthController@redirectToGoogle');
 Route::get('auth/google/callback', 'SocialAuthController@handleGoogleCallback');
 
+Route::get('auth/facebook', 'SocialAuthController@redirectToFacebook');
+Route::get('auth/facebook/callback', 'SocialAuthController@handleFacebookCallback');
+
 Route::get('/', "HomeController@index");
 
 Route::get('/recover-password/{email}', "RegisterController@resendEmail");

@@ -43,4 +43,37 @@ class SocialAuthController extends Controller
         }
     }
 
+    public function redirectToFacebook()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+
+    public function handleFacebookCallback()
+    {
+        try {
+    
+            // Obtenemos los datos del usuario
+            $social_user = Socialite::driver("facebook")->user(); 
+            // Comprobamos si el usuario ya existe
+            if ($user = User::where('email', $social_user->email)->first()) { 
+                //return $this->authAndRedirect($user); // Login y redirección
+                Auth::loginUsingId($user->id);
+            } else {  
+                // En caso de que no exista creamos un nuevo usuario con sus datos.
+                $user = new User;
+                $user->name = $social_user->name;
+                $user->email = $social_user->email;
+                $user->facebook_id = $social_user->id;
+                $user->save();
+                Auth::loginUsingId($user->id);
+
+            }
+
+            return redirect()->to('/');
+    
+        } catch (Exception $e) {
+            dd($e->getMessage());
+        }
+    }
+
 }
