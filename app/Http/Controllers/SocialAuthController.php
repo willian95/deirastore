@@ -11,8 +11,9 @@ use App\User;
 class SocialAuthController extends Controller
 {
     
-    public function redirectToGoogle()
+    public function redirectToGoogle(Request $request)
     {
+        dd($request);
         return Socialite::driver('google')->redirect();
     }
 
@@ -36,9 +37,9 @@ class SocialAuthController extends Controller
                 $user->save();
                 Auth::loginUsingId($user->id);
             }
-            //return redirect()->to('/');
+            return redirect()->to('/');
             
-            return redirect()->intended("/");
+            //return redirect()->intended("/");
 
         } catch (Exception $e) {
             dd($e->getMessage());
