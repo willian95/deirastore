@@ -38,8 +38,10 @@ class SocialAuthController extends Controller
                 Auth::loginUsingId($user->id);
             }
             
-            dd(session("path"));
-            return redirect()->to('/');
+            if(session("path") == null)
+                return redirect()->to('/');
+            else
+                return redirect()->to(session("path"));
             
             //return redirect()->intended("/");
 
