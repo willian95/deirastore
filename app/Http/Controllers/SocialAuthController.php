@@ -13,14 +13,14 @@ class SocialAuthController extends Controller
     
     public function redirectToGoogle(Request $request)
     {
-        dd($request->all());
+        session(["path" => $request->path]);
         return Socialite::driver('google')->redirect();
     }
 
     public function handleGoogleCallback()
     {
         try {
-    
+            
             $googleUser = Socialite::driver('google')->user();
      
             $existUser = User::where('email',$googleUser->email)->first();
@@ -37,6 +37,8 @@ class SocialAuthController extends Controller
                 $user->save();
                 Auth::loginUsingId($user->id);
             }
+            
+            dd(session("path"));
             return redirect()->to('/');
             
             //return redirect()->intended("/");
