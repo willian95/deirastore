@@ -4,6 +4,10 @@
 
     <div class="container pagina bg" v-cloak>
 
+        <div class="loader-cover-custom" v-if="loading == true">
+            <div class="loader-custom"></div>
+        </div>
+
         <div class="row">
             
                <!--- <a class="btn btn-primary btn-general btn-general--form" style="color: #fff;" href="{{ url()->previous() }}"><i class="fa fa-arrow-left"></i></a>
@@ -134,6 +138,11 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-12">
+                                <div class="form-group text-center">
+                                    <button class="btn btn-primary btn-general btn-general--form" @click="storeGuestUser()">Confirmar compra</button>
+                                </div>
+                            </div>
                             
                         </div>
 
@@ -166,7 +175,8 @@
                     rut:"",
                     name:"",
                     lastname:"",
-                    rutLoading:""
+                    rutLoading:"",
+                    loading:false
                 }
             },
             methods:{
@@ -287,6 +297,73 @@
                     } else {
                         return true;
                     }
+                },
+                storeGuestUser(){
+
+                    error = false
+                    if(this.name == ""){
+                        alertify.error("Nombre de invitado es requerido")
+                        error = true
+                    }
+
+                    if(this.lastname == ""){
+                        alertify.error("Apellido de invitado es requerido")
+                        error = true
+                    }
+
+                    if(this.phoneNumber == ""){
+                        alertify.error("Número teléfonico de invitado es requerido")
+                        error = true
+                    }else{
+                        let regexp = /^(\+?56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/
+                        //let regexp = /^(\+?56)?(\s?)(\s?)[9876543]\d{7}$/
+                        if(this.phoneNumber.match(regexp)){
+                        
+                        }else{
+                            alertify.error("Número telefónico no válido")
+                            error = true
+                        }
+
+                    }
+
+                    if(this.rut == ""){
+                        alertify.error("Rut de invitado es requerido")
+                        error = true
+                    }
+
+                    if(this.email == ""){
+                        alertify.error("Email de invitado es requerido")
+                        error = true
+                    }
+
+                    if(!error){
+
+                        let location = JSON.parse(window.localStorage.getItem("guestUserLocation"))
+
+                        let guestUser = 
+                        {
+                            name: this.name,
+                            lastname: this.lastname,
+                            phoneNumber: this.phoneNumber,
+                            rut: this.rut,
+                            email: this.email,
+                            location_id: location.location_id,
+                            commune_id: location.selectedCommune,
+                            street: location.street,
+                            number: location.number,
+                            house: location.house
+                        }
+
+                        /*newGuest.location_id = this.location
+                        newGuest.comune_id = this.selectedComune
+                        newGuest.street = this.street
+                        newGuest.number = this.number
+                        newGuest.house = this.house*/
+                        
+                        localStorage.setItem("guestUser", JSON.stringify(guestUser))
+                        //window.location.href="{{ url('/cart/shipping') }}"
+                    }
+
                 }
 
             },
@@ -294,6 +371,7 @@
                 this.authCheck = "{{ \Auth::check() }}"
 
                 if(window.localStorage.getItem("deira_store_go_to_payment") == "true"){
+                    this.loading = true
                     window.localStorage.removeItem("deira_store_go_to_payment")
                     this.boleta()
                 }
