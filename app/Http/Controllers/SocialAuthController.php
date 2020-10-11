@@ -13,7 +13,7 @@ class SocialAuthController extends Controller
     
     public function redirectToGoogle(Request $request)
     {
-        dd($request);
+        dd($request->all());
         return Socialite::driver('google')->redirect();
     }
 
