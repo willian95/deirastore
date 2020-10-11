@@ -23,14 +23,15 @@
         <div class="row">
             <div class="col-6">
                 <p class="text-center">
-                    <button class="btn btn-success btn-general2 pl-4 pr-4" v-if="!authCheck" data-toggle="modal" data-target="#boletaModal">Boleta</button>
+                    <button class="btn btn-success btn-general2 pl-4 pr-4" @click="setBoleta()" v-if="!authCheck" data-toggle="modal" data-target="#boletaModal">Boleta</button>
                     <button class="btn btn-success btn-general2 pl-4 pr-4" v-else @click="boleta()">Boleta</button>
                 </p>
             </div>
             
             <div class="col-6">
                 <p class="text-center">
-                    <button class="btn btn-success btn-general2 pl-4 pr-4 btn-general2_bg" @click="factura()">Factura</button>
+                    <button class="btn btn-success btn-general2 pl-4 pr-4 btn-general2_bg" v-if="!authCheck" @click="setFactura()" data-toggle="modal" data-target="#facturaModal">Factura</button>
+                    <button class="btn btn-success btn-general2 pl-4 pr-4" v-else @click="factura()">Boleta</button>
                 </p>
                 <p class="text-center">
                     {{ App\Text::where("site_location", "Tipo de facturación")->where("type", "texto")->first()->text }}
@@ -161,6 +162,53 @@
             </div>
         </div>
 
+        <!-- Modal -->
+        <div class="modal fade" id="facturaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="modalCloseBoleta">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input placeholder="Email" type="text" autocomplete="off" class="form-control" id="email" aria-describedby="emailHelp" v-model="email">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="password">Contraseña</label>
+                                    <input placeholder="Contraseña" type="password" autocomplete="off" class="form-control" id="password" aria-describedby="emailHelp" v-model="password">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group text-center mb-5 mt-3">
+                            <button class="btn btn-primary btn-general btn-general--form" @click="login()">Login</button>
+                        </div>
+
+                        <h5 class="text-center">¿Aún no tienes cuenta?</h5>
+                        <div class="form-group text-center mb-5 mt-3">
+                            <button class="btn btn-primary btn-general btn-general--form" @click="register()">Registrate</button>
+                        </div>
+
+
+                        <div class="col-12">
+                            <div style="display:flex;">
+                                <button @click="redirectGoogle()" type="button" class="btn btn-success">Google</button>
+                                <button class="btn btn-success">Facebook</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
     @include('partials.footer')
 
@@ -187,10 +235,13 @@
                 }
             },
             methods:{
-                
-                boleta(){
-
+                setBoleta(){
                     localStorage.setItem("bill_type", "boleta")
+                },
+                setFactura(){
+                    localStorage.setItem("bill_type", "factura")
+                },
+                boleta(){
 
                     axios.post("{{ url('/checkout/store-session') }}", {items: JSON.parse(localStorage.getItem("checkoutProduct")), type: "boleta", guestUser: JSON.parse(localStorage.getItem("guestUser"))})
                     .then(res => {
@@ -204,7 +255,6 @@
                 },
                 factura(){
 
-                    localStorage.setItem("bill_type", "factura")
                     axios.post("{{ url('/checkout/store-session') }}", {items: JSON.parse(localStorage.getItem("checkoutProduct")), type: "factura"})
                     .then(res => {
                         if(res.data.success == true){
@@ -360,7 +410,7 @@
                             number: "",
                             house: ""
                         }
-                        alert("entre")
+       
 
                         if(location != null){
                             guestUser.location_id = location.location_id
@@ -390,7 +440,11 @@
                 if(window.localStorage.getItem("deira_store_go_to_payment") == "true"){
                     this.loading = true
                     window.localStorage.removeItem("deira_store_go_to_payment")
-                    this.boleta()
+                    if(window.localStorage.getItem("bill_type") == "boleta"){
+                        this.boleta()
+                    }else if(window.localStorage.getItem("bill_type") == "factura"){
+                        this.factura()
+                    }
                 }
 
             }
