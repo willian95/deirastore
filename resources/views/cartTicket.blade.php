@@ -63,7 +63,7 @@
                         </div>
 
                         <div class="form-group text-center mb-5 mt-3">
-                            <button class="btn btn-primary btn-general btn-general--form" @click="logIn()">Login</button>
+                            <button class="btn btn-primary btn-general btn-general--form" @click="login()">Login</button>
                         </div>
 
                         <h5 class="text-center">¿Aún no tienes cuenta?</h5>
