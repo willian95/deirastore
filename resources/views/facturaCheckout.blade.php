@@ -116,6 +116,7 @@
             },
             mounted(){
                 
+                window.localStorage.removeItem("deira_store_go_to_payment")
 
             }
 
