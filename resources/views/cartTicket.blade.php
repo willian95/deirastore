@@ -38,11 +38,11 @@
     </div>
 
             <!-- Modal -->
-            <div class="modal fade" id="boletaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="boletaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="modalCloseBoleta">
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -74,9 +74,13 @@
 
                         <div class="col-12">
                             <div style="display:flex;">
-                                <a href="{{ url('auth/google?path=/cart/ticket') }}" class="btn btn-success">Google</a>
+                                <a href="{{ url('auth/google?path=/checkout') }}" class="btn btn-success">Google</a>
                                 <button class="btn btn-success">Facebook</button>
                             </div>
+                        </div>
+
+                        <div class="form-group text-center mb-5 mt-3">
+                            <button class="btn btn-primary btn-general btn-general--form" @click="showGuestModal()" data-toggle="modal" data-target="#guestModal">Continuar como invitado</button>
                         </div>
 
 
@@ -84,6 +88,34 @@
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" id="guestModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="modalCloseBoleta">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input placeholder="Email" type="text" autocomplete="off" class="form-control" id="email" aria-describedby="emailHelp" v-model="email">
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
     @include('partials.footer')
 
@@ -134,7 +166,7 @@
                     axios.post("{{ url('/login') }}", {
                         email: this.email,
                         password: this.password,
-                        path:"/cart/ticket"
+                        path:"/checkout"
                     })
                     .then(res => {
 
@@ -157,6 +189,15 @@
                             //alertify.alert('Basic: true').set('basic', true); 
                         });
                     })
+                },
+                showGuestModal(){
+
+                    $("#modalCloseBoleta").click();
+                    $('body').removeClass('modal-open');
+                    $('body').css('padding-right', '0px');
+                    $('.modal-backdrop').remove();
+
+
                 }
 
             },
