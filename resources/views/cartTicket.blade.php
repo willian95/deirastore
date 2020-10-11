@@ -74,7 +74,7 @@
 
                         <div class="col-12">
                             <div style="display:flex;">
-                                <a href="{{ url('auth/google?path=/checkout') }}" class="btn btn-success">Google</a>
+                                <button type="button" class="btn btn-success">Google</button>
                                 <button class="btn btn-success">Facebook</button>
                             </div>
                         </div>
@@ -169,7 +169,7 @@
                 
                 boleta(){
 
-                    /*localStorage.setItem("bill_type", "boleta")
+                    localStorage.setItem("bill_type", "boleta")
 
                     axios.post("{{ url('/checkout/store-session') }}", {items: JSON.parse(localStorage.getItem("checkoutProduct")), type: "boleta", guestUser: JSON.parse(localStorage.getItem("guestUser"))})
                     .then(res => {
@@ -178,7 +178,7 @@
                             window.location.href = "{{ route('checkout') }}"
                         }
 
-                    })*/
+                    })
 
                 },
                 factura(){
@@ -191,6 +191,12 @@
                         }
 
                     })
+
+                },
+                redirectGoogle(){
+
+                    window.localStorage.setItem("deira_store_go_to_payment", true)
+                    window.location.href="{{ url('auth/google?path=/checkout') }}"
 
                 },
                 login(){
@@ -275,6 +281,12 @@
             },
             mounted(){
                 this.authCheck = "{{ \Auth::check() }}"
+
+                if(window.localStorage.getItem("deira_store_go_to_payment") == "true"){
+                    windo.localStorage.removeItem("deira_store_go_to_payment")
+                    this.boleta()
+                }
+
             }
 
         })
