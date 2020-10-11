@@ -146,7 +146,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group text-center">
-                                    <button :disabled="isRutValid" class="btn btn-primary btn-general btn-general--form" @click="storeGuestUser()">Confirmar compra</button>
+                                    <button :disabled="!isRutValid" class="btn btn-primary btn-general btn-general--form" @click="storeGuestUser()">Confirmar compra</button>
                                 </div>
                             </div>
                             
