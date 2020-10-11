@@ -361,47 +361,60 @@
                 },
                 ticketView(){
 
-                    if(this.terms && this.confirmAddress == true){
-                        var newGuest ={
-                            name : "",
-                            name : "",
-                            lastname : "",
-                            phoneNumber : "",
-                            rut : "",
-                            guestEmail : "",
-                            location_id : "",
-                            comnue_id : "",
-                            street : "",
-                            number : "",
-                            house : ""
-
-                        }
-                        //let address = []
-                        if(this.authCheck == false){
-
-                            let guestUser = JSON.parse(localStorage.getItem("guestUser"))
-
-                            newGuest.name = guestUser.name
-                            newGuest.lastname = guestUser.lastname
-                            newGuest.phoneNumber = guestUser.phoneNumber
-                            newGuest.rut = guestUser.rut
-                            newGuest.guestEmail = guestUser.guestEmail
-                            newGuest.location_id = this.location
-                            newGuest.comune_id = this.selectedComune
-                            newGuest.street = this.street
-                            newGuest.number = this.number
-                            newGuest.house = this.house
-                            window.localStorage.setItem("guestUser", JSON.stringify(newGuest))
-                        }
-                        
-                        
-                        window.localStorage.setItem("checkoutProduct", JSON.stringify(this.guestItem))
-                        window.location.href = "{{ url('/cart/ticket') }}"
+                    if(this.terms == false){
+                        alertify.error("Debe aceptar los términos y condiciones")
                     }else{
-                        alertify.error("Debe aceptar los términos y condiciones y confirma su dirección")
+
+                        if(this.shippingAmount > 0 && this.confirmAddress == false){
+                            alertify.error("Debe confirmar su ubicación")
+                        }else{
+                            this.nextStep()
+                        }
+
+
                     }
+                    
 
                 },
+
+                nextStep(){
+                    var newGuest ={
+                        name : "",
+                        name : "",
+                        lastname : "",
+                        phoneNumber : "",
+                        rut : "",
+                        guestEmail : "",
+                        location_id : "",
+                        comnue_id : "",
+                        street : "",
+                        number : "",
+                        house : ""
+
+                    }
+                    //let address = []
+                    if(this.authCheck == false){
+
+                        let guestUser = JSON.parse(localStorage.getItem("guestUser"))
+
+                        newGuest.name = guestUser.name
+                        newGuest.lastname = guestUser.lastname
+                        newGuest.phoneNumber = guestUser.phoneNumber
+                        newGuest.rut = guestUser.rut
+                        newGuest.guestEmail = guestUser.guestEmail
+                        newGuest.location_id = this.location
+                        newGuest.comune_id = this.selectedComune
+                        newGuest.street = this.street
+                        newGuest.number = this.number
+                        newGuest.house = this.house
+                        window.localStorage.setItem("guestUser", JSON.stringify(newGuest))
+                    }
+                    
+                    
+                    window.localStorage.setItem("checkoutProduct", JSON.stringify(this.guestItem))
+                    window.location.href = "{{ url('/cart/ticket') }}"
+                },
+
                 updateCartLocation(){
                     
                     let error = false
