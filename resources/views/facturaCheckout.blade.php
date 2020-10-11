@@ -40,7 +40,7 @@
 
         </div>
 
-        <div class="row mt-4">
+        <div class="row ">
 
             <div class="col-md-6 mb-4">
 
@@ -60,7 +60,7 @@
 
         </div>
 
-        <div class="row mt-4">
+        <div class="row ">
             <div class="col-md-6 mb-4">
                 <div>
                     <label  for="businessMail">* Mail de administración</label>
@@ -69,7 +69,7 @@
             </div>
         </div>
 
-        <div class="row mt-4">
+        <div class="row ">
             <div class="col-12">
                 <button class="btn btn-primary btn-general2" @click="factura()">Pagar</button>
             </div>

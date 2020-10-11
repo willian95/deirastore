@@ -31,7 +31,7 @@
             <div class="col-6">
                 <p class="text-center">
                     <button class="btn btn-success btn-general2 pl-4 pr-4 btn-general2_bg" v-if="!authCheck" @click="setFactura()" data-toggle="modal" data-target="#facturaModal">Factura</button>
-                    <button class="btn btn-success btn-general2 pl-4 pr-4" v-else @click="factura()">Boleta</button>
+                    <button class="btn btn-success btn-general2 pl-4 pr-4" v-else @click="factura()">Factura</button>
                 </p>
                 <p class="text-center">
                     {{ App\Text::where("site_location", "Tipo de facturación")->where("type", "texto")->first()->text }}
