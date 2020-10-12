@@ -20,10 +20,10 @@
             <div class="col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-12">
 
                 <div class="card" v-for="sale in sales">
-                    <div class="card-body">
+                    <div class="card-body" style="padding-left: 20px; padding-right: 20px;">
                         <div class="row">
                             <div class="col-md-6" v-if="sale.user">
-                                <p class="text-center">
+                                <p>
                                     user: @{{ sale.user.name }}
                                 </p>
                             </div>
@@ -33,12 +33,12 @@
                                 </p>
                             </div>
                             <div class="col-md-6" v-if="sale.guest">
-                                <p class="text-center">
+                                <p>
                                     user: @{{ sale.guest.name }}
                                 </p>
                             </div>
                             <div class="col-md-6" v-if="sale.guest">
-                                <p class="text-center">
+                                <p>
                                     email: @{{ sale.guest.email }}
                                 </p>
                             </div>
@@ -59,7 +59,7 @@
                             <strong> Notificación de despacho enviada</strong>
                         </p>
                         <p v-if="sale.tracking" class="text-center">
-                            <strong>@{{ sale.tracking }}</strong>
+                            <strong>tracking: @{{ sale.tracking }}</strong>
                         </p>
                         <p class="text-center">
                             <button class="btn btn-success" @click="getProductDetails(sale.product_purchase, sale)" data-toggle="modal" data-target="#details">
