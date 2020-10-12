@@ -36,7 +36,7 @@ class SalesExport implements FromView, WithColumnFormatting
     public function view(): View
     {
         return view('exports.sales', [
-            'sales' => Payment::with('user', 'guest', 'productPurchase', 'productPurchase.product', "user.location", "user.commune", "guest.location", "guest.commune")->has('productPurchase')->whereDate('created_at', '>=', $this->fromDate)->whereDate("created_at", '<=', $this->toDate)->get()
+            'sales' => Payment::with('user', 'guest', 'productPurchase', 'productPurchase.product', "user.location", "user.commune", "guest.location", "guest.commune")->has('productPurchase')->has("user")->whereDate('created_at', '>=', $this->fromDate)->whereDate("created_at", '<=', $this->toDate)->get()
         ]);
     }
 

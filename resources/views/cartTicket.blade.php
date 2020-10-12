@@ -297,7 +297,7 @@
 
                     let path =""
                     if(window.localStorage.getItem("bill_type") == "boleta"){
-                        path = "/cart/ticket"
+                        path = "/cart/checkout"
                     }else if(window.localStorage.getItem("bill_type") == "factura"){
                         path = "/checkout/factura"
                     }
@@ -314,7 +314,10 @@
                         } else {
 
                             if (res.data.user.rol_id == 1) {
+
                                 window.location.href = res.data.path
+
+                                
                             } else if (res.data.user.rol_id == 3) {
                                 window.location.replace("{{ route('admin.dashboard') }}")
                             }
