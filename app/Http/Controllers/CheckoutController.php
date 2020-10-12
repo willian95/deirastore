@@ -396,7 +396,7 @@ class CheckoutController extends Controller
 					if($request->has("user")){
 						$user = User::find(\Auth::user()->id);
 						$user->location_id = $request->user["location_id"];
-						$user->commune_id = $request->user["comune_id"];
+						$user->comune_id = $request->user["comune_id"];
 						$user->street = $request->user["street"];
 						$user->number = $request->user["number"];
 						$user->house = $request->user["house"];
