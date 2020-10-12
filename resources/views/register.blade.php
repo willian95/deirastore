@@ -256,6 +256,8 @@
                         path = "/checkout/factura"
                     }
 
+                    window.localStorage.removeItem("bill_type")
+
                     axios.post("{{ url('/register') }}", {
                         name: this.name,
                         rut: this.rut,

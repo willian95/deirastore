@@ -52,6 +52,7 @@ class SocialAuthController extends Controller
 
     public function redirectToFacebook()
     {
+        session(["path" => $request->path]);
         return Socialite::driver('facebook')->redirect();
     }
 
@@ -76,7 +77,10 @@ class SocialAuthController extends Controller
 
             }
 
-            return redirect()->to('/');
+            if(session("path") == null)
+                return redirect()->to('/');
+            else
+                return redirect()->to(session("path"));
     
         } catch (Exception $e) {
             dd($e->getMessage());
