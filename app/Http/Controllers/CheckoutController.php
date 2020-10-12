@@ -374,23 +374,41 @@ class CheckoutController extends Controller
 
 			}else{
 
-				if($request->has("businessName") && $request->has("businessRut") && $request->has("businessAddress") && $request->has("businessPhone") && $request->has("businessMail")){
+				if($request->type == "factura"){
+					
+					if($request->has("businessName") && $request->has("businessRut") && $request->has("businessAddress") && $request->has("businessPhone") && $request->has("businessMail")){
 
-					$user = User::find(\Auth::user()->id);
-					$user->business_name = $request->businessName;
-					$user->business_rut = $request->businessRut;
-					$user->business_address = $request->businessAddress;
-					$user->business_phone = $request->businessPhone;
-					$user->business_mail = $request->businessMail;
-					$user->update();
+						$user = User::find(\Auth::user()->id);
+						$user->business_name = $request->businessName;
+						$user->business_rut = $request->businessRut;
+						$user->business_address = $request->businessAddress;
+						$user->business_phone = $request->businessPhone;
+						$user->business_mail = $request->businessMail;
+						$user->update();
+	
+					}else{
+	
+						return response()->json(["success" => false, "msg" => "Debe completar todos los campos"]);
+					}
 
 				}else{
 
-					return response()->json(["success" => false, "msg" => "Debe completar todos los campos"]);
+					if($request->has("user")){
+						$user = User::find(\Auth::user()->id);
+						$user->location_id = $request->user["location_id"];
+						$user->commune_id = $request->user["commune_id"];
+						$user->street = $request->user["street"];
+						$user->number = $request->user["number"];
+						$user->house = $request->user["house"];
+						$user->update();
+					}
+
+					session(["user" => \Auth::user()->id]);
+
 				}
 
 
-				session(["user" => \Auth::user()->id]);
+				
 			}
 
 			return response()->json(["success" => true, "guestUserId" => $guestUserId]);

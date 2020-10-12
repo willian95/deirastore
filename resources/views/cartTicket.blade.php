@@ -247,7 +247,7 @@
                 },
                 boleta(){
 
-                    axios.post("{{ url('/checkout/store-session') }}", {items: JSON.parse(localStorage.getItem("checkoutProduct")), type: "boleta", guestUser: JSON.parse(localStorage.getItem("guestUser"))})
+                    axios.post("{{ url('/checkout/store-session') }}", {items: JSON.parse(localStorage.getItem("checkoutProduct")), type: "boleta", guestUser: JSON.parse(localStorage.getItem("guestUser")), user: JSON.parse(window.localStorage.getItem("guestUserLocation"))})
                     .then(res => {
 
                         if(res.data.success == true){
