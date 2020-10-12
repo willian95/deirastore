@@ -125,15 +125,15 @@
                             </div>
                             
                             <div class="col-4" v-if="saleDetails.user">
-                                <p><strong>Calle</strong></p>
+                                <p v-if="saleDetails.user.street"><strong>Calle</strong></p>
                                 <p>@{{ saleDetails.user.street }}</p>
                             </div>
                             <div class="col-4" v-if="saleDetails.user">
-                                <p><strong>Número</strong></p>
+                                <p v-if="saleDetails.user.number"><strong>Número</strong></p>
                                 <p>@{{ saleDetails.user.number }}</p>
                             </div>
                             <div class="col-4" v-if="saleDetails.user">
-                                <p><strong>Dept / Casa /oficina</strong></p>
+                                <p v-if="saleDetails.user.house"><strong>Dept / Casa /oficina</strong></p>
                                 <p>@{{ saleDetails.user.house }}</p>
                             </div>
                             <div class="col-4" v-if="saleDetails.user && saleDetails.ticket_type == 'factura'">
@@ -183,15 +183,15 @@
                                 </div>
                             </div>
                             <div class="col-4" v-if="saleDetails.guest">
-                                <p><strong>Calle</strong></p>
+                                <p v-if="saleDetails.guest.street"><strong>Calle</strong></p>
                                 <p>@{{ saleDetails.guest.street }}</p>
                             </div>
                             <div class="col-4" v-if="saleDetails.guest">
-                                <p><strong>Número</strong></p>
+                                <p v-if="saleDetails.guest.number"><strong>Número</strong></p>
                                 <p>@{{ saleDetails.guest.number }}</p>
                             </div>
                             <div class="col-4" v-if="saleDetails.guest">
-                                <p><strong>Dept / Casa /oficina</strong></p>
+                                <p v-if="saleDetails.guest.house"><strong>Dept / Casa /oficina</strong></p>
                                 <p>@{{ saleDetails.guest.house }}</p>
                             </div>
                             
