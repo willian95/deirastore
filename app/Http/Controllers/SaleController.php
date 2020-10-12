@@ -60,7 +60,7 @@ class SaleController extends Controller
         $data = ["title" => "Ya puedes retirar tus productos", "text" => "Tus productos ya están listos para ser retirados en la tienda.", "products" => $products];
         $to_name = $user->name;
         $to_email = $user->email;
-        \Mail::send("emails.shippingEmail", $data, function($message) use ($to_name, $to_email) {
+        \Mail::send("emails.shippingMail", $data, function($message) use ($to_name, $to_email) {
 
             $message->to($to_email, $to_name)->subject("¡Ya puedes retirar tus productos!");
             $message->from(env("MAIL_FROM_ADDRESS"),"Deira");
