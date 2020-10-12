@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Exports\SalesExport;
 use App\Payment;
+use App\ProductPurchase;
 use Excel;
+use App\User;
 
 class SaleController extends Controller
 {
@@ -42,6 +44,31 @@ class SaleController extends Controller
         }catch(\Exception $e){
             return response()->json(["success" => false, "msg" => "Error en el servidor", "err" => $e->getMessage()]);
         }
+
+    }
+
+    function pickup(Request $request){
+
+        $payment = Payment::find($request->id);
+        $payment->ready_to_pickup = 1;
+        $payment->update();
+
+        $user = User::find($payment->user_id);
+
+        $products = ProductPurchase::with('product')->where('payment_id', $payment->id)->get();
+
+        $data = ["title" => "Ya puedes retirar tus productos", "text" => "Tus productos ya están listos para ser retirados en la tienda.", "products" => $products];
+        $to_name = $user->name;
+        $to_email = $user->email;
+        \Mail::send("emails.shippingEmail", $data, function($message) use ($to_name, $to_email) {
+
+            $message->to($to_email, $to_name)->subject("¡Ya puedes retirar tus productos!");
+            $message->from(env("MAIL_FROM_ADDRESS"),"Deira");
+
+        });
+
+
+        return response()->json(["success" => true, "msg" => "Se ha notificado al cliente el retiro de los articulos"]);
 
     }
 

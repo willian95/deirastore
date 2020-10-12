@@ -511,7 +511,14 @@
                 },
                 pickup(id){
 
-                    alert(id)
+                    axios.post("{{ url('/admin/sales/notify/pickup') }}", {id: id}).then(res => {
+
+                        swal({
+                            icon: "success",
+                            title: res.data.msg,
+                        })
+
+                    })
 
                 }
 
