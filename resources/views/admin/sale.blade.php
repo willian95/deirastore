@@ -518,7 +518,7 @@
                       
                         this.total = (data.price * data.amount) + data.shipping_cost
                         if(data.shipping_cost > 0){
-                            this.showShippingModal = true
+                            this.showShippingButton = true
                         }else{
                             this.showPickUpButton = true
                         }
