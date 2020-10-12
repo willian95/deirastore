@@ -392,7 +392,7 @@ class CheckoutController extends Controller
 					}
 
 				}else{
-
+					dump($request->has("user"));
 					if($request->has("user")){
 						$user = User::find(\Auth::user()->id);
 						$user->location_id = $request->user["location_id"];
@@ -401,7 +401,10 @@ class CheckoutController extends Controller
 						$user->number = $request->user["number"];
 						$user->house = $request->user["house"];
 						$user->update();
+						dump($user);
 					}
+
+					dd("");
 
 					session(["user" => \Auth::user()->id]);
 
