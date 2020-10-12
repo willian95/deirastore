@@ -297,7 +297,7 @@
 
                     let path =""
                     if(window.localStorage.getItem("bill_type") == "boleta"){
-                        path = "/cart/checkout"
+                        path = "/checkout"
                     }else if(window.localStorage.getItem("bill_type") == "factura"){
                         path = "/checkout/factura"
                     }
