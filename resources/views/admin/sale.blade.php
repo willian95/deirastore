@@ -96,7 +96,7 @@
                                 <p><strong>Tipo de facturación</strong></p>
                                 <p>@{{ saleDetails.ticket_type }}</p>
                             </div>
-                            {{--<div class="col-4" v-if="saleDetails.user">
+                            <div class="col-4" v-if="saleDetails.user">
                                 <p><strong>Nombre</strong></p>
                                 <p>@{{ saleDetails.user.name }}</p>
                             </div>
@@ -187,7 +187,7 @@
                             <div class="col-4" v-if="saleDetails.guest">
                                 <p><strong>Dept / Casa /oficina</strong></p>
                                 <p>@{{ saleDetails.guest.house }}</p>
-                            </div>--}}
+                            </div>
                             
                             
                         </div>
