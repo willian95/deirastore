@@ -255,7 +255,6 @@
                             </tr>
                         </tbody>
                     </table>                
-                
 
                 </div>
                 <div class="modal-footer">
@@ -439,6 +438,10 @@
                         </tbody>
                     </table>
 
+                    <p class="text-center">
+                        <button class="btn btn-info" @click="pickup(saleDetails.id)">Retiro en tienda</button>
+                    </p>
+
                 </div>
 
             </div>
@@ -464,6 +467,7 @@
                     page:1,
                     sales:[],
                     fromDate:"",
+                    showShippingModal:false,
                     toDate:"",
                     total:0
                 }
@@ -471,13 +475,16 @@
             methods:{
             
                 getProductDetails(details, sale){
+                    this.showShippingModal = false
                     this.productDetails = details
                     this.saleDetails = sale
 
                     this.productDetails.forEach((data, index) => {
                       
                         this.total = (data.price * data.amount) + data.shipping_cost
-
+                        if(data.shipping_cost > 0){
+                            this.showShippingModal = true
+                        }
                     })
 
                 },
@@ -500,6 +507,11 @@
                 exportExcel(){
 
                     window.open("{{ url('/admin/sales/export/') }}"+"/"+this.fromDate+"/to/"+this.toDate)
+
+                },
+                pickup(id){
+
+                    alert(id)
 
                 }
 
