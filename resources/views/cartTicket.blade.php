@@ -315,6 +315,7 @@
 
                             if (res.data.user.rol_id == 1) {
 
+                                window.localStorage.removeItem("deira_store_go_to_payment")
                                 window.location.href = res.data.path
 
                                 
