@@ -219,7 +219,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{--<tr v-for="(productDetail, index) in productDetails">
+                            <tr v-for="(productDetail, index) in productDetails">
                                 <td>
                                     @{{ index + 1 }}
                                 </td>
@@ -238,7 +238,7 @@
                                 <td>
                                     @{{ parseInt(productDetail.shipping_cost).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}
                                 </td>
-                            </tr>--}}
+                            </tr>
                         </tbody>
                     </table>                
                 
