@@ -59,7 +59,7 @@
                             <strong> Notificación de despacho enviada</strong>
                         </p>
                         <p v-if="sale.tracking" class="text-center">
-                            <strong>@{{ dale.tracking }}</strong>
+                            <strong>@{{ sale.tracking }}</strong>
                         </p>
                         <p class="text-center">
                             <button class="btn btn-success" @click="getProductDetails(sale.product_purchase, sale)" data-toggle="modal" data-target="#details">
