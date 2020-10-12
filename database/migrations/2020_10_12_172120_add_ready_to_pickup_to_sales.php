@@ -13,7 +13,7 @@ class AddReadyToPickupToSales extends Migration
      */
     public function up()
     {
-        Schema::table('sales', function (Blueprint $table) {
+        Schema::table('purchases', function (Blueprint $table) {
             $table->boolean("ready_to_pickup")->default(false);
             $table->boolean("ready_to_ship")->default(false);
             $table->string("tracking")->nullable();
