@@ -338,6 +338,7 @@ Route::prefix('admin')->middleware('admin')->group(function () {
 
     Route::get("sales/export/{fromDate}/to/{toDate}", "SaleController@export");
     Route::post('/sales/notify/pickup', "SaleController@pickup");
+    Route::post('/sales/notify/shipping', "SaleController@shipping");
 
     Route::get("users/registered", "UserController@index");
     Route::get("users/guest", "UserController@guest");

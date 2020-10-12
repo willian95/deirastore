@@ -474,6 +474,10 @@
                         <label for="tracking">Tracking</label>
                         <input type="text" class="form-control" v-model="tracking" id="tracking">
                     </div>
+                    
+                    <p class="text-center">
+                        <button class="btn btn-info" data-dismiss="modal" @click="shipping()">Aceptar</button>
+                    </p>
 
                 </div>
             </div>
@@ -503,6 +507,7 @@
                     showPickUpButton:false,
                     toDate:"",
                     tracking:"",
+                    saleId:"",
                     total:0
                 }
             },
@@ -513,6 +518,7 @@
                     this.showPickUpButton = false
                     this.productDetails = details
                     this.saleDetails = sale
+                    this.saleId = sale.id
 
                     this.productDetails.forEach((data, index) => {
                       
@@ -563,6 +569,37 @@
                         }
 
                     })
+
+                },
+                shipping(id){
+
+                    if(this.tracking != null){
+                        axios.post("{{ url('/admin/sales/notify/shipping') }}", {id: id, tracking: this.tracking}).then(res => {
+
+                            if(res.data.success == true){
+                                swal({
+                                    icon: "success",
+                                    title: res.data.msg,
+                                })
+
+                                this.saleId= ""
+
+                            }else{
+                                swal({
+                                    icon: "error",
+                                    title: res.data.msg,
+                                })
+                            }
+
+                            
+
+                        })
+                    }else{
+                        swal({
+                            icon: "error",
+                            title: "Debe ingresar el número de tracking",
+                        })
+                    }
 
                 }
 

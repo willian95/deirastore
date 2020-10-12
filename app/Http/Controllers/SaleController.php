@@ -76,4 +76,8 @@ class SaleController extends Controller
 
     }
 
+    function shipping(Request $request){
+        
+    }
+
 }
