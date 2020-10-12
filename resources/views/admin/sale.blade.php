@@ -448,7 +448,7 @@
 
                     <p class="text-center">
                         <button class="btn btn-info" v-if="showPickUpButton" @click="pickup(saleDetails.id)">Retiro en tienda</button>
-                        <button class="btn btn-info" v-if="showShippingButton">Despacho</button>
+                        <button class="btn btn-info" data-toggle="modal" data-target="#trackingModal" v-if="showShippingButton">Despacho</button>
                     </p>
 
                 </div>
@@ -458,6 +458,27 @@
     </div>
 
     <!-- Notification Modal -->
+
+    <div class="modal fade" id="trackingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Tracking</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    
+                    <div class="form-group">
+                        <label for="tracking">Tracking</label>
+                        <input type="text" class="form-control" v-model="tracking" id="tracking">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
@@ -481,6 +502,7 @@
                     showShippingButton:false,
                     showPickUpButton:false,
                     toDate:"",
+                    tracking:"",
                     total:0
                 }
             },
