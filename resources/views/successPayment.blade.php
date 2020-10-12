@@ -24,9 +24,9 @@
                             <p> <strong>Nombre: </strong> {{ $user->name }}</p>
                             <p> <strong>Apellido:</strong> {{ $user->lastname }}</p>
                             <p> <strong>RUT:</strong> {{ $user->rut }}</p>
-                            <p> <strong>Región:</strong> {{ App\Region::where("id", $user->location_id)->first()->name }}</p>
+                            {{--<p> <strong>Región:</strong> {{ App\Region::where("id", $user->location_id)->first()->name }}</p>
                             <p> <strong>Comuna:</strong> {{ App\Comune::where("id", $user->comune_id)->first()->name }}</p>
-                            <p> <strong>Calle:</strong> {{ $user->street }}</p>
+                            <p> <strong>Calle:</strong> {{ $user->street }}</p>--}}
                         </div>
                     </div>
 
