@@ -21,32 +21,45 @@
 
                 <div class="card" v-for="sale in sales">
                     <div class="card-body">
-                        <p class="text-center" v-if="sale.user">
-                            user: @{{ sale.user.name }}
-                        </p>
-                        <p class="text-center" v-if="sale.user">
-                            email: @{{ sale.user.email }}
-                        </p>
+                        <div class="row">
+                            <div class="col-md-6" v-if="sale.user">
+                                <p class="text-center">
+                                    user: @{{ sale.user.name }}
+                                </p>
+                            </div>
+                            <div class="col-md-6" v-if="sale.user">
+                                <p class="text-center">
+                                    email: @{{ sale.user.email }}
+                                </p>
+                            </div>
+                            <div class="col-md-6" v-if="sale.guest">
+                                <p class="text-center">
+                                    user: @{{ sale.guest.name }}
+                                </p>
+                            </div>
+                            <div class="col-md-6" v-if="sale.guest">
+                                <p class="text-center">
+                                    email: @{{ sale.guest.email }}
+                                </p>
+                            </div>
+                            <div class="col-md-6">
+                                <p>
+                                    status: <span v-if="sale.status == 'aprovado'">Aprobado</span><span v-else>Rechazado</span>
+                                </p>
+                            </div>
+                            <div class="col-md-6">
+                                Fecha: @{{ sale.created_at.toString().substring(0, 10) }}
+                            </div>
+                        </div>
                         
-
-                        <p class="text-center" v-if="sale.guest">
-                            user: @{{ sale.guest.name }}
-                        </p>
-                        <p class="text-center" v-if="sale.guest">
-                            email: @{{ sale.guest.email }}
-                        </p>
-                        
-                        <p class="text-center">
-                            status: <span v-if="sale.status == 'aprovado'">Aprobado</span><span v-else>Rechazado</span>
-                        </p>
-                        <p class="text-center">
-                            Fecha: @{{ sale.created_at.toString().substring(0, 10) }}
-                        </p>
                         <p v-if="sale.ready_to_pickup == 1"  class="text-center">
                            <strong> Notificación de retiro en tienda enviada</strong>
                         </p>
                         <p v-if="sale.ready_to_ship == 1" class="text-center">
                             <strong> Notificación de despacho enviada</strong>
+                        </p>
+                        <p v-if="sale.tracking" class="text-center">
+                            <strong>@{{ dale.tracking }}</strong>
                         </p>
                         <p class="text-center">
                             <button class="btn btn-success" @click="getProductDetails(sale.product_purchase, sale)" data-toggle="modal" data-target="#details">
@@ -584,6 +597,7 @@
                                 })
 
                                 this.saleId= ""
+                                this.tracking = ""
                                 this.fetch()
 
                             }else{
