@@ -71,7 +71,9 @@
 
         <div class="row ">
             <div class="col-12">
-                <button class="btn btn-primary btn-general2" @click="factura()">Pagar</button>
+                <p class="text-center">
+                    <button style="padding-left: 20px; padding-right: 20px;" class="btn btn-primary btn-general2" @click="factura()">Pagar</button>
+                </p>
             </div>
         </div>
 
