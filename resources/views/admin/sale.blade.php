@@ -28,7 +28,7 @@
                                 </p>
                             </div>
                             <div class="col-md-6" v-if="sale.user">
-                                <p class="text-center">
+                                <p>
                                     email: @{{ sale.user.email }}
                                 </p>
                             </div>
