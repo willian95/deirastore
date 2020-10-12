@@ -297,7 +297,7 @@
 
                     let path =""
                     if(window.localStorage.getItem("bill_type") == "boleta"){
-                        path = "/checkout"
+                        path = "/cart/ticket"
                     }else if(window.localStorage.getItem("bill_type") == "factura"){
                         path = "/checkout/factura"
                     }
@@ -315,7 +315,7 @@
 
                             if (res.data.user.rol_id == 1) {
 
-                                window.localStorage.removeItem("deira_store_go_to_payment")
+                                //window.localStorage.removeItem("deira_store_go_to_payment")
                                 window.location.href = res.data.path
 
                                 
