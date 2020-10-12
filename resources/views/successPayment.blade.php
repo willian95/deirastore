@@ -226,7 +226,8 @@
             el: '#dev-app',
             data(){
                 return{
-                    user:""
+                    user:"",
+                    billType:"",
                 }
             },
             methods:{
@@ -241,6 +242,7 @@
                
                 this.deleteStorage()
                 this.user = JSON.parse(localStorage.getItem("guestUser"))
+                this.billType = window.localStorage.getItem("bill_type")
 
             }
 
