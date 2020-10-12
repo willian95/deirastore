@@ -102,7 +102,7 @@ class SaleController extends Controller
         });
 
 
-        return response()->json(["success" => true, "msg" => "Se ha notificado al cliente el retiro de los articulos"]);
+        return response()->json(["success" => true, "msg" => "Se ha notificado al cliente el despacho de los articulos"]);
 
     }
 

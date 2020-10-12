@@ -561,6 +561,7 @@
                                 icon: "success",
                                 title: res.data.msg,
                             })
+                            this.fetch()
                         }else{
                             swal({
                                 icon: "error",
@@ -583,6 +584,7 @@
                                 })
 
                                 this.saleId= ""
+                                this.fetch()
 
                             }else{
                                 swal({
