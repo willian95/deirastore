@@ -91,6 +91,7 @@ class CheckoutController extends Controller
 
 			if(session("type") == "factura"){
 				$payment->ticket_type = "factura";
+
 			}else if(session("type") == "boleta"){
 				$payment->ticket_type = "boleta";
 			}
@@ -372,6 +373,23 @@ class CheckoutController extends Controller
 				}
 
 			}else{
+
+				if($request->has("businessName") && $request->has("businessRut") && $request->has("businessAddress") && $request->has("businessPhone") && $request->has("businessMail")){
+
+					$user = User::find(\Auth::user()->id);
+					$user->business_name = $request->businessName;
+					$user->business_rut = $request->businessRut;
+					$user->business_address = $request->businessAddress;
+					$user->business_phone = $request->businessPhone;
+					$user->business_mail = $request->businessMail;
+					$user->update();
+
+				}else{
+
+					return response()->json(["success" => false, "msg" => "Debe completar todos los campos"]);
+				}
+
+
 				session(["user" => \Auth::user()->id]);
 			}
 
