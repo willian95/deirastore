@@ -78,6 +78,31 @@ class SaleController extends Controller
 
     function shipping(Request $request){
         
+        $payment = Payment::find($request->id);
+        $payment->ready_to_ship = 1;
+        $payment->update();
+
+        $user = User::find($payment->user_id);
+
+        $products = ProductPurchase::with('product')->where('payment_id', $payment->id)->where("shipping_method", "despacho")->get();
+
+        if(count($products) <= 0){
+            return response()->json(["success" => false, "msg" => "No hay productos para retirar"]);
+        }
+
+        $data = ["title" => "Tus productos fueron despachados", "text" => "Tus productos ya fueron despachados. Con el número de tracking podrás hacerle seguimiento a su envío", "products" => $products, "tracking" => $request->tracking];
+        $to_name = $user->name;
+        $to_email = $user->email;
+        \Mail::send("emails.shippingMail", $data, function($message) use ($to_name, $to_email) {
+
+            $message->to($to_email, $to_name)->subject("¡Tus productos fueron despachados!");
+            $message->from(env("MAIL_FROM_ADDRESS"),"Deira");
+
+        });
+
+
+        return response()->json(["success" => true, "msg" => "Se ha notificado al cliente el retiro de los articulos"]);
+
     }
 
 }
