@@ -79,7 +79,7 @@
 
 
                         <div class="col-12">
-                            <div style="display:flex;" class="text-center">
+                            <div style="display:flex; justify-content: center;">
                                 <p class="text-center">
                                     <button @click="redirectGoogle()" type="button" class="btn btn-success">Google</button>
                                     <button class="btn btn-success" disabled>Facebook</button>
@@ -200,7 +200,7 @@
 
 
                         <div class="col-12">
-                            <div style="display:flex;" class="text-center">
+                            <div style="display:flex; justify-content: center;">
                                 <p class="text-center">
                                     <button @click="redirectGoogle()" type="button" class="btn btn-success">Google</button>
                                     <button class="btn btn-success" disabled>Facebook</button>
