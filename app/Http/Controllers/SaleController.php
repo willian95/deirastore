@@ -55,7 +55,11 @@ class SaleController extends Controller
 
         $user = User::find($payment->user_id);
 
-        $products = ProductPurchase::with('product')->where('payment_id', $payment->id)->get();
+        $products = ProductPurchase::with('product')->where('payment_id', $payment->id)->where("shipping_method", "retiro")->get();
+
+        if(count($products) <= 0){
+            return response()->json(["success" => false, "msg" => "No hay productos para retirar"]);
+        }
 
         $data = ["title" => "Ya puedes retirar tus productos", "text" => "Tus productos ya están listos para ser retirados en la tienda.", "products" => $products];
         $to_name = $user->name;

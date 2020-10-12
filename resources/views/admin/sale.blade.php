@@ -38,7 +38,15 @@
                         
                         <p class="text-center">
                             status: <span v-if="sale.status == 'aprovado'">Aprobado</span><span v-else>Rechazado</span>
+                        </p>
+                        <p class="text-center">
                             Fecha: @{{ sale.created_at.toString().substring(0, 10) }}
+                        </p>
+                        <p v-if="sale.ready_to_pickup == 1">
+                           <strong> Notificación de retiro en tienda enviada</strong>
+                        </p>
+                        <p v-if="sale.ready_to_ship == 1">
+                            <strong> Notificación de despacho enviada</strong>
                         </p>
                         <p class="text-center">
                             <button class="btn btn-success" @click="getProductDetails(sale.product_purchase, sale)" data-toggle="modal" data-target="#details">
@@ -439,7 +447,8 @@
                     </table>
 
                     <p class="text-center">
-                        <button class="btn btn-info" @click="pickup(saleDetails.id)">Retiro en tienda</button>
+                        <button class="btn btn-info" v-if="showPickUpButton" @click="pickup(saleDetails.id)">Retiro en tienda</button>
+                        <button class="btn btn-info" v-if="showShippingButton">Despacho</button>
                     </p>
 
                 </div>
@@ -449,6 +458,8 @@
     </div>
 
     <!-- Notification Modal -->
+
+
 
 @endsection
 
@@ -467,7 +478,8 @@
                     page:1,
                     sales:[],
                     fromDate:"",
-                    showShippingModal:false,
+                    showShippingButton:false,
+                    showPickUpButton:false,
                     toDate:"",
                     total:0
                 }
@@ -475,7 +487,8 @@
             methods:{
             
                 getProductDetails(details, sale){
-                    this.showShippingModal = false
+                    this.showShippingButton = false
+                    this.showPickUpButton = false
                     this.productDetails = details
                     this.saleDetails = sale
 
@@ -484,6 +497,8 @@
                         this.total = (data.price * data.amount) + data.shipping_cost
                         if(data.shipping_cost > 0){
                             this.showShippingModal = true
+                        }else{
+                            this.showPickUpButton = true
                         }
                     })
 
@@ -513,10 +528,17 @@
 
                     axios.post("{{ url('/admin/sales/notify/pickup') }}", {id: id}).then(res => {
 
-                        swal({
-                            icon: "success",
-                            title: res.data.msg,
-                        })
+                        if(res.data.success == true){
+                            swal({
+                                icon: "success",
+                                title: res.data.msg,
+                            })
+                        }else{
+                            swal({
+                                icon: "error",
+                                title: res.data.msg,
+                            })
+                        }
 
                     })
 
