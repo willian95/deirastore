@@ -15,9 +15,9 @@
         </div>--->
         <div class="row center-form">
             <div class="col-12">
-                <div style="display:flex;">
+                <div style="display:flex;" class="text-center">
                     <a href="{{ url('auth/google') }}" class="btn btn-success">Google</a>
-                    <button class="btn btn-success">Facebook</button>
+                    <button href="{{ url('auth/facebook') }}" class="btn btn-success" disabled>Facebook</button>
                 </div>
             </div>
             <div class="col-lg-6  col-md-6  col-12">
@@ -66,10 +66,10 @@
                                     <div class="icon-container" v-if="rutLoading == true">
                                         <i class="loader"></i>
                                     </div>
-                                    <div class="icon-container" v-if="loading == false && isRutValid == true">
+                                    <div class="icon-container" v-if="rutloading == false && isRutValid == true">
                                         <i class="fa fa-check-square"></i>
                                     </div>
-                                    <div class="icon-container" v-if="loading == false && isRutValid == false">
+                                    <div class="icon-container" v-if="rutloading == false && isRutValid == false">
                                         <i class="fa fa-times"></i>
                                     </div>
                                 </div>

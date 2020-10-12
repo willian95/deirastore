@@ -124,7 +124,7 @@ td .es-button-border-2:hover {
                 </tr>
                 @foreach($products as $product)
                   <tr style="border: 1px solid black; border-collapse:collapse">
-                      <td style="border: 1px solid black; border-collapse:collapse">{{ $loop->index }}</td>
+                      <td style="border: 1px solid black; border-collapse:collapse">{{ $loop->index + 1 }}</td>
                       <td style="border: 1px solid black; border-collapse:collapse">{{ $product->product->name }}}</td>
                       <td style="border: 1px solid black; border-collapse:collapse">{{ $product->amount }}</td>
                       <td style="border: 1px solid black; border-collapse:collapse">{{ number_format($product->price, 0, ",", ".") }}</td>

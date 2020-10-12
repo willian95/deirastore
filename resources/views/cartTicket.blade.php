@@ -81,7 +81,7 @@
                         <div class="col-12">
                             <div style="display:flex;">
                                 <button @click="redirectGoogle()" type="button" class="btn btn-success">Google</button>
-                                <button class="btn btn-success">Facebook</button>
+                                <button class="btn btn-success" disabled>Facebook</button>
                             </div>
                         </div>
 
@@ -200,7 +200,7 @@
                         <div class="col-12">
                             <div style="display:flex;">
                                 <button @click="redirectGoogle()" type="button" class="btn btn-success">Google</button>
-                                <button class="btn btn-success">Facebook</button>
+                                <button class="btn btn-success" disabled>Facebook</button>
                             </div>
                         </div>
 
@@ -268,6 +268,18 @@
                         window.location.href="{{ url('auth/google?path=/checkout/factura') }}"
                     }
                     
+
+                },
+                redirectFacebook(){
+
+                    window.localStorage.setItem("deira_store_go_to_payment", true)
+
+                    if(window.localStorage.getItem("bill_type") == "boleta"){
+                        window.location.href="{{ url('auth/facebook?path=/cart/ticket') }}"
+                    }else if(window.localStorage.getItem("bill_type") == "factura"){
+                        window.location.href="{{ url('auth/facebook?path=/checkout/factura') }}"
+                    }
+
 
                 },
                 register(){
