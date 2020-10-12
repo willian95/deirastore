@@ -112,11 +112,11 @@
                                 <p><strong>Email</strong></p>
                                 <p>@{{ saleDetails.user.email }}</p>
                             </div>
-                            {{--<div class="col-4" v-if="saleDetails.user">
+                            <div class="col-4" v-if="saleDetails.user.location">
                                 <p><strong>Región</strong></p>
                                 <p>@{{ saleDetails.user.location.name }}</p>
                             </div>
-                            <div class="col-4" v-if="saleDetails.user">
+                            <div class="col-4" v-if="saleDetails.user.commune">
                                 <p><strong>Comuna</strong></p>
                                 <p>@{{ saleDetails.user.commune.name }}</p>
                             </div>
@@ -187,7 +187,7 @@
                             <div class="col-4" v-if="saleDetails.guest">
                                 <p><strong>Dept / Casa /oficina</strong></p>
                                 <p>@{{ saleDetails.guest.house }}</p>
-                            </div>--}}
+                            </div>
                             
                             
                         </div>
