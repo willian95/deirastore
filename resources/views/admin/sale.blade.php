@@ -85,8 +85,9 @@
                 </div>
                 <div class="modal-body">
 
-                    <div class="container-fluid">
+                    < class="container-fluid">
                         <div class="row">
+                            
                             <div class="col-4">
                                 <p><strong>Tipo de usuario</strong></p>
                                 <p v-if="saleDetails.user">Registrado</p>
@@ -100,6 +101,8 @@
                                 <p><strong>Nombre</strong></p>
                                 <p>@{{ saleDetails.user.name }}</p>
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-4" v-if="saleDetails.user">
                                 <p><strong>Rut</strong></p>
                                 <p>@{{ saleDetails.user.rut }}</p>
@@ -112,23 +115,23 @@
                                 <p><strong>Email</strong></p>
                                 <p>@{{ saleDetails.user.email }}</p>
                             </div>
-                            <span v-if="saleDetails.user" class="row">
-                                <div class="col-4" v-if="saleDetails.user.location">
-                                    <p><strong>Región</strong></p>
-                                    <p>@{{ saleDetails.user.location.name }}</p>
-                                </div>
-                                <div class="col-4" v-if="saleDetails.user.commune">
-                                    <p><strong>Comuna</strong></p>
-                                    <p>@{{ saleDetails.user.commune.name }}</p>
-                                </div>
-                                <div class="col-4" v-if="saleDetails.user">
-                                    <p v-if="saleDetails.user.street"><strong>Calle</strong></p>
-                                    <p>@{{ saleDetails.user.street }}</p>
-                                </div>
-
-                            </span>
-                            
-                            
+                        </div>
+                        <div class="row" v-if="saleDetails.user">
+                            <div class="col-4" v-if="saleDetails.user.location">
+                                <p><strong>Región</strong></p>
+                                <p>@{{ saleDetails.user.location.name }}</p>
+                            </div>
+                            <div class="col-4" v-if="saleDetails.user.commune">
+                                <p><strong>Comuna</strong></p>
+                                <p>@{{ saleDetails.user.commune.name }}</p>
+                            </div>
+                            <div class="col-4" v-if="saleDetails.user">
+                                <p v-if="saleDetails.user.street"><strong>Calle</strong></p>
+                                <p>@{{ saleDetails.user.street }}</p>
+                            </div>
+                        
+                        </div>
+                        <div  class="row">
                             <div class="col-4" v-if="saleDetails.user">
                                 <p v-if="saleDetails.user.number"><strong>Número</strong></p>
                                 <p>@{{ saleDetails.user.number }}</p>
@@ -141,6 +144,10 @@
                                 <p><strong>Razón social empresa</strong></p>
                                 <p>@{{ saleDetails.user.business_name }}</p>
                             </div>
+
+                        </div>
+                            
+                        <div class="row">
                             <div class="col-4" v-if="saleDetails.user && saleDetails.ticket_type == 'factura'">
                                 <p><strong>RUT empresa</strong></p>
                                 <p>@{{ saleDetails.user.business_rut }}</p>
@@ -157,7 +164,10 @@
                                 <p><strong>Correo empresa</strong></p>
                                 <p>@{{ saleDetails.user.business_mail }}</p>
                             </div>
-                            <div class="col-4" v-if="saleDetails.guest">
+                        </div>
+                            
+                        <div class="row">
+                        <div class="col-4" v-if="saleDetails.guest">
                                 <p><strong>Nombre</strong></p>
                                 <p>@{{ saleDetails.guest.name }}</p>
                             </div>
@@ -195,9 +205,9 @@
                                 <p v-if="saleDetails.guest.house"><strong>Dept / Casa /oficina</strong></p>
                                 <p>@{{ saleDetails.guest.house }}</p>
                             </div>
-                            
-                            
                         </div>
+                            
+                            
                     </div>
 
                     <div>
