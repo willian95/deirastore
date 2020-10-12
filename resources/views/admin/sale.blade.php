@@ -328,7 +328,7 @@
                     this.saleDetails = sale
 
                     this.productDetails.forEach((data, index) => {
-
+                        console.log("data", data)
                         this.total = data.price + data.shipping_cost
 
                     })
