@@ -44,6 +44,9 @@
                             <button class="btn btn-success" @click="getProductDetails(sale.product_purchase, sale)" data-toggle="modal" data-target="#details">
                                 Detalles
                             </button>
+                            <button class="btn btn-success" @click="getProductDetails(sale.product_purchase, sale)" data-toggle="modal" data-target="#notification">
+                                Enviar notificación
+                            </button>
                         </p>
                     </div>
                 </div>
@@ -262,8 +265,8 @@
         </div>
     </div>
 
-
     <!-- Details Modal -->
+    
 
     <!-- export Modal -->
 
@@ -307,9 +310,142 @@
             </div>
         </div>
     </div>
-
-
     <!-- export Modal -->
+
+    <!-- Notification modal -->
+
+    <div class="modal fade" id="notification" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Notificación</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="container-fluid">
+
+                    <div class="row" v-if="saleDetails.user">
+                            <div class="col-4" v-if="saleDetails.user.location">
+                                <p><strong>Región</strong></p>
+                                <p>@{{ saleDetails.user.location.name }}</p>
+                            </div>
+                            <div class="col-4" v-if="saleDetails.user.commune">
+                                <p><strong>Comuna</strong></p>
+                                <p>@{{ saleDetails.user.commune.name }}</p>
+                            </div>
+                            <div class="col-4" v-if="saleDetails.user">
+                                <p v-if="saleDetails.user.street"><strong>Calle</strong></p>
+                                <p>@{{ saleDetails.user.street }}</p>
+                            </div>
+                        
+                        </div>
+                        <div  class="row">
+                            <div class="col-4" v-if="saleDetails.user">
+                                <p v-if="saleDetails.user.number"><strong>Número</strong></p>
+                                <p>@{{ saleDetails.user.number }}</p>
+                            </div>
+                            <div class="col-4" v-if="saleDetails.user">
+                                <p v-if="saleDetails.user.house"><strong>Dept / Casa /oficina</strong></p>
+                                <p>@{{ saleDetails.user.house }}</p>
+                            </div>
+                            <div class="col-4" v-if="saleDetails.user && saleDetails.ticket_type == 'factura'">
+                                <p><strong>Razón social empresa</strong></p>
+                                <p>@{{ saleDetails.user.business_name }}</p>
+                            </div>
+
+                        </div>
+                            
+                        <div class="row">
+                            <div class="col-4" v-if="saleDetails.user && saleDetails.ticket_type == 'factura'">
+                                <p><strong>RUT empresa</strong></p>
+                                <p>@{{ saleDetails.user.business_rut }}</p>
+                            </div>
+                            <div class="col-4" v-if="saleDetails.user && saleDetails.ticket_type == 'factura'">
+                                <p><strong>Dirección empresa</strong></p>
+                                <p>@{{ saleDetails.user.business_address }}</p>
+                            </div>
+                            <div class="col-4" v-if="saleDetails.user && saleDetails.ticket_type == 'factura'">
+                                <p><strong>Teléfono empresa</strong></p>
+                                <p>@{{ saleDetails.user.business_phone }}</p>
+                            </div>
+                            <div class="col-4" v-if="saleDetails.user && saleDetails.ticket_type == 'factura'">
+                                <p><strong>Correo empresa</strong></p>
+                                <p>@{{ saleDetails.user.business_mail }}</p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div v-if="saleDetails.guest">
+                                <div class="col-4" v-if="saleDetails.guest.location">
+                                    <p><strong>Región</strong></p>
+                                    <p>@{{ saleDetails.guest.location.name }}</p>
+                                </div>
+                                <div class="col-4" v-if="saleDetails.guest.commune">
+                                    <p><strong>Comuna</strong></p>
+                                    <p>@{{ saleDetails.guest.commune.name }}</p>
+                                </div>
+                            </div>
+                            <div class="col-4" v-if="saleDetails.guest">
+                                <p v-if="saleDetails.guest.street"><strong>Calle</strong></p>
+                                <p>@{{ saleDetails.guest.street }}</p>
+                            </div>
+                            <div class="col-4" v-if="saleDetails.guest">
+                                <p v-if="saleDetails.guest.number"><strong>Número</strong></p>
+                                <p>@{{ saleDetails.guest.number }}</p>
+                            </div>
+                            <div class="col-4" v-if="saleDetails.guest">
+                                <p v-if="saleDetails.guest.house"><strong>Dept / Casa /oficina</strong></p>
+                                <p>@{{ saleDetails.guest.house }}</p>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Precio</th>
+                                <th>Tipo de envío </th>
+                                <th>Costo de envío </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(productDetail, index) in productDetails">
+                                <td>
+                                    @{{ index + 1 }}
+                                </td>
+                                <td>
+                                    @{{ productDetail.product.name }}
+                                </td>
+                                <td>
+                                    @{{ productDetail.amount }}
+                                </td>
+                                <td>
+                                    @{{ parseInt(productDetail.price).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}
+                                </td>
+                                <td>
+                                    @{{ productDetail.shipping_method }}
+                                </td>
+                                <td>
+                                    @{{ parseInt(productDetail.shipping_cost).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Modal -->
 
 @endsection
 
