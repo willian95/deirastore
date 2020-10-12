@@ -112,14 +112,18 @@
                                 <p><strong>Email</strong></p>
                                 <p>@{{ saleDetails.user.email }}</p>
                             </div>
-                            <div class="col-4" v-if="saleDetails.user.location">
-                                <p><strong>Región</strong></p>
-                                <p>@{{ saleDetails.user.location.name }}</p>
+                            <div v-if="saleDetails.user">
+                                <div class="col-4" v-if="saleDetails.user.location">
+                                    <p><strong>Región</strong></p>
+                                    <p>@{{ saleDetails.user.location.name }}</p>
+                                </div>
+                                <div class="col-4" v-if="saleDetails.user.commune">
+                                    <p><strong>Comuna</strong></p>
+                                    <p>@{{ saleDetails.user.commune.name }}</p>
+                                </div>
+
                             </div>
-                            <div class="col-4" v-if="saleDetails.user.commune">
-                                <p><strong>Comuna</strong></p>
-                                <p>@{{ saleDetails.user.commune.name }}</p>
-                            </div>
+                            
                             <div class="col-4" v-if="saleDetails.user">
                                 <p><strong>Calle</strong></p>
                                 <p>@{{ saleDetails.user.street }}</p>
@@ -168,13 +172,15 @@
                                 <p><strong>Email</strong></p>
                                 <p>@{{ saleDetails.guest.email }}</p>
                             </div>
-                            <div class="col-4" v-if="saleDetails.guest">
-                                <p><strong>Región</strong></p>
-                                <p>@{{ saleDetails.guest.location.name }}</p>
-                            </div>
-                            <div class="col-4" v-if="saleDetails.guest">
-                                <p><strong>Comuna</strong></p>
-                                <p>@{{ saleDetails.guest.commune.name }}</p>
+                            <div v-if="saleDetails.guest">
+                                <div class="col-4" v-if="saleDetails.guest.location">
+                                    <p><strong>Región</strong></p>
+                                    <p>@{{ saleDetails.guest.location.name }}</p>
+                                </div>
+                                <div class="col-4" v-if="saleDetails.guest.commune">
+                                    <p><strong>Comuna</strong></p>
+                                    <p>@{{ saleDetails.guest.commune.name }}</p>
+                                </div>
                             </div>
                             <div class="col-4" v-if="saleDetails.guest">
                                 <p><strong>Calle</strong></p>
