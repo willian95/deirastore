@@ -571,10 +571,10 @@
                     })
 
                 },
-                shipping(id){
+                shipping(){
 
                     if(this.tracking != null){
-                        axios.post("{{ url('/admin/sales/notify/shipping') }}", {id: id, tracking: this.tracking}).then(res => {
+                        axios.post("{{ url('/admin/sales/notify/shipping') }}", {id: saleId, tracking: this.tracking}).then(res => {
 
                             if(res.data.success == true){
                                 swal({

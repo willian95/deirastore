@@ -80,6 +80,7 @@ class SaleController extends Controller
         
         $payment = Payment::find($request->id);
         $payment->ready_to_ship = 1;
+        $payment->tracking = $request->tracking;
         $payment->update();
 
         $user = User::find($payment->user_id);
