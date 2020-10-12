@@ -42,10 +42,10 @@
                         <p class="text-center">
                             Fecha: @{{ sale.created_at.toString().substring(0, 10) }}
                         </p>
-                        <p v-if="sale.ready_to_pickup == 1">
+                        <p v-if="sale.ready_to_pickup == 1"  class="text-center">
                            <strong> Notificación de retiro en tienda enviada</strong>
                         </p>
-                        <p v-if="sale.ready_to_ship == 1">
+                        <p v-if="sale.ready_to_ship == 1" class="text-center">
                             <strong> Notificación de despacho enviada</strong>
                         </p>
                         <p class="text-center">
