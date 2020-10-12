@@ -412,7 +412,7 @@ class CheckoutController extends Controller
 				
 			}
 
-			//return response()->json(["success" => true, "guestUserId" => $guestUserId]);
+			return response()->json(["success" => true, "guestUserId" => $guestUserId]);
 
 		}catch(\Exception $e){
 			return response()->json(["success" => false, "err" => $e->getMessage(), "ln" => $e->getLine()]);

@@ -468,7 +468,7 @@
                 if(window.localStorage.getItem("deira_store_go_to_payment") == "true"){
                     this.loading = true
                     window.localStorage.removeItem("deira_store_go_to_payment")
-                    alert(window.localStorage.getItem("bill_type"))
+                    
                     if(window.localStorage.getItem("bill_type") == "boleta"){
                         this.boleta()
                     }else if(window.localStorage.getItem("bill_type") == "factura"){
