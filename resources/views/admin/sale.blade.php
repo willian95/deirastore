@@ -187,7 +187,7 @@
                             <div class="col-4" v-if="saleDetails.guest">
                                 <p><strong>Dept / Casa /oficina</strong></p>
                                 <p>@{{ saleDetails.guest.house }}</p>
-                            </div>
+                            </div>--}}
                             
                             
                         </div>
