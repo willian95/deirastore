@@ -112,7 +112,7 @@
                                 <p><strong>Email</strong></p>
                                 <p>@{{ saleDetails.user.email }}</p>
                             </div>
-                            <div class="col-4" v-if="saleDetails.user">
+                            {{--<div class="col-4" v-if="saleDetails.user">
                                 <p><strong>Región</strong></p>
                                 <p>@{{ saleDetails.user.location.name }}</p>
                             </div>
