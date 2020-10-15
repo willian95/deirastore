@@ -116,7 +116,7 @@
 
                         swal({
                             icon:"error",
-                            message:"Todos los campos son obligatorios"
+                            text:"Todos los campos son obligatorios"
                         })
 
                     }

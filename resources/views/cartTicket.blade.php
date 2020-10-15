@@ -464,7 +464,7 @@
             },
             mounted(){
                 this.authCheck = "{{ \Auth::check() }}"
-                alert(window.localStorage.getItem("deira_store_go_to_payment"))
+            
                 if(window.localStorage.getItem("deira_store_go_to_payment") == "true"){
                     this.loading = true
                     window.localStorage.removeItem("deira_store_go_to_payment")
