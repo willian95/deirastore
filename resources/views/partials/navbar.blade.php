@@ -18,7 +18,7 @@
                         @if(\Auth::check() && \Auth::user()->id)
                             <a class="nav-link dropdown-toggle user_content"  href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img src="{{ asset('assets/img/persona2.svg') }}" alt="" style="    width: 20px;
-                                margin-right: 10px;">   {{ Auth::user()->name }}
+                                margin-right: 10px;">   {{ substr(Auth::user()->name, 0, 15) }}
                                 <div class="active_user">
                                     
                                 </div>
