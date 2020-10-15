@@ -104,13 +104,23 @@
 
                 factura(){
 
-                    axios.post("{{ url('/checkout/store-session') }}", {items: JSON.parse(localStorage.getItem("checkoutProduct")), type: "factura", businessName: this.businessName, businessRut: this.businessRut, businessAddress: this.businessAddress, businessPhone: this.businessPhone, businessMail: this.businessMail})
-                    .then(res => {
-                        if(res.data.success == true){
-                            window.location.href = "{{ route('checkout') }}"
-                        }
+                    if(this.businessName != "" && this.businessRut != "" && this.businessAddress != "" && this.businessPhone != "" && this.businessMail != ""){
+                        axios.post("{{ url('/checkout/store-session') }}", {items: JSON.parse(localStorage.getItem("checkoutProduct")), type: "factura", businessName: this.businessName, businessRut: this.businessRut, businessAddress: this.businessAddress, businessPhone: this.businessPhone, businessMail: this.businessMail})
+                        .then(res => {
+                            if(res.data.success == true){
+                                window.location.href = "{{ route('checkout') }}"
+                            }
 
-                    })
+                        })
+                    }else{
+
+                        swal({
+                            icon:"error",
+                            message:"Todos los campos son obligatorios"
+                        })
+
+                    }
+                    
 
                 },
                 
