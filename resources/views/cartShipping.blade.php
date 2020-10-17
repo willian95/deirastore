@@ -2,6 +2,13 @@
 
 @section('content')
 
+    <style>
+        select{
+            border: 2px solid #87b4be;
+            background: #bddcfc;
+        }
+    </style>
+
     <div class="container pagina bg">
         <div class="carrito">
             <div id="cart">
@@ -69,7 +76,13 @@
                                                     {{--<p>@{{ item.sub_title }}</p>--}}
                                                 </td>
                                                 <td>$ @{{ parseInt(item.price).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</td>
-                                                <td>@{{ item.amount }}</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <button class="btn btn-secondary">+</button>
+                                                        @{{ item.amount }}
+                                                        <button class="btn btn-secondary">-</button>
+                                                    </div>
+                                                </td>
                                                 <td>$ @{{ parseInt(item.price * item.amount).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</td>
                                                 <td>
                                                     <select class="form-control shippingChoice" @change="updateCart(item.id)" :id="'shippingChoice'+item.id">
