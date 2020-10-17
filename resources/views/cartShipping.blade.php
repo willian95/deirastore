@@ -66,7 +66,7 @@
                                                 <td v-else>@{{ item.brand_name }}</td>
                                                 <td>
                                                     <span>@{{ item.name }} </span>
-                                                    <p>@{{ item.sub_title }}</p>
+                                                    {{--<p>@{{ item.sub_title }}</p>--}}
                                                 </td>
                                                 <td>$ @{{ parseInt(item.price).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</td>
                                                 <td>@{{ item.amount }}</td>
