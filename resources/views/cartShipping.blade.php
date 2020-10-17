@@ -79,7 +79,9 @@
                                                 <td>
                                                     <div class="d-flex">
                                                         <button class="btn btn-secondary">+</button>
-                                                        @{{ item.amount }}
+                                                        <div style="width: 20px;">
+                                                            @{{ item.amount }}
+                                                        </div>
                                                         <button class="btn btn-secondary">-</button>
                                                     </div>
                                                 </td>
