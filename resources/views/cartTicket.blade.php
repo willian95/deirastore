@@ -39,13 +39,64 @@
             </div>
         
         </div>
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <td class="table__title">Producto</td>
+                            <td class="table__title">Marca</td>
+                            <td class="table__title">Nombre</td>
+                            <td class="table__title">Precio</td>
+                            <td class="table__title">Cantidad</td>
+                            <td class="table__title">Total</td>
+                            <!--<td class="table__title">Opciones de envío</td>-->
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr v-for="(item, index) in guestItem">
+                            <td><img class="lista-pedido" :src="item.picture" alt=""></td>
+                            <td v-if="item.brand_image != null"><img class="lista-pedido" :src="'{{ url('/') }}'+'/images/brands/'+item.brand_image" alt=""></td>
+                            <td v-else>@{{ item.brand_name }}</td>
+                            <td>
+                                <span>@{{ item.name }} </span>
+                                {{--<p>@{{ item.sub_title }}</p>--}}
+                            </td>
+                            <td>$ @{{ parseInt(item.price).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</td>
+                            <td>
+                                <div class="d-flex">
+                                    
+                                    <div class="text-center">
+                                        @{{ item.amount }}
+                                    </div>
+
+                                </div>
+                            </td>
+                            <td>$ @{{ parseInt(item.price * item.amount).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</td>
+                            {{--<td>
+                                <select class="form-control shippingChoice" @change="updateCart(item.id)" :id="'shippingChoice'+item.id">
+                                    <option value="1">Retiro en tienda</option>
+                                    <option value="2" v-if="item.data_source_id == 2" :selected="item.shipping_method == 2">Despacho</option>
+                                </select>
+                            </td>--}}
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
 
 
     </div>
 
             <!-- Modal -->
         <div class="modal fade" id="boletaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="modalCloseBoleta">
@@ -54,13 +105,13 @@
                     </div>
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="email">Email</label>
                                     <input placeholder="Email" type="text" autocomplete="off" class="form-control" id="email" aria-describedby="emailHelp" v-model="email">
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="password">Contraseña</label>
                                     <input placeholder="Contraseña" type="password" autocomplete="off" class="form-control" id="password" aria-describedby="emailHelp" v-model="password">
@@ -69,26 +120,31 @@
                         </div>
 
                         <div class="form-group text-center mb-5 mt-3">
-                            <button class="btn btn-primary btn-general btn-general--form" @click="login()">Login</button>
-                        </div>
-
-                        <h5 class="text-center">¿Aún no tienes cuenta?</h5>
-                        <div class="form-group text-center mb-5 mt-3">
-                            <button class="btn btn-primary btn-general btn-general--form" @click="register()">Registrate</button>
-                        </div>
-
-
-                        <div class="col-12">
-                            <div style="display:flex; justify-content: center;">
-                                <p class="text-center">
-                                    <button @click="redirectGoogle()" type="button" class="btn btn-success">Google</button>
-                                    <button class="btn btn-success" disabled>Facebook</button>
-                                </p>
-                            </div>
+                            <button class="btn btn-dark" @click="login()">IDENTIFICATE</button>
+                            <p class="text-center">
+                                <small class="text-center" @click="register()" style="cursor:pointer;">¿Aún no tienes cuenta?</small>
+                            </p>
                         </div>
 
                         <div class="form-group text-center mb-5 mt-3">
                             <button class="btn btn-primary btn-general btn-general--form" @click="showGuestModal()" data-toggle="modal" data-target="#guestModal">Continuar como invitado</button>
+                        </div>
+
+                        <div class="col-12">
+                            <div>
+                                <p class="text-center">
+                                    {{--<button @click="redirectGoogle()" type="button" class="btn btn-success">Google</button>
+                                    <button class="btn btn-success" disabled>Facebook</button>--}}
+                                    <button class="loginBtn loginBtn--facebook" @click="redirectFacebook()">
+                                        Inicia sesión con Facebook
+                                    </button>
+                                </p>
+                                <p class="text-center">
+                                    <button class="loginBtn loginBtn--google" @click="redirectGoogle()">
+                                        Inicia sesión con  Google
+                                    </button>
+                                </p>
+                            </div>
                         </div>
 
 
@@ -166,7 +222,7 @@
 
         <!-- Modal -->
         <div class="modal fade" id="facturaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="modalCloseBoleta">
@@ -175,13 +231,13 @@
                     </div>
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="email">Email</label>
                                     <input placeholder="Email" type="text" autocomplete="off" class="form-control" id="email" aria-describedby="emailHelp" v-model="email">
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="password">Contraseña</label>
                                     <input placeholder="Contraseña" type="password" autocomplete="off" class="form-control" id="password" aria-describedby="emailHelp" v-model="password">
@@ -190,20 +246,31 @@
                         </div>
 
                         <div class="form-group text-center mb-5 mt-3">
-                            <button class="btn btn-primary btn-general btn-general--form" @click="login()">Login</button>
+                            <button class="btn btn-dark" @click="login()">IDENTIFICATE</button>
+                            <p class="text-center">
+                                <small class="text-center" @click="register()" style="cursor:pointer;">¿Aún no tienes cuenta?</small>
+                            </p>
                         </div>
 
-                        <h5 class="text-center">¿Aún no tienes cuenta?</h5>
+                        {{--<h5 class="text-center">¿Aún no tienes cuenta?</h5>
                         <div class="form-group text-center mb-5 mt-3">
                             <button class="btn btn-primary btn-general btn-general--form" @click="register()">Registrate</button>
-                        </div>
+                        </div>--}}
 
 
                         <div class="col-12">
-                            <div style="display:flex; justify-content: center;">
+                            <div>
                                 <p class="text-center">
-                                    <button @click="redirectGoogle()" type="button" class="btn btn-success">Google</button>
-                                    <button class="btn btn-success" disabled>Facebook</button>
+                                    {{--<button @click="redirectFacebook()" type="button" class="btn btn-success">Google</button>
+                                    <button class="btn btn-success" disabled>Facebook</button>--}}
+                                    <button  class="loginBtn loginBtn--facebook">
+                                        Login with Facebook
+                                    </button>
+                                </p>
+                                <p class="text-center">
+                                    <button @click="redirectGoogle()" class="loginBtn loginBtn--google">
+                                        Login with Google
+                                    </button>
                                 </p>
                             </div>
                         </div>
@@ -235,6 +302,8 @@
                     name:"",
                     lastname:"",
                     rutLoading:"",
+                    guestItem:[],
+                    totalGuest:0,
                     loading:false
                 }
             },
@@ -459,20 +528,39 @@
                         //window.location.href="{{ url('/cart/shipping') }}"
                     }
 
+                },
+                getGuestItems(){
+                    let products = JSON.parse(window.localStorage.getItem('cart'))
+                    
+                    if(products != null){
+                        
+                        axios.post("{{ url('/guestCart') }}", {products: products}).then(res => {
+                            this.guestItem = res.data.cart
+                            this.totalGuest = res.data.total
+                        })
+
+                    }
+                    
                 }
 
             },
             mounted(){
+                this.getGuestItems()
                 this.authCheck = "{{ \Auth::check() }}"
             
                 if(window.localStorage.getItem("deira_store_go_to_payment") == "true"){
-                    this.loading = true
+                    
                     window.localStorage.removeItem("deira_store_go_to_payment")
                     
                     if(window.localStorage.getItem("bill_type") == "boleta"){
+                        this.loading = true
                         this.boleta()
                     }else if(window.localStorage.getItem("bill_type") == "factura"){
-                        this.factura()
+                        if(this.authCheck == true){
+                            this.loading = true
+                            this.factura()
+                        }
+                        
                     }
                 }
 

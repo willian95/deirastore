@@ -33,10 +33,20 @@
                             <button class="btn btn-primary btn-general btn-general--form" @click="logIn()">Acceder</button>
                         </div>
 
-                        <div class="col-12">
-                            <div style="display:flex;" class="text-center">
-                                <a href="{{ url('auth/google') }}" class="btn btn-success">Google</a>
-                                <button href="{{ url('auth/facebook') }}" class="btn btn-success" disabled>Facebook</button>
+                        <div class="col-md-12">
+                            <div>
+                                <p class="text-center">
+                                    {{--<button @click="redirectGoogle()" type="button" class="btn btn-success">Google</button>
+                                    <button class="btn btn-success" disabled>Facebook</button>--}}
+                                    <button @click="redirectFacebook()" class="loginBtn loginBtn--facebook">
+                                        Login with Facebook
+                                    </button>
+                                </p>
+                                <p class="text-center">
+                                    <button @click="redirectGoogle()" class="loginBtn loginBtn--google">
+                                        Login with Google
+                                    </button>
+                                </p>
                             </div>
                         </div>
 
@@ -100,6 +110,12 @@
 
                 }
 
+            },
+            redirectFacebook(){
+                window.location.href="{{ url('auth/facebook') }}"
+            },
+            redirectGoogle(){
+                window.location.href="{{ url('auth/google') }}"
             },
             formHasErrors() {
 

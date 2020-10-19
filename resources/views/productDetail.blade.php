@@ -525,7 +525,7 @@
                     
 
                     if(exists == false){
-                        cart.push({productId: this.productId, amount: this.amount})
+                        cart.push({productId: this.productId, amount: this.amount, stock: this.maxAmount})
                     }
                     
                     window.localStorage.setItem("cart", JSON.stringify(cart))

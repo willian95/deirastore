@@ -4,8 +4,8 @@
 
     <style>
         select{
-            border: 2px solid #87b4be;
-            background: #bddcfc;
+            border: 2px solid #87b4be !important;
+            background: #bddcfc !important;
         }
     </style>
 
@@ -78,11 +78,14 @@
                                                 <td>$ @{{ parseInt(item.price).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</td>
                                                 <td>
                                                     <div class="d-flex">
-                                                        <button class="btn btn-secondary">+</button>
-                                                        <div style="width: 20px;">
+                                                        <button class="btn btn-secondary" @click="addAmount(item.id, item.amount, item.maxAmount)">+</button>
+                                                        <div class="text-center" style="width: 20px;">
                                                             @{{ item.amount }}
                                                         </div>
-                                                        <button class="btn btn-secondary">-</button>
+                                                        <button class="btn btn-secondary" @click="substractAmount(item.id, item.amount)">-</button>
+                                                        <button class="btn btn-danger" style="margin-left: 10px;" @click="erase(item.id)">
+                                                            <i class="fa fa-trash"></i>
+                                                        </button>
                                                     </div>
                                                 </td>
                                                 <td>$ @{{ parseInt(item.price * item.amount).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</td>
@@ -211,7 +214,7 @@
                             <p>Más información al final del presente sitio</p>
 
                           </div>
-                            <div class="btn-buy">
+                            <div class="btn-buy"  v-if="guestItem.length > 0">
                                 
                                 <div class="form-check">
                                     <input  type="checkbox" class="form-check-input mt-2" id="terms" v-model="terms">
@@ -272,26 +275,22 @@
                 erase(id){
 
                     if(confirm("¿Está seguro de eliminar este producto?")){
-                        axios.post("{{ route('cart.delete') }}", {id: id})
-                        .then(res => {
-                            
-                            if(res.data.success == true){
+                        
+                        let products = JSON.parse(window.localStorage.getItem('cart'))
 
-                                alertify.success(res.data.msg)
-                                this.getItems()
+                        products.forEach((data, index) => {
 
-                            }else{
-
-                                alertify.error(res.data.msg)
-
+                            if(data.productId == id){
+                                
+                                products.splice(index, 1)
+                                
                             }
 
                         })
-                        .catch(err => {
-                            $.each(err.response.data.errors, function(key, value){
-                                alertify.error(value)
-                            });
-                        })
+                        
+                        window.localStorage.setItem("cart", JSON.stringify(products))
+                        this.getGuestItems()
+                        
                     }
 
                 },
@@ -338,6 +337,41 @@
                     })
 
                 },
+
+                addAmount(id, amount, maxAmount){
+                    let products = JSON.parse(window.localStorage.getItem('cart'))
+
+                    products.forEach((data, index) => {
+
+                        if(data.productId == id){
+                            if(amount + 1 <= maxAmount){
+                                products[index].amount = amount + 1
+                            }
+                        }
+
+                    })
+                    
+                    window.localStorage.setItem("cart", JSON.stringify(products))
+                    this.getGuestItems()
+                    
+                },
+                substractAmount(id, amount){
+                    let products = JSON.parse(window.localStorage.getItem('cart'))
+
+                    products.forEach((data, index) => {
+
+                        if(data.productId == id){
+                            if(amount - 1 > 0){
+                                products[index].amount = amount - 1
+                            }
+                        }
+
+                    })
+                    
+                    window.localStorage.setItem("cart", JSON.stringify(products))
+                    this.getGuestItems()
+                },
+
                 updateCart(id){
                     
                     var shippingChoices = [];

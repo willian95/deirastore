@@ -82,7 +82,7 @@ class NexsysProducts extends Command
             //system('unzip CLPriceFileDeira.csv.zip');
             sleep(10);
             Excel::import(new IngramImport, public_path('/').'CLPriceFileDeira.csv');
-
+            Product::update(["amount" => 0]);
             Log::info("reading done");
 
         }catch(\Exception $e){
@@ -147,9 +147,11 @@ class NexsysProducts extends Command
                             $index = 0;
                             $model = null;
 
-
-                            $productSlug = str_replace(" ", "-", $value->short_description);
-                            $productSlug = str_replace("/", "-", $productSlug);
+                            if($value->short_description != null){
+                                $productSlug = str_replace(" ", "-", $value->short_description);
+                                $productSlug = str_replace("/", "-", $productSlug);
+                            }
+                            
                             
                             $excluded_tax = false;
                             if($value->tax_excluded == "true")

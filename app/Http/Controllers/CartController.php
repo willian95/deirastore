@@ -190,7 +190,8 @@ class CartController extends Controller
                 "price" => intval($individualPrice),
                 "amount" => $request->products[$loop]["amount"],
                 "is_external" => $products->is_external,
-                "data_source_id" => $products->data_source_id
+                "data_source_id" => $products->data_source_id,
+                "maxAmount" => $products->amount
             ];
 
             $loop++;
