@@ -144,6 +144,7 @@ class NexsysProducts extends Command
                 foreach($products as $product){
                     foreach($product as $value){
                         
+                        if($value){
                             $index = 0;
                             $model = null;
 
@@ -195,6 +196,7 @@ class NexsysProducts extends Command
                                 }
 
                             }
+                        }
 
                     }
                 }
