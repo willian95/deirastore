@@ -228,7 +228,7 @@ class NexsysProducts extends Command
 
         }
 
-        $products = App\Product::where('slug', 'like', '%/%')->get();
+        $products = Product::where('slug', 'like', '%/%')->get();
         foreach($products as $product){
 
             $obj = App\Product::find($product->id);
