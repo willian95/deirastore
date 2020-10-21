@@ -218,7 +218,7 @@ class NexsysProducts extends Command
 
         }
 
-        $products = Product::whereIsNull("picture")->get();
+        $products = Product::whereNull("picture")->get();
 
         foreach($products as $product){
             
