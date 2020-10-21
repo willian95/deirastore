@@ -146,7 +146,7 @@ class ProductController extends Controller
                 $product->picture = url('/').'/images/products/'.$fileName;
             }
             $product->description = $request->description;
-            $product->slug = $slug;
+            //$product->slug = $slug;
             $product->category_id = $request->categoryId;
             $product->brand_id = $request->brandId;
             $product->sku = $request->vpn;
