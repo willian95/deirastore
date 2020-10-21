@@ -7,7 +7,7 @@ trait CartAbandonTrait
 {
     public function sendMessage()
     {
-        if(\Auth::check() && url()->previous() == url('/cart')){
+        /*if(\Auth::check() && url()->previous() == url('/cart')){
             $products = Cart::with('product')->where('user_id', \Auth::user()->id)->get();
             $data = ["products" => $products];
             $to_email = \Auth::user()->email;
@@ -21,7 +21,7 @@ trait CartAbandonTrait
                 });
             }
             
-        }
+        }*/
     }
 
 }
