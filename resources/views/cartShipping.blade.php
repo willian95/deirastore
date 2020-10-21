@@ -38,7 +38,7 @@
 
                 <div class="container" id="progress-section">
                     <ul class="progressbar">
-                        <li>Bolsa de Entrega</li>
+                        <li>Bolsa de compras</li>
                         <li class="active">Tipo de entrega</li>
                         <li>Pago</li>
                     </ul>
