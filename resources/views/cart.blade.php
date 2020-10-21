@@ -29,6 +29,14 @@
                     <a class="btn btn-primary btn-general btn-general--form" style="color: #fff;" href="{{ url()->previous() }}"><i class="fa fa-arrow-left"></i></a>
                 </div>--->
 
+                <div class="container" id="#progress-section">
+                    <ul class="progressbar">
+                        <li class="active">Bolsa de Entrega</li>
+                        <li>Tipo de entrega</li>
+                        <li>Pago</li>
+                    </ul>
+                </div>
+
                 <div class="row" v-cloak>
                     <div class="col-sm-12 ">
 
