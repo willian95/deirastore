@@ -8,6 +8,14 @@
             <div class="loader-custom"></div>
         </div>
 
+        <div class="container" id="progress-section">
+            <ul class="progressbar">
+                <li>Bolsa de Entrega</li>
+                <li>Tipo de entrega</li>
+                <li class="active">Pago</li>
+            </ul>
+        </div>
+
         <div class="row">
             
                <!--- <a class="btn btn-primary btn-general btn-general--form" style="color: #fff;" href="{{ url()->previous() }}"><i class="fa fa-arrow-left"></i></a>
