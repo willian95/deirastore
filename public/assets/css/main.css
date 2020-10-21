@@ -79,8 +79,8 @@
   }
   
   #progress-section .progressbar li.active:before {
-    border-color: green;
-    background-color: green;
+    border-color: #87B4BE;
+    background-color: #87B4BE;
   }
   
 
