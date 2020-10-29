@@ -132,6 +132,11 @@ td .es-button-border-2:hover {
                         </tr>
                    </table></td> 
                  </tr> 
+                 @if(isset($tracking))
+                 <tr style="border-collapse:collapse;"> 
+                      <td align="center" style="padding:10px;Margin:0;"><span class="es-button-border es-button-border-2" style="border-style:solid;border-color:#2CB543;background:#D32B2B;border-width:0px;display:inline-block;border-radius:20px;width:auto;"><a href="https://www.urbanoexpress.cl" class="es-button es-button-1" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;font-size:16px;color:#FFFFFF;border-style:solid;border-color:#D32B2B;border-width:10px 20px 10px 20px;display:inline-block;background:#D32B2B;border-radius:20px;font-weight:normal;font-style:normal;line-height:19px;width:auto;text-align:center;">Rastrea tu envío aquí</a></span></td> 
+                     </tr> 
+                @endif
                </table></td> 
              </tr> 
              <tr style="border-collapse:collapse;"> 
