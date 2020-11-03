@@ -33,7 +33,13 @@ return [
     'google' => [
         'client_id' => '270786535137-mjk7uaasr6if9akf1k2ij717v2t7tir7.apps.googleusercontent.com',
         'client_secret' => 'b-reLU0CgAtW522U4H7qmfUL',
-        'redirect' => 'https://servertest.sytes.net/deirastore/public/auth/google/callback',
+        'redirect' => 'https://deirastore.cl/auth/google/callback',
+    ],
+
+    'facebook' => [
+        'client_id' => '761199804725004',
+        'client_secret' => 'af57037205552a6e6fe8487a8bd975be',
+        'redirect' => 'https://deirastore.cl/auth/facebook/callback',
     ],
 
 ];
