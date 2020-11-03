@@ -148,7 +148,8 @@ class CartController extends Controller
 
         foreach($request->products as $product){
             $products = Product::with('category', 'brand', "items")->where('id', $product['productId'])->first();
-        
+            
+            return response()->json($products);
             $price = 0;
             if($products->percentage_range_profit > 0 && $products->percentage_range_profit != null){
                 $price = (($products->price_range_profit * DolarPrice::first()->price) ) * $product["amount"];
