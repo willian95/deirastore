@@ -150,53 +150,56 @@ class CartController extends Controller
         foreach($request->products as $product){
             $products = Product::with('category', 'brand', "items")->where('id', $product['productId'])->first();
             
-            return response()->json($products);
             $price = 0;
-            if($products->percentage_range_profit > 0 && $products->percentage_range_profit != null){
-                $price = (($products->price_range_profit * DolarPrice::first()->price) ) * $product["amount"];
-            }else{
-                $price = (($products->external_price * DolarPrice::first()->price) ) * $product["amount"];
+
+            if($products){
+                if($products->percentage_range_profit > 0 && $products->percentage_range_profit != null){
+                    $price = (($products->price_range_profit * DolarPrice::first()->price) ) * $product["amount"];
+                }else{
+                    $price = (($products->external_price * DolarPrice::first()->price) ) * $product["amount"];
+                }
+                $picture = "";
+    
+                if($products->data_source_id == 2){
+    
+                    $picture = $products->picture;
+    
+                }else if($products->data_source_id == 1){
+    
+                    $picture = $products->picture;
+    
+                }else{
+    
+                    $picture = asset('/images/products/'.$products->picture);
+    
+                }
+    
+                $individualPrice =0;
+                if($products->percentage_range_profit > 0 && $products->percentage_range_profit != null){
+                    $individualPrice = ($products->price_range_profit * DolarPrice::first()->price) + 1;
+                }else{
+                    $individualPrice = ($products->external_price * DolarPrice::first()->price) + 1;
+                }
+    
+                $total += $individualPrice * $product["amount"];
+    
+                $cart[] = [
+                    "id" => $product["productId"],
+                    "picture" => $picture,
+                    "name" => $products->name,
+                    "brand_image" => $products->brand->image,
+                    "brand_name" => $products->brand->name,
+                    "sub_title" => $products->sub_title,
+                    "price" => intval($individualPrice),
+                    "amount" => $request->products[$loop]["amount"],
+                    "is_external" => $products->is_external,
+                    "data_source_id" => $products->data_source_id,
+                    "maxAmount" => $products->amount
+                ];
+    
+                $loop++;
             }
-            $picture = "";
 
-            if($products->data_source_id == 2){
-
-                $picture = $products->picture;
-
-            }else if($products->data_source_id == 1){
-
-                $picture = $products->picture;
-
-            }else{
-
-                $picture = asset('/images/products/'.$products->picture);
-
-            }
-
-            $individualPrice =0;
-            if($products->percentage_range_profit > 0 && $products->percentage_range_profit != null){
-                $individualPrice = ($products->price_range_profit * DolarPrice::first()->price) + 1;
-            }else{
-                $individualPrice = ($products->external_price * DolarPrice::first()->price) + 1;
-            }
-
-            $total += $individualPrice * $product["amount"];
-
-            $cart[] = [
-                "id" => $product["productId"],
-                "picture" => $picture,
-                "name" => $products->name,
-                "brand_image" => $products->brand->image,
-                "brand_name" => $products->brand->name,
-                "sub_title" => $products->sub_title,
-                "price" => intval($individualPrice),
-                "amount" => $request->products[$loop]["amount"],
-                "is_external" => $products->is_external,
-                "data_source_id" => $products->data_source_id,
-                "maxAmount" => $products->amount
-            ];
-
-            $loop++;
 
         }
 
