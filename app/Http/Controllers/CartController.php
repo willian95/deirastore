@@ -145,6 +145,7 @@ class CartController extends Controller
         $loop = 0;
         $total = 0;
         $totalWeight = 0;
+        //
 
         foreach($request->products as $product){
             $products = Product::with('category', 'brand', "items")->where('id', $product['productId'])->first();
