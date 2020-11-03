@@ -50,7 +50,7 @@ class SocialAuthController extends Controller
         }
     }
 
-    public function redirectToFacebook()
+    public function redirectToFacebook(Request $request)
     {
         session(["path" => $request->path]);
         return Socialite::driver('facebook')->redirect();
