@@ -73,23 +73,22 @@ class NexsysProducts extends Command
         Log::info("monster alive");
         try{
 
-            //$connection = ssh2_connect('200.27.164.195', 3390);
-            //ssh2_auth_password($connection, 'root', 'Terminal*1');
+            $connection = ssh2_connect('200.27.164.195', 3390);
+            ssh2_auth_password($connection, 'root', 'Terminal*1');
 
-            //ssh2_scp_recv($connection, '/home/ftpingram/CLPriceFileDeira.csv', public_path('/')."CLPriceFileDeira.csv");
-            //ssh2_scp_recv($connection, '/home/ftpingram/CLPriceFileDeira.csv.zip', public_path('/')."CLPriceFileDeira.csv.zip");
-            //ob_end_clean();
-            //system('unzip CLPriceFileDeira.csv.zip');
+            ssh2_scp_recv($connection, '/home/ftpingram/CLPriceFileDeira.csv', public_path('/')."CLPriceFileDeira.csv");
+            
+            system('unzip CLPriceFileDeira.csv.zip');
             sleep(10);
             Product::query()->update(["amount" => 0]);
-            /*Excel::import(new IngramImport, public_path('/').'CLPriceFileDeira.csv');
-            Log::info("reading done");*/
+            Excel::import(new IngramImport, public_path('/').'CLPriceFileDeira.csv');
+            Log::info("reading done");
 
         }catch(\Exception $e){
             Log::info($e->getMessage().", ln: ".$e->getLine());
         }
 
-        /*$url = "https://app.nexsysla.com/nexsysServiceSoap/NexsysServiceSoap?wsdl";
+        $url = "https://app.nexsysla.com/nexsysServiceSoap/NexsysServiceSoap?wsdl";
         $marks = [
             "3nStar",
             "ADATA",
@@ -234,7 +233,7 @@ class NexsysProducts extends Command
             $obj =Product::find($product->id);
             $obj->slug = str_replace("/", "-", $obj->slug);
             $obj->update();
-        }*/
+        }
     
     }
 }
