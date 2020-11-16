@@ -54,7 +54,7 @@ class NexsysProducts extends Command
         //ini_set("memory_limit","500M");
         ini_set('max_execution_time', 0);
 
-        /*try{
+        try{
             Log::info("backup");
             $filename='database_backup_'.date('G_a_m_d_y').'.sql';
 
@@ -66,36 +66,36 @@ class NexsysProducts extends Command
             
             Log::info($e->getMessage());
             
-        }*/
+        }
 
         //$params = ["encoding" => "UTF-8", "verifypeer" => false, "verifyhost" => false];
 
         Log::info("monster alive");
         try{
 
-            /*$connection = ssh2_connect('200.27.164.195', 3390);
+            $connection = ssh2_connect('200.27.164.195', 3390);
             ssh2_auth_password($connection, 'root', 'Terminal*1');
 
-            ssh2_scp_recv($connection, '/home/ftpingram/CLPriceFileDeira.csv', public_path('/')."CLPriceFileDeira.csv");*/
+            ssh2_scp_recv($connection, '/home/ftpingram/CLPriceFileDeira.csv', public_path('/')."CLPriceFileDeira.csv");
             //ssh2_scp_recv($connection, '/home/ftpingram/CLPriceFileDeira.csv.zip', public_path('/')."CLPriceFileDeira.csv.zip");
             //ob_end_clean();
             //system('unzip CLPriceFileDeira.csv.zip');
-            /*sleep(10);
-            Excel::import(new IngramImport, public_path('/').'CLPriceFileDeira.csv');
+            sleep(10);
             Product::update(["amount" => 0]);
+            /*Excel::import(new IngramImport, public_path('/').'CLPriceFileDeira.csv');
             Log::info("reading done");*/
 
         }catch(\Exception $e){
             Log::info($e->getMessage().", ln: ".$e->getLine());
         }
 
-        $url = "https://app.nexsysla.com/nexsysServiceSoap/NexsysServiceSoap?wsdl";
+        /*$url = "https://app.nexsysla.com/nexsysServiceSoap/NexsysServiceSoap?wsdl";
         $marks = [
-            /*"3nStar",
+            "3nStar",
             "ADATA",
-            "AOC",*/
+            "AOC",
             "APC",
-            /*"ARCServe",
+            "ARCServe",
             "Audiocodes",
             "Corel",
             "Datalogic",
@@ -125,7 +125,7 @@ class NexsysProducts extends Command
             "Red Hat",
             "Sophos",
             "Wacom",
-            "Xerox"*/
+            "Xerox"
         ];
 
         foreach($marks as $mark){
@@ -234,7 +234,7 @@ class NexsysProducts extends Command
             $obj =Product::find($product->id);
             $obj->slug = str_replace("/", "-", $obj->slug);
             $obj->update();
-        }
+        }*/
     
     }
 }
