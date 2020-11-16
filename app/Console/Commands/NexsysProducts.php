@@ -81,7 +81,7 @@ class NexsysProducts extends Command
             //ob_end_clean();
             //system('unzip CLPriceFileDeira.csv.zip');
             sleep(10);
-            Model::query()->update(["amount" => 0]);
+            Product::query()->update(["amount" => 0]);
             /*Excel::import(new IngramImport, public_path('/').'CLPriceFileDeira.csv');
             Log::info("reading done");*/
 
