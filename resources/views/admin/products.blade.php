@@ -66,9 +66,13 @@
                         <p class="">
                         @{{ product.name }}
                         </p>
-                        <button class="btn btn-success" @click="edit(product)" data-toggle="modal" data-target="#createProduct"><i class="fa fa-edit"></i></button>
-                        <button v-if="product.deleted_at == null" class="btn btn-danger" @click="erase(product.id)" title="ocultar"><i class="fa fa-ban"></i></button>
-                        <button v-else class="btn btn-info" @click="restore(product.id)" title="restaurar"><i class="fa fa-clone"></i></button>
+                        <div>
+                            <button class="btn btn-success" @click="edit(product)" data-toggle="modal" data-target="#createProduct"><i class="fa fa-edit"></i></button>
+                            <button v-if="product.deleted_at == null" class="btn btn-danger" @click="erase(product.id)" title="ocultar"><i class="fa fa-ban"></i></button>
+                            <button v-else class="btn btn-info" @click="restore(product.id)" title="restaurar"><i class="fa fa-clone"></i></button>
+                            <button v-if="product.is_external == false" class="btn btn-secondary" @click="hardDelete(product.id)" title="Eliminar"><i class="fa fa-trash"></i></button>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -934,6 +938,29 @@
                     } else {
                         return true;
                     }
+                },
+                hardDelete(id){
+
+                    if(confirm('¿Estás seguro?')){
+
+                        axios.post("{{ url('/admin/products/hard/delete') }}", {id: id})
+                        .then(res => {
+                            this.loading = false
+                            if(res.data.success == true){
+                                alertify.success(res.data.msg)
+                                this.fetch()
+                            }else{
+                                alertify.error(res.data.msg)
+                            }
+                            
+                        })
+                        .catch(err => {
+                            this.loading = false
+                            console.log(err.response.data)
+                        })
+
+                    }
+
                 }
 
             },

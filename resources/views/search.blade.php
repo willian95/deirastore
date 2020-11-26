@@ -70,9 +70,9 @@
                            
                         </div>
                         <div class="main-slider__text">
-                            <span>@{{ product.name }}</span>
+                            <span class="title">@{{ product.name }}</span>
                             <p class="title-brand">@{{ product.brand.name }}</p>
-                            <p class="title" v-if="product.category">@{{ product.category.name }}</p>
+                            <p v-if="product.category">@{{ product.category.name }}</p>
                             <span class="price" v-if="product.percentage_range_profit > 0 && product.percentage_range_profit != null">$ @{{ parseInt((dolarPrice * product.price_range_profit) + 1).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</span>
                             <span class="price" v-else>$ @{{  parseInt((dolarPrice * product.external_price) + 1).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</span>
                             <!--<span class="price" v-if="product.external_price > 0">$ @{{ parseInt((product.external_price * dolarPrice) + 1).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</span>
