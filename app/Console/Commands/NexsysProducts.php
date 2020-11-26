@@ -80,7 +80,7 @@ class NexsysProducts extends Command
             
             //system('unzip CLPriceFileDeira.csv.zip');
             sleep(10);
-            Product::query()->update(["amount" => 0]);
+            Product::query()->where("is_external", 1)->update(["amount" => 0]);
             Excel::import(new IngramImport, public_path('/').'CLPriceFileDeira.csv');
             Log::info("reading done");
 
