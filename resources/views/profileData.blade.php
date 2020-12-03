@@ -140,7 +140,7 @@
                         </div>
 
                     
-                            <div class="row" style="width: 100%">
+                            {{--<div class="row" style="width: 100%">
                                 <div class="col-12">
                                     
                                     <div class="form-grid__item form-check">
@@ -197,7 +197,7 @@
                                         <input  placeholder="Email de adminstradción" type="text" class="form-control" id="businessMail" v-model="businessMail" :disabled="readonly">
                                     </div>
                                 </div>
-                            </div>
+                            </div>--}}
                                 
                         
                      

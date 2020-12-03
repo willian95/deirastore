@@ -60,6 +60,7 @@ class BannerController extends Controller
                 $banner->button_color = $request->buttonColor;
                 $banner->button_text_color = $request->buttonTextColor;
                 $banner->location = $request->location;
+                $banner->vertical_position = $request->verticalPosition;
 
                 $count = Banner::where("location", $request->location)->where("size", $request->size)->count();
                 $banner->order = $count + 1;
@@ -198,10 +199,8 @@ class BannerController extends Controller
             }else{
                 $banner->location = $request->location;     
             }
-           
 
-            //dd($banner);
-                //dd($banner);
+            $banner->vertical_position = $request->verticalPosition;
 
             $banner->update();
 

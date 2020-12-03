@@ -240,6 +240,13 @@ Route::get('/categories', function(){
     return view('categories');
 });
 
+Route::get("wishlist", "WishlistController@index");
+Route::get("wishlist-fetch-products", "WishlistController@fetch");
+Route::post("wishlist-add", "WishlistController@add");
+Route::post("wishlist-remove", "WishlistController@remove");
+Route::post("wishlist-check", "WishlistController@checkProduct");
+
+
 Route::prefix('admin')->middleware('admin')->group(function () {
     
     Route::get('/dashboard', function(){
@@ -258,6 +265,8 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         }
 
     });
+
+    Route::post("/products/hard/delete", "ProductController@hardDelete");
 
     Route::get('/brands', "BrandController@index")->name('admin.brands');
     Route::post('/brands/store', "BrandController@store")->name('admin.brands.store');
@@ -282,6 +291,12 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::post('/products/delete', "ProductController@delete")->name('admin.products.delete');
     Route::post('/products/restore', "ProductController@restore")->name('admin.products.restore');
     Route::get('/products/show/{id}', "ProductController@show")->name('admin.products.show');
+
+    Route::get('/feature/{productId}', "FeatureController@index");
+    Route::get('/feature/fetch/{productId}', "FeatureController@fetch");
+    Route::post('/feature/store', "FeatureController@store");
+    Route::post('/feature/update', "FeatureController@update");
+    Route::post('/feature/delete', "FeatureController@delete");
 
     Route::get('/purchase', "PurchaseController@index")->name('admin.purchase');
     Route::get('/purchase/product/{id}', "PurchaseController@show")->name('admin.purchase.show');

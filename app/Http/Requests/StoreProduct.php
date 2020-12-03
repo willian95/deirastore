@@ -32,7 +32,7 @@ class StoreProduct extends FormRequest
             "picture" => "required",
             "brandId" => "required|integer",
             "stock" => "required|integer",
-            "dataSourceId" =>"required|integer"
+            "dataSourceId" =>"nullable|integer"
         ];
     }
 

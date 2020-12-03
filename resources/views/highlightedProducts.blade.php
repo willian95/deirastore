@@ -65,8 +65,17 @@
                             <p class="title" >@{{ product.name }}</p>
                             <p class="title-brand">@{{ product.product.brand.name }}</p>
                             <span v-if="product.category">@{{ product.product.category.name }}</span>
-                            <span class="price" v-if="product.percentage_range_profit > 0 && product.percentage_range_profit != null">$ @{{ parseInt((dolarPrice * product.price_range_profit) + 1).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</span>
-                            <span class="price" v-else>$ @{{  parseInt((dolarPrice * product.external_price) + 1).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</span>
+                            <div v-if="product.sale_price == null || product.sale_price == 0">
+                                <span class="price" style="color: #d32b2b;" v-if="product.percentage_range_profit > 0 && product.percentage_range_profit != null"><strong>$ @{{ parseInt((dolarPrice * product.price_range_profit) + 1).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</strong></span>
+                                <span class="price" style="color: #d32b2b;" v-else><strong>$ @{{  parseInt((dolarPrice * product.external_price) + 1).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</strong></span>
+                            </div>
+                            <div v-else>
+                                <span class="price" style="color: #d32b2b;"><strong>$ @{{ parseInt((dolarPrice * product.sale_price) + 1).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</strong></span>
+                                
+                                <strike class="price" v-if="product.percentage_range_profit > 0 && product.percentage_range_profit != null"><small>$ @{{ parseInt((dolarPrice * product.price_range_profit) + 1).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</small></strike>
+                                <strike class="price" v-else><small>$ @{{  parseInt((dolarPrice * product.external_price) + 1).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</small></strike>
+
+                            </div>
                             <!--<p v-if="product.sub_price > 0" class="price-old">Normal <span>$ @{{ product.sub_price }}</span></p>-->
                         </div>
                     </a>

@@ -295,11 +295,34 @@
                                         <span>{{ $product->product->category->name }}</span>
                                         <br>
                                     @endif
-                                    @if($product->product->percentage_range_profit != 0 && $product->product->percentage_range_profit != null)
+                                    @if($product->product->sale_price == null || $product->product->sale_price == 0)
+                                    
+                                        @if($product->product->percentage_range_profit > 0 && $product->product->percentage_range_profit != null)
+                                            <span class="price">{{ number_format(intval($product->product->price_range_profit * App\DolarPrice::first()->price) + 1, 0, ",", ".") }}</span>
+                                        @else
+                                            <span class="price">{{ number_format(intval($product->product->external_price * App\DolarPrice::first()->price) + 1, 0, ",", ".") }}</span>
+                                        @endif
+                                    
+                                    @else
+
+                                        <span class="price" >$ {{ number_format(intval((App\DolarPrice::first()->price * $product->product->sale_price) + 1), 0,",", ".") }}</span>
+
+                                        @if($product->product->percentage_range_profit > 0 && $product->product->percentage_range_profit != null)
+                                            <strike class="price">
+                                                <small style="font-size: 14px; color: red;">$ {{ number_format((intval(App\DolarPrice::first()->price * $product->product->price_range_profit) + 1), 0, ",", ".") }}</small>
+                                            </strike>
+                                        @else
+                                            <strike class="price">
+                                                <small style="font-size: 14px; color: red;">$ {{  number_format((intval(App\DolarPrice::first()->price * $product->product->external_price) + 1), 0, ",", ".") }}</small>
+                                            </strike>
+                                        @endif
+
+                                    @endif
+                                    {{--@if($product->product->percentage_range_profit != 0 && $product->product->percentage_range_profit != null)
                                         <span class="price">$ {{ number_format(intval($product->product->price_range_profit * App\DolarPrice::first()->price) + 1, 0, ",", ".") }}</span>
                                     @else
                                         <span class="price">$ {{ number_format(intval($product->product->external_price * App\DolarPrice::first()->price) + 1, 0, ",", ".") }}</span>
-                                    @endif
+                                    @endif--}}
 
                                     
                                     

@@ -151,10 +151,17 @@ class CartController extends Controller
         
             if($products){
                 $price = 0;
-                if($products->percentage_range_profit > 0 && $products->percentage_range_profit != null){
-                    $price = (($products->price_range_profit * DolarPrice::first()->price) ) * $product["amount"];
+           
+                if($products->sale_price == 0 || $products->sale_price == null){
+                    if($products->percentage_range_profit > 0 && $products->percentage_range_profit != null){
+                        $price = (($products->price_range_profit * DolarPrice::first()->price) ) * $product["amount"];
+                    }else{
+                        $price = (($products->external_price * DolarPrice::first()->price) ) * $product["amount"];
+                    }
                 }else{
-                    $price = (($products->external_price * DolarPrice::first()->price) ) * $product["amount"];
+
+                    $price = (($products->sale_price * DolarPrice::first()->price) ) * $product["amount"];
+
                 }
                 $picture = "";
 
@@ -173,11 +180,16 @@ class CartController extends Controller
                 }
 
                 $individualPrice =0;
-                if($products->percentage_range_profit > 0 && $products->percentage_range_profit != null){
-                    $individualPrice = ($products->price_range_profit * DolarPrice::first()->price) + 1;
+                if($products->sale_price == 0 || $products->sale_price == null){
+                    if($products->percentage_range_profit > 0 && $products->percentage_range_profit != null){
+                        $individualPrice = ($products->price_range_profit * DolarPrice::first()->price) + 1;
+                    }else{
+                        $individualPrice = ($products->external_price * DolarPrice::first()->price) + 1;
+                    }
                 }else{
-                    $individualPrice = ($products->external_price * DolarPrice::first()->price) + 1;
+                    $individualPrice = ($products->sale_price * DolarPrice::first()->price) + 1;
                 }
+                
 
                 $total += $individualPrice * $product["amount"];
 

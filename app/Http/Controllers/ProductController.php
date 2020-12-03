@@ -84,8 +84,14 @@ class ProductController extends Controller
             $product->location = $request->location;
             $product->warranty = $request->warranty;
             $product->color = $request->color;
-            $product->data_source_id = $request->dataSourceId;
+            if(isset($request->dataSourceId)){
+                $product->data_source_id = $request->dataSourceId;
+            }else{
+                $product->data_source_id = 0;
+            }
+            
             $product->is_external = false;
+            $product->sale_price = $request->salePrice;
             
             $product->save();
 
@@ -217,6 +223,8 @@ class ProductController extends Controller
                 $product->data_source_id = $request->dataSourceId;
             }
 
+            $product->sale_price = $request->salePrice;
+
             $product->update();
 
             return response()->json(["success" => true, "msg" => "Producto actualizado"]);
@@ -288,6 +296,20 @@ class ProductController extends Controller
 
             return response()->json(["success" => false, "msg" => "Error en el servidor"]);
 
+        }
+
+    }
+
+    function hardDelete(Request $request){
+
+        try{
+
+            $product = Product::where("id", $request->id)->forceDelete();
+
+            return response()->json(["success" =>true, "msg" => "Producto eliminado completamente"]);
+
+        }catch(\Exception $e){
+            return response()->json(["success" => false, "msg" => "Error en el servidor", "err" => $e->getMessage()]);
         }
 
     }

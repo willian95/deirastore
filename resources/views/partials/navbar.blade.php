@@ -35,6 +35,7 @@
                                 @endif
                                 @if(Auth::user()->rol_id == 1)
                                     <a href="{{ url('/profile') }}" class="drow-none">Mis Datos</a>
+                                    <a href="{{ url('/wishlist') }}" class="drow-none">Wishlist</a>
                                 @endif
                                 <a href="{{ url('/logout') }}" class="drow-none">Cerrar sesión</a>
                             @else

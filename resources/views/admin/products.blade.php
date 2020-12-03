@@ -68,6 +68,7 @@
                         </p>
                         <div>
                             <button class="btn btn-success" @click="edit(product)" data-toggle="modal" data-target="#createProduct"><i class="fa fa-edit"></i></button>
+                            <a class="btn btn-secondary" :href="'{{ url('/admin/feature') }}'+'/'+product.id"><i class="fa fa-table"></i></a>
                             <button v-if="product.deleted_at == null" class="btn btn-danger" @click="erase(product.id)" title="ocultar"><i class="fa fa-ban"></i></button>
                             <button v-else class="btn btn-info" @click="restore(product.id)" title="restaurar"><i class="fa fa-clone"></i></button>
                             <button v-if="product.is_external == false" class="btn btn-secondary" @click="hardDelete(product.id)" title="Eliminar"><i class="fa fa-trash"></i></button>
@@ -195,8 +196,8 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <button type="button" class="btn btn-secondary" @click="closeCategoryForm()">Close</button>
-                                    <button type="button" class="btn btn-primary" @click="storeCategory()">Save changes</button>
+                                    <button type="button" class="btn btn-secondary" @click="closeCategoryForm()">Cerrar</button>
+                                    <button type="button" class="btn btn-primary" @click="storeCategory()">Crear categoría</button>
                                 </div>
                             </div>
                         </div>
@@ -233,15 +234,20 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <button type="button" class="btn btn-secondary" @click="closeBrandForm()">Close</button>
-                                    <button type="button" class="btn btn-primary" @click="storeBrand()">Save changes</button>
+                                    <button type="button" class="btn btn-secondary" @click="closeBrandForm()">Cerrar</button>
+                                    <button type="button" class="btn btn-primary" @click="storeBrand()">Crear marca</button>
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="price">precio (en Dólares)</label>
+                            <label for="price">Precio (en Dólares)</label>
                             <input type="text" class="form-control" id="price" v-model="price" @keypress="isNumberDot($event)">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="salePrice">Precio oferta (en Dólares)</label>
+                            <input type="text" class="form-control" id="salePrice" v-model="salePrice" @keypress="isNumberDot($event)">
                         </div>
 
                         <div class="form-group col-md-6">
@@ -340,8 +346,8 @@
                     
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" @click="store()">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" @click="store()">Crear</button>
                 </div>
             </div>
         </div>
@@ -368,8 +374,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" @click="storeCategory()">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" @click="storeCategory()">Crear categoría</button>
                 </div>
             </div>
         </div>
@@ -415,6 +421,7 @@
                     brands:[],
                     loading:false,
                     dataSourceId:"",
+                    salePrice:"",
                     //sku:"",
                     stock:"",
                     vpn:"",
@@ -498,6 +505,7 @@
                             formData.append("location", this.location)
                             formData.append("warranty", this.warranty)
                             formData.append("color", this.color)
+                            formData.append("salePrice", this.salePrice)
 
                             axios.post("{{ route('admin.products.store') }}", formData, {
                                 headers: {
@@ -796,6 +804,7 @@
                     formData.append("location", this.location)
                     formData.append("warranty", this.warranty)
                     formData.append("color", this.color)
+                    formData.append("salePrice", this.salePrice)
 
                     axios.post("{{ route('admin.products.update') }}", formData,  {
                         headers: {

@@ -4,6 +4,116 @@
 
     <div class="container bg" v-cloak>
 
+    <div class="row">
+
+                @foreach(App\Banner::where('size', 'large')->where('location', $slug)->where("vertical_position", "arriba")->orderBy("order")->get() as $banner)
+
+                    @php
+                        $float = "";
+                        if($banner->position == "izquierda"){
+                            $float = "left";
+                        }else{
+                            $float = "right";
+                        }
+
+                    @endphp
+
+                    <div class="col-12">
+                        <!--<div class="main-banner">-->
+                        @if($banner->link != "")
+                            <a href="{{ $banner->link }}" target="_blank">
+                        @endif
+                            <div class="main-banner__card-img">
+                                <img src="{{ asset('/images/banners/'.$banner->image) }}" alt="" style="width: 100%;">
+                                <!--<div class="main-banner__content">-->
+                                    <div class="title" style="text-align: {{ $float }};">
+                                        <h3 style="color: {{ $banner->title_color }}">{{ $banner->title }}</h3>
+                                        <p style="color: {{ $banner->text_color }}">{{ $banner->text }}</p>
+                                    </div>
+                                <!--</div>-->
+                            </div>
+
+                        @if($banner->link != "")
+                            </a>
+                        @endif
+                        <!--</div>-->
+                    </div>
+                @endforeach
+
+            </div>
+
+
+            <div class="row">
+                @foreach(App\Banner::where('size', 'medium')->where('location', $slug)->where("vertical_position", "arriba")->orderBy("order")->get() as $banner)
+
+                    @php
+                        $float = "";
+                        if($banner->position == "izquierda"){
+                            $float = "left";
+                        }else{
+                            $float = "right";
+                        }
+
+                    @endphp
+
+                    <div class="col-md-6">
+                        @if($banner->link != "")
+                            <a href="{{ $banner->link }}" target="_blank">
+                        @endif
+                        <div class="main-banner__card-img">
+                            <img src="{{ asset('/images/banners/'.$banner->image) }}" alt="" style="width: 100%;">
+                            <div class="title" style="text-align: {{ $float }};">
+                                <h3 style="color: {{ $banner->title_color }}">{{ $banner->title }}</h3>
+                                <p style="color: {{ $banner->text_color }}">{{ $banner->text }}</p>
+                                @if($banner->link != "" && $banner->button_text != "")
+                                    <a href="{{ $banner->link }}" target="_blank" class="btn-general" style="color: {{ $banner->button_text_color }}; background-color: {{ $banner->button_color }};">{{ $banner->button_text }}</a>
+                                @endif
+                            </div>
+                        </div>
+                        @if($banner->link != "")
+                            </a>
+                        @endif
+                    </div>
+
+                @endforeach
+            </div>
+        
+
+            <div class="row">
+                @foreach(App\Banner::where('size', 'small')->where('location', $slug)->where("vertical_position", "arriba")->orderBy("order")->get() as $banner)
+                    
+                    @php
+                        $float = "";
+                        if($banner->position == "izquierda"){
+                            $float = "left";
+                        }else{
+                            $float = "right";
+                        }
+
+                    @endphp
+
+                    <div class="col-md-3">
+                        @if($banner->link != "")
+                            <a href="{{ $banner->link }}" target="_blank">
+                        @endif
+                        <div class="main-banner__card-img">
+                            <img src="{{ asset('/images/banners/'.$banner->image) }}" alt="" style="width: 100%;">
+                            <div class="title" style="text-align: {{ $float }} !important">
+                                <h3 style="color: {{ $banner->title_color }}">{{ $banner->title }}</h3>
+                                <p style="color: {{ $banner->text_color }}">{{ $banner->text }}</p>
+                                @if($banner->link != "" || $banner->button_text != "")
+                                <a href="{{ $banner->link }}" target="_blank" class="btn-general" style="color: {{ $banner->button_text_color }}; background-color: {{ $banner->button_color }};">{{ $banner->button_text }}</a>
+                                @endif
+                            </div>
+                        </div>
+                        @if($banner->link != "")
+                            </a>
+                        @endif
+                    </div>
+
+                @endforeach
+            </div>
+
         <div class="title__general title__general-start fadeInUp wow animated pag-center">
             <p><strong>{{ $brand->name }}</strong></p>
             
@@ -73,8 +183,18 @@
                             <p class="title" >@{{ product.name }}</p>
                             <p class="title-brand">@{{ product.brand.name }}</p>
                             <span v-if="product.category">@{{ product.category.name }}</span>
-                            <span class="price" v-if="product.percentage_range_profit > 0 && product.percentage_range_profit != null">$ @{{ parseInt((dolarPrice * product.price_range_profit) + 1).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</span>
-                            <span class="price" v-else>$ @{{  parseInt((dolarPrice * product.external_price) + 1).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</span>
+                            
+                            <div v-if="product.sale_price == null || product.sale_price == 0">
+                                <span class="price" style="color: #d32b2b;" v-if="product.percentage_range_profit > 0 && product.percentage_range_profit != null"><strong>$ @{{ parseInt((dolarPrice * product.price_range_profit) + 1).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</strong></span>
+                                <span class="price" style="color: #d32b2b;" v-else><strong>$ @{{  parseInt((dolarPrice * product.external_price) + 1).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</strong></span>
+                            </div>
+                            <div v-else>
+                                <span class="price" style="color: #d32b2b;"><strong>$ @{{ parseInt((dolarPrice * product.sale_price) + 1).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</strong></span>
+                                
+                                <strike class="price" v-if="product.percentage_range_profit > 0 && product.percentage_range_profit != null"><small>$ @{{ parseInt((dolarPrice * product.price_range_profit) + 1).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</small></strike>
+                                <strike class="price" v-else><small>$ @{{  parseInt((dolarPrice * product.external_price) + 1).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</small></strike>
+
+                            </div>
                             <!--<p v-if="product.sub_price > 0" class="price-old">Normal <span>$ @{{ product.sub_price }}</span></p>-->
                         </div>
                     </a>
@@ -111,7 +231,7 @@
      
         <div class="row">
 
-            @foreach(App\Banner::where('size', 'large')->where('location', $slug)->orderBy("order")->get() as $banner)
+            @foreach(App\Banner::where('size', 'large')->where('location', $slug)->where("vertical_position", "abajo")->orderBy("order")->get() as $banner)
 
                 @php
                     $float = "";
@@ -149,7 +269,7 @@
 
 
         <div class="row">
-        @foreach(App\Banner::where('size', 'medium')->where('location', $slug)->orderBy("order")->get() as $banner)
+        @foreach(App\Banner::where('size', 'medium')->where('location', $slug)->where("vertical_position", "abajo")->orderBy("order")->get() as $banner)
 
             @php
                 $float = "";
@@ -185,7 +305,7 @@
         
 
         <div class="row">
-        @foreach(App\Banner::where('size', 'small')->where('location', $slug)->orderBy("order")->get() as $banner)
+        @foreach(App\Banner::where('size', 'small')->where('location', $slug)->where("vertical_position", "abajo")->orderBy("order")->get() as $banner)
             
             @php
                 $float = "";

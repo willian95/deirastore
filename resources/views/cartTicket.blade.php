@@ -29,25 +29,6 @@
         </div>
 
         <div class="row">
-            <div class="col-6">
-                <p class="text-center">
-                    <button class="btn btn-success btn-general2 pl-4 pr-4" @click="setBoleta()" v-if="!authCheck" data-toggle="modal" data-target="#boletaModal">Boleta</button>
-                    <button class="btn btn-success btn-general2 pl-4 pr-4" v-else @click="boleta()">Boleta</button>
-                </p>
-            </div>
-            
-            <div class="col-6">
-                <p class="text-center">
-                    <button class="btn btn-success btn-general2 pl-4 pr-4 btn-general2_bg" v-if="!authCheck" @click="setFactura()" data-toggle="modal" data-target="#facturaModal">Factura</button>
-                    <button class="btn btn-success btn-general2 pl-4 pr-4" v-else @click="factura()">Factura</button>
-                </p>
-                <p class="text-center">
-                    {{ App\Text::where("site_location", "Tipo de facturación")->where("type", "texto")->first()->text }}
-                </p>
-            </div>
-        
-        </div>
-        <div class="row">
             <div class="col-12">
                 <table class="table table-bordered">
                     <thead>
@@ -97,6 +78,26 @@
 
             </div>
 
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <p class="text-center">
+                    <button class="btn btn-danger btn-general pl-4 pr-4" @click="setBoleta()" v-if="!authCheck" data-toggle="modal" data-target="#boletaModal">Boleta</button>
+                    <button class="btn btn-danger btn-general pl-4 pr-4" v-else @click="boleta()">Boleta</button>
+                </p>
+            </div>
+            
+            <div class="col-6">
+                <p class="text-center">
+                    <button class="btn btn-info btn-general3 pl-4 pr-4 btn-general2_bg" v-if="!authCheck" @click="setFactura()" data-toggle="modal" data-target="#facturaModal">Factura</button>
+                    <button class="btn btn-info btn-general3 pl-4 pr-4" v-else @click="factura()">Factura</button>
+                </p>
+                <p class="text-center">
+                    {{ App\Text::where("site_location", "Tipo de facturación")->where("type", "texto")->first()->text }}
+                </p>
+            </div>
+        
         </div>
 
 

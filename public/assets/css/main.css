@@ -581,6 +581,35 @@ header {
     text-decoration: none !important;
 }
 
+
+.btn-general3 {
+    color: #fff;
+    background: #5494a3;
+    padding: 10px 10px 10px 10px;
+    border-radius: 50px;
+    font-size: 16px;
+    outline: #5494a3;
+    border: 1px solid #5494a3;
+    text-decoration: none !important;
+    transition: .5s;
+    font-weight: 400;
+}
+
+.btn-general3_bg {
+    color: #5494a3;
+    background: #ffffff;
+}
+
+.btn-general3:hover {
+    background: #fff;
+    color: #5494a3;
+
+    border-radius: 50px;
+    font-size: 1rem;
+    outline: transparent;
+    text-decoration: none !important;
+}
+
 .main-banner__card {
     display: grid;
     grid-template-columns: 25% 50% 25%;

@@ -94,11 +94,11 @@
                                                 <span>Seguimiento online</span>
                                             </div>
                                         </div>
-                                        <div class="carrito_item">
-                                            <img src="assets/img/deira-47.png" alt="">
+                                        <div class="carrito_item" style="border: 1px solid #d4cfcf; padding-left: 5px;">
+                                            <img src="{{ url('assets/img/deira-47.png') }}" alt="">
                                         </div>
                                         <div class="carrito_item">
-                                            <img src="assets/img/auricular.svg" alt="">
+                                            <img src="{{ url('assets/img/auricular.svg') }}" alt="">
                                             <div>
                                                 <p>CONTÁCTANOS </p>
                                                 <span>+56 22 674 8000</span>

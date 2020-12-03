@@ -111,6 +111,13 @@
                         </select>   
                     </div>
                     <div class="form-group">
+                        <label for="">Posición Vetical</label>
+                        <select class="form-control" v-model="verticalPosition">
+                            <option value="arriba">Arriba</option>
+                            <option value="abajo">Abajo</option>
+                        </select>   
+                    </div>
+                    <div class="form-group">
                         <label for="">Titulo</label>
                         <input type="text" class="form-control" v-model="title">
                     </div>
@@ -205,6 +212,7 @@
                     buttonTextColor:"",
                     textColor:"",
                     titleColor:"",
+                    verticalPosition:"abajo",
                     brands:[],
                     location:""
 
@@ -218,7 +226,7 @@
                         this.update()
                     }else{
 
-                        axios.post("{{ route('admin.banner.store') }}", {location: this.location, titleColor: this.titleColor, textColor: this.textColor, buttonTextColor: this.buttonTextColor, buttonColor: this.buttonColor, buttonText: this.buttonText, text: this.text, title: this.title, position: this.position, link: this.link, size: this.size, image: this.picture})
+                        axios.post("{{ route('admin.banner.store') }}", {location: this.location, titleColor: this.titleColor, textColor: this.textColor, buttonTextColor: this.buttonTextColor, buttonColor: this.buttonColor, buttonText: this.buttonText, text: this.text, title: this.title, position: this.position, link: this.link, size: this.size, image: this.picture, verticalPosition: this.verticalPosition})
                         .then(res => {
                             
                             if(res.data.success == true){
@@ -235,6 +243,7 @@
                                 this.titleColor = ""
                                 this.location = "landing"
                                 this.imagePreview = ""
+                                this.verticalPosition = "abajo"
                                 $("#image").val(null)
                                 this.fetch()
 
@@ -306,6 +315,7 @@
                     this.buttonTextColor = banner.button_text_color
                     this.location = banner.location
                     this.position = banner.position 
+                    this.verticalPosition =banner.vertical_position
                     this.imagePreview = "{{ url('/') }}"+"/images/banners/"+banner.image
 
                 },
@@ -326,6 +336,7 @@
                     formData.append("textColor", this.textColor)
                     formData.append("titleColor", this.titleColor)
                     formData.append("location", this.location)
+                    formData.append("verticalPosition", this.verticalPosition)
 
                     axios.post("{{ route('admin.banner.update') }}", formData)
                     .then(res => {
@@ -342,6 +353,7 @@
                             this.textColor = ""
                             this.titleColor = ""
                             this.location = "landing"
+                            this.verticalPosition = "abajo"
                             this.imagePreview = ""
                             $("#image").val(null)
                             this.fetch()

@@ -86,11 +86,12 @@
                                                 <td>$ @{{ parseInt(item.price).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</td>
                                                 <td>
                                                     <div class="d-flex">
-                                                        <button class="btn btn-secondary" @click="addAmount(item.id, item.amount, item.maxAmount)">+</button>
+                                                        <button class="btn btn-secondary" @click="substractAmount(item.id, item.amount)" style="padding: 1px 8px;">-</button>
                                                         <div class="text-center" style="width: 20px;">
                                                             @{{ item.amount }}
                                                         </div>
-                                                        <button class="btn btn-secondary" @click="substractAmount(item.id, item.amount)">-</button>
+                                                        <button class="btn btn-secondary" @click="addAmount(item.id, item.amount, item.maxAmount)" style="padding: 1px 8px;">+</button>
+                                                        
                                                         <button class="btn btn-danger" style="margin-left: 10px;" @click="erase(item.id)">
                                                             <i class="fa fa-trash"></i>
                                                         </button>

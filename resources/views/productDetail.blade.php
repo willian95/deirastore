@@ -23,11 +23,36 @@
 
                             <div class="div-informacion-detalles">
                                 <h2><strong>{{ $product->name }}</strong></h2>
-                                <h3>$  @if($product->percentage_range_profit != 0 && $product->percentage_range_profit != null)
+
+                                @if($product->sale_price == null || $product->sale_price == 0)
+                                    
+                                    @if($product->percentage_range_profit > 0 && $product->percentage_range_profit != null)
+                                        <h4>{{ number_format(intval($product->price_range_profit * App\DolarPrice::first()->price) + 1, 0, ",", ".") }}</h4>
+                                    @else
+                                        <h4>{{ number_format(intval($product->external_price * App\DolarPrice::first()->price) + 1, 0, ",", ".") }}</h4>
+                                    @endif
+                                
+                                @else
+
+                                    <h4 class="price" >$ {{ number_format(intval((App\DolarPrice::first()->price * $product->sale_price) + 1), 0,",", ".") }}</h4>
+
+                                    @if($product->percentage_range_profit > 0 && $product->percentage_range_profit != null)
+                                        <strike class="price">
+                                            <small style="font-size: 14px; color: red;">$ {{ number_format((intval(App\DolarPrice::first()->price * $product->price_range_profit) + 1), 0, ",", ".") }}</small>
+                                        </strike>
+                                    @else
+                                        <strike class="price">
+                                            <small style="font-size: 14px; color: red;">$ {{  number_format((intval(App\DolarPrice::first()->price * $product->external_price) + 1), 0, ",", ".") }}</small>
+                                        </strike>
+                                    @endif
+
+                                @endif
+
+                                {{--<h3>$  @if($product->percentage_range_profit != 0 && $product->percentage_range_profit != null)
                                         {{ number_format(intval($product->price_range_profit * App\DolarPrice::first()->price) + 1, 0, ",", ".") }}
                                     @else
                                         {{ number_format(intval($product->external_price * App\DolarPrice::first()->price) + 1, 0, ",", ".") }}
-                                    @endif
+                                    @endif--}}
                                 
                                 <h5>{{ $product->sub_title }}</h5>
                                 <ul>
@@ -35,6 +60,15 @@
                                     <li><strong>VPN:</strong> {{ $product->sku }}</li>
                                     <li><strong>STOCK:</strong> {{ $product->amount }}</li>
                                 </ul>
+
+                                @if(\Auth::check() && \Auth::user())
+                                <ul>
+                                    <li>
+                                        <i style="cursor:pointer; font-size: 40px;" class="fa fa-heart-o" @click="addToWishlist()" v-if="isFavorite == false"></i>
+                                        <i style="cursor:pointer; font-size: 40px;" class="fa fa-heart" @click="removeFromWishlist()" v-else></i>
+                                    </li>
+                                </ul>
+                                @endif
 
 
                                 @if($product->amount > 0)
@@ -252,6 +286,12 @@
                                                     <td>{{ $product->warranty }}</td>
                                                 </tr>
                                                 @endif
+                                                @foreach(App\Feature::where("product_id", $product->id)->get() as $feature)
+                                                    <tr>
+                                                        <td>@{{ $feature->feature }}</td>
+                                                        <td>@{{ $feature->description }}</td>
+                                                    </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -261,13 +301,14 @@
 
                         </div>
 
-                        <div class="card">
+                        {{--<div class="card">
                             <a class="collapsed card-link" data-toggle="collapse" href="#collapseTres">
                                 <div class="card-header acordeon-2">
                                     <h2><strong>Calificación </strong>y Comentarios</h2>
                                 </div>
+                            </a>
                         </div>
-                        </a>
+                        
                         <div id="collapseTres" class="collapse" data-parent="#accordion">
                             <div class="card-body">
                                 <div class="container comentarios">
@@ -326,7 +367,7 @@
                                 </div>
 
                             </div>
-                        </div>
+                        </div>--}}
                     </div>
                 </div>
             </div>
@@ -408,7 +449,8 @@
                     comments:[],
                     comment:"",
                     maxAmount:"{!! $product->amount !!}",
-                    auth: '{!! \Auth::check() !!}'
+                    auth: '{!! \Auth::check() !!}',
+                    isFavorite:false
                 }
             },
             methods:{
@@ -532,11 +574,59 @@
 
                     alertify.success("Producto añadido al carrito")
 
+                },
+                addToWishlist(){
+
+                    axios.post("{{ url('wishlist-add') }}", {"productId": this.productId}).then(res => {
+
+                        if(res.data.success == true){
+
+                            alertify.success(res.data.msg)
+                            this.isFavorite = true
+
+                        }else{
+
+                            alertify.error(res.data.msg)
+
+                        }
+
+                    })
+
+                },
+                removeFromWishlist(){
+
+                    axios.post("{{ url('wishlist-remove') }}", {"productId": this.productId}).then(res => {
+
+                        if(res.data.success == true){
+
+                            alertify.success(res.data.msg)
+                            this.isFavorite = false
+
+                        }else{
+
+                            alertify.error(res.data.msg)
+
+                        }
+
+                    })
+
+                },
+                checkWishlist(){
+
+                    axios.post("{{ url('wishlist-check') }}", {"productId": this.productId}).then(res => {
+
+                        if(res.data.wish != null){
+                            this.isFavorite = true
+                        }
+
+                    })
+
                 }
 
             },
             mounted(){
                 this.fetch()
+                this.checkWishlist()
                 //this.test()
 
             }

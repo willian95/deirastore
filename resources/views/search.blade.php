@@ -73,8 +73,19 @@
                             <span class="title">@{{ product.name }}</span>
                             <p class="title-brand">@{{ product.brand.name }}</p>
                             <p v-if="product.category">@{{ product.category.name }}</p>
-                            <span class="price" v-if="product.percentage_range_profit > 0 && product.percentage_range_profit != null">$ @{{ parseInt((dolarPrice * product.price_range_profit) + 1).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</span>
-                            <span class="price" v-else>$ @{{  parseInt((dolarPrice * product.external_price) + 1).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</span>
+
+                            <div v-if="product.sale_price == null || product.sale_price == 0">
+                                <span class="price" v-if="product.percentage_range_profit > 0 && product.percentage_range_profit != null">$ @{{ parseInt((dolarPrice * product.price_range_profit) + 1).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</span>
+                                <span class="price" v-else>$ @{{  parseInt((dolarPrice * product.external_price) + 1).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</span>
+                            </div>
+                            <div v-else>
+                                <span class="price" >$ @{{ parseInt((dolarPrice * product.sale_price) + 1).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</span>
+                                
+                                <strike class="price" v-if="product.percentage_range_profit > 0 && product.percentage_range_profit != null"><small>$ @{{ parseInt((dolarPrice * product.price_range_profit) + 1).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</small></strike>
+                                <strike class="price" v-else><small>$ @{{  parseInt((dolarPrice * product.external_price) + 1).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</small></strike>
+
+                            </div>
+
                             <!--<span class="price" v-if="product.external_price > 0">$ @{{ parseInt((product.external_price * dolarPrice) + 1).toString().replace(/\B(?=(\d{3})+\b)/g, ".") }}</span>
                             <span class="price" v-else>$ @{{ product.price }}</span>-->
                             
