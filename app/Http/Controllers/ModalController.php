@@ -60,6 +60,8 @@ class ModalController extends Controller
 
             $modal = Modal::first();
 
+            dd($fileName);
+
             if($modal != null){
                 $modal->status = $request->status;
                 $modal->text = $request->text;
