@@ -288,8 +288,8 @@
                                                 @endif
                                                 @foreach(App\Feature::where("product_id", $product->id)->get() as $feature)
                                                     <tr>
-                                                        <td>@{{ $feature->feature }}</td>
-                                                        <td>@{{ $feature->description }}</td>
+                                                        <td>{{ $feature->feature }}</td>
+                                                        <td>{{ $feature->description }}</td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
