@@ -221,6 +221,12 @@
                                                     </td>
                                                 </tr>
                                                 @endforeach
+                                                @foreach(App\Feature::where("product_id", $product->id)->get() as $feature)
+                                                    <tr>
+                                                        <td>{{ $feature->feature }}</td>
+                                                        <td>{{ $feature->description }}</td>
+                                                    </tr>
+                                                @endforeach
                                                 
                                             </tbody>
                                         </table>
@@ -286,7 +292,7 @@
                                                     <td>{{ $product->warranty }}</td>
                                                 </tr>
                                                 @endif
-                                                {{ $product->id }}
+                                              
                                                 @foreach(App\Feature::where("product_id", $product->id)->get() as $feature)
                                                     <tr>
                                                         <td>{{ $feature->feature }}</td>
