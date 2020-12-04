@@ -60,9 +60,10 @@ class ModalController extends Controller
 
             $modal = Modal::first();
 
-            dd($fileName);
+            
 
             if($modal != null){
+                dd("entre1");
                 $modal->status = $request->status;
                 $modal->text = $request->text;
                 if($request->get('image') != null){
@@ -73,6 +74,7 @@ class ModalController extends Controller
                 }
                 $modal->update();
             }else{
+                dd("entre2");
                 $modal = new Modal;
                 
                 $modal->status = $request->status;
