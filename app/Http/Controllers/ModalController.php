@@ -63,15 +63,19 @@ class ModalController extends Controller
             
 
             if($modal != null){
-                dd("entre1");
+               
                 $modal->status = $request->status;
                 $modal->text = $request->text;
                 if($request->get('image') != null){
                     $modal->image = url('/').'/images/modal/'.$fileName;
+                    dd("entre1");
                 }
+                
                 if($request->deleteImage == true){
                     $modal->image = null;
+                    dd("entre2");
                 }
+                dd("entre3");
                 $modal->update();
             }else{
                 dd("entre2");
