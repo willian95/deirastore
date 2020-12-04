@@ -2785,7 +2785,7 @@ img.lista-pedido {
 }
 
 .show-on-mobile{
-    display: none;
+    display: none !important;
 }
 
 .stock{
