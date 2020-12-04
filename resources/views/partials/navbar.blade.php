@@ -59,16 +59,16 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             @if(Auth::check() && Auth::user()->id)
                                 @if(Auth::user()->rol_id == 3)
-                                    <a href="{{ url('/admin/dashboard') }}" class="drow-none">Administrador</a>
+                                    <a href="{{ url('/admin/dashboard') }}" class="drow-none" style="width: 100% !important">Administrador</a>
                                 @endif
                                 @if(Auth::user()->rol_id == 1)
-                                    <a href="{{ url('/profile') }}" class="drow-none">Mis Datos</a>
-                                    <a href="{{ url('/wishlist') }}" class="drow-none">Wishlist</a>
+                                    <a href="{{ url('/profile') }}" class="drow-none" style="width: 100% !important">Mis Datos</a>
+                                    <a href="{{ url('/wishlist') }}" class="drow-none" style="width: 100% !important">Wishlist</a>
                                 @endif
-                                <a href="{{ url('/logout') }}" class="drow-none">Cerrar sesión</a>
+                                <a href="{{ url('/logout') }}" class="drow-none" style="width: 100% !important">Cerrar sesión</a>
                             @else
-                                <a class="drow-none" href="{{ url('/login') }}">Iniciar sesión</a>
-                                <a class="drow-none" href="{{ url('/register') }}">Registrarme</a>
+                                <a class="drow-none" href="{{ url('/login') }}" style="width: 100% !important">Iniciar sesión</a>
+                                <a class="drow-none" href="{{ url('/register') }}" style="width: 100% !important">Registrarme</a>
                             @endif
                         </div>
                     </li>
