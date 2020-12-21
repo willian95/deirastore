@@ -113,7 +113,7 @@
                     formData.append("deleteImage", this.deleteImage)
                     formData.append("status", this.status)
 
-                    axios.post("{{ url('admin/pop-up/update') }}", formData)
+                    axios.post("{{ url('admin/pop-up/update') }}", {"text": this.text, "image": this.picture, "deleteImage": this.deleteImage, "status": this.status})
                     .then(res => {
                         
                         this.loading = false

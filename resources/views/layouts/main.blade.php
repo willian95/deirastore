@@ -101,7 +101,7 @@
             methods: {
 
                 search() {
-
+                 
                     if (this.searchText != "") {
                         localStorage.setItem("search", this.searchText)
                         window.location.href = "{{ url('/search') }}"

@@ -1,6 +1,6 @@
 @media (max-width: 767px) {
     .show-on-mobile {
-        display: block;
+        display: block !important;
     }
 
     .offcanvas-collapse {
@@ -539,8 +539,8 @@
     }
 
     .main-menu__top-item .btn__user a {
-        height: 39px;
-        width: 39px !important;
+        height: 30px;
+        width: 30px !important;
         box-shadow: 0px 0px 12px #0000002b;
     }
     .active_user {
@@ -687,8 +687,8 @@
     }
 
     .main-menu__top-item ul li a {
-        height: 40px;
-        width: 40px;
+        height: 30px;
+        width: 30px;
         box-shadow: 0px 0px 12px #0000002b;
     }
 

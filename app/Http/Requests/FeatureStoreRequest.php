@@ -24,16 +24,14 @@ class FeatureStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            "feature" => "required",
-            "description" => "required"
+            "feature" => "required"
         ];
     }
 
     public function messages()
     {
         return [
-            "feature.required" => "Característica es requerida",
-            "description.required" => "Descripción es requerida"
+            "feature.required" => "Característica es requerida"
         ];
     }
 }

@@ -2,6 +2,29 @@
 
 @section('content')
 
+    <style>
+
+        #feature-table table{
+            position: relative;
+            right: 48px;
+            left: 0;
+            width: 100% !important;
+            margin-top: 4%;
+            margin-left: 0%;
+            font-size: 10px;
+            border: 1px solid #dee2e6;
+            margin-bottom: 1rem;
+            background-color: transparent;
+        }
+
+        #feature-table td{
+            border: 1px solid #dee2e6;
+            font-size: 1rem;
+            padding: 5px;
+        }
+
+    </style>
+
     <div class="container bg">
         <div id="product-detail">
             <section class="informacion-detalles container" v-cloak>
@@ -221,15 +244,12 @@
                                                     </td>
                                                 </tr>
                                                 @endforeach
-                                                @foreach(App\Feature::where("product_id", $product->id)->get() as $feature)
-                                                    <tr>
-                                                        <td>{{ $feature->feature }}</td>
-                                                        <td>{{ $feature->description }}</td>
-                                                    </tr>
-                                                @endforeach
                                                 
                                             </tbody>
                                         </table>
+                                       <div id="feature-table">
+                                        {!! $product->feature !!}
+                                       </div>
                                     </div>
                                 </div>
                             </div>

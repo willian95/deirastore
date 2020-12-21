@@ -1,4 +1,31 @@
+<!-- Modal -->
+<div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" id=search-area-mobile>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Búsqueda</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+            <input type="text" id="search" class="form-control" v-model="searchText" placeholder="Buscar">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" @click="search()">Buscar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <header>
+
+    
+
+
     <div class="container">
         <div class="main-menu__top">
             <div class="main-menu__top-item">
@@ -13,10 +40,11 @@
                 </form>
             </div>
             <div class="main-menu__top-item table_nav">
-                <ul>                  
+                <ul>
+                                     
                     <li class="nav-item dropdown arrow  btn__user">
                         @if(\Auth::check() && \Auth::user()->id)
-                            <a class="nav-link dropdown-toggle user_content"  href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle user_content"  href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-right: -10px;">
                                 <img src="{{ asset('assets/img/persona2.svg') }}" alt="" style="    width: 20px;
                                 margin-right: 10px;">   {{ substr(Auth::user()->name, 0, 10) }} @if(strlen(Auth::user()->name) > 10).@endif
                                 <div class="active_user">
@@ -24,30 +52,38 @@
                                 </div>
                             </a>
                         @else
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-right: -10px;">
                                 <img src="{{ asset('assets/img/persona2.svg') }}" alt="">
                             </a>    
                         @endif
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             @if(Auth::check() && Auth::user()->id)
                                 @if(Auth::user()->rol_id == 3)
-                                    <a href="{{ url('/admin/dashboard') }}" class="drow-none">Administrador</a>
+                                    <a href="{{ url('/admin/dashboard') }}" class="drow-none" style="width: 100% !important">Administrador</a>
                                 @endif
                                 @if(Auth::user()->rol_id == 1)
-                                    <a href="{{ url('/profile') }}" class="drow-none">Mis Datos</a>
-                                    <a href="{{ url('/wishlist') }}" class="drow-none">Wishlist</a>
+                                    <a href="{{ url('/profile') }}" class="drow-none" style="width: 100% !important">Mis Datos</a>
+                                    <a href="{{ url('/wishlist') }}" class="drow-none" style="width: 100% !important">Wishlist</a>
                                 @endif
-                                <a href="{{ url('/logout') }}" class="drow-none">Cerrar sesión</a>
+                                <a href="{{ url('/logout') }}" class="drow-none" style="width: 100% !important">Cerrar sesión</a>
                             @else
-                                <a class="drow-none" href="{{ url('/login') }}">Iniciar sesión</a>
-                                <a class="drow-none" href="{{ url('/register') }}">Registrarme</a>
+                                <a class="drow-none" href="{{ url('/login') }}" style="width: 100% !important">Iniciar sesión</a>
+                                <a class="drow-none" href="{{ url('/register') }}" style="width: 100% !important">Registrarme</a>
                             @endif
                         </div>
                     </li>
 
                     <!--<li><a href=""><img src="{{ asset('assets/img/telefono.svg') }}" alt=""></a></li>-->
                     
-                    <li><a class="cart__btn" href="{{ url('/cart') }}"><img src="{{ asset('assets/img/carro2.svg') }}" alt=""><span id="total"></span></a></li>
+                    <li class="nav-item btn__user"><a class="cart__btn" href="{{ url('/cart') }}"><img src="{{ asset('assets/img/carro2.svg') }}" alt=""><span id="total"></span></a></li>
+
+                    <li class="nav-item btn__user">
+                        
+                        <a class="user_content show-on-mobile" style="margin-left: 8px !important;" data-toggle="modal" data-target="#searchModal">
+                            <img src="{{ asset('assets/img/lupa.svg') }}" alt="" style="width: 15px;margin-right: 4px;">
+                        </a>
+                        
+                    </li> 
                     
                         <script>
                             
@@ -82,6 +118,8 @@
         </div>
     </div>
 
+    
+
 
     <nav class="navbar navbar-expand-md fixed-top navbar-fixed-js">
         <div class="container">
@@ -94,10 +132,6 @@
             </div>
             <div class="navbar-collapse offcanvas-collapse">
                 <ul class="navbar-nav m-auto">
-
-                    <li class="nav-item navbar-custom hidden-md-up"   id="search-area-mobile">
-                        <input type="text" id="search" class="form-control" v-model="searchText" placeholder="Buscar" v-on:keyup.enter="search()">
-                    </li>
 
                     <li class="nav-item navbar-custom">
                         <a class="nav-link" href="{{ route('brands.all') }}">Marcas </a>
