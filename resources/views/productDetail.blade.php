@@ -14,7 +14,7 @@
             font-size: 10px;
             border: 1px solid #dee2e6;
             margin-bottom: 1rem;
-            background-color: transparent;
+            background-colFor: transparent;
         }
 
         #feature-table td{
@@ -313,12 +313,7 @@
                                                 </tr>
                                                 @endif
                                               
-                                                @foreach(App\Feature::where("product_id", $product->id)->get() as $feature)
-                                                    <tr>
-                                                        <td>{{ $feature->feature }}</td>
-                                                        <td>{{ $feature->description }}</td>
-                                                    </tr>
-                                                @endforeach
+                                                
                                             </tbody>
                                         </table>
                                     </div>
